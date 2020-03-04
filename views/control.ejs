@@ -1,0 +1,239 @@
+<!--<!DOCTYPE html>
+<html>
+  <head>
+
+      <title><%= title %></title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+  <div>
+    <button id="btnNormal">Normal</button>
+  </div>
+  <div>
+    <button onclick="iniciarEmocion(2)">Pensar</button>
+  </div>
+  <div>
+    <button onclick="iniciarEmocion(3)">Triste</button>
+  </div>
+  <div>
+    <button onclick="iniciarEmocion(4)">Amor</button>
+  </div>
+  <div data-role="page" id="pageone">
+    <div data-role="header">
+      <h1>The tap Event</h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+      <p><button id="btnNormal">Normal</button></p>
+      <p>Tap me away!</p>
+      <p>Tap me too!</p>
+    </div>
+
+    <div data-role="footer">
+      <h1>Footer Text</h1>
+    </div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+  <script src="/javascripts/controlEva.js"></script>
+  </body>
+</html>-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      .ui-loader {display: none;}
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="/javascripts/controlEva.js"></script>
+    
+  </head>
+  <body>
+    <!--<div data-role="page" id="pageone">
+      <div data-role="header">
+        <h1>Control de Eva</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <p><button id="btnNormal">Normal</button></p>
+        <p><button id="btnPensar">Pensar</button></p>
+        <p><button id="btnTriste">Triste</button></p>
+        <p><button id="btnAmor">Amor</button></p>
+      </div>
+    </div>-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Control de Eva</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Inicio</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Comportamientos de Eva</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Mensaje Personalizado</h2>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Mensaje Personalizado</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-10">
+                  <input type="text" class="form-control input-lg" id="txtMensaje" placeholder="Mensaje personalizado!" >
+                </div>
+                <div class="col-md-2">
+                  <button id="btnEnviar" class="btn btn-success btn-lg btn-block">Enviar</button>  
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>  
+        </div>
+      </div>
+      <h2>Expresiones Faciales</h2>
+      <hr />
+      <div class="row">
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Normal</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnNormal" class="btn btn-default btn-lg"><img src="https://static.amnesty.org.au/wp-content/uploads/2016/10/Neutral_Face_Emoji.png?x85233" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Pensar</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnPensar" class="btn btn-default btn-lg"><img src="https://cdn.shopify.com/s/files/1/1061/1924/products/Thinking_Face_Emoji_large.png?v=1480481060" class="img-responsive"></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Triste</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnTriste" class="btn btn-default btn-lg"><img src="https://cdn-images-1.medium.com/max/600/1*QovtKY97w1Gbi03dSjWYSg.png" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Amor</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnAmor" class="btn btn-default btn-lg"><img src="https://s-media-cache-ak0.pinimg.com/originals/05/e9/b1/05e9b1a807c20e5e521316f22d09ffdd.png" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Engagement</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnEngagement" class="btn btn-default btn-lg"><img src="https://cdn.shopify.com/s/files/1/1061/1924/files/Surprised_Face_Emoji.png?9898922749706957214" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Feliz</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnFeliz" class="btn btn-default btn-lg"><img src="http://3.bp.blogspot.com/-m89YZ-rXwZo/VKf6f6pdEbI/AAAAAAAADg0/S3gdnt5bM6Q/s1600/Emoji%2BSmiley-02.png" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Miedo</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnMiedo" class="btn btn-default btn-lg"><img src="https://cdn.shopify.com/s/files/1/1061/1924/products/Fearful_Face_Emoji_1024x1024.png?v=1480481053" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+      </div>
+      <h2>Conversaciones</h2>
+      <hr />
+      <div class="row">
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Saludo</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnSaludo" class="btn btn-default btn-lg btn-block"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Emoji_u1f44b.svg/2000px-Emoji_u1f44b.svg.png" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Refranes</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnRefranes" class="btn btn-default btn-lg btn-block"><img src="/images/quote-256.png" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xs-4 col-md-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Chiste</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnChiste" class="btn btn-default btn-lg btn-block"><img src="/images/comedy.png" class="img-responsive"></button>
+            </div>
+          </div>  
+        </div>
+      </div>
+      <footer>
+        <p>&copy; 2017 CICESE</p>
+      </footer>
+    </div>
+
+     
+  </body>
+</html>
