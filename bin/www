@@ -1,0 +1,165 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('controleva:server');
+var http = require('http');
+const spawn = require('child_process').spawn;
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+
+/**
+* Create WebSocket Server
+**/
+
+var io = require('socket.io')(server);
+
+
+io.on('connection', function(socket) {
+    console.log('Un cliente se ha conectado');
+    //socket.emit('messages', 1);
+
+    socket.on('new-message',function(data){
+	console.log('Ha llegado un nuevo mensaje');
+	console.log('Data:'+data);
+  console.log(data);
+  if (data.tipo) {
+    switch(data.tipo){
+      case 1://pensar
+      let gestoApp = spawn('python',['./sendDataArduino.py','--gesto','P']);
+      gestoApp.stdout.on('data', (data) => {
+        console.log(data.toString());
+      });
+
+      gestoApp.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`);
+      });
+
+      gestoApp.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+      });
+      break;
+      case 2://triste
+      let gestoApp2 = spawn('python',['./sendDataArduino.py','--gesto','T']);
+      gestoApp2.stdout.on('data', (data) => {
+        console.log(data.toString());
+      });
+
+      gestoApp2.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`);
+      });
+
+      gestoApp2.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+      });
+      break;
+      default:
+      break;
+    }
+  }
+  else{
+    if(data.accion){
+		if(data.mensajePersonalizado)
+			app.mensajePersonalizado(data.mensajePersonalizado);
+		else
+			if(data.accionMusica)
+				app.accionMusica(data);
+			else{
+				if(data.queryMedia)
+					app.buscarMedia(data.queryMedia);
+				else
+					app.accionConsola(data.comando);
+				}
+
+	  }
+  }
+	//else{
+		io.sockets.emit('messages',data);
+
+    });
+});
+
+app.setIO(io);
+
+/* Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port,"0.0.0.0");
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
