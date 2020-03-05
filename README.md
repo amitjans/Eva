@@ -16,7 +16,7 @@ sudo apt-get install libasound2-dev
 
 ### Configuración
 
-Archivos necesarios para el uso de esta aplicación:
+Archivo necesario para el uso de los servicios de texto a voz de Watson y de voz a texto de Google:
 
 - config-services.js
 ```js
@@ -33,3 +33,12 @@ exports.credentials.tts = {
 ```
  
  - [Archivo JSON que contiene la clave de la cuenta de servicio de Google](https://cloud.google.com/docs/authentication/getting-started)
+
+Archivo auxiliar para el inicio de la aplicación 
+ ```bash
+ #!/bin/bash
+echo Eva
+sudo amixer cset numid=1 100% #volumen de la vocina
+export GOOGLE_APPLICATION_CREDENTIALS="credencial.json" #importar las credenciales de google
+node --stack_size=160000 bin/www #Iniciar la aplicación
+ ```
