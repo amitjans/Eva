@@ -35,6 +35,9 @@ exports.credentials.tts = {
  - [Archivo JSON que contiene la clave de la cuenta de servicio de Google](https://cloud.google.com/docs/authentication/getting-started)
 
 Archivo auxiliar para el inicio de la aplicación 
+
+- ini.sh
+
  ```bash
  #!/bin/bash
 echo Eva
