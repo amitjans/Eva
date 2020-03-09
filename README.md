@@ -16,7 +16,7 @@ sudo apt-get install libasound2-dev
 
 ### Configuración
 
-Archivo necesario para el uso de los servicios de texto a voz de Watson y de voz a texto de Google:
+Archivos necesarios para el uso de los servicios de texto a voz de Watson y de voz a texto de Google:
 
 - config-services.js
 ```js
