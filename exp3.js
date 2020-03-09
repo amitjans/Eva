@@ -26,14 +26,11 @@ module.exports = {
         console.log(respuestaParticipante);
         send.enviarMensaje(usuarioId, respuestaParticipante);
         send.enviarMensaje(evaId, 'Gusto');
-        io.sockets.emit('messages', joy);
+        social.emotions('joy', 0);
         var obj = await social.speak('Mucho gusto en conocerte ' + gn.ProcesarNombre(respuestaParticipante));
-        console.log(obj);
-        while (typeof(obj) === "undefined") {
-        }
-        var obj = await social.play('./audio.wav');
+        //var obj = await social.play('./audio.wav');
         //var obj = await social.play('./exp3files/gusto.wav');
-        io.sockets.emit('messages', ini);
+        social.emotions('ini', 0);
         send.enviarMensaje(evaId, 'Explicación');
         var obj = await social.play('./exp3files/explicacion2.wav');
     
@@ -43,10 +40,11 @@ module.exports = {
         do {
     
             for (let j = i; j < i + 3; j++) {
-                console.log(j);
-                var obj = await social.play(pregunta[j].audio);
-                var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
-                social.stopListening();
+                do {
+                    var obj = await social.play(pregunta[j].audio);
+                    respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
+                    social.stopListening();
+                } while (respuestaParticipante.includes('repite') || respuestaParticipante.includes('repetir'));
                 send.enviarMensaje(usuarioId, respuestaParticipante + ' --- ' + pregunta[j].respuesta);
                 send.enviarMensaje(usuarioId, PhoneticSpanish(respuestaParticipante) + ' --- ' + PhoneticSpanish(pregunta[j].respuesta));
                 if (respuestaParticipante.includes('no')) {
@@ -55,69 +53,74 @@ module.exports = {
                     var expression = Analyze(pregunta[j].respuesta, respuestaParticipante);
                     switch(expression) {
                         case 2:
-                            io.sockets.emit('messages', joy);
+                            social.emotions('joy', 0);
                             var obj = await social.play(RespuestaCorrecta());
+                            social.emotions('ini', 0);
                             break;
                         case 1:
-                            io.sockets.emit('messages', sad);
+                            social.emotions('sad', 1);
                             var obj = await social.play('./exp3files/incompleta.wav');
                             var obj = await social.play(pregunta[j].respaudio);
+                            social.emotions('ini', 0);
                             break;
                         case 0:
-                            io.sockets.emit('messages', sad);
+                            social.emotions('sad', 1);
                             var obj = await social.play('./exp3files/parcialmentecorrecta.wav');
                             var obj = await social.play(pregunta[j].respaudio);
+                            social.emotions('ini', 0);
+
                             break;
                         default:
-                            io.sockets.emit('messages', sad);
+                            social.emotions('sad', 1);
                             var obj = await social.play(RespuestaIncorrecta());
                             var obj = await social.play(pregunta[j].respaudio);
+                            social.emotions('ini', 0);
                       }
                 } else if (respuestaParticipante.includes(pregunta[j].respuesta) || PhoneticSpanish(respuestaParticipante).includes(PhoneticSpanish(pregunta[j].respuesta))
                 || pregunta[j].respuesta.includes(respuestaParticipante) || PhoneticSpanish(pregunta[j].respuesta).includes(PhoneticSpanish(respuestaParticipante))) {
-                    io.sockets.emit('messages', joy);
+                    send.eyes(joy);
                     console.log('Correcta');
                     send.enviarMensaje(evaId, 'Correcta');
                     correctas++;
                     var obj = await social.play(RespuestaCorrecta());
                 } else {
-                    io.sockets.emit('messages', sad);
+                    send.eyes(sad);
                     console.log('Incorrecta');
                     send.enviarMensaje(evaId, 'Incorrecta');
                     var obj = await social.play(RespuestaIncorrecta());
                     var obj = await social.play(pregunta[j].respaudio);
                 }
-                io.sockets.emit('messages', ini);
+                send.eyes(ini);
             }
             i=i+3;
             if (correctas == 3) {
-                io.sockets.emit('messages', joy);
+                social.emotions('joy', 1);
                 var obj = await social.play('./exp3files/resumen1.wav');
             } else if (correctas == 2) {
-                io.sockets.emit('messages', joy);
+                social.emotions('joy', 0);
                 var obj = await social.play('./exp3files/resumen1.wav');
             } else if (correctas == 1) {
-                io.sockets.emit('messages', sad);
+                social.emotions('sad', 1);
                 var obj = await social.play('./exp3files/resumen3.wav');
             } else {
-                io.sockets.emit('messages', sad);
+                social.emotions('sad', 1);
                 var obj = await social.play('./exp3files/resumen4.wav');
             }
-            io.sockets.emit('messages',ini);
+            social.emotions('ini', 0);
             correctas = 0;
             var obj = await social.play('./exp3files/otra.wav');
             var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
             social.stopListening();
             send.enviarMensaje(evaId, respuestaParticipante);
             if (respuestaParticipante.includes("no")) {
-                io.sockets.emit('messages', sad);
+                social.emotions('sad', 1);
                 next = false;
                 var obj = await social.play('./exp3files/terminar.wav');
             } else {
-                io.sockets.emit('messages', joy);
+                social.emotions('joy', 0);
                 var obj = await social.play('./exp3files/otra1.wav');
             }
-            io.sockets.emit('messages', ini);
+            social.emotions('ini', 1);
         } while (next);
     }
 };
@@ -162,4 +165,8 @@ function Analyze(respuesta, participante) {
 	} else {
 		return -1;
 	}
+}
+
+var generarNumeroRandom = function (min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }

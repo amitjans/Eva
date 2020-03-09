@@ -23,6 +23,15 @@ const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 9600
 })
 
+var send = require('./app');
+
+var joy = { anim: 'joy', bcolor: '', speed: 2.0 };
+var sad = { anim: 'sad', bcolor: '', speed: 2.0 };
+var anger = { anim: 'anger', bcolor: '', speed: 2.0 };
+var ini = { anim: 'ini', bcolor: '', speed: 2.0 };
+
+var lastlevel = 0;
+
 class SocialRobot {
   constructor(configuration, credentials) {
     this.configuration = {};
@@ -174,20 +183,17 @@ class SocialRobot {
   }
 
   sleep(ms) {
+    return new Promise(resolve => {
+      setTimeout(resolve, ms)
+    })
+  }
+  
+  sleepanim(ms) {
     var animation = spawn('./leds/countdown');
     return new Promise(resolve => {
       setTimeout(resolve, ms)
     })
   }
-
-// listen(callback) {
-//   // make sure we can listen
-//   //this._assertCapability('listen');
-
-//   // set up the microphone
-//   //this._sendAudioWatsonSpeechtoText(callback);
-//   this.sendAudioGoogleSpeechtoText2(callback);
-// }
 
   sendAudioGoogleSpeechtoText2(callback) {
     let speakAnimation = spawn('./leds/escuchaT');
@@ -237,14 +243,58 @@ class SocialRobot {
   }
 
 stopListening() {
-  // make sure we can listen
-  //this._assertCapability('listen');
   if(record)
     record.stop();
-  // stop the mic
-  //this._mic.stop();
 }
-  
+
+emotions (emotion, level) {
+  switch (emotion) {
+      case 'ini':
+          if (lastlevel >= 0) {
+              send.eyes(ini);
+          }
+          if (lastlevel >= 1) {
+            this.movement('c');
+          }
+          break;
+      case 'sad':
+          if (level >= 0) {
+              send.eyes(sad);
+          }
+          if (level >= 1) {
+            this.movement('d');
+          }
+          if (level >= 2) {
+            this.movement('s');
+          }
+          break;
+      case 'anger':
+          if (level >= 0) {
+              send.eyes(anger);
+          }
+          if (level >= 1) {
+              this.movement('r');
+          }
+          if (level >= 2) {
+              
+          }
+          break;
+      case 'joy':
+          if (level >= 0) {
+              send.eyes(joy);
+          }
+          if (level >= 1) {
+            this.movement('u');
+          }
+          if (level >= 2) {
+              
+          }
+          break;
+      default:
+          break;
+  }
+  lastlevel = level;
+}
 }
 
 /**

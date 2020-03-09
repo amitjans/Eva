@@ -1,310 +1,194 @@
 <!DOCTYPE html>
 <html ng-app="evaApp">
-  <head>
-    <title><%= title %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <style>
-      .ui-loader {display: none;}
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <!--<script
+
+<head>
+  <title><%= title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <style>
+    .ui-loader {
+      display: none;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <!--<script
 src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-    <script type="text/javascript" src="/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
-    <script src="/javascripts/controlAngular.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+  <script type="text/javascript" src="/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+  <script src="/javascripts/controlAngular.js"></script>
 
-  </head>
-  <body ng-controller="ControlEvaController as controlList">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed"
-data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Control de Eva</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Inicio</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+</head>
+
+<body ng-controller="ControlEvaController as controlList">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Control de Eva</a>
       </div>
-    </nav>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Inicio</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
 
-    <div class="jumbotron bg-danger">
-      <div class="container">
-        <h1>Comportamientos de Eva</h1>
-        <p class="text-center">
-			<a role="button"class="btn btn-primary" ng-show="!listen" ng-click="setMicrofono(true)">Encender&nbsp;&nbsp;<i class="fa fa-microphone fa-lg" aria-hidden="true"></i></a>
-			<a role="button"class="btn btn-danger" ng-show="listen" ng-click="setMicrofono(false)">Apagar&nbsp;&nbsp;<i class="fa fa-microphone-slash fa-lg" aria-hidden="true"></i></a>
-		</p>
+  <div class="jumbotron bg-danger">
+    <div class="container">
+      <h1>Comportamientos de Eva</h1>
+      <p class="text-center">
+        <a role="button" class="btn btn-primary" ng-show="!listen" ng-click="setMicrofono(true)">Encender&nbsp;&nbsp;<i
+            class="fa fa-microphone fa-lg" aria-hidden="true"></i></a>
+        <a role="button" class="btn btn-danger" ng-show="listen" ng-click="setMicrofono(false)">Apagar&nbsp;&nbsp;<i
+            class="fa fa-microphone-slash fa-lg" aria-hidden="true"></i></a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="alert alert-danger alert-dismissible" role="alert" ng-repeat="error in errores">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <strong>Cuidado!</strong> {{error.error}} <strong>{{error.query}}</strong>.
       </div>
     </div>
-
-    <div class="container">
-          <div class="row">
-                <div class="alert alert-danger alert-dismissible" role="alert" ng-repeat="error in errores">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <strong>Cuidado!</strong> {{error.error}} <strong>{{error.query}}</strong>.
-                </div>
+    <div class="row">
+      <div class="col-md-12">
+        <a role="button" class="btn btn-info btn-lg col-md-1 col-md-offset-11 col-xs-4 col-xs-offset-8"
+          data-toggle="collapse" data-target="#panelLogs" aria-expanded="false" aria-controls="panelLogs"
+          ng-click="mostrarLog=!mostrarLog">Logs&nbsp;<i ng-show="!mostrarLog" class="fa fa-chevron-circle-down fa-lg"
+            aria-hidden="true"></i><i ng-show="mostrarLog" class="fa fa-chevron-circle-up fa-lg"
+            aria-hidden="true"></i></a>
+        <hr />
       </div>
-          <div class="row">
-        <div class="col-md-12">
-          <a role="button" class="btn btn-info btn-lg col-md-1 col-md-offset-11 col-xs-4 col-xs-offset-8" data-toggle="collapse" data-target="#panelLogs" aria-expanded="false" aria-controls="panelLogs" ng-click="mostrarLog=!mostrarLog">Logs&nbsp;<i ng-show="!mostrarLog" class="fa fa-chevron-circle-down fa-lg" aria-hidden="true"></i><i ng-show="mostrarLog" class="fa fa-chevron-circle-up fa-lg" aria-hidden="true"></i></a>
-          <hr/>
-        </div>
-      </div>
-      <div class="row">
-        <div id="panelLogs" class="col-md-12 collapse">
-                        <br/>
-          <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Interacciones</h3>
-              </div>
-              <div class="panel-body" id="containerLogs">
-				<div class="{{interaccion.class}}" ng-repeat="(index, interaccion) in interacciones">
-					<strong>
-							{{interaccion.fecha | date:"dd/MM @ h:mm:ss a"}} {{interaccion.autor}}:
-					</strong>
-					<em ng-bind-html="renderHtml(interaccion.mensaje)">
+    </div>
+    <div class="row">
+      <div id="panelLogs" class="col-md-12 collapse">
+        <br />
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Interacciones</h3>
+            </div>
+            <div class="panel-body" id="containerLogs">
+              <div class="{{interaccion.class}}" ng-repeat="(index, interaccion) in interacciones">
+                <strong>
+                  {{interaccion.fecha | date:"dd/MM @ h:mm:ss a"}} {{interaccion.autor}}:
+                </strong>
+                <em ng-bind-html="renderHtml(interaccion.mensaje)">
 
-					</em>
-				</div>
+                </em>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h2><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;Control Script</h2>
-          <h3>{{textoScript}}</h3>
-          <!--<div class="row">
-		    		<div class="col-md-6" ng-repeat="(listName, list) in cursos.lists">
-              	<div class="panel panel-success" >
-	              	<div class="panel-heading">
-								    	{{listName}}
-								  </div>
-							  	<div class="panel-body">
-								  	<ul dnd-list="list">
-									    <li ng-repeat="item in list"
-									        dnd-draggable="item"
-									        dnd-moved="list.splice($index, 1)"
-									        dnd-effect-allowed="move"
-									        dnd-selected="cursos.selected = item"
-									        ng-class="{'selected': cursos.selected === item}"
-									        >
-									        {{$index+1}}. {{item.label}}
-									    </li>
-										</ul>
-							  	</div>
-              	</div>
-              </div>
-		    	</div>-->
-        </div>
-        <div class="col-md-7">
-          <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
-          <hr />
-            <div class="row">
-              <div class="col-md-4">
-                <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteraccion1()"><i class="fa fa-comments fa-2x"></i>&nbsp;Interacción 1</button>
-              </div>
-              <div class="col-md-4">
-                <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="iniciarInteraccion2()"><i class="fa fa-comments fa-2x"></i>&nbsp;Interacción 2</button>
-              </div>
-              <div class="col-md-4">
-                <button class="btn btn-lg btn-info btn-block" type="button" ng-click="iniciarInteraccion3()"><i class="fa fa-comments fa-2x"></i>&nbsp;Interacción 3</button>
-              </div>
-              <!--<div class="col-md-4">
-                <button class="btn btn-lg btn-default btn-block" type="button" ng-click="iniciarDespedida()">Despedida</button>
-              </div>-->
-            </div>
-
-            <div class="row">
-              <h5>Grupo 1-2</h5>
-              <div class="col-md-6">
-                <h5><strong>{{script[indiceScript1].frase}}</strong></h5>
-              </div>
-              <div class="col-md-3">
-                <input type="text" class="form-control" placeholder="añadir complemento" ng-model="complementoFrase">
-              </div>
-              <div class="col-md-3">
-                <button class="btn btn-primary btn-block" type="button" ng-click="enviarFraseScript()">Enviar</button>
-              </div>
-            </div>
-            <div class="row">
-              <br>
-              <div class="col-md-3">
-                <button class="btn btn-danger btn-block btn-lg" type="button" ng-click="decrementarIndice()">Anterior</button>
-              </div>
-              <div class="col-md-3 col-md-offset-6">
-                <button class="btn btn-success btn-block btn-lg" type="button" ng-click="incrementarIndice()">Siguiente</button>
-              </div>
-
-            </div>
-
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;Control Script</h2>
+        <h3>{{textoScript}}</h3>
+      </div>
+      <div class="col-md-7">
+        <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
+        <hr />
         <div class="row">
-		 <div class="col-md-5">
-			<h2><i class="fa fa-user-md fa-lg" aria-hidden="true"></i>&nbsp;Meditación</h2>
-			<hr />
-			<i role="button" class="fa fa-play-circle fa-3x fa-pull-left" aria-hidden="true" ng-if="!meditacionPlay" ng-click="reproducirMeditacion()"></i><i role="button" class="fa fa-stop-circle fa-3x fa-pull-left text-danger" aria-hidden="true" ng-if="meditacionPlay" ng-click="detenerMeditacion()"></i> <strong class="lead">Meditación</strong><br><small class="text-muted">Myrna</small>
-		</div>
-        <div class="col-md-5">
-          <h2><i class="fa fa-music fa-lg" aria-hidden="true"></i>&nbsp;Media</h2>
-          <hr />
-          <div class="row">
-            <div class="col-md-12"><br></div>
-            <div class="col-lg-12">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar ..." ng-model="queryMedia" ng-keydown="buscarMedia2($event)">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="buscarMedia()">Buscar&nbsp;<i class="fa fa-search" aria-hidden="true"></i></button>
-                </span>
-              </div><!-- /input-group -->
-            </div>
+          <div class="col-md-4">
+            <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteraccion1()"><i
+                class="fa fa-comments fa-2x"></i>&nbsp;Interacción 1</button>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <p class="text-center text-primary" ng-if="cargandoMedia"><br/><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span></p>
-              <table class="table table-hover">
-                <thead>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="(key, track) in tracks">
-                  <td class="col-md-2 col-xs-3"><img src="{{track.img}}" class="img-responsive img-thumbnail"></td>
-                  <td><i role="button" class="fa fa-play-circle fa-3x fa-pull-left" aria-hidden="true" ng-if="!track.reproduce" ng-click="playMusic(track)"></i><i role="button" class="fa fa-pause-circle fa-3x fa-pull-left" aria-hidden="true" ng-if="track.reproduce" ng-click="pauseMusic(track)"></i><i role="button" class="fa fa-stop-circle fa-3x fa-pull-left text-danger" aria-hidden="true" ng-if="track.reproduce" ng-click="stopMusic(track)"></i> <strong>{{track.titulo}}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="col-md-4">
+            <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="iniciarInteraccion2()"><i
+                class="fa fa-comments fa-2x"></i>&nbsp;Interacción 2</button>
           </div>
-        </div>
+          <div class="col-md-4">
+            <button class="btn btn-lg btn-info btn-block" type="button" ng-click="iniciarInteraccion3()"><i
+                class="fa fa-comments fa-2x"></i>&nbsp;Interacción 3</button>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h2><i class="fa fa-quote-left fa-lg" aria-hidden="true"></i>&nbsp;Frases</h2>
-          <hr/>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-success">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Personalizada</h3>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <!--<div class="col-md-10">
-                      <input type="text" class="form-control input-lg"
-id="txtMensaje" placeholder="Frase personalizada!" ng-model="mensaje"
-ng-keydown="enviarMensaje2($event)">
-                    </div>
-                    <div class="col-md-2">
-                      <button id="btnEnviar" class="btn btn-success
-btn-lg btn-block" ng-click="enviarMensaje()"><i class="fa fa-volume-up
-fa-lg" aria-hidden="true"></i></button>
-                    </div>-->
-                    <div class="col-lg-12">
-                                        <div class="input-group">
-                                          <input type="text" class="form-control" placeholder="Frase personalizada!" ng-model="mensaje" ng-keydown="enviarMensaje2($event)">
-                                          <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button" ng-click="enviarMensaje()">Enviar&nbsp;<i class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
-                                          </span>
-                                        </div><!-- /input-group -->
-                                </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h2><i class="fa fa-quote-left fa-lg" aria-hidden="true"></i>&nbsp;Frases</h2>
+        <hr />
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Personalizada</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Frase personalizada!" ng-model="mensaje"
+                        ng-keydown="enviarMensaje2($event)">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="enviarMensaje()">Enviar&nbsp;<i
+                            class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
+                      </span>
+                    </div><!-- /input-group -->
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
-              <button type="button" class="btn btn-link btn-lg" data-toggle="collapse" data-target="#panelFrases" aria-expanded="false" aria-controls="panelFrases">Predefinidas &nbsp;<i class="fa fa-chevron-circle-down fa-lg" aria-hidden="true"></i>  </button>
-              <hr/>
-              <div class="collapse" id="panelFrases">
-                <button type="button" class="btn btn-link btn-lg" ng-repeat="(key, frase) in frases" ng-click="enviarFrase(key)">  <i class="fa fa-volume-up fa-lg" aria-hidden="true"></i>&nbsp;{{frase}}</button>
-                <button type="button" class="btn btn-link btn-lg" ng-repeat="(key, frase2) in frases2" ng-click="enviarFrase2(key)">  <i class="fa fa-volume-up fa-lg" aria-hidden="true"></i>&nbsp;{{frase2}}</button>
-              </div>
-            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <h2><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>&nbsp;Emociones</h2>
-          <hr/>
-          <div class="col-xs-4 col-md-3" ng-repeat="(key, emocion) in emociones">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">{{emocion}}</h3>
-              </div>
-              <div class="panel-body">
-                <button class="btn btn-default btn-lg"><img src="/images/{{emocion}}.png" class="img-responsive" ng-click="enviarEmocion(key)"></button>
-              </div>
+      </div>
+      <div class="col-md-6">
+        <h2><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>&nbsp;Emociones</h2>
+        <hr />
+        <div class="col-xs-4 col-md-3" ng-repeat="(key, emocion) in emociones">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{emocion}}</h3>
+            </div>
+            <div class="panel-body">
+              <button class="btn btn-default btn-lg"><img src="/images/{{emocion}}.png" class="img-responsive"
+                  ng-click="enviarEmocion(key)"></button>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h2><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>&nbsp;Conversaciones</h2>
-          <hr />
-          <div class="col-xs-4 col-md-3" ng-repeat="(key, conversacion) in conversaciones">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">{{conversacion.nombre}}</h3>
-              </div>
-              <div class="panel-body">
-                <button id="btnSaludo" type="button" class="btn btn-default btn-lg btn-block"><img src="/images/{{conversacion.nombre}}.png" class="img-responsive" ng-click="enviarConversacion(conversacion)"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--
-        <div class="col-md-6">
-                        <h2><i class="fa fa-music fa-lg" aria-hidden="true"></i>&nbsp;Media</h2>
-                        <hr />
-                        <div class="row">
-                                <div class="col-md-12"><br></div>
-                                <div class="col-lg-12">
-                                        <div class="input-group">
-                                          <input type="text" class="form-control" placeholder="Buscar.." ng-model="queryMedia" ng-keydown="buscarMedia2($event)">
-                                          <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button" ng-click="buscarMedia()">Buscar&nbsp;<i class="fa fa-search" aria-hidden="true"></i></button>
-                                          </span>
-                                        </div>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-md-12">
-                                        <p class="text-center text-primary" ng-if="cargandoMedia"><br/><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span></p>
-                                        <table class="table table-hover">
-                                                <thead>
-                                                </thead>
-                                                <tbody>
-                                                  <tr ng-repeat="(key, track) in tracks">
-                                                        <td class="col-md-2 col-xs-3"><img src="{{track.img}}" class="img-responsive img-thumbnail"></td>
-                                                        <td><i role="button" class="fa fa-play-circle fa-3x fa-pull-left" aria-hidden="true" ng-if="!track.reproduce" ng-click="playMusic(track)"></i><i role="button" class="fa fa-pause-circle fa-3x fa-pull-left" aria-hidden="true" ng-if="track.reproduce" ng-click="pauseMusic(track)"></i><i role="button" class="fa fa-stop-circle fa-3x fa-pull-left text-danger" aria-hidden="true" ng-if="track.reproduce" ng-click="stopMusic(track)"></i> <strong>{{track.titulo}}</strong></td>
-                                                  </tr>
-                                                </tbody>
-                                        </table>
-                                </div>
-                            </div>
-                </div>-->
-      </div>
-      <footer>
-        <p>&copy; 2017 CICESE</p>
-      </footer>
     </div>
-  </body>
+    <div class="row">
+      <div class="col-md-6">
+        <h2><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>&nbsp;Conversaciones</h2>
+        <hr />
+        <div class="col-xs-4 col-md-3" ng-repeat="(key, conversacion) in conversaciones">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{conversacion.nombre}}</h3>
+            </div>
+            <div class="panel-body">
+              <button id="btnSaludo" type="button" class="btn btn-default btn-lg btn-block"><img
+                  src="/images/{{conversacion.nombre}}.png" class="img-responsive"
+                  ng-click="enviarConversacion(conversacion)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2020 CICESE</p>
+    </footer>
+  </div>
+</body>
 </html>
