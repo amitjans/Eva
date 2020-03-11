@@ -7,6 +7,8 @@ function procesar(texto) {
 	return texto;
 }
 
+var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
+
 module.exports = {
 	Ultimatum: async function (evaId, usuarioId) {
 		var social = new SocialRobot(credentials.config, credentials.credentials);
@@ -21,9 +23,9 @@ module.exports = {
 		var obj = await social.play('./exp1files/explicacion.wav');
 		//Juego Ultimátum
 		var puntos = 0;
-		var iteraciones = 4;
+		var iteraciones = 10;
 		var resp = '';
-		var respanterior = '';
+		respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
 		for (let i = 0; i < iteraciones; i++) {
 			social.emotions('ini', 0);
 			if (i == 0) {
@@ -37,66 +39,45 @@ module.exports = {
 				var obj = await social.play('./exp1files/' + NextOffer() + '.wav');
 			}
 			var temp = 0;
-			var oferta = await social.sendAudioGoogleSpeechtoText2(procesar);
-			social.stopListening();
-			send.enviarMensaje(usuarioId, oferta);
-			var respuesta = oferta.split(" ");
-			var re = /[\d]+/;
-			var first = true;
-			for (let k = 0; k < respuesta.length; k++) {
-				if (re.test(respuesta[k])) {
-					temp = parseInt(respuesta[k]);
-					if (first) {
-						first = false;
-						if (AnalizarOferta(respuesta, k)) {
-							k = respuesta.length;
+			do {
+				var oferta = await social.sendAudioGoogleSpeechtoText2(procesar);
+				social.stopListening();
+				send.enviarMensaje(usuarioId, oferta);
+				var respuesta = oferta.split(" ");
+				var re = /[\d]+/;
+				var first = true;
+				for (let k = 0; k < respuesta.length; k++) {
+					if (re.test(respuesta[k])) {
+						temp = parseInt(respuesta[k]);
+						if (first) {
+							first = false;
+							if (AnalizarOferta(respuesta, k)) {
+								k = respuesta.length;
+							}
 						}
 					}
 				}
-			}
+				if(temp > 100){
+					var obj = await social.play('./exp1files/limite.wav');
+				} else if(!(temp + '').endsWith('0')){
+					var obj = await social.play('./exp1files/multiplo.wav');
+					temp += 100;
+				}
+			} while (temp > 100);
 
-			var index = generarNumeroRandom(0, 100);
-			if (temp <= 10) {
-				resp = 'noacepto';
-				social.emotions('anger', resp === respanterior ? 1 : 0);
-				respanterior = resp;
-			} else if (temp >= 50) {
-				resp = 'aceptooferta';
-				social.emotions('joy', resp === respanterior ? 1 : 0);
-				respanterior = resp;
-			} else if (temp == 30) {
-				if (index > 50) {
-					resp = 'aceptooferta';
-				} else {
-					resp = 'noacepto';
-					social.emotions('sad', resp === respanterior ? 1 : 0);
-				}
-				respanterior = resp;
-			} else if (temp == 40) {
-				if (index > 25) {
-					resp = 'aceptooferta';
-				} else {
-					resp = 'noacepto';
-					social.emotions('sad', resp === respanterior ? 1 : 0);
-				}
-				respanterior = resp;
-			} else if (temp == 20) {
-				if (index > 75) {
-					resp = 'aceptooferta';
-				} else {
-					resp = 'noacepto';
-					social.emotions('anger', resp === respanterior ? 1 : 0);
-				}
-				respanterior = resp;
-			}
+			resp = decision(social, temp);
+			
+			respanterior.anterior = (resp.includes('aceptooferta') ? 'aceptooferta' : 'noacepto');
 			console.log('Esperando');
 			await social.sleepanim(5500);
-			if (resp === 'aceptooferta') {
+			if (resp.includes('aceptooferta')) {
 				puntos += 100 - temp;
 			}
 			var obj = await social.play('./exp1files/' + resp + '.wav');
 			send.enviarMensaje(evaId, resp + '. Llevas hasta ahora un total de ' + puntos + ' puntos');
-			var obj = await social.speak('Llevas hasta ahora un total de ' + puntos + ' puntos');
+			if (i < (iteraciones - 1)) {
+				var obj = await social.speak('Llevas hasta ahora un total de ' + puntos + ' puntos');
+			}
 		}
 		social.emotions('ini', 0);
 		send.enviarMensaje('Resumen - Total de puntos: ' + puntos + ' puntos');
@@ -109,6 +90,59 @@ module.exports = {
 		console.log('Terminó la sesion.');
 	}
 };
+
+function decision(social, temp) {
+	var index = generarNumeroRandom(0, 100);
+	var resp = '';
+	if (temp <= 20) {
+		if (index > 75 && temp > 10) {
+			resp = 'aceptooferta';
+			if (respanterior.emocion === 'joy') {
+				setEmocion(social, 'sad', 0);
+				resp = 'b' + resp;
+			} else if (respanterior.emocion === 'sad') {
+				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
+				setEmocion(social, temp, (temp === 'sad' ? 1 : 0));
+			}
+		} else {
+			resp = 'noacepto';
+			setEmocion(social, 'anger', (resp === respanterior.anterior ? 1 : 0));
+		}
+	} else if (temp >= 50) {
+		resp = 'aceptooferta';
+		setEmocion(social, 'joy', (resp === respanterior.anterior ? 1 : 0));
+	} else if (temp == 30) {
+		if (index > 50) {
+			resp = ((respanterior.emocion !== 'sad' && respanterior.emocion !== 'ini') ? 'baceptooferta' : 'aceptooferta');
+			setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0));
+		} else {
+			resp = 'noacepto';
+			if (respanterior.emocion === 'sad' && respanterior.nivel == 2) {
+				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
+				setEmocion(social, temp, (temp === 'sad' ? 2 : 1));
+			} else if (respanterior.emocion === 'anger'){
+				setEmocion(social, 'sad', 1);
+			} else {
+				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0));
+			}
+		}
+	} else if (temp == 40) {
+		if (index > 25) {
+			resp = 'aceptooferta';
+			setEmocion(social, 'ini', 0);
+		} else {
+			resp = 'noacepto';
+			setEmocion(social, 'sad', (resp === respanterior.anterior ? 1 : 0));
+		}
+	}
+	return resp;
+}
+
+function setEmocion(social, emocion, nivel) {
+	social.emotions(emocion, nivel);
+	respanterior.emocion = emocion;
+	respanterior.nivel = nivel;
+}
 
 function AnalizarOferta(respuesta, k) {
 	for (let l = 0; l < k; l++) {
