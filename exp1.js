@@ -67,7 +67,6 @@ module.exports = {
 
 			resp = decision(social, temp);
 			
-			respanterior.anterior = (resp.includes('aceptooferta') ? 'aceptooferta' : 'noacepto');
 			console.log('Esperando');
 			await social.sleepanim(5500);
 			if (resp.includes('aceptooferta')) {
@@ -98,48 +97,51 @@ function decision(social, temp) {
 		if (index > 75 && temp > 10) {
 			resp = 'aceptooferta';
 			if (respanterior.emocion === 'joy') {
-				setEmocion(social, 'sad', 0);
 				resp = 'b' + resp;
+				setEmocion(social, 'sad', 0, resp);
 			} else if (respanterior.emocion === 'sad') {
 				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
-				setEmocion(social, temp, (temp === 'sad' ? 1 : 0));
+				setEmocion(social, temp, (temp === 'sad' ? 1 : 0), resp);
+			} else {
+				setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp);
 			}
 		} else {
 			resp = 'noacepto';
-			setEmocion(social, 'anger', (resp === respanterior.anterior ? 1 : 0));
+			setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp);
 		}
 	} else if (temp >= 50) {
 		resp = 'aceptooferta';
-		setEmocion(social, 'joy', (resp === respanterior.anterior ? 1 : 0));
+		setEmocion(social, 'joy', ('joy' === respanterior.emocion ? 1 : 0), resp);
 	} else if (temp == 30) {
 		if (index > 50) {
-			resp = ((respanterior.emocion !== 'sad' && respanterior.emocion !== 'ini') ? 'baceptooferta' : 'aceptooferta');
-			setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0));
+			resp = ((respanterior.emocion !== 'sad') ? 'baceptooferta' : 'aceptooferta');
+			setEmocion(social, 'sad', ('sad' === respanterior.emocion ? 1 : 0), resp);
 		} else {
 			resp = 'noacepto';
-			if (respanterior.emocion === 'sad' && respanterior.nivel == 2) {
+			if (respanterior.emocion === 'sad' && respanterior.nivel == 1) {
 				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
-				setEmocion(social, temp, (temp === 'sad' ? 2 : 1));
+				setEmocion(social, temp, (temp === 'sad' ? 2 : 1), resp);
 			} else if (respanterior.emocion === 'anger'){
-				setEmocion(social, 'sad', 1);
+				setEmocion(social, 'sad', 1, resp);
 			} else {
-				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0));
+				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0), resp);
 			}
 		}
 	} else if (temp == 40) {
 		if (index > 25) {
 			resp = 'aceptooferta';
-			setEmocion(social, 'ini', 0);
+			setEmocion(social, 'ini', 0, resp);
 		} else {
 			resp = 'noacepto';
-			setEmocion(social, 'sad', (resp === respanterior.anterior ? 1 : 0));
+			setEmocion(social, 'sad', (resp === respanterior.anterior ? 1 : 0), resp);
 		}
 	}
 	return resp;
 }
 
-function setEmocion(social, emocion, nivel) {
+function setEmocion(social, emocion, nivel, resp) {
 	social.emotions(emocion, nivel);
+	respanterior.anterior = (resp.includes('aceptooferta') ? 'aceptooferta' : 'noacepto');
 	respanterior.emocion = emocion;
 	respanterior.nivel = nivel;
 }
