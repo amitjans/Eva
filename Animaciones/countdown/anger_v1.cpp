@@ -35,9 +35,9 @@ bool state = true;
 
 for (int i = 0; i < 18; i++)
 {
-    everloop_image.leds[i].green = 255;
-    everloop_image.leds[i].blue = 255;
-    everloop_image.leds[i].red = 255;
+    everloop_image.leds[i].green = 0;
+    everloop_image.leds[i].blue = 0;
+    everloop_image.leds[i].red = 200;
 }
 
 everloop.Write(&everloop_image);	
@@ -55,33 +55,33 @@ for (int i = 0; i < 18; i++)
 }
 
 
-for (int i = 0; i < 8; i++)
-{
-    everloop_image.leds[ledInicio].green = state ? 255 : 0;
-    everloop_image.leds[ledInicio].blue = state ? 255 : 0;
-    everloop_image.leds[ledInicio].red = state ? 255 : 0;
+// for (int i = 0; i < 8; i++)
+// {
+//     everloop_image.leds[ledInicio].green = state ? 255 : 0;
+//     everloop_image.leds[ledInicio].blue = state ? 255 : 0;
+//     everloop_image.leds[ledInicio].red = state ? 255 : 0;
 
-    everloop_image.leds[siguiente(ledInicio)].green = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio)].blue = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio)].red = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio)].green = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio)].blue = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio)].red = state ? 255 : 0;
 
-    everloop_image.leds[siguiente(ledInicio + 1)].green = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio + 1)].blue = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio + 1)].red = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 1)].green = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 1)].blue = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 1)].red = state ? 255 : 0;
 
-    everloop_image.leds[siguiente(ledInicio + 2)].green = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio + 2)].blue = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio + 2)].red = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 2)].green = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 2)].blue = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 2)].red = state ? 255 : 0;
 
-    everloop_image.leds[siguiente(ledInicio + 3)].green = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio + 3)].blue = state ? 255 : 0;
-    everloop_image.leds[siguiente(ledInicio + 3)].red = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 3)].green = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 3)].blue = state ? 255 : 0;
+//     everloop_image.leds[siguiente(ledInicio + 3)].red = state ? 255 : 0;
 
-    state = !state;
+//     state = !state;
 
-    everloop.Write(&everloop_image);	
-    usleep(40000*v);
-}
+//     everloop.Write(&everloop_image);	
+//     usleep(40000*v);
+// }
 return 0;
 }
 
