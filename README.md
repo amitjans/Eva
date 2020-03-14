@@ -9,11 +9,16 @@
 - NodeJs 8.17.0
 - [Matrix Voice](https://matrix-io.github.io/matrix-documentation/matrix-voice/resources/microphone/)
 ### Librerías
-Requerida para compilar la dependencia "speaker".
+ - Requerida para compilar la dependencia "speaker".
 ```bash
 sudo apt-get install libasound2-dev
 ```
-### Dependencias
+ - Requerida para compilar las aplicaciones del arreglo de luces led.
+```bash
+sudo apt-get install matrixio-creator-init libmatrixio-creator-hal libmatrixio-creator-hal-dev
+```
+
+### Dependencias de la aplicación
 ```bash
 npm install
 ```
@@ -21,7 +26,7 @@ npm install
 ### Animaciones
 Para compilar las animaciones del arreglo de leds de la Matrix Voice
 ```bash
-g++ -o escuchaT escuchaT.cpp -lmatrix_creator_hal -std=c++11
+g++ -o app app.cpp -std=c++11 -lmatrix_creator_hal
 ```
 
 ### Configuración
