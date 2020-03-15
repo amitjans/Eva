@@ -26,8 +26,8 @@ module.exports = {
 		var iteraciones = 10;
 		var resp = '';
 		respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
+		social.emotions('ini', 0);
 		for (let i = 0; i < iteraciones; i++) {
-			social.emotions('ini', 0);
 			if (i == 0) {
 				send.enviarMensaje(evaId, 'Comenzar Ofertas');
 				var obj = await social.play('./exp1files/comenzarofertas.wav');
@@ -64,16 +64,18 @@ module.exports = {
 					temp += 100;
 				}
 			} while (temp > 100);
-
+			
 			resp = decision(social, temp);
 			
 			console.log('Esperando');
-			await social.sleepanim(5500);
+			await social.sleep(5500);
 			if (resp.includes('aceptooferta')) {
 				puntos += 100 - temp;
 			}
 			var obj = await social.play('./exp1files/' + resp + '.wav');
 			send.enviarMensaje(evaId, resp + '. Llevas hasta ahora un total de ' + puntos + ' puntos');
+			social.emotions('ini', 0);
+			await social.sleep(500);
 			if (i < (iteraciones - 1)) {
 				var obj = await social.speak('Llevas hasta ahora un total de ' + puntos + ' puntos');
 			}

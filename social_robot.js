@@ -25,9 +25,9 @@ const port = new SerialPort('/dev/ttyUSB0', {
 
 var send = require('./app');
 
-var joy = { anim: 'joy', bcolor: '', speed: 2.0 };
-var sad = { anim: 'sad', bcolor: '', speed: 2.0 };
-var anger = { anim: 'anger', bcolor: '', speed: 2.0 };
+var joy = { anim: 'joy', bcolor: '', speed: 0.5 };
+var sad = { anim: 'sad', bcolor: '', speed: 0.5 };
+var anger = { anim: 'anger', bcolor: '', speed: 0.5 };
 var ini = { anim: 'ini', bcolor: '', speed: 2.0 };
 
 var lastlevel = 0;
@@ -260,6 +260,7 @@ emotions (emotion, level) {
       case 'sad':
           if (level >= 0) {
               send.eyes(sad);
+              var animation = spawn('./leds/sad_v2');
           }
           if (level >= 1) {
             this.movement('d');
@@ -271,9 +272,10 @@ emotions (emotion, level) {
       case 'anger':
           if (level >= 0) {
               send.eyes(anger);
+              var animation = spawn('./leds/anger_v2');
           }
           if (level >= 1) {
-              this.movement('r');
+              this.movement('a');
           }
           if (level >= 2) {
               
@@ -282,6 +284,7 @@ emotions (emotion, level) {
       case 'joy':
           if (level >= 0) {
               send.eyes(joy);
+              var animation = spawn('./leds/joy_v2');
           }
           if (level >= 1) {
             this.movement('u');
