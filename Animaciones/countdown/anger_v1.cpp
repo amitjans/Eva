@@ -37,17 +37,61 @@ for (int i = 0; i < 18; i++)
 {
     everloop_image.leds[i].green = 0;
     everloop_image.leds[i].blue = 0;
-    everloop_image.leds[i].red = 200;
+    everloop_image.leds[i].red = 0;
 }
 
 everloop.Write(&everloop_image);	
 usleep(40000*v);
 
+for (int i = 0; i < 3; i++)
+{
+    everloop_image.leds[led].green = 255;
+    everloop_image.leds[led].blue = 255;
+    everloop_image.leds[led].red = 255;
+
+    led = siguiente(led);
+    everloop.Write(&everloop_image);	
+    usleep(40000*v);
+}
+
+for (int i = 3; i < 6; i++)
+{
+    everloop_image.leds[led].green = 200;
+    everloop_image.leds[led].blue = 200;
+    everloop_image.leds[led].red = 200;
+
+    led = siguiente(led);
+    everloop.Write(&everloop_image);	
+    usleep(40000*v);
+}
+
+for (int i = 6; i < 9; i++)
+{
+    everloop_image.leds[led].green = 190;
+    everloop_image.leds[led].blue = 191;
+    everloop_image.leds[led].red = 247;
+
+    led = siguiente(led);
+    everloop.Write(&everloop_image);	
+    usleep(40000*v);
+}
+
+for (int i = 9; i < 18; i++)
+{
+    everloop_image.leds[led].green = 0;
+    everloop_image.leds[led].blue = 0;
+    everloop_image.leds[led].red = 200;
+
+    led = siguiente(led);
+    everloop.Write(&everloop_image);	
+    usleep(40000*v);
+}
+
 for (int i = 0; i < 18; i++)
 {
     everloop_image.leds[led].green = 0;
     everloop_image.leds[led].blue = 0;
-    everloop_image.leds[led].red = 0;
+    everloop_image.leds[led].red = 200;
 
     led = siguiente(led);
     everloop.Write(&everloop_image);	

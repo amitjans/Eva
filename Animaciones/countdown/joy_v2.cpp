@@ -30,6 +30,7 @@ matrix_hal::Everloop everloop;
 everloop.Setup(&bus);
 int ledInicio=frente(4);
 int led = ledInicio;
+int temp = led;
 int v = 5;
 bool state = true;
 
@@ -43,45 +44,82 @@ for (int i = 0; i < 18; i++)
 everloop.Write(&everloop_image);	
 usleep(40000*v);
 
-for (int i = 0; i < 18; i++)
+for (int j = 0; j < 15; j++)
 {
-    everloop_image.leds[led].green = 255;
-    everloop_image.leds[led].blue = 0;
-    everloop_image.leds[led].red = 100;
-
+    //apaga todos antes de pintar otra vez
+    for (int i = 0; i < 18; i++)
+    {
+        everloop_image.leds[i].green = 0;
+        everloop_image.leds[i].blue = 0;
+        everloop_image.leds[i].red = 0;
+    }
+    //donde ocurre la magia
+    temp = led;
+    for (int i = 0; i < 4; i++)
+    {
+        if (temp == ledInicio || temp == siguiente(ledInicio) || temp == siguiente(ledInicio + 1) || temp == siguiente(ledInicio + 2))
+        {
+            everloop_image.leds[temp].red = 255;
+            everloop_image.leds[temp].green = 255;
+            everloop_image.leds[temp].blue = 255;
+        } else if (temp == siguiente(ledInicio + 3) || temp == siguiente(ledInicio + 4) || temp == siguiente(ledInicio + 5) || temp == siguiente(ledInicio + 6)){
+            everloop_image.leds[temp].red = 216;
+            everloop_image.leds[temp].green = 255;
+            everloop_image.leds[temp].blue = 189;
+        } else if (temp == siguiente(ledInicio + 7) || temp == siguiente(ledInicio + 8) || temp == siguiente(ledInicio + 9) || temp == siguiente(ledInicio + 10)){
+            everloop_image.leds[temp].red = 169;
+            everloop_image.leds[temp].green = 255;
+            everloop_image.leds[temp].blue = 119;
+        } else if (temp == siguiente(ledInicio + 11) || temp == siguiente(ledInicio + 12) || temp == siguiente(ledInicio + 13) || temp == siguiente(ledInicio + 14)){
+            everloop_image.leds[temp].red = 100;
+            everloop_image.leds[temp].green = 255;
+            everloop_image.leds[temp].blue = 0;
+        } else {
+            everloop_image.leds[temp].red = 100;
+            everloop_image.leds[temp].green = 255;
+            everloop_image.leds[temp].blue = 0;
+        }        
+        temp = siguiente(temp);
+    }
     led = siguiente(led);
-    everloop.Write(&everloop_image);	
+    everloop.Write(&everloop_image);
     usleep(40000*v);
 }
 
+for (int j = 0; j < 18; j++)
+{
+    //apaga todos antes de pintar otra vez
+    // for (int i = 0; i < 18; i++)
+    // {
+    //     everloop_image.leds[i].green = 0;
+    //     everloop_image.leds[i].blue = 0;
+    //     everloop_image.leds[i].red = 0;
+    // }
+    //donde ocurre la magia
+    temp = led;
+    for (int i = 0; i < 4; i++)
+    {
+        everloop_image.leds[temp].red = 100;
+        everloop_image.leds[temp].green = 255;
+        everloop_image.leds[temp].blue = 0;
+        temp = siguiente(temp);
+    }
+led = siguiente(led);
+everloop.Write(&everloop_image);
+usleep(40000 * v);
+}
 
-// for (int i = 0; i < 8; i++)
-// {
-//     everloop_image.leds[ledInicio].green = state ? 255 : 0;
-//     everloop_image.leds[ledInicio].blue = state ? 255 : 0;
-//     everloop_image.leds[ledInicio].red = state ? 255 : 0;
+//apaga los leds al final
+for (int i = 0; i < 18; i++)
+{
+    everloop_image.leds[i].green = 0;
+    everloop_image.leds[i].blue = 0;
+    everloop_image.leds[i].red = 0;
+}
 
-//     everloop_image.leds[siguiente(ledInicio)].green = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio)].blue = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio)].red = state ? 255 : 0;
+everloop.Write(&everloop_image);	
+usleep(40000*v);
 
-//     everloop_image.leds[siguiente(ledInicio + 1)].green = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio + 1)].blue = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio + 1)].red = state ? 255 : 0;
-
-//     everloop_image.leds[siguiente(ledInicio + 2)].green = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio + 2)].blue = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio + 2)].red = state ? 255 : 0;
-
-//     everloop_image.leds[siguiente(ledInicio + 3)].green = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio + 3)].blue = state ? 255 : 0;
-//     everloop_image.leds[siguiente(ledInicio + 3)].red = state ? 255 : 0;
-
-//     state = !state;
-
-//     everloop.Write(&everloop_image);	
-//     usleep(40000*v);
-// }
 return 0;
 }
 
