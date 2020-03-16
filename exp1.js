@@ -12,6 +12,7 @@ var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
 module.exports = {
 	Ultimatum: async function (evaId, usuarioId) {
 		var social = new SocialRobot(credentials.config, credentials.credentials);
+		social.emotions('ini', 0);
 		send.enviarMensaje(evaId, 'Hola');
 		var obj = await social.play('./exp1files/hola.wav');
 		var respuesta = await social.sendAudioGoogleSpeechtoText2(procesar);
@@ -34,7 +35,13 @@ module.exports = {
 			} else if (i == (iteraciones - 1)) {
 				send.enviarMensaje(evaId, 'Ultima oferta');
 				var obj = await social.play('./exp1files/ultimaoportunidad.wav');
-			} else {
+			} else if (i == 5) {
+				send.enviarMensaje(evaId, 'Van 5');
+				var obj = await social.play('./exp1files/quintaoferta.wav');
+			} else if (i == (iteraciones - 3)) {
+				send.enviarMensaje(evaId, 'Faltan 3');
+				var obj = await social.play('./exp1files/tresofertas.wav');
+			}   else {
 				send.enviarMensaje(evaId, 'Siguiente oferta');
 				var obj = await social.play('./exp1files/' + NextOffer() + '.wav');
 			}
@@ -100,49 +107,49 @@ function decision(social, temp) {
 			resp = 'aceptooferta';
 			if (respanterior.emocion === 'joy') {
 				resp = 'b' + resp;
-				setEmocion(social, 'sad', 0, resp);
+				setEmocion(social, 'sad', 0, resp, 0.5);
 			} else if (respanterior.emocion === 'sad') {
 				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
-				setEmocion(social, temp, (temp === 'sad' ? 1 : 0), resp);
+				setEmocion(social, temp, (temp === 'sad' ? 1 : 0), resp, 0.5);
 			} else {
-				setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp);
+				setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp, 0.5);
 			}
 		} else {
 			resp = 'noacepto';
-			setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp);
+			setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp, 0.5);
 		}
 	} else if (temp >= 50) {
 		resp = 'aceptooferta';
-		setEmocion(social, 'joy', ('joy' === respanterior.emocion ? 1 : 0), resp);
+		setEmocion(social, 'joy', ('joy' === respanterior.emocion ? 1 : 0), resp, 0.5);
 	} else if (temp == 30) {
 		if (index > 50) {
 			resp = ((respanterior.emocion !== 'sad') ? 'baceptooferta' : 'aceptooferta');
-			setEmocion(social, 'sad', ('sad' === respanterior.emocion ? 1 : 0), resp);
+			setEmocion(social, 'sad', ('sad' === respanterior.emocion ? 1 : 0), resp, 0.5);
 		} else {
 			resp = 'noacepto';
 			if (respanterior.emocion === 'sad' && respanterior.nivel == 1) {
 				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
-				setEmocion(social, temp, (temp === 'sad' ? 2 : 1), resp);
+				setEmocion(social, temp, (temp === 'sad' ? 2 : 1), resp, 0.5);
 			} else if (respanterior.emocion === 'anger'){
-				setEmocion(social, 'sad', 1, resp);
+				setEmocion(social, 'sad', 1, resp, 0.5);
 			} else {
-				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0), resp);
+				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0), resp, 0.5);
 			}
 		}
 	} else if (temp == 40) {
 		if (index > 25) {
 			resp = 'aceptooferta';
-			setEmocion(social, 'ini', 0, resp);
+			setEmocion(social, 'ini', 0, resp, 0.5);
 		} else {
 			resp = 'noacepto';
-			setEmocion(social, 'sad', (resp === respanterior.anterior ? 1 : 0), resp);
+			setEmocion(social, 'sad', (resp === respanterior.anterior ? 1 : 0), resp, 0.5);
 		}
 	}
 	return resp;
 }
 
-function setEmocion(social, emocion, nivel, resp) {
-	social.emotions(emocion, nivel);
+function setEmocion(social, emocion, nivel, resp, speed) {
+	social.emotions(emocion, nivel, speed);
 	respanterior.anterior = (resp.includes('aceptooferta') ? 'aceptooferta' : 'noacepto');
 	respanterior.emocion = emocion;
 	respanterior.nivel = nivel;

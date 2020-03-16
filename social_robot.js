@@ -25,11 +25,6 @@ const port = new SerialPort('/dev/ttyUSB0', {
 
 var send = require('./app');
 
-var joy = { anim: 'joy', bcolor: '', speed: 0.5 };
-var sad = { anim: 'sad', bcolor: '', speed: 0.5 };
-var anger = { anim: 'anger', bcolor: '', speed: 0.5 };
-var ini = { anim: 'ini', bcolor: '', speed: 2.0 };
-
 var lastlevel = 0;
 
 class SocialRobot {
@@ -169,7 +164,7 @@ class SocialRobot {
           console.error('> an audio playback error has ocurred');
           reject();
         });
-        let speakAnimation = spawn('./leds/' + (anim || 'hablaT'));
+        let speakAnimation = spawn('./leds/' + (anim || 'hablaT_v2'));
         player.play(soundFile);
       });
     }  
@@ -247,11 +242,14 @@ stopListening() {
     record.stop();
 }
 
-emotions (emotion, level) {
+emotions (emotion, level, speed) {
+  console.log('la velocidad es: ' + speed);
+  var temp = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
+  console.log('la velocidad es: ' + temp.speed);
   switch (emotion) {
       case 'ini':
           if (lastlevel >= 0) {
-              send.eyes(ini);
+              send.eyes(temp);
           }
           if (lastlevel >= 1) {
             this.movement('c');
@@ -259,7 +257,7 @@ emotions (emotion, level) {
           break;
       case 'sad':
           if (level >= 0) {
-              send.eyes(sad);
+              send.eyes(temp);
               var animation = spawn('./leds/sad_v2');
           }
           if (level >= 1) {
@@ -271,7 +269,7 @@ emotions (emotion, level) {
           break;
       case 'anger':
           if (level >= 0) {
-              send.eyes(anger);
+              send.eyes(temp);
               var animation = spawn('./leds/anger_v2');
           }
           if (level >= 1) {
@@ -283,7 +281,7 @@ emotions (emotion, level) {
           break;
       case 'joy':
           if (level >= 0) {
-              send.eyes(joy);
+              send.eyes(temp);
               var animation = spawn('./leds/joy_v2');
           }
           if (level >= 1) {
