@@ -24,6 +24,8 @@ const port = new SerialPort('/dev/ttyUSB0', {
 })
 
 var send = require('./app');
+var logs = require('./log');
+var log = '';
 
 var lastlevel = 0;
 
@@ -47,6 +49,7 @@ class SocialRobot {
     const port = new SerialPort('/dev/ttyUSB0', {
       baudRate: 9600
     })
+    log = '';
   }
   _createServiceAPI(service, credentials) {
     console.info('> Social Robot initializing ' + service + ' service');
@@ -243,9 +246,7 @@ stopListening() {
 }
 
 emotions (emotion, level, speed) {
-  console.log('la velocidad es: ' + speed);
   var temp = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
-  console.log('la velocidad es: ' + temp.speed);
   switch (emotion) {
       case 'ini':
           if (lastlevel >= 0) {
@@ -296,6 +297,16 @@ emotions (emotion, level, speed) {
   }
   lastlevel = level;
 }
+
+templog(who, texto) {
+  log += who.autor + ': ' + texto + '\n';
+  send.enviarMensaje(who, texto);
+}
+
+savelogs(nombre){
+  logs.logs(nombre + Date.now(), log);
+}
+
 }
 
 /**
