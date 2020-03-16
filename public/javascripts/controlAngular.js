@@ -170,4 +170,22 @@ angular.module('evaApp', ['dndLists'])
 						console.log(error);
 					});
 			};
+
+			$scope.iniciarInteraccion4 = function () {
+				$http.get('interaccion/iniciarInteraccion4')
+					.then(function (res) {
+						console.info('Inició interaccion con grupo 4');
+					}, function (error) {
+						console.log(error);
+					});
+			};
+
+			$scope.iniciarInteraccion5 = function () {
+				$http.get('interaccion/iniciarInteraccion5')
+					.then(function (res) {
+						console.info('Inició interaccion con grupo 5');
+					}, function (error) {
+						console.log(error);
+					});
+			};
 		});

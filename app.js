@@ -210,7 +210,17 @@ index.get('/interaccion/iniciarInteraccion2', function (req, res) {
 	res.status(200).jsonp();
 });
 
+var logs = require('./log');
 index.get('/interaccion/iniciarInteraccion3', function (req, res) {
+	logs.logs('adrian' + Date.now(), 'algo dentro de adrian');
+	res.status(200).jsonp();
+});
+
+index.get('/interaccion/iniciarInteraccion4', function (req, res) {
+	res.status(200).jsonp();
+});
+
+index.get('/interaccion/iniciarInteraccion5', function (req, res) {
 	exp1.Ultimatum(evaId, usuarioId);
 	res.status(200).jsonp();
 });

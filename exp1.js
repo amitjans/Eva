@@ -1,6 +1,5 @@
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
-var send = require('./app');
 var gn = require('./getname');
 
 function procesar(texto) {
@@ -13,43 +12,43 @@ module.exports = {
 	Ultimatum: async function (evaId, usuarioId) {
 		var social = new SocialRobot(credentials.config, credentials.credentials);
 		social.emotions('ini', 0);
-		send.enviarMensaje(evaId, 'Hola');
+		social.templog(evaId, 'Hola');
 		var obj = await social.play('./exp1files/hola.wav');
 		var respuesta = await social.sendAudioGoogleSpeechtoText2(procesar);
 		social.stopListening();
 		var nombre = gn.ProcesarNombre(respuesta);
-		send.enviarMensaje(usuarioId, respuesta + ' - ' + nombre);
+		social.templog(usuarioId, respuesta + ' - ' + nombre);
 		var obj = await social.speak('Mucho gusto en conocerte ' + nombre);
-		send.enviarMensaje(evaId, 'Explicación');
+		social.templog(evaId, 'Explicación');
 		var obj = await social.play('./exp1files/explicacion.wav');
 		//Juego Ultimátum
 		var puntos = 0;
-		var iteraciones = 10;
+		var iteraciones = 5;
 		var resp = '';
 		respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
 		social.emotions('ini', 0);
 		for (let i = 0; i < iteraciones; i++) {
 			if (i == 0) {
-				send.enviarMensaje(evaId, 'Comenzar Ofertas');
+				social.templog(evaId, 'Comenzar Ofertas');
 				var obj = await social.play('./exp1files/comenzarofertas.wav');
 			} else if (i == (iteraciones - 1)) {
-				send.enviarMensaje(evaId, 'Ultima oferta');
+				social.templog(evaId, 'Ultima oferta');
 				var obj = await social.play('./exp1files/ultimaoportunidad.wav');
 			} else if (i == 5) {
-				send.enviarMensaje(evaId, 'Van 5');
+				social.templog(evaId, 'Van 5');
 				var obj = await social.play('./exp1files/quintaoferta.wav');
 			} else if (i == (iteraciones - 3)) {
-				send.enviarMensaje(evaId, 'Faltan 3');
+				social.templog(evaId, 'Faltan 3');
 				var obj = await social.play('./exp1files/tresofertas.wav');
 			}   else {
-				send.enviarMensaje(evaId, 'Siguiente oferta');
+				social.templog(evaId, 'Siguiente oferta');
 				var obj = await social.play('./exp1files/' + NextOffer() + '.wav');
 			}
 			var temp = 0;
 			do {
 				var oferta = await social.sendAudioGoogleSpeechtoText2(procesar);
 				social.stopListening();
-				send.enviarMensaje(usuarioId, oferta);
+				social.templog(usuarioId, oferta);
 				var respuesta = oferta.split(" ");
 				var re = /[\d]+/;
 				var first = true;
@@ -80,7 +79,7 @@ module.exports = {
 				puntos += 100 - temp;
 			}
 			var obj = await social.play('./exp1files/' + resp + '.wav');
-			send.enviarMensaje(evaId, resp + '. Llevas hasta ahora un total de ' + puntos + ' puntos');
+			social.templog(evaId, resp + '. Llevas hasta ahora un total de ' + puntos + ' puntos');
 			social.emotions('ini', 0);
 			await social.sleep(500);
 			if (i < (iteraciones - 1)) {
@@ -88,13 +87,14 @@ module.exports = {
 			}
 		}
 		social.emotions('ini', 0);
-		send.enviarMensaje('Resumen - Total de puntos: ' + puntos + ' puntos');
+		social.templog(evaId, 'Resumen - Total de puntos: ' + puntos + ' puntos');
 		var obj = await social.rec(' ' + puntos + ', puntos.', 'puntos');
 		var obj = await social.play('./exp1files/despedida.1.wav');
 		var obj = await social.play('./temp/puntos.wav');
 		var obj = await social.play('./exp1files/despedida.2.wav');
 		var obj = await social.play('./exp1files/despedida.3.wav');
-		send.enviarMensaje(evaId, 'Bueno, finalmente obtuviste un total de ' + puntos + ', puntos. Ahora me despido por el momento, espero volver a verte pronto ' + nombre + '. Que tengas un bonito día.');
+		social.templog(evaId, 'Bueno, finalmente obtuviste un total de ' + puntos + ', puntos. Ahora me despido por el momento, espero volver a verte pronto ' + nombre + '. Que tengas un bonito día.');
+		social.savelogs(nombre);
 		console.log('Terminó la sesion.');
 	}
 };
