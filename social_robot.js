@@ -245,7 +245,7 @@ stopListening() {
     record.stop();
 }
 
-emotions (emotion, level, speed) {
+emotions (emotion, level, leds, speed) {
   var temp = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
   switch (emotion) {
       case 'ini':
@@ -259,7 +259,9 @@ emotions (emotion, level, speed) {
       case 'sad':
           if (level >= 0) {
               send.eyes(temp);
-              var animation = spawn('./leds/sad_v2');
+              if (leds) {
+                var animation = spawn('./leds/sad_v2');
+              }
           }
           if (level >= 1) {
             this.movement('d');
@@ -271,7 +273,9 @@ emotions (emotion, level, speed) {
       case 'anger':
           if (level >= 0) {
               send.eyes(temp);
-              var animation = spawn('./leds/anger_v2');
+              if (leds) {
+                var animation = spawn('./leds/anger_v2');
+              }
           }
           if (level >= 1) {
               this.movement('a');
@@ -283,7 +287,9 @@ emotions (emotion, level, speed) {
       case 'joy':
           if (level >= 0) {
               send.eyes(temp);
-              var animation = spawn('./leds/joy_v2');
+              if (leds) {
+                var animation = spawn('./leds/joy_v2');
+              }
           }
           if (level >= 1) {
             this.movement('u');
