@@ -250,7 +250,7 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 	}
 	if (req.query.e == 5) {
 		lastlevel = 1;
-		social.emotions('anger', 1, 0.5);
+		social.emotions('anger', 1, true, 0.5);
 	}
 	if (req.query.e == 6) {
 		lastlevel = 2;
