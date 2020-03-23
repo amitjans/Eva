@@ -251,6 +251,9 @@ emotions (emotion, level, leds, speed) {
       case 'ini':
           if (lastlevel >= 0) {
               send.eyes(temp);
+              if (leds){
+                var animation = spawn('./leds/base');
+              }
           }
           if (lastlevel >= 1) {
             this.movement('c');

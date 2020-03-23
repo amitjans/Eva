@@ -1,17 +1,13 @@
 var casos = [
-    { id: 1, audio: './exp2files/casos/s1.wav' },
-    { id: 2, audio: './exp2files/casos/s2.wav' },
-    { id: 3, audio: './exp2files/casos/s3.wav' },
-    { id: 4, audio: './exp2files/casos/s4.wav' },
-    { id: 5, audio: './exp2files/casos/s5.wav' },
-    { id: 6, audio: './exp2files/casos/s6.wav' },
-    { id: 7, audio: './exp2files/casos/s7.wav' },
-    { id: 8, audio: './exp2files/casos/s8.wav' },
-    { id: 9, audio: './exp2files/casos/s9.wav' },
-    { id: 10, audio: './exp2files/casos/s10.wav' },
-    { id: 11, audio: './exp2files/casos/s11.wav' },
-    { id: 12, audio: './exp2files/casos/s12.wav' },
-    { id: 13, audio: './exp2files/casos/s13.wav' }    
+    { id: 1, audio: './exp2files/casos/ha.wav' },
+    { id: 2, audio: './exp2files/casos/hd.wav' },
+    { id: 3, audio: './exp2files/casos/hg.wav' },
+    { id: 4, audio: './exp2files/casos/hl.wav' },
+    { id: 5, audio: './exp2files/casos/ma.wav' },
+    { id: 6, audio: './exp2files/casos/md.wav' },
+    { id: 7, audio: './exp2files/casos/mendigo.wav' },
+    { id: 8, audio: './exp2files/casos/mg.wav' },
+    { id: 9, audio: './exp2files/casos/nino.wav' }
 ];
 
 module.exports = {
