@@ -7,7 +7,39 @@
 
 ## Instalación
 - NodeJs 8.17.0
-- [Matrix Voice](https://matrix-io.github.io/matrix-documentation/matrix-voice/resources/microphone/)
+```bash
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+```
+```bash
+source ~/.profile
+```
+```bash
+nvm install v8.17.0
+```
+```bash
+nvm use v8.17.0
+```
+- Registrar la [Matrix Voice](https://matrix-io.github.io/matrix-documentation/matrix-voice/resources/microphone/) como micrófono
+
+```bash
+curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.matrix.one/raspbian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/matrixlabs.list
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+```bash
+sudo reboot
+```
+
+```bash
+sudo apt install matrixio-kernel-modules
+```
+
+```bash
+sudo reboot
+```
+
 ### Librerías
  - Requerida para compilar la dependencia "speaker".
 ```bash
