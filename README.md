@@ -40,23 +40,25 @@ sudo apt install matrixio-kernel-modules
 sudo reboot
 ```
 
+### Dependencias de la aplicación
+```bash
+npm install
+```
+<!--
 ### Librerías
  - Requerida para compilar la dependencia "speaker".
 ```bash
 sudo apt-get install libasound2-dev
 ```
- - Requerida para compilar las aplicaciones del arreglo de luces led.
+-->
+
+
+### Animaciones
+ - Paquetes requeridos para compilar las animaciones del arreglo de luces led.
 ```bash
 sudo apt-get install matrixio-creator-init libmatrixio-creator-hal libmatrixio-creator-hal-dev
 ```
-
-### Dependencias de la aplicación
-```bash
-npm install
-```
-
-### Animaciones
-Para compilar las animaciones del arreglo de leds de la Matrix Voice
+ - Para compilar las animaciones del arreglo de leds de la Matrix Voice
 ```bash
 g++ -o app app.cpp -std=c++11 -lmatrix_creator_hal
 ```
