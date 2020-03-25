@@ -18,14 +18,15 @@ module.exports = {
     autopilot: async function (evaId, usuarioId) {
         var social = new SocialRobot(credentials.config, credentials.credentials);
         var caso = casos.getCasos();
-        social.emotions('ini', 0);
-        social.templog(evaId, 'Hola');
-        var obj = await social.play('./exp3files/hola.wav');
-        var nombre = await social.sendAudioGoogleSpeechtoText2(procesar);
-        social.stopListening();
-        social.templog(evaId, nombre);
-        social.emotions('joy', 0);
-        var obj = await social.speak('Mucho gusto en conocerte ' + nombre);
+        var nombre = await gn.getName(social, evaId, usuarioId);
+        // social.emotions('ini', 0);
+        // social.templog(evaId, 'Hola');
+        // var obj = await social.play('./exp3files/hola.wav');
+        // var nombre = await social.sendAudioGoogleSpeechtoText2(procesar);
+        // social.stopListening();
+        // social.templog(evaId, nombre);
+        // social.emotions('joy', 0);
+        // var obj = await social.speak('Mucho gusto en conocerte ' + nombre);
         // var obj = await social.play('./audio.wav');
         // io.sockets.emit('messages', ini);
         // social.templog(evaId, 'Explicación');
