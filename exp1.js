@@ -11,15 +11,7 @@ var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
 module.exports = {
 	Ultimatum: async function (evaId, usuarioId) {
 		var social = new SocialRobot(credentials.config, credentials.credentials);
-		social.emotions('ini', 0);
-		social.templog(evaId, 'Hola');
-		var obj = await social.play('./exp1files/hola.wav');
-		var respuesta = await social.sendAudioGoogleSpeechtoText2(procesar);
-		social.stopListening();
-		var nombre = gn.ProcesarNombre(respuesta);
-		social.templog(usuarioId, respuesta + ' - ' + nombre);
-		var obj = await social.speak('Mucho gusto en conocerte ' + nombre);
-
+		var nombre = await gn.getName(social, evaId, usuarioId);
 		//ini platica
 		social.templog(evaId, 'Platica');
 		var obj = await social.play('./exp1files/platica/1.wav');

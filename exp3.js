@@ -18,18 +18,7 @@ module.exports = {
     QaA: async function (evaId, usuarioId) {
         var social = new SocialRobot(credentials.config, credentials.credentials);
         var pregunta = preguntas.getPreguntas();       
-        send.enviarMensaje(evaId, 'Hola');
-        //var obj = await social.play('./exp3files/blank.wav');
-        var obj = await social.play('./exp3files/hola.wav');
-        var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
-        social.stopListening();
-        console.log(respuestaParticipante);
-        send.enviarMensaje(usuarioId, respuestaParticipante);
-        send.enviarMensaje(evaId, 'Gusto');
-        social.emotions('joy', 0);
-        var obj = await social.speak('Mucho gusto en conocerte ' + gn.ProcesarNombre(respuestaParticipante));
-        //var obj = await social.play('./audio.wav');
-        //var obj = await social.play('./exp3files/gusto.wav');
+        var nombre = await gn.getName(social, evaId, usuarioId);
         social.emotions('ini', 0);
         send.enviarMensaje(evaId, 'Explicación');
         var obj = await social.play('./exp3files/explicacion2.wav');
