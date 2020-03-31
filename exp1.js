@@ -1,6 +1,7 @@
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 var gn = require('./getname');
+var p = require('./platica');
 
 function procesar(texto) {
 	return texto;
@@ -12,34 +13,7 @@ module.exports = {
 	Ultimatum: async function (evaId, usuarioId) {
 		var social = new SocialRobot(credentials.config, credentials.credentials);
 		var nombre = await gn.getName(social, evaId, usuarioId);
-		//ini platica
-		social.templog(evaId, 'Platica');
-		var obj = await social.play('./exp1files/platica/1.wav');
-		var respuesta = await social.sendAudioGoogleSpeechtoText2(procesar);
-		social.stopListening();
-		social.templog(usuarioId, respuesta);
-		social.emotions('joy', 0, false);
-		var obj = await social.play('./exp1files/platica/2.wav');
-		social.emotions('ini', 0);
-		var obj = await social.play('./exp1files/platica/3.wav');
-		social.emotions('joy', 1, false);
-		var obj = await social.play('./exp1files/platica/4.wav');
-		social.movement('c');
-		social.emotions('sad', 0, false);
-		var obj = await social.play('./exp1files/platica/5.wav');
-		social.emotions('ini', 0);
-		var obj = await social.play('./exp1files/platica/6.wav');
-		social.emotions('sad', 1, false);
-		var obj = await social.play('./exp1files/platica/7.wav');
-		social.movement('c');
-		social.emotions('anger', 0, false);
-		var obj = await social.play('./exp1files/platica/8.wav');
-		social.emotions('anger', 1, false);
-		var obj = await social.play('./exp1files/platica/9.wav');
-		social.emotions('ini', 0);
-		var obj = await social.play('./exp1files/platica/10.wav');
-		//end platica
-
+		var aux = await p.inicial(social, evaId, usuarioId);
 		social.templog(evaId, 'Explicación');
 		var obj = await social.play('./exp1files/explicacion.wav');
 		//Juego Ultimátum

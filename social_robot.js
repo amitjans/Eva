@@ -26,6 +26,7 @@ const port = new SerialPort('/dev/ttyUSB0', {
 var send = require('./app');
 var logs = require('./log');
 var log = '';
+var time = 0;
 
 var lastlevel = 0;
 
@@ -50,6 +51,7 @@ class SocialRobot {
       baudRate: 9600
     })
     log = '';
+    time = Date.now();
   }
   _createServiceAPI(service, credentials) {
     console.info('> Social Robot initializing ' + service + ' service');
@@ -247,24 +249,19 @@ stopListening() {
 
 emotions (emotion, level, leds, speed) {
   var temp = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
+  send.eyes(temp);
   switch (emotion) {
       case 'ini':
-          if (lastlevel >= 0) {
-              send.eyes(temp);
-              if (leds){
-                var animation = spawn('./leds/base');
-              }
+          if (leds){
+            var animation = spawn('./leds/base');
           }
           if (lastlevel >= 1) {
             this.movement('c');
           }
           break;
       case 'sad':
-          if (level >= 0) {
-              send.eyes(temp);
-              if (leds) {
-                var animation = spawn('./leds/sad_v2');
-              }
+          if (leds) {
+            var animation = spawn('./leds/sad_v2');
           }
           if (level >= 1) {
             this.movement('d');
@@ -274,11 +271,8 @@ emotions (emotion, level, leds, speed) {
           }
           break;
       case 'anger':
-          if (level >= 0) {
-              send.eyes(temp);
-              if (leds) {
-                var animation = spawn('./leds/anger_v2');
-              }
+          if (leds) {
+            var animation = spawn('./leds/anger_v2');
           }
           if (level >= 1) {
               this.movement('a');
@@ -288,11 +282,8 @@ emotions (emotion, level, leds, speed) {
           }
           break;
       case 'joy':
-          if (level >= 0) {
-              send.eyes(temp);
-              if (leds) {
-                var animation = spawn('./leds/joy_v2');
-              }
+          if (leds) {
+            var animation = spawn('./leds/joy_v2');
           }
           if (level >= 1) {
             this.movement('u');
@@ -312,8 +303,9 @@ templog(who, texto) {
   send.enviarMensaje(who, texto);
 }
 
-savelogs(nombre){
-  logs.logs(nombre + Date.now(), log);
+savelogs(nombre, temp){
+  logs.logs(nombre + time, (temp || log));
+  log = '';
 }
 
 }
