@@ -52,9 +52,6 @@ module.exports = app;
  * */
 
 var apiai = require('apiai');
-////e8201965be70405e8f1b1700f1563d98
-//var appai = apiai("8921709f76374a34a31a1fa46d55799b");
-//6881626afeaf4d7faeb548b84c60a08c
 var appai = apiai("8921709f76374a34a31a1fa46d55799b");
 var optionsAPI = {
 	sessionId: '5bd69057-bd3b-471e-96c4-1bb61df59528'//'<unique session id>'
@@ -79,7 +76,6 @@ var enviarMensaje = function (autor, msg, media) {
 		data.media = media;
 	console.log(data);
 	io.sockets.emit('messages', data);
-	//logs.logs(nombres[0], Date.now() + ' ' + autor.autor + ': 1: ' + msg);
 };
 
 var eyes = function (params) {
@@ -98,95 +94,17 @@ var enviarError = function (error, query) {
 }
 
 module.exports.setIO = setIO;
-var comandoVoz;
-
-var contextos;
-
-function seleccionarMensaje(tipo, msg) {
-	switch (tipo) {
-		case 1: enviarMensaje(evaId, msg);
-			break;
-		default: break;
-	}
-};
-
-var respuestaNumero;
-var pistaJuego = '';
-var suposicionAnterior = -1;
 
 var generarNumeroRandom = function (min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 var fs = require('fs');
 var util = require('util');
 
 var PlayMusic = require('playmusic');
-var pm = new PlayMusic();
-var request2 = require("request");
-//const spawn = require('child_process').spawn;
-
-var cancionActual;
-
-/*******************************************************************/
-/********************Parte del agente conversacional****************/
-
-// You can find your project ID in your Dialogflow agent settings
-const projectId = 'juego-ultimatum-mwcaer'; //https://dialogflow.com/docs/agents#settings
-const sessionId = '454885';
-const query = 'hola';
-const languageCode = 'es-419';
-const structjson = require('./structjson.js');
-
-// Instantiate a DialogFlow client.
-const dialogflow = require('dialogflow');
-const sessionClient = new dialogflow.SessionsClient();
-
-// Define session path
-const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 var indiceScript1 = 1;
-
-const pify = require('pify');
-
-var timeFixation = [10000, 15000, 20000, 25000];
-
-var ofertas_realizadas = [];
-var nombreParticipante;
-var script_ultimatum = [
-	{ frase: '¡Hola!', type: 'IniciarJuego', time: 100 },
-	//{frase:'C,type:'NE', time:100},
-	//{frase:'¿Cuál es tu nombre?',type:'NR', time:4000},
-	//{frase:'Muy bien, ¡Com a jugar!',type:'IniciarJuego', time:2000},
-	{ frase: '¡Gracias por jugar conmigo!', type: 'NE', time: 3000 }
-];
-
-var canciones = {
-	'sin un amor': {
-		url: 'https://www.youtube.com/watch?v=rNJpQVEArIs',
-		timePause: 85000
-	}
-};
-
-var artistas = {
-	'pedro infante': {
-		name: 'Amorcito corazón',
-		url: 'https://www.youtube.com/watch?v=OP5E3wiM69w',
-		timePause: 90000
-	}
-};
-
-// The text query request.
-const requestDialog = {
-	session: sessionPath,
-	queryInput: {
-		text: {
-			text: query,
-			languageCode: languageCode,
-		},
-	},
-};
 
 function randomIntInc(low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low)
@@ -212,7 +130,16 @@ index.get('/interaccion/iniciarInteraccion2', function (req, res) {
 
 var logs = require('./log');
 index.get('/interaccion/iniciarInteraccion3', function (req, res) {
-	logs.logs('adrian' + Date.now(), 'algo dentro de adrian');
+	(async () => {
+		const text2wav = require('text2wav')
+		let out = await text2wav('test')
+		// out is of type Uint8Array
+		const assert = require('assert')
+		assert.equal(out[0], 82) //R
+		assert.equal(out[1], 73) //I
+		assert.equal(out[2], 70) //F
+		assert.equal(out[3], 70) //F
+	})()
 	res.status(200).jsonp();
 });
 
