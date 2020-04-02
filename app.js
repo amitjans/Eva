@@ -79,7 +79,7 @@ var enviarMensaje = function (autor, msg, media) {
 };
 
 var eyes = function (params) {
-	io.sockets.emit('messages', params);
+	io.sockets.emit('emotion', params);
 }
 
 module.exports.enviarMensaje = enviarMensaje;
