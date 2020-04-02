@@ -1,4 +1,5 @@
 var gn = require('./getname');
+var Compare = require('./Compare');
 var PhoneticSpanish = require('./PhoneticSpanish');
 var preguntas = require('./exp3qaa');
 var p = require('./platica');
@@ -39,8 +40,7 @@ module.exports = {
                     if (expression > 0) {
                         correctas++;
                     }
-                } else if (respuestaParticipante.includes(pregunta[j].respuesta) || PhoneticSpanish(respuestaParticipante).includes(PhoneticSpanish(pregunta[j].respuesta))
-                || pregunta[j].respuesta.includes(respuestaParticipante) || PhoneticSpanish(pregunta[j].respuesta).includes(PhoneticSpanish(respuestaParticipante))) {
+                } else if (Compare(respuestaParticipante, pregunta[j].respuesta) > 0) {
                     await Respuesta(social, evaId, pregunta[j], 2);
                     correctas++;
                 } else {
