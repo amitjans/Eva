@@ -31,7 +31,7 @@
     "serialport": "^8.0.7",
     "serve-favicon": "^2.5.0",
     "sleep": "^6.1.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "1.7.4",
     "temp": "^0.8.3",
     "tree-kill": "^1.2.2",
     "underscore": "^1.8.3",
