@@ -1,22 +1,12 @@
-var SocialRobot = require('./social_robot');
-var credentials = require('./config-services');
-var send = require('./app');
 var gn = require('./getname');
-var PhoneticSpanish = require('./PhoneticSpanish');
 var casos = require('./exp2data');
-
-var joy = { anim: 'joy', bcolor: '', speed: 2.0 };
-var sad = { anim: 'sad', bcolor: '', speed: 2.0 };
-var anger = { anim: 'anger', bcolor: '', speed: 2.0 };
-var ini = { anim: 'ini', bcolor: '', speed: 2.0 };
 
 function procesar(texto) {
     return texto;
 }
 
 module.exports = {
-    autopilot: async function (evaId, usuarioId) {
-        var social = new SocialRobot(credentials.config, credentials.credentials);
+    autopilot: async function (social, evaId, usuarioId) {
         var caso = casos.getCasos();
         var nombre = await gn.getName(social, evaId, usuarioId);
         // social.emotions('ini', 0);

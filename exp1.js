@@ -1,5 +1,3 @@
-var SocialRobot = require('./social_robot');
-var credentials = require('./config-services');
 var gn = require('./getname');
 var p = require('./platica');
 
@@ -10,8 +8,7 @@ function procesar(texto) {
 var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
 
 module.exports = {
-	Ultimatum: async function (evaId, usuarioId) {
-		var social = new SocialRobot(credentials.config, credentials.credentials);
+	Ultimatum: async function (social, evaId, usuarioId) {
 		var nombre = await gn.getName(social, evaId, usuarioId);
 		var aux = await p.inicial(social, evaId, usuarioId);
 		social.templog(evaId, 'Explicación');

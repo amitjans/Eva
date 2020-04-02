@@ -42,23 +42,12 @@ src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Inicio</a></li>
+          <li><a href="/interaccion">Interacción</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
     </div>
   </nav>
-
-  <div class="jumbotron bg-danger">
-    <div class="container">
-      <h1>Comportamientos de Eva</h1>
-      <p class="text-center">
-        <a role="button" class="btn btn-primary" ng-show="!listen" ng-click="setMicrofono(true)">Encender&nbsp;&nbsp;<i
-            class="fa fa-microphone fa-lg" aria-hidden="true"></i></a>
-        <a role="button" class="btn btn-danger" ng-show="listen" ng-click="setMicrofono(false)">Apagar&nbsp;&nbsp;<i
-            class="fa fa-microphone-slash fa-lg" aria-hidden="true"></i></a>
-      </p>
-    </div>
-  </div>
 
   <div class="container">
     <div class="row">
@@ -153,6 +142,20 @@ src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
+        <hr />
+        <div class="row">
+          <div class="col-md-4" ng-repeat="item in interacciones">
+            <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteracciong(item._id)">
+              <i class="fa fa-comments"></i>&nbsp;{{ item.nombre }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-6">
         <h2><i class="fa fa-quote-left fa-lg" aria-hidden="true"></i>&nbsp;Frases</h2>

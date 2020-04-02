@@ -188,4 +188,25 @@ angular.module('evaApp', ['dndLists'])
 						console.log(error);
 					});
 			};
+
+			$scope.iniciarInteracciong = function (id) {
+				$http.get('interaccion/iniciarInteracciong?id=' + id)
+					.then(function (res) {
+						console.info('Inició interaccion con grupo g');
+					}, function (error) {
+						console.log(error);
+					});
+			};
+
+			$scope.listinteracciones = function () {
+				$http.get('/api/interaccion')
+					.then(function (res) {
+						$scope.interacciones = res.data;
+					}, function (error) {
+						console.log(error);
+					});
+			};
+
+			$scope.listinteracciones();
+
 		});

@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var logs = require('./log');
 
@@ -25,7 +24,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/users', require('./routes/users'));
+app.get('/interaccion', function(req, res) {
+	res.render('interaccion');
+  });
+app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
+
+const { mongoose } = require('./server/database');
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -67,6 +72,7 @@ var setIO = function (ioBase) {
 
 var usuarioId = { autor: 'Usuario', class: 'text-muted' };
 var evaId = { autor: 'Robot Eva', class: 'text-danger' };
+var indiceScript1 = 1;
 
 var enviarMensaje = function (autor, msg, media) {
 	var data = autor;
@@ -79,7 +85,7 @@ var enviarMensaje = function (autor, msg, media) {
 };
 
 var eyes = function (params) {
-	io.sockets.emit('emotion', params);
+	io.sockets.emit('messages', params);
 }
 
 module.exports.enviarMensaje = enviarMensaje;
@@ -104,13 +110,15 @@ var util = require('util');
 
 var PlayMusic = require('playmusic');
 
-var indiceScript1 = 1;
-
 function randomIntInc(low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low)
 }
 
 var kill = require('tree-kill');
+
+var SocialRobot = require('./social_robot');
+var credentials = require('./config-services');
+var social = new SocialRobot(credentials.config, credentials.credentials);
 
 var exp1 = require('./exp1');
 var exp2 = require('./exp2');
@@ -118,43 +126,39 @@ var exp3 = require('./exp3');
 
 index.get('/interaccion/iniciarInteraccion1', function (req, res) {
 	console.log('interaccion/iniciarInteraccion1');
-	exp3.QaA(evaId, usuarioId);
+	social.resetlog();
+	exp3.QaA(social, evaId, usuarioId);
 	res.status(200).jsonp();
 });
 
 index.get('/interaccion/iniciarInteraccion2', function (req, res) {
 	console.log('interaccion/iniciarInteraccion2');
-	exp2.autopilot(evaId, usuarioId);
+	social.resetlog();
+	exp2.autopilot(social, evaId, usuarioId);
 	res.status(200).jsonp();
 });
 
 var logs = require('./log');
 index.get('/interaccion/iniciarInteraccion3', function (req, res) {
-	(async () => {
-		const text2wav = require('text2wav')
-		let out = await text2wav('test')
-		// out is of type Uint8Array
-		const assert = require('assert')
-		assert.equal(out[0], 82) //R
-		assert.equal(out[1], 73) //I
-		assert.equal(out[2], 70) //F
-		assert.equal(out[3], 70) //F
-	})()
-	res.status(200).jsonp();
+	const text2wav = require('text2wav');
+	let out = text2wav('hola');
 });
 
 index.get('/interaccion/iniciarInteraccion4', function (req, res) {
+	social.resetlog();
+	social.setEmotional(false);
+	exp1.Ultimatum(social, evaId, usuarioId);
 	res.status(200).jsonp();
 });
 
 index.get('/interaccion/iniciarInteraccion5', function (req, res) {
-	exp1.Ultimatum(evaId, usuarioId);
+	social.resetlog();
+	social.setEmotional(true);
+	exp1.Ultimatum(social, evaId, usuarioId);
 	res.status(200).jsonp();
 });
 
-var SocialRobot = require('./social_robot');
 var lastlevel = 0;
-var social = new SocialRobot();
 
 index.get('/interaccion/iniciaremocion', function (req, res) {
 	//sad
@@ -197,5 +201,29 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 		social.emotions('ini', 0);
 	}
 	console.log(req.query.e);
+	res.status(200).jsonp();
+});
+
+const interaccion = require('./server/models/interaccion');
+var convert = require('xml-js');
+var respuesta = '';
+
+index.get('/interaccion/iniciarInteracciong', async function (req, res) {
+	const temp = await interaccion.findById(req.query.id);
+	var json = convert.xml2js(temp.xml, {compact: false});
+	console.log(json);
+
+	for (element of json.elements) {
+		if(element.name == 'emotion'){
+			var e = element.elements;
+			social.emotions(e[0].attributes.name, e[0].attributes.value, false, (e[0].attributes.speed || 2.0));
+			if (e.length > 1) {
+				await social.speak(e[1].attributes.texto);
+			}
+		} else if (element.name == 'listen') {
+			respuesta = await social.sendAudioGoogleSpeechtoText2();
+			console.log(respuesta);
+		}
+	}
 	res.status(200).jsonp();
 });
