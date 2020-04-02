@@ -27,6 +27,7 @@ var send = require('./app');
 var logs = require('./log');
 var log = '';
 var time = 0;
+var emotional = true;
 
 var lastlevel = 0;
 
@@ -44,15 +45,13 @@ class SocialRobot {
     }, this);
     if (credentials != undefined && credentials.hasOwnProperty('tts')) {
       var creds = credentials['tts'];
-      console.log(creds);
       this._createServiceAPI('tts', creds);
     }
-    const port = new SerialPort('/dev/ttyUSB0', {
-      baudRate: 9600
-    })
     log = '';
     time = Date.now();
+    emotional = true;
   }
+
   _createServiceAPI(service, credentials) {
     console.info('> Social Robot initializing ' + service + ' service');
     assert(credentials, "no credentials found for the " + service + " service");
@@ -70,6 +69,7 @@ class SocialRobot {
         break;
     }
   }
+
   /**
    * 
    * @param {String} message to speak 
@@ -247,9 +247,17 @@ stopListening() {
     record.stop();
 }
 
+setEmotional(value){
+  emotional = value;
+}
+
 emotions (emotion, level, leds, speed) {
-  var temp = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
-  send.eyes(temp);
+  if (!emotional) {
+    return;
+  }
+
+  var json = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
+  send.eyes(json);
   switch (emotion) {
       case 'ini':
           if (leds){
@@ -296,6 +304,11 @@ emotions (emotion, level, leds, speed) {
           break;
   }
   lastlevel = level;
+}
+
+resetlog(){
+  log = '';
+  time = Date.now();
 }
 
 templog(who, texto) {
