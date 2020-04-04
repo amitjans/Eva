@@ -24,7 +24,7 @@ module.exports = {
     getName : async function (social, evaId, usuarioId) {
         social.emotions('ini', 0);
         social.templog(evaId, 'Hola');
-        var obj = await social.play('./exp3files/hola.wav');
+        var obj = await social.play('./interacciones/exp3files/hola.wav');
         var nombre = await social.sendAudioGoogleSpeechtoText2();
         social.templog(usuarioId, nombre);
         nombre = ProcesarNombre(nombre);
