@@ -13,12 +13,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.create = function () {
-      $scope.xml = $scope.xml.replace(/\n/gi, '').replace(/\t/gi, '').replace(/\r/gi, '');
-      console.log($scope.xml);
-      var json = '{ "nombre": "' + $scope.nombre + '", "xml": "' + $scope.xml + '" }';
+      var json = { nombre: $scope.nombre, data: { node: node, link: link }};
       $http.post('/api/interaccion', json).then(function successCallback(response) {
-        $scope.nombre = '';
-        $scope.xml = '';
+        $scope.reset();
         $scope.list();
       }, function errorCallback(response) {
         $scope.format();
@@ -27,63 +24,125 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
     $scope.update = function (l) {
       $scope.nombre = l.nombre;
-      $scope.xml = l.xml;
       $scope.updateid = l._id;
       $scope.icon = false;
       $scope.accion = 'Editar';
-      $scope.format();
-      //up();
+      var data = JSON.parse(l.data);
+      node = data.node;
+      link = data.link;
+      $scope.node = node;
+      id = 0;
+      node.forEach(element => {
+        if (id < element.key) {
+          id = element.key;
+        }
+      });
+      id++;
+      reload();
     }
 
     $scope.updatesend = function () {
-      $scope.xml = $scope.xml.replace(/\n/gi, '').replace(/\t/gi, '').replace(/\r/gi, '');
-      var json = '{ "nombre": "' + $scope.nombre + '", "xml": "' + $scope.xml + '" }';
+      //$scope.xml = $scope.xml.replace(/\n/gi, '').replace(/\t/gi, '').replace(/\r/gi, '');
+      var json = { nombre: $scope.nombre, data: { node: node, link: link }};
       $http.put('/api/interaccion/' + $scope.updateid, json).then(function successCallback(response) {
         $scope.updateid = '';
         $scope.accion = 'Agregar';
         $scope.icon = true;
-        $scope.nombre = '';
-        $scope.xml = '';
+        $scope.reset();
         $scope.list();
       }, function errorCallback(response) {
-        $scope.format();
       });
     }
 
     $scope.delete = function (id) {
       $http.delete('/api/interaccion/' + id).then(function successCallback(response) {
-        //notify(response.data.mensaje);
         $scope.list();
-        //up();
       }, function errorCallback(response) {
-        //notify(response.data.mensaje);
       });;
     }
 
-    $scope.format = function () {
-      var formatted = '', indent= '';
-      var xml = $scope.xml;
-      var tab = '\t';
-      xml.split(/>\s*</).forEach(function(node) {
-          if (node.match( /^\/\w/ )) indent = indent.substring(tab.length);
-          formatted += indent + '<' + node + '>\r\n';
-          if (node.match( /^<?\w[^>]*[^\/]$/ )) indent += tab;
-      });
-      $scope.xml = formatted.substring(1, formatted.length-3);
+    $scope.reset = function () {
+      $scope.nombre = '';
+      node = [];
+      link = [];
+      reload();
+    }
+
+    $scope.actualizar = function () {
+      $scope.node = node;
+      reload();
     }
 
     $scope.setemocion = function () {
-      $scope.xml = ($scope.xml || '') + "<emotion><category name='" + $scope.emocion + "' value='" + $scope.nivel + "' speed='" + $scope.velocidad + "' />";
-      if (!!$scope.texto || $scope.texto != '') {
-        $scope.xml += "<speak>" + $scope.texto + "</speak>";
+      var color = "lightgray";
+      switch ($scope.emocion) {
+        case 'joy':
+          color = "lightyellow";
+          break;
+        case 'sad':
+          color = "lightblue";
+          break;
+        case 'surprised':
+          color = 'lightgreen';
+          break;
+        case 'anger':
+          color = "red";
+          break;
+        default:
+          break;
       }
-      $scope.xml += "</emotion>";
-      $scope.format();
+      node.push({ key: id, name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: $scope.nivel, speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
+      $scope.node = node;
+      //if (!!$scope.link || $scope.link !== '') {
+        link.push({ from: $scope.link, to: id });
+      //}
+      id++;
+      reload();
+      $("#myModal").modal('hide');
+    }
+
+    $scope.setspeak = function () {
+      node.push({ key: id, name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.node = node;
+      if (!!$scope.link || $scope.link !== '') {
+        link.push({ from: $scope.link, to: id });
+      }
+      id++;
+      reload();
+      $("#myModalSpeak").modal('hide');
     }
 
     $scope.setlisten = function () {
-      $scope.xml = ($scope.xml || '') + '<listen></listen>';
-      $scope.format();
+      node.push({ key: id, name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.node = node;
+      if (!!$scope.link || $scope.link !== '') {
+        link.push({ from: $scope.link, to: id });
+      }
+      id++;
+      reload();
+      $("#myModalListen").modal('hide');
+    }
+    
+    $scope.setsleep = function () {
+      node.push({ key: id, name: "Esperar_" + id, type: "wait", color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.node = node;
+      if (!!$scope.link || $scope.link !== '') {
+        link.push({ from: $scope.link, to: id });
+      }
+      id++;
+      reload();
+      $("#myModalWait").modal('hide');
+    }
+
+    $scope.setfor = function () {
+      node.push({ key: id, name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
+      $scope.node = node;
+      if (!!$scope.link || $scope.link !== '') {
+        link.push({ from: $scope.link, to: id });
+      }
+      id++;
+      reload();
+      $("#myModalFor").modal('hide');
     }
 
     $scope.list();
