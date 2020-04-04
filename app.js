@@ -120,9 +120,9 @@ var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 var social = new SocialRobot(credentials.config, credentials.credentials);
 
-var exp1 = require('./exp1');
-var exp2 = require('./exp2');
-var exp3 = require('./exp3');
+var exp1 = require('./interacciones/exp1');
+var exp2 = require('./interacciones/exp2');
+var exp3 = require('./interacciones/exp3');
 
 index.get('/interaccion/iniciarInteraccion1', function (req, res) {
 	console.log('interaccion/iniciarInteraccion1');

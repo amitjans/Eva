@@ -1,5 +1,5 @@
-var gn = require('./getname');
-var p = require('./platica');
+var gn = require('./common/getname');
+var p = require('./common/platica');
 
 function procesar(texto) {
 	return texto;
@@ -12,7 +12,7 @@ module.exports = {
 		var nombre = await gn.getName(social, evaId, usuarioId);
 		var aux = await p.inicial(social, evaId, usuarioId);
 		social.templog(evaId, 'Explicación');
-		var obj = await social.play('./exp1files/explicacion.wav');
+		var obj = await social.play('./interacciones/exp1files/explicacion.wav');
 		//Juego Ultimátum
 		var puntos = 0;
 		var puntoseva = 0;
@@ -23,19 +23,19 @@ module.exports = {
 		for (let i = 0; i < iteraciones; i++) {
 			if (i == 0) {
 				social.templog(evaId, 'Comenzar Ofertas');
-				var obj = await social.play('./exp1files/comenzarofertas.wav');
+				var obj = await social.play('./interacciones/exp1files/comenzarofertas.wav');
 			} else if (i == (iteraciones - 1)) {
 				social.templog(evaId, 'Ultima oferta');
-				var obj = await social.play('./exp1files/ultimaoportunidad.wav');
+				var obj = await social.play('./interacciones/exp1files/ultimaoportunidad.wav');
 			} else if (i == 5) {
 				social.templog(evaId, 'Van 5');
-				var obj = await social.play('./exp1files/quintaoferta.wav');
+				var obj = await social.play('./interacciones/exp1files/quintaoferta.wav');
 			} else if (i == (iteraciones - 3)) {
 				social.templog(evaId, 'Faltan 3');
-				var obj = await social.play('./exp1files/tresofertas.wav');
+				var obj = await social.play('./interacciones/exp1files/tresofertas.wav');
 			}   else {
 				social.templog(evaId, 'Siguiente oferta');
-				var obj = await social.play('./exp1files/' + NextOffer() + '.wav');
+				var obj = await social.play('./interacciones/exp1files/' + NextOffer() + '.wav');
 			}
 			var temp = -1;
 			do {
@@ -57,12 +57,9 @@ module.exports = {
 					}
 				}
 				if (temp == -1) {
-					var obj = await social.play('./exp1files/repetir.wav');
+					var obj = await social.play('./interacciones/exp1files/repetir.wav');
 				} else if(temp > 10){
-					var obj = await social.play('./exp1files/limite.wav');
-				} else if(!(temp + '').endsWith('0')){
-					var obj = await social.play('./exp1files/multiplo.wav');
-					temp += 10;
+					var obj = await social.play('./interacciones/exp1files/limite.wav');
 				}
 			} while (temp > 10 || temp == -1);
 			
@@ -74,7 +71,7 @@ module.exports = {
 				puntos += 10 - temp;
 				puntoseva += temp;
 			}
-			var obj = await social.play('./exp1files/' + resp + '.wav');
+			var obj = await social.play('./interacciones/exp1files/' + resp + '.wav');
 			social.templog(evaId, resp + '. Llevas hasta ahora un total de ' + puntos + ' pesos y yo llevo ' + puntoseva);
 			social.emotions('ini', 0);
 			await social.sleep(500);
@@ -85,11 +82,11 @@ module.exports = {
 		social.emotions('ini', 0);
 		social.templog(evaId, 'Resumen - Total de puntos: ' + puntos + ' puntos y Eva ' + puntoseva);
 		var obj = await social.rec(' ' + puntos + ' pesos. Y a yo obtuve un total de ' + puntoseva + ' pesos.' , 'puntos');
-		var obj = await social.play('./exp1files/despedida.1.wav');
+		var obj = await social.play('./interacciones/exp1files/despedida.1.wav');
 		var obj = await social.play('./temp/puntos.wav');
-		var obj = await social.play('./exp1files/despedida.1.1.wav');
-		var obj = await social.play('./exp1files/despedida.2.wav');
-		var obj = await social.play('./exp1files/despedida.3.wav');
+		var obj = await social.play('./interacciones/exp1files/despedida.1.1.wav');
+		var obj = await social.play('./interacciones/exp1files/despedida.2.wav');
+		var obj = await social.play('./interacciones/exp1files/despedida.3.wav');
 		social.templog(evaId, 'Bueno, finalmente obtuviste un total de ' + puntos + ', pesos. Ahora me despido por el momento, espero volver a verte pronto ' + nombre + '. Que tengas un bonito día.');
 		social.savelogs(nombre);
 		console.log('Terminó la sesion.');
@@ -99,7 +96,7 @@ module.exports = {
 function decision(social, temp) {
 	var index = generarNumeroRandom(0, 100);
 	var resp = '';
-	if (temp <= 20) {
+	if (temp <= 2) {
 		if (index > 75 && temp > 10) {
 			resp = 'aceptooferta';
 			if (respanterior.emocion === 'joy') {
@@ -115,10 +112,10 @@ function decision(social, temp) {
 			resp = 'noacepto';
 			setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp, 0.5);
 		}
-	} else if (temp >= 50) {
+	} else if (temp >= 5) {
 		resp = 'aceptooferta';
 		setEmocion(social, 'joy', ('joy' === respanterior.emocion ? 1 : 0), resp, 0.5);
-	} else if (temp == 30) {
+	} else if (temp == 3) {
 		if (index > 50) {
 			resp = ((respanterior.emocion !== 'sad') ? 'baceptooferta' : 'aceptooferta');
 			setEmocion(social, 'sad', ('sad' === respanterior.emocion ? 1 : 0), resp, 0.5);
@@ -133,7 +130,7 @@ function decision(social, temp) {
 				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0), resp, 0.5);
 			}
 		}
-	} else if (temp == 40) {
+	} else if (temp == 4) {
 		if (index > 25) {
 			resp = 'aceptooferta';
 			setEmocion(social, 'ini', 0, resp, 0.5);

@@ -1,8 +1,8 @@
-var gn = require('./getname');
-var Compare = require('./Compare');
-var PhoneticSpanish = require('./PhoneticSpanish');
+var gn = require('./common/getname');
+var Compare = require('../utils/Compare');
+var PhoneticSpanish = require('../utils/PhoneticSpanish');
 var preguntas = require('./exp3qaa');
-var p = require('./platica');
+var p = require('./common/platica');
 
 function procesar(texto) {
     return texto;
@@ -15,7 +15,7 @@ module.exports = {
         //var aux = await p.inicial(social, evaId, usuarioId);
         social.emotions('ini', 0);
         social.templog(evaId, 'Explicación');
-        var obj = await social.play('./exp3files/explicacion2.wav');
+        var obj = await social.play('./interacciones/exp3files/explicacion2.wav');
     
         var i = 0;
         var correctas = 0;
@@ -51,31 +51,31 @@ module.exports = {
             i=i+3;
             if (correctas == 3) {
                 social.emotions(( total == 6 ? 'surprise' : 'joy' ), 1);
-                var obj = await social.play('./exp3files/resumen1.wav');
+                var obj = await social.play('./interacciones/exp3files/resumen1.wav');
             } else if (correctas == 2) {
                 social.emotions('joy', 0);
-                var obj = await social.play('./exp3files/resumen1.wav');
+                var obj = await social.play('./interacciones/exp3files/resumen1.wav');
             } else if (correctas == 1) {
                 social.emotions('sad', 1);
-                var obj = await social.play('./exp3files/resumen3.wav');
+                var obj = await social.play('./interacciones/exp3files/resumen3.wav');
             } else {
                 social.emotions('sad', 1);
-                var obj = await social.play('./exp3files/resumen4.wav');
+                var obj = await social.play('./interacciones/exp3files/resumen4.wav');
             }
             social.emotions('ini', 0);
             total += correctas;
             correctas = 0;
-            var obj = await social.play('./exp3files/otra.wav');
+            var obj = await social.play('./interacciones/exp3files/otra.wav');
             var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
             social.stopListening();
             social.templog(evaId, respuestaParticipante);
             if (respuestaParticipante.includes("no")) {
                 social.emotions('sad', 1);
                 next = false;
-                var obj = await social.play('./exp3files/terminar.wav');
+                var obj = await social.play('./interacciones/exp3files/terminar.wav');
             } else {
                 social.emotions('joy', 0);
-                var obj = await social.play('./exp3files/otra1.wav');
+                var obj = await social.play('./interacciones/exp3files/otra1.wav');
             }
             social.emotions('ini', 1);
         } while (next);
@@ -84,12 +84,12 @@ module.exports = {
 };
 
 function RespuestaCorrecta() {
-	var array = ['./exp3files/correcta1.wav', './exp3files/correcta2.wav', './exp3files/correcta3.wav'];
+	var array = ['./interacciones/exp3files/correcta1.wav', './interacciones/exp3files/correcta2.wav', './interacciones/exp3files/correcta3.wav'];
 	return array[generarNumeroRandom(0, array.length - 1)];
 }
 
 function RespuestaIncorrecta() {
-	var array = ['./exp3files/incorrecta1.wav', './exp3files/incorrecta2.wav'];
+	var array = ['./interacciones/exp3files/incorrecta1.wav', './interacciones/exp3files/incorrecta2.wav'];
 	return array[generarNumeroRandom(0, array.length - 1)];
 }
 
@@ -125,14 +125,14 @@ async function Respuesta(social, evaId, pregunta, expression) {
         case 1:
             social.emotions('sad', 1);
             social.templog(evaId, 'Incompleta');
-            var obj = await social.play('./exp3files/incompleta.wav');
+            var obj = await social.play('./interacciones/exp3files/incompleta.wav');
             var obj = await social.play(pregunta.respaudio);
             social.emotions('ini', 0);
             break;
         case 0:
             social.emotions('sad', 1);
             social.templog(evaId, 'Parcialmente Correcta');
-            var obj = await social.play('./exp3files/parcialmentecorrecta.wav');
+            var obj = await social.play('./interacciones/exp3files/parcialmentecorrecta.wav');
             var obj = await social.play(pregunta.respaudio);
             social.emotions('ini', 0);
             break;
