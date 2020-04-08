@@ -17,8 +17,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $http.post('/api/interaccion', json).then(function successCallback(response) {
         $scope.reset();
         $scope.list();
+        id = 0;
       }, function errorCallback(response) {
-        $scope.format();
       });
     }
 
@@ -42,7 +42,13 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.updatesend = function () {
-      //$scope.xml = $scope.xml.replace(/\n/gi, '').replace(/\t/gi, '').replace(/\r/gi, '');
+      var json = { nombre: $scope.nombre, data: { node: node, link: link }};
+      $http.put('/api/interaccion/' + $scope.updateid, json).then(function successCallback(response) {
+      }, function errorCallback(response) {
+      });
+    }
+
+    $scope.updatesendx = function () {
       var json = { nombre: $scope.nombre, data: { node: node, link: link }};
       $http.put('/api/interaccion/' + $scope.updateid, json).then(function successCallback(response) {
         $scope.updateid = '';
@@ -50,6 +56,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.icon = true;
         $scope.reset();
         $scope.list();
+        id = 0;
       }, function errorCallback(response) {
       });
     }
@@ -73,6 +80,18 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       reload();
     }
 
+    $scope.common = function (value) {
+      $scope.node = node;
+      $scope.texto = '';
+      if (!!$scope.link) {
+        link.push({ from: parseInt($scope.link), to: id });
+      }
+      $scope.link = '' + id;
+      id++;
+      reload();
+      $("#myModal" + value).modal('hide');
+    }
+
     $scope.setemocion = function () {
       var color = "lightgray";
       switch ($scope.emocion) {
@@ -92,58 +111,33 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
           break;
       }
       node.push({ key: id, name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: $scope.nivel, speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
-      $scope.node = node;
-      //if (!!$scope.link || $scope.link !== '') {
-        link.push({ from: $scope.link, to: id });
-      //}
-      id++;
-      reload();
-      $("#myModal").modal('hide');
+      $scope.common('');
     }
 
     $scope.setspeak = function () {
       node.push({ key: id, name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.node = node;
-      if (!!$scope.link || $scope.link !== '') {
-        link.push({ from: $scope.link, to: id });
-      }
-      id++;
-      reload();
-      $("#myModalSpeak").modal('hide');
+      $scope.common('Speak');
     }
 
     $scope.setlisten = function () {
       node.push({ key: id, name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.node = node;
-      if (!!$scope.link || $scope.link !== '') {
-        link.push({ from: $scope.link, to: id });
-      }
-      id++;
-      reload();
-      $("#myModalListen").modal('hide');
+      $scope.common('Listen');
     }
     
     $scope.setsleep = function () {
-      node.push({ key: id, name: "Esperar_" + id, type: "wait", color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.node = node;
-      if (!!$scope.link || $scope.link !== '') {
-        link.push({ from: $scope.link, to: id });
-      }
-      id++;
-      reload();
-      $("#myModalWait").modal('hide');
+      node.push({ key: id, name: "Esperar_" + id, type: "wait", color: "lightblue", time: $scope.time, isGroup: false, group: $scope.group });
+      $scope.common('Wait');
     }
 
     $scope.setfor = function () {
       node.push({ key: id, name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
-      $scope.node = node;
-      if (!!$scope.link || $scope.link !== '') {
-        link.push({ from: $scope.link, to: id });
-      }
-      id++;
-      reload();
-      $("#myModalFor").modal('hide');
+      $scope.common('For');
     }
 
+    $scope.setif = function () {
+      node.push({ key: id, name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('If');
+    }
+    
     $scope.list();
   }]);

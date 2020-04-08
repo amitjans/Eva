@@ -206,24 +206,130 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 
 const interaccion = require('./server/models/interaccion');
 var convert = require('xml-js');
-var respuesta = '';
+var Compare = require('./utils/Compare');
+var respuesta = [];
 
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	const temp = await interaccion.findById(req.query.id);
-	var json = convert.xml2js(temp.xml, {compact: false});
-	console.log(json);
+	//var json = convert.xml2js(temp.xml, {compact: false});
 
-	for (element of json.elements) {
-		if(element.name == 'emotion'){
-			var e = element.elements;
-			social.emotions(e[0].attributes.name, e[0].attributes.value, false, (e[0].attributes.speed || 2.0));
-			if (e.length > 1) {
-				await social.speak(e[1].attributes.texto);
-			}
-		} else if (element.name == 'listen') {
-			respuesta = await social.sendAudioGoogleSpeechtoText2();
-			console.log(respuesta);
-		}
-	}
+	var json = JSON.parse(temp.data);
+
+	var nodes = json.node;
+	var links = json.link;
+	respuesta = [];
+
+	// console.log(nodes);
+	// console.log(links);
+	fnodes = FirstsNodes(links, nodes.slice());
+	// console.log(fnodes);
+	// console.log('Y le sigue');
+	// console.log(NextNode(links, fnodes[0], nodes)[0]);
+
+	social.resetlog();	
+	await ProcessFlow(nodes, links, fnodes, 0);
+	social.savelogs('');
+
 	res.status(200).jsonp();
 });
+
+async function ProcessFlow(nodes, links, fnodes, ini) {
+	let aux = [fnodes[ini]];
+	let n = true;
+	do {
+		if (aux.length == 1 || aux[0].type !== 'if') {
+			if (aux[0].type === 'for') {
+				for (let f = 0; f < aux[0].iteraciones; f++) {					
+					await ProcessFlow(nodes, links, fnodes, FirstsOfGroup(fnodes, aux[0].key));
+				}
+			} else {
+				await ProcessNode(aux[0]);
+			}	
+			aux = NextNode(links, aux[0], nodes);
+		} else if (aux.length > 1) {
+			aux.sort(function (a, b) { return a.text === b.text ? 0 : a.text < b.text ? 1 : -1; });
+			for (let c = 0; c < aux.length; c++) {
+				if (Compare((aux[c].text || ''), respuesta[respuesta.length - 1]) > 1) {
+					aux = NextNode(links, aux[c], nodes);
+					break;
+				}
+			}
+		}
+		n = aux.length > 0;
+	} while (n);
+}
+
+async function ProcessNode(element) {
+	if(element.type === 'emotion'){
+		var e = element.elements;
+		social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
+	} else if (element.type === 'speak') {
+		social.templog(evaId, element.text);
+		let t = element.text;
+		if (t.includes('$')) {
+			t = includeAnswers(t.split(' '));
+		}
+		await social.speak(t);
+	} else if (element.type === 'listen') {
+		var r = await social.sendAudioGoogleSpeechtoText2();
+		social.stopListening();
+		respuesta.push(r);
+		social.templog(usuarioId, r);
+	} else if (element.type === 'wait') {
+		await social.sleep(element.time);
+	}
+}
+
+function FirstsNodes(link, fnodes) {
+	for (let i = 0; i < fnodes.length; i++) {
+		for (const iterator of link) {
+			if (fnodes[i].key == iterator.to) {
+				fnodes.splice(i,1);
+				i--;
+				break;
+			}
+		}
+	}
+	if (fnodes.length > 1) {
+		for (let j = 0; j < fnodes.length; j++) {
+			if (!fnodes[j].group) {
+				fnodes.unshift(fnodes.splice(j,1)[0]);
+				break;
+			}		
+		}
+	}
+	return fnodes;
+}
+
+function FirstsOfGroup(fnodes, key) {
+	for (let i = 0; i < fnodes.length; i++) {
+		if (fnodes[i].group == key) {
+			return i;
+		}
+	}
+}
+
+function NextNode(link, node, nodes) {
+	let n = [];
+	for (let i = 0; i < link.length; i++) {
+		if (link[i].from == node.key) {
+			for (let j = 0; j < nodes.length; j++) {
+				if (link[i].to == nodes[j].key) {
+					n.push(nodes[j]);
+				}
+			}
+		}
+	}
+	return n;
+}
+
+function includeAnswers(value) {
+	for (let i = 0; i < value.length; i++){
+		if(/\$[\d]+/.test(value[i])){
+		  value[i] = respuesta[parseInt(value[i].substring(1)) - 1];
+	  } else if (value[i] === '$'){
+		  value[i] = respuesta[respuesta.length - 1];
+	  }
+	}
+	return value.join(" ");
+  }

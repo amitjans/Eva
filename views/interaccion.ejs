@@ -2,7 +2,7 @@
 <html ng-app="evaApp">
 
 <head>
-  <title></title>
+  <title>Interacciones</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -60,9 +60,8 @@
               <tbody>
                 <tr ng-repeat="l in listado">
                   <td>{{ l.nombre }}</td>
-                  <td><span class="btn btn-default" ng-click="update(l)"><i class="zmdi zmdi-edit"></i></span></td>
-                  <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="zmdi zmdi-delete"></i></span>
-                  </td>
+                  <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
+                  <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span></td>
                 </tr>
               </tbody>
             </table>
@@ -91,9 +90,11 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="button" ng-show="icon" class="btn btn-primary btn-sm"
                     ng-click="create()">Guardar</button>
-                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
+                    <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
                     ng-click="updatesend()">Actualizar</button>
-                  <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">Actualizar Diagrama</button>
+                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
+                    ng-click="updatesendx()">Actualizar y Terminar</button>
+                  <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">Refrescar</button>
                 </div>
               </div>
 
@@ -110,6 +111,8 @@
                     data-target="#myModalWait">Esperar</button>
                   <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#myModalFor">Ciclo</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#myModalIf">Condici&oacute;n</button>
                 </div>
               </div>
 
@@ -354,7 +357,7 @@
                         <label class="col-sm-2 control-label">Iteraciones</label>
                         <div class="col-sm-10">
                           <input type="number" class="form-control input-sm" ng-model="it"
-                            placeholder="Tiempo a esperar en ms">
+                            placeholder="Cantidad de iteraciones">
                         </div>
                       </div>
                     </div>
@@ -366,6 +369,53 @@
                 </div>
               </div>
               <!-- Modal Ciclo -->
+
+              <!-- Modal Condicion -->
+              <div class="modal fade" id="myModalIf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Agregar Condici&oacute;n</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div ng-show="!!node">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Grupo</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="group" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" ng-show="item.isGroup" value="{{item.key}}">
+                                {{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Anterior</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="link" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" value="{{item.key}}">{{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Condici&oacute;n</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control input-sm" ng-model="texto" placeholder="Condición">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" ng-click="setif()" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Condicion -->
 
             </div>
           </div>
@@ -410,6 +460,11 @@
       myDiagram.nodeTemplate =
         $(go.Node, "Auto",  // the Shape will go around the TextBlock
           $(go.Shape, "RoundedRectangle", { strokeWidth: 0, fill: "white" },
+            {
+              portId: "", cursor: "pointer",
+              fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
+              toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: true
+            },
             // Shape.fill is bound to Node.data.color
             new go.Binding("fill", "color")),
           $(go.TextBlock,
@@ -419,6 +474,75 @@
         );
 
       // but use the default Link template, by not setting Diagram.linkTemplate
+      myDiagram.linkTemplate =
+        $(go.Link,
+          { toShortLength: 3, relinkableFrom: true, relinkableTo: true },  // allow the user to relink existing links
+          $(go.Shape,
+            { strokeWidth: 2 },
+            new go.Binding("stroke", "color")),
+          $(go.Shape,
+            { toArrow: "Standard", stroke: null },
+            new go.Binding("fill", "color"))
+        );
+      //-------------------------------------------------------------------------------------------------------------------------------
+      // Define the appearance and behavior for Groups:
+      function groupInfo(adornment) {  // takes the tooltip or context menu, not a group node data object
+        var g = adornment.adornedPart;  // get the Group that the tooltip adorns
+        var mems = g.memberParts.count;
+        var links = 0;
+        g.memberParts.each(function(part) {
+          if (part instanceof go.Link) links++;
+        });
+        return "Ciclo: " + g.data.name + "\n" + mems + " acciones y " + links + " enlaces";
+      }
+      // Groups consist of a title in the color given by the group node data
+      // above a translucent gray rectangle surrounding the member parts
+      myDiagram.groupTemplate =
+        $(go.Group, "Vertical",
+          {
+            selectionObjectName: "PANEL",  // selection handle goes around shape, not label
+            ungroupable: true  // enable Ctrl-Shift-G to ungroup a selected Group
+          },
+          $(go.TextBlock,
+            {
+              alignment: go.Spot.Left,
+              font: "bold 19px sans-serif",
+              isMultiline: false,  // don't allow newlines in text
+              editable: true  // allow in-place editing by user
+            },
+            new go.Binding("text", "name").makeTwoWay(),
+            new go.Binding("stroke", "color")),
+          $(go.Panel, "Auto",
+            { name: "PANEL" },
+            $(go.Shape, "Rectangle",  // the rectangular shape around the members
+              {
+                fill: "rgba(0,0,0,0)", stroke: "gray", strokeWidth: 3,
+                portId: "", cursor: "pointer",  // the Shape is the port, not the whole Node
+                fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
+                toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: true
+              }),
+            $(go.Placeholder, { margin: 10, background: "transparent" })  // represents where the members are
+          ),
+          { // this tooltip Adornment is shared by all groups
+            toolTip:
+              $("ToolTip",
+                $(go.TextBlock, { margin: 4 },
+                  // bind to tooltip, not to Group.data, to allow access to Group properties
+                  new go.Binding("text", "", groupInfo).ofObject())
+              )
+          }
+        );
+      // provide a tooltip for the background of the Diagram, when not over any Part ------------------------------------------------
+      function diagramInfo(model) {  // Tooltip info for the diagram's model
+        return "Diagrama:\n" + model.nodeDataArray.length + " nodos, " + model.linkDataArray.length + " enlaces";
+      }
+
+      myDiagram.toolTip =
+        $("ToolTip",
+          $(go.TextBlock, { margin: 4 },
+            new go.Binding("text", "", diagramInfo))
+        );
+      // ----------------------------------------------------------------------------------------------------------------------------
 
       // create the model data that will be represented by Nodes and Links
       myDiagram.model = new go.GraphLinksModel(node, link);

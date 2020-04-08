@@ -201,7 +201,7 @@ angular.module('evaApp', ['dndLists'])
 			$scope.listinteracciones = function () {
 				$http.get('/api/interaccion')
 					.then(function (res) {
-						$scope.interacciones = res.data;
+						$scope.interactions = res.data;
 					}, function (error) {
 						console.log(error);
 					});
