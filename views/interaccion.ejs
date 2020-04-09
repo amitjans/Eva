@@ -61,7 +61,8 @@
                 <tr ng-repeat="l in listado">
                   <td>{{ l.nombre }}</td>
                   <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
-                  <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span></td>
+                  <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -90,7 +91,7 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="button" ng-show="icon" class="btn btn-primary btn-sm"
                     ng-click="create()">Guardar</button>
-                    <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
+                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
                     ng-click="updatesend()">Actualizar</button>
                   <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
                     ng-click="updatesendx()">Actualizar y Terminar</button>
@@ -113,6 +114,10 @@
                     data-target="#myModalFor">Ciclo</button>
                   <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#myModalIf">Condici&oacute;n</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#myModalMov">Movimiento</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#myModalInt">Interacci&oacute;n</button>
                 </div>
               </div>
 
@@ -417,6 +422,116 @@
               </div>
               <!-- Modal Condicion -->
 
+              <!-- Modal Movimiento -->
+              <div class="modal fade" id="myModalMov" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Agregar Movimiento</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div ng-show="!!node">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Grupo</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="group" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" ng-show="item.isGroup" value="{{item.key}}">
+                                {{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Anterior</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="link" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" value="{{item.key}}">{{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Movimiento</label>
+                        <div class="col-sm-10">
+                          <select name="nivel" id="" ng-model="movement" class="form-control">
+                            <option value="n">Si</option>
+                            <option value="s">No</option>
+                            <option value="c">Centrar</option>
+                            <option value="r">Derecha</option>
+                            <option value="l">Izquierda</option>
+                            <option value="u">Arriba</option>
+                            <option value="d">Abajo</option>
+                            <option value="a">Ira</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" ng-click="setmov()" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Movimiento -->
+
+              <!-- Modal Interaccion -->
+              <div class="modal fade" id="myModalInt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Agregar Interacci&oacute;n</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div ng-show="!!node">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Grupo</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="group" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" ng-show="item.isGroup" value="{{item.key}}">
+                                {{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Anterior</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="link" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" value="{{item.key}}">{{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Interacci&oacute;n</label>
+                        <div class="col-sm-10">
+                          <select name="int" id="" ng-model="int" class="form-control">
+                            <option value="0">Obtener Nombre</option>
+                            <option value="1">Ultim&aacute;tum</option>
+                            <option value="2">Coches Aut&oacute;nomos</option>
+                            <option value="3">Preguntas y Respuestas</option>
+                            <option value="4">Pl&aacute;tica</option>
+                            <option ng-repeat="i in listado" value="{{i._id}}">{{ i.nombre }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" ng-click="setint()" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Interaccion -->
+
             </div>
           </div>
         </div>
@@ -438,122 +553,7 @@
   <script type="text/javascript" src="/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
   <script src="/javascripts/controllers/interaccion.js"></script>
   <script src="/javascripts/go.js"></script>
-  <script>
-
-    var myDiagram;
-    var id = 0;
-    var node = [];
-    var link = [];
-
-    function init() {
-      var $ = go.GraphObject.make;  // for conciseness in defining templates
-
-      myDiagram = $(go.Diagram, "myDiagramDiv",  // create a Diagram for the DIV HTML element
-        {
-          "undoManager.isEnabled": true,
-          //layout: $(go.TreeLayout)
-          //layout: $(go.LayeredDigraphLayout)
-          layout: $(go.TreeLayout, { angle: 90, sorting: go.TreeLayout.SortingAscending })
-        });
-
-      // define a simple Node template
-      myDiagram.nodeTemplate =
-        $(go.Node, "Auto",  // the Shape will go around the TextBlock
-          $(go.Shape, "RoundedRectangle", { strokeWidth: 0, fill: "white" },
-            {
-              portId: "", cursor: "pointer",
-              fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
-              toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: true
-            },
-            // Shape.fill is bound to Node.data.color
-            new go.Binding("fill", "color")),
-          $(go.TextBlock,
-            { margin: 8, font: "bold 14px sans-serif", stroke: '#333' }, // Specify a margin to add some room around the text
-            // TextBlock.text is bound to Node.data.key
-            new go.Binding("text", "name"))
-        );
-
-      // but use the default Link template, by not setting Diagram.linkTemplate
-      myDiagram.linkTemplate =
-        $(go.Link,
-          { toShortLength: 3, relinkableFrom: true, relinkableTo: true },  // allow the user to relink existing links
-          $(go.Shape,
-            { strokeWidth: 2 },
-            new go.Binding("stroke", "color")),
-          $(go.Shape,
-            { toArrow: "Standard", stroke: null },
-            new go.Binding("fill", "color"))
-        );
-      //-------------------------------------------------------------------------------------------------------------------------------
-      // Define the appearance and behavior for Groups:
-      function groupInfo(adornment) {  // takes the tooltip or context menu, not a group node data object
-        var g = adornment.adornedPart;  // get the Group that the tooltip adorns
-        var mems = g.memberParts.count;
-        var links = 0;
-        g.memberParts.each(function(part) {
-          if (part instanceof go.Link) links++;
-        });
-        return "Ciclo: " + g.data.name + "\n" + mems + " acciones y " + links + " enlaces";
-      }
-      // Groups consist of a title in the color given by the group node data
-      // above a translucent gray rectangle surrounding the member parts
-      myDiagram.groupTemplate =
-        $(go.Group, "Vertical",
-          {
-            selectionObjectName: "PANEL",  // selection handle goes around shape, not label
-            ungroupable: true  // enable Ctrl-Shift-G to ungroup a selected Group
-          },
-          $(go.TextBlock,
-            {
-              alignment: go.Spot.Left,
-              font: "bold 19px sans-serif",
-              isMultiline: false,  // don't allow newlines in text
-              editable: true  // allow in-place editing by user
-            },
-            new go.Binding("text", "name").makeTwoWay(),
-            new go.Binding("stroke", "color")),
-          $(go.Panel, "Auto",
-            { name: "PANEL" },
-            $(go.Shape, "Rectangle",  // the rectangular shape around the members
-              {
-                fill: "rgba(0,0,0,0)", stroke: "gray", strokeWidth: 3,
-                portId: "", cursor: "pointer",  // the Shape is the port, not the whole Node
-                fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
-                toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: true
-              }),
-            $(go.Placeholder, { margin: 10, background: "transparent" })  // represents where the members are
-          ),
-          { // this tooltip Adornment is shared by all groups
-            toolTip:
-              $("ToolTip",
-                $(go.TextBlock, { margin: 4 },
-                  // bind to tooltip, not to Group.data, to allow access to Group properties
-                  new go.Binding("text", "", groupInfo).ofObject())
-              )
-          }
-        );
-      // provide a tooltip for the background of the Diagram, when not over any Part ------------------------------------------------
-      function diagramInfo(model) {  // Tooltip info for the diagram's model
-        return "Diagrama:\n" + model.nodeDataArray.length + " nodos, " + model.linkDataArray.length + " enlaces";
-      }
-
-      myDiagram.toolTip =
-        $("ToolTip",
-          $(go.TextBlock, { margin: 4 },
-            new go.Binding("text", "", diagramInfo))
-        );
-      // ----------------------------------------------------------------------------------------------------------------------------
-
-      // create the model data that will be represented by Nodes and Links
-      myDiagram.model = new go.GraphLinksModel(node, link);
-    }
-
-    function reload() {
-      myDiagram.model = new go.GraphLinksModel(node, link);
-    }
-
-    init();
-  </script>
+  <script src="/javascripts/diagrama.js"></script>
 </body>
 
 </html>

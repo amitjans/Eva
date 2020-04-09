@@ -1,3 +1,5 @@
+var random = require('../utils/Random');
+
 var casos = [
     { id: 1, audio: './interacciones/exp2files/casos/ha.wav' },
     { id: 2, audio: './interacciones/exp2files/casos/hd.wav' },
@@ -11,19 +13,7 @@ var casos = [
 ];
 
 module.exports = {
-    getCasos: function () {
-        var idx = casos.length;
-        while (idx > 1) {
-            idx = idx - 1;
-            var sel = generarNumeroRandom(0, idx);
-            var temp = casos[sel];
-            casos[sel] = casos[idx];
-            casos[idx] = temp;
-        }
-        return casos;
+    getCasos: function () {      
+        return random.randomize(casos);
     }
 };
-
-var generarNumeroRandom = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }

@@ -1,16 +1,9 @@
-var gn = require('./common/getname');
-var p = require('./common/platica');
+var random = require('../utils/Random');
 
-function procesar(texto) {
-	return texto;
-}
-
-var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
+var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0 };
 
 module.exports = {
-	Ultimatum: async function (social, evaId, usuarioId) {
-		var nombre = await gn.getName(social, evaId, usuarioId);
-		var aux = await p.inicial(social, evaId, usuarioId);
+	Ultimatum: async function (social, evaId, usuarioId, nombre) {
 		social.templog(evaId, 'Explicación');
 		var obj = await social.play('./interacciones/exp1files/explicacion.wav');
 		//Juego Ultimátum
@@ -18,7 +11,7 @@ module.exports = {
 		var puntoseva = 0;
 		var iteraciones = 10;
 		var resp = '';
-		respanterior = { anterior: 'z', emocion: 'ini', nivel: 0};
+		respanterior = { anterior: 'z', emocion: 'ini', nivel: 0 };
 		social.emotions('ini', 0);
 		for (let i = 0; i < iteraciones; i++) {
 			if (i == 0) {
@@ -33,13 +26,13 @@ module.exports = {
 			} else if (i == (iteraciones - 3)) {
 				social.templog(evaId, 'Faltan 3');
 				var obj = await social.play('./interacciones/exp1files/tresofertas.wav');
-			}   else {
+			} else {
 				social.templog(evaId, 'Siguiente oferta');
 				var obj = await social.play('./interacciones/exp1files/' + NextOffer() + '.wav');
 			}
 			var temp = -1;
 			do {
-				var oferta = await social.sendAudioGoogleSpeechtoText2(procesar);
+				var oferta = await social.sendAudioGoogleSpeechtoText2();
 				social.stopListening();
 				social.templog(usuarioId, oferta);
 				var respuesta = oferta.split(" ");
@@ -58,13 +51,13 @@ module.exports = {
 				}
 				if (temp == -1) {
 					var obj = await social.play('./interacciones/exp1files/repetir.wav');
-				} else if(temp > 10){
+				} else if (temp > 10) {
 					var obj = await social.play('./interacciones/exp1files/limite.wav');
 				}
 			} while (temp > 10 || temp == -1);
-			
+
 			resp = decision(social, temp);
-			
+
 			console.log('Esperando');
 			await social.sleep(5500);
 			if (resp.includes('aceptooferta')) {
@@ -81,20 +74,19 @@ module.exports = {
 		}
 		social.emotions('ini', 0);
 		social.templog(evaId, 'Resumen - Total de puntos: ' + puntos + ' puntos y Eva ' + puntoseva);
-		var obj = await social.rec(' ' + puntos + ' pesos. Y a yo obtuve un total de ' + puntoseva + ' pesos.' , 'puntos');
+		var obj = await social.rec(' ' + puntos + ' pesos. Y yo obtuve un total de ' + puntoseva + ' pesos.', 'puntos');
 		var obj = await social.play('./interacciones/exp1files/despedida.1.wav');
 		var obj = await social.play('./temp/puntos.wav');
-		var obj = await social.play('./interacciones/exp1files/despedida.1.1.wav');
-		var obj = await social.play('./interacciones/exp1files/despedida.2.wav');
-		var obj = await social.play('./interacciones/exp1files/despedida.3.wav');
-		social.templog(evaId, 'Bueno, finalmente obtuviste un total de ' + puntos + ', pesos. Ahora me despido por el momento, espero volver a verte pronto ' + nombre + '. Que tengas un bonito día.');
-		social.savelogs(nombre);
+	}, Despedida: async function (social) {
+		await social.play('./interacciones/exp1files/despedida.1.1.wav');
+		await social.play('./interacciones/exp1files/despedida.2.wav');
+		await social.play('./interacciones/exp1files/despedida.3.wav');
 		console.log('Terminó la sesion.');
 	}
 };
 
 function decision(social, temp) {
-	var index = generarNumeroRandom(0, 100);
+	var index = random.generarNumeroRandom(0, 100);
 	var resp = '';
 	if (temp <= 2) {
 		if (index > 75 && temp > 10) {
@@ -103,7 +95,7 @@ function decision(social, temp) {
 				resp = 'b' + resp;
 				setEmocion(social, 'sad', 0, resp, 0.5);
 			} else if (respanterior.emocion === 'sad') {
-				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
+				var temp = (random.generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
 				setEmocion(social, temp, (temp === 'sad' ? 1 : 0), resp, 0.5);
 			} else {
 				setEmocion(social, 'anger', (respanterior.emocion === 'anger' ? 1 : 0), resp, 0.5);
@@ -122,9 +114,9 @@ function decision(social, temp) {
 		} else {
 			resp = 'noacepto';
 			if (respanterior.emocion === 'sad' && respanterior.nivel == 1) {
-				var temp = (generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
+				var temp = (random.generarNumeroRandom(0, 100) > 50 ? 'anger' : 'sad');
 				setEmocion(social, temp, (temp === 'sad' ? 2 : 1), resp, 0.5);
-			} else if (respanterior.emocion === 'anger'){
+			} else if (respanterior.emocion === 'anger') {
 				setEmocion(social, 'sad', 1, resp, 0.5);
 			} else {
 				setEmocion(social, 'sad', (resp.includes(respanterior.anterior) ? 1 : 0), resp, 0.5);
@@ -158,13 +150,8 @@ function AnalizarOferta(respuesta, k) {
 	return true;
 }
 
-var generarNumeroRandom = function (min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function NextOffer() {
 	//var array = ['La siguiente por favor', 'La próxima oferta', 'Vamos a por la siguiente oferta ' + nombres[0]];
 	var array = ['next1', 'next2'];
-	return array[generarNumeroRandom(0, array.length - 1)];
+	return array[random.generarNumeroRandom(0, array.length - 1)];
 }
-

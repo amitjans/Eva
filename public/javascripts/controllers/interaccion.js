@@ -138,6 +138,41 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       node.push({ key: id, name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
       $scope.common('If');
     }
+
+    $scope.setmov = function () {
+      node.push({ key: id, name: "Movimiento_" + id, type: "mov", mov: $scope.movement, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Mov');
+    }
+
+    $scope.setint = function () {
+      let temp = '';
+      switch ($scope.int) {
+        case '0':
+          temp = 'Obtener Nombre';
+          break;
+        case '1':
+          temp = 'Ultimatum';
+          break;
+        case '2':
+          temp = 'Coches Autonomos';
+          break;
+        case '3':
+          temp = 'Preguntas y Respuestas';
+          break;
+        case '4':
+          temp = 'Platica';
+          break;
+        default:
+          $scope.listado.forEach(element => {
+            if (element._id === $scope.int) {
+              temp = element.nombre;
+            }
+          });
+          break;
+      }
+      node.push({ key: id, name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Int');
+    }
     
     $scope.list();
   }]);
