@@ -101,18 +101,10 @@ var enviarError = function (error, query) {
 
 module.exports.setIO = setIO;
 
-var generarNumeroRandom = function (min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 var fs = require('fs');
 var util = require('util');
 
 var PlayMusic = require('playmusic');
-
-function randomIntInc(low, high) {
-	return Math.floor(Math.random() * (high - low + 1) + low)
-}
 
 var kill = require('tree-kill');
 
@@ -123,6 +115,9 @@ var social = new SocialRobot(credentials.config, credentials.credentials);
 var exp1 = require('./interacciones/exp1');
 var exp2 = require('./interacciones/exp2');
 var exp3 = require('./interacciones/exp3');
+var random = require('./utils/Random');
+var gn = require('./interacciones/common/getname');
+var p = require('./interacciones/common/platica');
 
 index.get('/interaccion/iniciarInteraccion1', function (req, res) {
 	console.log('interaccion/iniciarInteraccion1');
@@ -140,22 +135,30 @@ index.get('/interaccion/iniciarInteraccion2', function (req, res) {
 
 var logs = require('./log');
 index.get('/interaccion/iniciarInteraccion3', function (req, res) {
-	const text2wav = require('text2wav');
-	let out = text2wav('hola');
+	console.log(random.generarNumeroRandom(100, 200));
+	res.status(200).jsonp();
 });
 
-index.get('/interaccion/iniciarInteraccion4', function (req, res) {
+index.get('/interaccion/iniciarInteraccion4', async function (req, res) {
 	social.resetlog();
 	social.setEmotional(false);
-	exp1.Ultimatum(social, evaId, usuarioId);
+	let nombre = await gn.getName(social, evaId, usuarioId);
+	await p.inicial(social, evaId, usuarioId);
+	await exp1.Ultimatum(social, evaId, usuarioId, nombre);
+	await exp1.Despedida(social);
+	social.savelogs(nombre);
 	res.status(200).jsonp();
 });
 
-index.get('/interaccion/iniciarInteraccion5', function (req, res) {
+index.get('/interaccion/iniciarInteraccion5', async function (req, res) {
+	res.status(200).jsonp();
 	social.resetlog();
 	social.setEmotional(true);
-	exp1.Ultimatum(social, evaId, usuarioId);
-	res.status(200).jsonp();
+	let nombre = await gn.getName(social, evaId, usuarioId);
+	await p.inicial(social, evaId, usuarioId);
+	await exp1.Ultimatum(social, evaId, usuarioId, nombre);
+	await exp1.Despedida(social);
+	social.savelogs(nombre);
 });
 
 var lastlevel = 0;
@@ -221,7 +224,7 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 
 	// console.log(nodes);
 	// console.log(links);
-	fnodes = FirstsNodes(links, nodes.slice());
+	var fnodes = FirstsNodes(links, nodes.slice());
 	// console.log(fnodes);
 	// console.log('Y le sigue');
 	// console.log(NextNode(links, fnodes[0], nodes)[0]);
@@ -242,6 +245,32 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 				for (let f = 0; f < aux[0].iteraciones; f++) {					
 					await ProcessFlow(nodes, links, fnodes, FirstsOfGroup(fnodes, aux[0].key));
 				}
+			} else if (aux[0].type === 'int') {
+				switch (aux[0].int) {
+					case '0':
+						respuesta.push(await gn.getName(social, evaId, usuarioId));
+						break;
+					case '1':
+						await exp1.Ultimatum(social, evaId, usuarioId);
+						break;
+					case '2':
+						await exp2.autopilot(social, evaId, usuarioId);
+						break;
+					case '3':
+						await exp3.QaA(social, evaId, usuarioId);
+						break;
+					case '4':
+						await p.inicial(social, evaId, usuarioId);
+						break;
+					default:
+						let sub = await interaccion.findById(req.query.id);
+						let j = JSON.parse(sub.data);
+						let jn = j.node;
+						let jl = j.link;
+						let jfnodes = FirstsNodes(jl, jn.slice());
+						await ProcessFlow(jn, jl, jfnodes, 0);
+						break;
+				}
 			} else {
 				await ProcessNode(aux[0]);
 			}	
@@ -260,7 +289,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 }
 
 async function ProcessNode(element) {
-	if(element.type === 'emotion'){
+	if (element.type === 'emotion') {
 		var e = element.elements;
 		social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
 	} else if (element.type === 'speak') {
@@ -277,6 +306,8 @@ async function ProcessNode(element) {
 		social.templog(usuarioId, r);
 	} else if (element.type === 'wait') {
 		await social.sleep(element.time);
+	} else if (element.type === 'mov') {
+		social.movement(element.mov);
 	}
 }
 

@@ -1,3 +1,5 @@
+var random = require('../utils/Random');
+
 var preguntas = [
     { pregunta: '¿Cuáles son los cinco tipos de sabores primarios?', respuesta: 'dulce amargo ácido salado umami', audio: './interacciones/exp3files/questions/1.wav', respaudio: './interacciones/exp3files/answers/1.wav', analyze: true },
     { pregunta: '¿Cuál es el lugar más frío de la tierra?', respuesta: 'Antártida', audio: './interacciones/exp3files/questions/2.wav', respaudio: './interacciones/exp3files/answers/2.wav', analyze: false },
@@ -138,18 +140,6 @@ var preguntas = [
 
 module.exports = {
     getPreguntas: function () {
-        var idx = preguntas.length;
-        while (idx > 1) {
-            idx = idx - 1;
-            var sel = generarNumeroRandom(0, idx);
-            var temp = preguntas[sel];
-            preguntas[sel] = preguntas[idx];
-            preguntas[idx] = temp;
-        }
-        return preguntas;
+        return random.randomize(preguntas);
     }
 };
-
-var generarNumeroRandom = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }

@@ -85,12 +85,12 @@ module.exports = {
 
 function RespuestaCorrecta() {
 	var array = ['./interacciones/exp3files/correcta1.wav', './interacciones/exp3files/correcta2.wav', './interacciones/exp3files/correcta3.wav'];
-	return array[generarNumeroRandom(0, array.length - 1)];
+	return array[random.generarNumeroRandom(0, array.length - 1)];
 }
 
 function RespuestaIncorrecta() {
 	var array = ['./interacciones/exp3files/incorrecta1.wav', './interacciones/exp3files/incorrecta2.wav'];
-	return array[generarNumeroRandom(0, array.length - 1)];
+	return array[random.generarNumeroRandom(0, array.length - 1)];
 }
 
 function Analyze(respuesta, participante) {
@@ -143,8 +143,4 @@ async function Respuesta(social, evaId, pregunta, expression) {
             var obj = await social.play(pregunta.respaudio);
             social.emotions('ini', 0);
       }
-}
-
-var generarNumeroRandom = function (min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
