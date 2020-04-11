@@ -214,49 +214,42 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 const interaccion = require('./server/models/interaccion');
 var convert = require('xml-js');
 var Compare = require('./utils/Compare');
+var nodeutils = require('./utils/NodeUtils');
 var respuesta = [];
+var nodes = [];
+var links = [];
+
+index.get('/interaccion/unified', async function (req, res) {
+	const temp = await interaccion.findById(req.query.id);
+	var json = JSON.parse(temp.data);
+	
+	nodes = json.node;
+	links = json.link;
+	respuesta = [];
+	
+	let tempname = temp.nombre + '_expandida';
+	
+	await unify();
+	
+	const nuevointeraccion = new interaccion();
+	nuevointeraccion.nombre = tempname;
+	nuevointeraccion.data = JSON.stringify({ node: nodes, link: links });
+	await nuevointeraccion.save();
+	res.status(200).jsonp();
+});
 
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	res.status(200).jsonp();
 	const temp = await interaccion.findById(req.query.id);
 	var json = JSON.parse(temp.data);
 
-	var nodes = json.node;
-	var links = json.link;
+	nodes = json.node;
+	links = json.link;
 	respuesta = [];
 
-	let tempname = temp.nombre;
+	await unify();
 
-	for (let i = 0; i < nodes.length; i++) {
-		if (nodes[i].type === 'int') {
-			if (nodes[i].int.length > 1) {
-				let sub = await interaccion.findById(nodes[i].int);
-				let j = JSON.parse(sub.data);
-				let jn = j.node;
-				let jl = j.link;
-				let aux = FirstAndLast(jn.slice(), jl.slice());
-				for (let j = 0; j < links.length; j++) {
-					if (links[j].to === nodes[i].key) {
-						links[j].to = aux[0].key;
-					} else if (links[j].from === nodes[i].key) {
-						links[j].from = aux[1].key;
-					}
-				}
-				nodes.splice(i, 1);
-				i = -1;
-				nodes = nodes.concat(jn);
-				links = links.concat(jl);
-				tempname += '_' + sub.nombre;
-			}
-		}
-	}
-
-	const nuevointeraccion = new interaccion();
-	nuevointeraccion.nombre = tempname;
-	nuevointeraccion.data = JSON.stringify({ node: nodes, link: links });
-	await nuevointeraccion.save();
-
-	var fnodes = FirstsNodes(links, nodes.slice());
+	var fnodes = nodeutils.FirstsNodes(links, nodes.slice());
 
 	social.resetlog();
 	await ProcessFlow(nodes, links, fnodes, 0);
@@ -270,7 +263,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 		if (aux.length == 1 || aux[0].type !== 'if') {
 			if (aux[0].type === 'for') {
 				for (let f = 0; f < aux[0].iteraciones; f++) {
-					await ProcessFlow(nodes, links, fnodes, FirstsOfGroup(fnodes, aux[0].key));
+					await ProcessFlow(nodes, links, fnodes, nodeutils.FirstsOfGroup(fnodes, aux[0].key));
 				}
 			} else if (aux[0].type === 'int') {
 				switch (aux[0].int) {
@@ -295,12 +288,12 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 			} else {
 				await ProcessNode(aux[0]);
 			}
-			aux = NextNode(links, aux[0], nodes);
+			aux = nodeutils.NextNode(links, aux[0], nodes);
 		} else if (aux.length > 1) {
 			aux.sort(function (a, b) { return a.text === b.text ? 0 : a.text < b.text ? 1 : -1; });
 			for (let c = 0; c < aux.length; c++) {
 				if (Compare((aux[c].text || ''), respuesta[respuesta.length - 1]) > 1) {
-					aux = NextNode(links, aux[c], nodes);
+					aux = nodeutils.NextNode(links, aux[c], nodes);
 					break;
 				}
 			}
@@ -317,7 +310,7 @@ async function ProcessNode(element) {
 		social.templog(evaId, element.text);
 		let t = element.text;
 		if (t.includes('$')) {
-			t = includeAnswers(t.split(' '));
+			t = nodeutils.includeAnswers(t.split(' '), respuesta);
 			await social.speak(t);
 		} else {
 			try {
@@ -341,94 +334,33 @@ async function ProcessNode(element) {
 	}
 }
 
-function FirstsNodes(link, fnodes) {
-	for (let i = 0; i < fnodes.length; i++) {
-		for (const iterator of link) {
-			if (fnodes[i].key == iterator.to) {
-				fnodes.splice(i, 1);
-				i--;
-				break;
-			}
-		}
-	}
-	if (fnodes.length > 1) {
-		for (let j = 0; j < fnodes.length; j++) {
-			if (!fnodes[j].group) {
-				fnodes.unshift(fnodes.splice(j, 1)[0]);
-				break;
-			}
-		}
-	}
-	return fnodes;
-}
-
-function FirstsOfGroup(fnodes, key) {
-	for (let i = 0; i < fnodes.length; i++) {
-		if (fnodes[i].group == key) {
-			return i;
-		}
-	}
-}
-
-function NextNode(link, node, nodes) {
-	let n = [];
-	for (let i = 0; i < link.length; i++) {
-		if (link[i].from == node.key) {
-			for (let j = 0; j < nodes.length; j++) {
-				if (link[i].to == nodes[j].key) {
-					n.push(nodes[j]);
+async function unify() {
+	for (let i = 0; i < nodes.length; i++) {
+		if (nodes[i].type === 'int') {
+			if (nodes[i].int.length > 1) {
+				let sub = await interaccion.findById(nodes[i].int);
+				let j = JSON.parse(sub.data);
+				let jn = j.node;
+				let jl = j.link;
+				let aux = nodeutils.FirstAndLast(jn.slice(), jl.slice());
+				for (let j = 0; j < links.length; j++) {
+					if (links[j].to === nodes[i].key) {
+						links[j].to = aux.ini[0].key;
+						for (let k = 1; k < aux.ini.length; k++) {
+							links.push({ from: links[j].from, to: aux.ini[k].key });
+						}
+					} else if (links[j].from === nodes[i].key) {
+						links[j].from = aux.end[0].key;
+						for (let l = 1; l < aux.end.length; l++) {
+							links.push({ from: aux.end[l].key, to: links[j].to });
+						}
+					}
 				}
+				nodes.splice(i, 1);
+				i = -1;
+				nodes = nodes.concat(jn);
+				links = links.concat(jl);
 			}
 		}
 	}
-	return n;
-}
-
-function includeAnswers(value) {
-	for (let i = 0; i < value.length; i++) {
-		if (/\$[\d]+/.test(value[i])) {
-			value[i] = respuesta[parseInt(value[i].substring(1)) - 1];
-		} else if (value[i] === '$') {
-			value[i] = respuesta[respuesta.length - 1];
-		}
-	}
-	return value.join(" ");
-}
-
-function FirstAndLast(nodes, links) {
-	let result = [];
-	for (let i = 0; i < nodes.length && result.length < 2; i++) {
-		if (!!nodes[i].group) {
-			nodes.splice(i, 1);
-			i--;
-			continue;
-		}
-		if (FromSomeone(nodes[i], links) && ToSomeone(nodes[i], links)) {
-			nodes.splice(i, 1);
-			i--;
-		} else if (FromSomeone(nodes[i], links) && !ToSomeone(nodes[i], links)) {
-			result.push(nodes[i]);
-		} else {
-			result.unshift(nodes[i]);
-		}
-	}
-	return result;
-}
-
-function FromSomeone(node, links) {
-	for (const iterator of links) {
-		if (node.key == iterator.to) {
-			return true;
-		}
-	}
-	return false;
-}
-
-function ToSomeone(node, links) {
-	for (const iterator of links) {
-		if (node.key == iterator.from) {
-			return true;
-		}
-	}
-	return false;
 }
