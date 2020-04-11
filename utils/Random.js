@@ -9,6 +9,9 @@ module.exports = {
             value[idx] = temp;
         }
         return value;
+    },
+    getOne: function (value) {
+        return value[generarNumeroRandom(0, value.length - 1)];
     }
 };
 

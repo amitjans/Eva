@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', require('./routes/users'));
-app.get('/interaccion', function(req, res) {
+app.get('/interaccion', function (req, res) {
 	res.render('interaccion');
-  });
+});
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 
 const { mongoose } = require('./server/database');
@@ -119,18 +119,22 @@ var random = require('./utils/Random');
 var gn = require('./interacciones/common/getname');
 var p = require('./interacciones/common/platica');
 
-index.get('/interaccion/iniciarInteraccion1', function (req, res) {
-	console.log('interaccion/iniciarInteraccion1');
-	social.resetlog();
-	exp3.QaA(social, evaId, usuarioId);
+index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	res.status(200).jsonp();
+	social.resetlog();
+	let nombre = await gn.getName(social, evaId, usuarioId);
+	await exp3.QaA(social, evaId, usuarioId);
+	await exp3.Despedida(social);
+	social.savelogs(nombre);
 });
 
-index.get('/interaccion/iniciarInteraccion2', function (req, res) {
-	console.log('interaccion/iniciarInteraccion2');
-	social.resetlog();
-	exp2.autopilot(social, evaId, usuarioId);
+index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
 	res.status(200).jsonp();
+	social.resetlog();
+	let nombre = await gn.getName(social, evaId, usuarioId);
+	await exp2.autopilot(social, evaId, usuarioId);
+	await exp2.Despedida(social);
+	social.savelogs(nombre);
 });
 
 var logs = require('./log');
@@ -140,14 +144,14 @@ index.get('/interaccion/iniciarInteraccion3', function (req, res) {
 });
 
 index.get('/interaccion/iniciarInteraccion4', async function (req, res) {
+	res.status(200).jsonp();
 	social.resetlog();
 	social.setEmotional(false);
 	let nombre = await gn.getName(social, evaId, usuarioId);
 	await p.inicial(social, evaId, usuarioId);
-	await exp1.Ultimatum(social, evaId, usuarioId, nombre);
+	await exp1.Ultimatum(social, evaId, usuarioId);
 	await exp1.Despedida(social);
 	social.savelogs(nombre);
-	res.status(200).jsonp();
 });
 
 index.get('/interaccion/iniciarInteraccion5', async function (req, res) {
@@ -156,7 +160,7 @@ index.get('/interaccion/iniciarInteraccion5', async function (req, res) {
 	social.setEmotional(true);
 	let nombre = await gn.getName(social, evaId, usuarioId);
 	await p.inicial(social, evaId, usuarioId);
-	await exp1.Ultimatum(social, evaId, usuarioId, nombre);
+	await exp1.Ultimatum(social, evaId, usuarioId);
 	await exp1.Despedida(social);
 	social.savelogs(nombre);
 });
@@ -213,27 +217,50 @@ var Compare = require('./utils/Compare');
 var respuesta = [];
 
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
+	res.status(200).jsonp();
 	const temp = await interaccion.findById(req.query.id);
-	//var json = convert.xml2js(temp.xml, {compact: false});
-
 	var json = JSON.parse(temp.data);
 
 	var nodes = json.node;
 	var links = json.link;
 	respuesta = [];
 
-	// console.log(nodes);
-	// console.log(links);
-	var fnodes = FirstsNodes(links, nodes.slice());
-	// console.log(fnodes);
-	// console.log('Y le sigue');
-	// console.log(NextNode(links, fnodes[0], nodes)[0]);
+	let tempname = temp.nombre;
 
-	social.resetlog();	
+	for (let i = 0; i < nodes.length; i++) {
+		if (nodes[i].type === 'int') {
+			if (nodes[i].int.length > 1) {
+				let sub = await interaccion.findById(nodes[i].int);
+				let j = JSON.parse(sub.data);
+				let jn = j.node;
+				let jl = j.link;
+				let aux = FirstAndLast(jn.slice(), jl.slice());
+				for (let j = 0; j < links.length; j++) {
+					if (links[j].to === nodes[i].key) {
+						links[j].to = aux[0].key;
+					} else if (links[j].from === nodes[i].key) {
+						links[j].from = aux[1].key;
+					}
+				}
+				nodes.splice(i, 1);
+				i = -1;
+				nodes = nodes.concat(jn);
+				links = links.concat(jl);
+				tempname += '_' + sub.nombre;
+			}
+		}
+	}
+
+	const nuevointeraccion = new interaccion();
+	nuevointeraccion.nombre = tempname;
+	nuevointeraccion.data = JSON.stringify({ node: nodes, link: links });
+	await nuevointeraccion.save();
+
+	var fnodes = FirstsNodes(links, nodes.slice());
+
+	social.resetlog();
 	await ProcessFlow(nodes, links, fnodes, 0);
 	social.savelogs('');
-
-	res.status(200).jsonp();
 });
 
 async function ProcessFlow(nodes, links, fnodes, ini) {
@@ -242,7 +269,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 	do {
 		if (aux.length == 1 || aux[0].type !== 'if') {
 			if (aux[0].type === 'for') {
-				for (let f = 0; f < aux[0].iteraciones; f++) {					
+				for (let f = 0; f < aux[0].iteraciones; f++) {
 					await ProcessFlow(nodes, links, fnodes, FirstsOfGroup(fnodes, aux[0].key));
 				}
 			} else if (aux[0].type === 'int') {
@@ -263,17 +290,11 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 						await p.inicial(social, evaId, usuarioId);
 						break;
 					default:
-						let sub = await interaccion.findById(req.query.id);
-						let j = JSON.parse(sub.data);
-						let jn = j.node;
-						let jl = j.link;
-						let jfnodes = FirstsNodes(jl, jn.slice());
-						await ProcessFlow(jn, jl, jfnodes, 0);
 						break;
 				}
 			} else {
 				await ProcessNode(aux[0]);
-			}	
+			}
 			aux = NextNode(links, aux[0], nodes);
 		} else if (aux.length > 1) {
 			aux.sort(function (a, b) { return a.text === b.text ? 0 : a.text < b.text ? 1 : -1; });
@@ -297,8 +318,17 @@ async function ProcessNode(element) {
 		let t = element.text;
 		if (t.includes('$')) {
 			t = includeAnswers(t.split(' '));
+			await social.speak(t);
+		} else {
+			try {
+				if (!fs.existsSync('./temp/' + element.key + '.wav')) {
+					await social.rec(t, element.key);
+				}
+				await social.play('./temp/' + element.key + '.wav');
+			} catch (err) {
+				console.error(err)
+			}
 		}
-		await social.speak(t);
 	} else if (element.type === 'listen') {
 		var r = await social.sendAudioGoogleSpeechtoText2();
 		social.stopListening();
@@ -315,7 +345,7 @@ function FirstsNodes(link, fnodes) {
 	for (let i = 0; i < fnodes.length; i++) {
 		for (const iterator of link) {
 			if (fnodes[i].key == iterator.to) {
-				fnodes.splice(i,1);
+				fnodes.splice(i, 1);
 				i--;
 				break;
 			}
@@ -324,9 +354,9 @@ function FirstsNodes(link, fnodes) {
 	if (fnodes.length > 1) {
 		for (let j = 0; j < fnodes.length; j++) {
 			if (!fnodes[j].group) {
-				fnodes.unshift(fnodes.splice(j,1)[0]);
+				fnodes.unshift(fnodes.splice(j, 1)[0]);
 				break;
-			}		
+			}
 		}
 	}
 	return fnodes;
@@ -355,12 +385,50 @@ function NextNode(link, node, nodes) {
 }
 
 function includeAnswers(value) {
-	for (let i = 0; i < value.length; i++){
-		if(/\$[\d]+/.test(value[i])){
-		  value[i] = respuesta[parseInt(value[i].substring(1)) - 1];
-	  } else if (value[i] === '$'){
-		  value[i] = respuesta[respuesta.length - 1];
-	  }
+	for (let i = 0; i < value.length; i++) {
+		if (/\$[\d]+/.test(value[i])) {
+			value[i] = respuesta[parseInt(value[i].substring(1)) - 1];
+		} else if (value[i] === '$') {
+			value[i] = respuesta[respuesta.length - 1];
+		}
 	}
 	return value.join(" ");
-  }
+}
+
+function FirstAndLast(nodes, links) {
+	let result = [];
+	for (let i = 0; i < nodes.length && result.length < 2; i++) {
+		if (!!nodes[i].group) {
+			nodes.splice(i, 1);
+			i--;
+			continue;
+		}
+		if (FromSomeone(nodes[i], links) && ToSomeone(nodes[i], links)) {
+			nodes.splice(i, 1);
+			i--;
+		} else if (FromSomeone(nodes[i], links) && !ToSomeone(nodes[i], links)) {
+			result.push(nodes[i]);
+		} else {
+			result.unshift(nodes[i]);
+		}
+	}
+	return result;
+}
+
+function FromSomeone(node, links) {
+	for (const iterator of links) {
+		if (node.key == iterator.to) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function ToSomeone(node, links) {
+	for (const iterator of links) {
+		if (node.key == iterator.from) {
+			return true;
+		}
+	}
+	return false;
+}

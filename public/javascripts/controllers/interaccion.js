@@ -33,8 +33,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $scope.node = node;
       id = 0;
       node.forEach(element => {
-        if (id < element.key) {
-          id = element.key;
+        if (id < parseInt(element.name.split('_')[1])) {
+          id = parseInt(element.name.split('_')[1]);
         }
       });
       id++;
@@ -80,13 +80,13 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       reload();
     }
 
-    $scope.common = function (value) {
+    $scope.common = function (value, identifier) {
       $scope.node = node;
       $scope.texto = '';
       if (!!$scope.link) {
-        link.push({ from: parseInt($scope.link), to: id });
+        link.push({ from: parseInt($scope.link), to: identifier });
       }
-      $scope.link = '' + id;
+      $scope.link = '' + identifier;
       id++;
       reload();
       $("#myModal" + value).modal('hide');
@@ -110,38 +110,38 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         default:
           break;
       }
-      node.push({ key: id, name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: $scope.nivel, speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
-      $scope.common('');
+      node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: $scope.nivel, speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
+      $scope.common('', node[node.length - 1].key);
     }
 
     $scope.setspeak = function () {
-      node.push({ key: id, name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.common('Speak');
+      node.push({ key: Date.now(), name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Speak', node[node.length - 1].key);
     }
 
     $scope.setlisten = function () {
-      node.push({ key: id, name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.common('Listen');
+      node.push({ key: Date.now(), name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Listen', node[node.length - 1].key);
     }
     
     $scope.setsleep = function () {
-      node.push({ key: id, name: "Esperar_" + id, type: "wait", color: "lightblue", time: $scope.time, isGroup: false, group: $scope.group });
-      $scope.common('Wait');
+      node.push({ key: Date.now(), name: "Esperar_" + id, type: "wait", color: "lightblue", time: $scope.time, isGroup: false, group: $scope.group });
+      $scope.common('Wait', node[node.length - 1].key);
     }
 
     $scope.setfor = function () {
-      node.push({ key: id, name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
-      $scope.common('For');
+      node.push({ key: Date.now(), name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
+      $scope.common('For', node[node.length - 1].key);
     }
 
     $scope.setif = function () {
-      node.push({ key: id, name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.common('If');
+      node.push({ key: Date.now(), name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('If', node[node.length - 1].key);
     }
 
     $scope.setmov = function () {
-      node.push({ key: id, name: "Movimiento_" + id, type: "mov", mov: $scope.movement, color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.common('Mov');
+      node.push({ key: Date.now(), name: "Movimiento_" + id, type: "mov", mov: $scope.movement, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Mov', node[node.length - 1].key);
     }
 
     $scope.setint = function () {
@@ -170,8 +170,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
           });
           break;
       }
-      node.push({ key: id, name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
-      $scope.common('Int');
+      node.push({ key: Date.now(), name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Int', node[node.length - 1].key);
     }
     
     $scope.list();
