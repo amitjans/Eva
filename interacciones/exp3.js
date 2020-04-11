@@ -1,8 +1,7 @@
-var gn = require('./common/getname');
 var Compare = require('../utils/Compare');
 var PhoneticSpanish = require('../utils/PhoneticSpanish');
 var preguntas = require('./exp3qaa');
-var p = require('./common/platica');
+var random = require('../utils/Random');
 
 function procesar(texto) {
     return texto;
@@ -10,8 +9,7 @@ function procesar(texto) {
 
 module.exports = {
     QaA: async function (social, evaId, usuarioId) {
-        var pregunta = preguntas.getPreguntas();       
-        var nombre = await gn.getName(social, evaId, usuarioId);
+        var pregunta = preguntas.getPreguntas();
         //var aux = await p.inicial(social, evaId, usuarioId);
         social.emotions('ini', 0);
         social.templog(evaId, 'Explicación');
@@ -79,18 +77,18 @@ module.exports = {
             }
             social.emotions('ini', 1);
         } while (next);
-        social.savelogs(nombre);
-    }
+    }, Despedida: async function (social) {
+		await social.play('./interacciones/exp3files/despedida.wav');
+		console.log('Terminó la sesion.');
+	}
 };
 
 function RespuestaCorrecta() {
-	var array = ['./interacciones/exp3files/correcta1.wav', './interacciones/exp3files/correcta2.wav', './interacciones/exp3files/correcta3.wav'];
-	return array[random.generarNumeroRandom(0, array.length - 1)];
+	return random.getOne(['./interacciones/exp3files/correcta1.wav', './interacciones/exp3files/correcta2.wav', './interacciones/exp3files/correcta3.wav']);
 }
 
 function RespuestaIncorrecta() {
-	var array = ['./interacciones/exp3files/incorrecta1.wav', './interacciones/exp3files/incorrecta2.wav'];
-	return array[random.generarNumeroRandom(0, array.length - 1)];
+	return random.getOne(['./interacciones/exp3files/incorrecta1.wav', './interacciones/exp3files/incorrecta2.wav']);
 }
 
 function Analyze(respuesta, participante) {

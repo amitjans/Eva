@@ -3,7 +3,7 @@ var random = require('../utils/Random');
 var respanterior = { anterior: 'z', emocion: 'ini', nivel: 0 };
 
 module.exports = {
-	Ultimatum: async function (social, evaId, usuarioId, nombre) {
+	Ultimatum: async function (social, evaId, usuarioId) {
 		social.templog(evaId, 'Explicación');
 		var obj = await social.play('./interacciones/exp1files/explicacion.wav');
 		//Juego Ultimátum
