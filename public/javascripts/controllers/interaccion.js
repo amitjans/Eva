@@ -68,6 +68,13 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       });;
     }
 
+    $scope.unified = function (id) {
+      $http.get('/interaccion/unified?id=' + id).then(function successCallback(response) {
+        $scope.list();
+      }, function errorCallback(response) {
+      });
+    }
+
     $scope.reset = function () {
       $scope.nombre = '';
       node = [];

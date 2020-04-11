@@ -60,6 +60,7 @@
               <tbody>
                 <tr ng-repeat="l in listado">
                   <td>{{ l.nombre }}</td>
+                  <td><span class="btn btn-default" ng-click="unified(l._id)"><i class="fa fa-expand fa-sm"></i></span></td>
                   <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
                   <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
                   </td>
