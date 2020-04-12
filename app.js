@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
+var index = require('./server/routes/index');
 
 var logs = require('./log');
 
@@ -24,11 +24,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', require('./routes/users'));
+app.use('/users', require('./server/routes/users'));
 app.get('/interaccion', function (req, res) {
 	res.render('interaccion');
 });
+app.get('/script', function (req, res) {
+	res.render('script');
+});
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
+app.use('/api/script', require('./server/routes/script.routes.js'));
 
 const { mongoose } = require('./server/database');
 
@@ -212,12 +216,15 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 });
 
 const interaccion = require('./server/models/interaccion');
+const script = require('./server/models/script');
 var convert = require('xml-js');
 var Compare = require('./utils/Compare');
 var nodeutils = require('./utils/NodeUtils');
 var respuesta = [];
 var nodes = [];
 var links = [];
+var s = [];
+var sactual;
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.findById(req.query.id);
@@ -285,6 +292,15 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 					default:
 						break;
 				}
+			} else if (aux[0].type === 'script'){
+				if (s.length == 0) {
+					s = JSON.parse((await script.findById(aux[0].sc)).data);
+					if (aux[0].random) {
+						s = random.randomize(s);
+					}
+				}
+				sactual = s.shift();
+				await social.speak(sactual.hablar);
 			} else {
 				await ProcessNode(aux[0]);
 			}
