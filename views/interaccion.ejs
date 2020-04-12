@@ -36,6 +36,7 @@
         <ul class="nav navbar-nav">
           <li class=""><a href="/controlAngular">Inicio</a></li>
           <li class="active"><a href="/interaccion">Interacción</a></li>
+          <li class=""><a href="/script">Scripts</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -119,6 +120,8 @@
                     data-target="#myModalMov">Movimiento</button>
                   <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#myModalInt">Interacci&oacute;n</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#myModalScript">Script</button>
                 </div>
               </div>
 
@@ -166,13 +169,9 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">Nivel</label>
-                        <div class="col-sm-10">
-                          <select name="nivel" id="" ng-model="nivel" class="form-control">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                          </select>
+                        <label class="col-sm-2 control-label">Movimiento</label>
+                        <div class="col-sm-1">
+                          <input type="checkbox" class="form-control" ng-model="nivel" name="nivel" id="nivel"/>
                         </div>
                       </div>
                       <div class="form-group">
@@ -527,6 +526,65 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       <button type="button" ng-click="setint()" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Interaccion -->
+
+              <!-- Modal Interaccion -->
+              <div class="modal fade" id="myModalScript" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Agregar Interacci&oacute;n</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div ng-show="!!node">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Grupo</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="group" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" ng-show="item.isGroup" value="{{item.key}}">
+                                {{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Anterior</label>
+                          <div class="col-sm-10">
+                            <select name="emocion" id="" ng-model="link" class="form-control">
+                              <option value="" selected>Ninguno</option>
+                              <option ng-repeat="item in node" value="{{item.key}}">{{ item.name }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Script</label>
+                        <div class="col-sm-10">
+                          <select name="emocion" id="" ng-model="thescript" class="form-control">
+                            <option value="" selected>Ninguno</option>
+                            <option ng-repeat="item in slistado" value="{{item._id}}">{{ item.nombre }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Aleatorio</label>
+                        <div class="col-sm-1">
+                          <input type="checkbox" class="form-control" ng-model="rs" name="rs" id="rs"/>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" ng-click="setscript()" class="btn btn-primary">Salvar</button>
                     </div>
                   </div>
                 </div>

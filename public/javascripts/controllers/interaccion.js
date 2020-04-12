@@ -12,6 +12,13 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       });
     }
 
+    $scope.slist = function () {
+      $http.get('/api/script').then(function successCallback(response) {
+          $scope.slistado = response.data;
+      }, function errorCallback(response) {
+      });
+    }
+
     $scope.create = function () {
       var json = { nombre: $scope.nombre, data: { node: node, link: link }};
       $http.post('/api/interaccion', json).then(function successCallback(response) {
@@ -117,7 +124,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         default:
           break;
       }
-      node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: $scope.nivel, speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
+      node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: ($scope.nivel ? 2 : 0), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
       $scope.common('', node[node.length - 1].key);
     }
 
@@ -151,6 +158,11 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $scope.common('Mov', node[node.length - 1].key);
     }
 
+    $scope.setscript = function () {
+      node.push({ key: Date.now(), name: "Script_" + id, type: "script", sc: $scope.thescript, random: $scope.rs, color: "lightblue", isGroup: false, group: $scope.group });
+      $scope.common('Script', node[node.length - 1].key);
+    }
+
     $scope.setint = function () {
       let temp = '';
       switch ($scope.int) {
@@ -182,4 +194,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
     
     $scope.list();
+    $scope.slist();
+    $scope.rs = false;
+    $scope.nivel = false;
   }]);
