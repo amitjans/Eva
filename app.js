@@ -308,7 +308,12 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 		} else if (aux.length > 1) {
 			aux.sort(function (a, b) { return a.text === b.text ? 0 : a.text < b.text ? 1 : -1; });
 			for (let c = 0; c < aux.length; c++) {
-				if (Compare((aux[c].text || ''), respuesta[respuesta.length - 1]) > 1) {
+				if (aux[c].text === '%') {
+					if (Compare(sactual.respuesta, respuesta[respuesta.length - 1]) > 1) {
+						aux = nodeutils.NextNode(links, aux[c], nodes);
+						break;
+					}
+				} else if (Compare((aux[c].text || ''), respuesta[respuesta.length - 1]) > 1) {
 					aux = nodeutils.NextNode(links, aux[c], nodes);
 					break;
 				}
