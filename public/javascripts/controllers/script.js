@@ -28,8 +28,16 @@ eva.controller('script', ['$scope', '$http', function ($scope, $http) {
 
     $scope.prepare = function () {
         let temp = $scope.data.split('\n');
-        $scope.data = '[\n\t{ "hablar": "' +  temp.join('"},\n\t{ "hablar": "') + '"}\n]';
-        $scope.list();
+        if ($scope.multi) {
+          $scope.data = '[';
+          for (let i = 0; i < temp.length; i++) {
+            $scope.data += '\n\t{ "hablar": "' + temp[i] + '", "respuesta": "' + temp[i+1] + '"},';
+            i++;
+          }
+          $scope.data = $scope.data.substring(0, $scope.data.length - 1) + '\n]';
+        } else {
+          $scope.data = '[\n\t{ "hablar": "' +  temp.join('"},\n\t{ "hablar": "') + '"}\n]';
+        }
     }
 
     $scope.update = function (l) {
@@ -60,5 +68,6 @@ eva.controller('script', ['$scope', '$http', function ($scope, $http) {
       });;
     }
     
+    $scope.multi = false;
     $scope.list();
   }]);
