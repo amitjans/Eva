@@ -32,6 +32,7 @@ module.exports = {
         social.stopListening();
         social.emotions('joy', 0);
         var obj = await social.speak('Mucho gusto en conocerte ' + nombre);
+        social.emotions('ini', 0);
         return nombre;
     }
 };
