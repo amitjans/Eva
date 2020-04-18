@@ -58,7 +58,9 @@ module.exports = {
     },
     includeAnswers: function (value, respuesta) {
         for (let i = 0; i < value.length; i++) {
-            if (/\$[\d]+/.test(value[i])) {
+            if (/\$-[\d]+/.test(value[i])) {
+                value[i] = respuesta[(respuesta.length - 1) - parseInt(value[i].substring(2))];
+            } else if (/\$[\d]+/.test(value[i])) {
                 value[i] = respuesta[parseInt(value[i].substring(1)) - 1];
             } else if (value[i] === '$') {
                 value[i] = respuesta[respuesta.length - 1];
