@@ -59,7 +59,8 @@ function init() {
         $(go.Group, "Vertical",
             {
                 selectionObjectName: "PANEL",  // selection handle goes around shape, not label
-                ungroupable: true  // enable Ctrl-Shift-G to ungroup a selected Group
+                ungroupable: true,  // enable Ctrl-Shift-G to ungroup a selected Group
+                layout: $(go.TreeLayout, { angle: 90, sorting: go.TreeLayout.SortingAscending })
             },
             $(go.TextBlock,
                 {
