@@ -31,8 +31,12 @@ app.get('/interaccion', function (req, res) {
 app.get('/script', function (req, res) {
 	res.render('script');
 });
+app.get('/audio', function (req, res) {
+	res.render('audio');
+});
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
+app.use('/api/audio', require('./server/routes/audio.routes.js'));
 
 const { mongoose } = require('./server/database');
 
@@ -245,6 +249,12 @@ index.get('/interaccion/unified', async function (req, res) {
 	res.status(200).jsonp();
 });
 
+index.get('/interaccion/audio', async function (req, res) {
+	res.status(200).jsonp();
+	console.log('./sonidos/' + req.query.id + '.wav');
+	await social.play('./sonidos/' + req.query.id + '.wav');
+});
+
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	res.status(200).jsonp();
 	const temp = await interaccion.findById(req.query.id);
@@ -352,6 +362,12 @@ async function ProcessNode(element) {
 		await social.sleep(element.time);
 	} else if (element.type === 'mov') {
 		social.movement(element.mov);
+	} else if (element.type === 'sound') {
+		if (element.wait) {
+			await social.play('./sonidos/' + element.src + '.wav');
+		} else {
+			social.play('./sonidos/' + element.src + '.wav');
+		}
 	}
 }
 
