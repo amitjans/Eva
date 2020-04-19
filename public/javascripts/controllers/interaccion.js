@@ -19,6 +19,13 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     });
   }
 
+  $scope.soundlist = function () {
+    $http.get('/api/audio').then(function successCallback(response) {
+      $scope.soundlistado = response.data;
+    }, function errorCallback(response) {
+    });
+  }
+
   $scope.create = function () {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
     $http.post('/api/interaccion', json).then(function successCallback(response) {
@@ -103,7 +110,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     reload();
   }
 
-  $scope.common = function (value, identifier) {
+  $scope.common = function (identifier) {
     $scope.node = node;
     $scope.texto = '';
     if (!!$scope.link) {
@@ -157,32 +164,36 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.setemocion();
         break;
       case 2:
-        $scope.setspeak();
+        node.push({ key: Date.now(), name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 3:
-        $scope.setlisten();
+        node.push({ key: Date.now(), name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 4:
-        $scope.setsleep();
+        node.push({ key: Date.now(), name: "Esperar_" + id, type: "wait", color: "lightblue", time: $scope.time, isGroup: false, group: $scope.group });
         break;
       case 5:
-        $scope.setfor();
+        node.push({ key: Date.now(), name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
         break;
       case 6:
-        $scope.setif();
+        node.push({ key: Date.now(), name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 7:
-        $scope.setmov();
+        node.push({ key: Date.now(), name: "Movimiento_" + id, type: "mov", mov: $scope.movement, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 8:
         $scope.setint();
         break;
       case 9:
-        $scope.setscript();
+        node.push({ key: Date.now(), name: "Script_" + id, type: "script", sc: $scope.thescript, random: $scope.rs, color: "lightblue", isGroup: false, group: $scope.group });
+        break;
+      case 10:
+        node.push({ key: Date.now(), name: "Audio_" + id, type: "sound", src: $scope.thesound, wait: $scope.waitsound, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       default:
         break;
     }
+    $scope.common(node[node.length - 1].key);
   }
 
   $scope.setemocion = function () {
@@ -204,42 +215,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
     }
     node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: ($scope.nivel ? 2 : 0), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
-    $scope.common('', node[node.length - 1].key);
-  }
-
-  $scope.setspeak = function () {
-    node.push({ key: Date.now(), name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
-    $scope.common('Speak', node[node.length - 1].key);
-  }
-
-  $scope.setlisten = function () {
-    node.push({ key: Date.now(), name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
-    $scope.common('Listen', node[node.length - 1].key);
-  }
-
-  $scope.setsleep = function () {
-    node.push({ key: Date.now(), name: "Esperar_" + id, type: "wait", color: "lightblue", time: $scope.time, isGroup: false, group: $scope.group });
-    $scope.common('Wait', node[node.length - 1].key);
-  }
-
-  $scope.setfor = function () {
-    node.push({ key: Date.now(), name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
-    $scope.common('For', node[node.length - 1].key);
-  }
-
-  $scope.setif = function () {
-    node.push({ key: Date.now(), name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
-    $scope.common('If', node[node.length - 1].key);
-  }
-
-  $scope.setmov = function () {
-    node.push({ key: Date.now(), name: "Movimiento_" + id, type: "mov", mov: $scope.movement, color: "lightblue", isGroup: false, group: $scope.group });
-    $scope.common('Mov', node[node.length - 1].key);
-  }
-
-  $scope.setscript = function () {
-    node.push({ key: Date.now(), name: "Script_" + id, type: "script", sc: $scope.thescript, random: $scope.rs, color: "lightblue", isGroup: false, group: $scope.group });
-    $scope.common('Script', node[node.length - 1].key);
   }
 
   $scope.setint = function () {
@@ -269,11 +244,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
     }
     node.push({ key: Date.now(), name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
-    $scope.common('Int', node[node.length - 1].key);
   }
 
   $scope.list();
   $scope.slist();
+  $scope.soundlist();
   $scope.rs = false;
   $scope.nivel = false;
+  $scope.waitsound = false;
 }]);

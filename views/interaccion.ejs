@@ -37,6 +37,7 @@
           <li class=""><a href="/controlAngular">Inicio</a></li>
           <li class="active"><a href="/interaccion">Interacción</a></li>
           <li class=""><a href="/script">Scripts</a></li>
+          <li class=""><a href="/audio">Audios</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -119,6 +120,7 @@
                   <button type="button" class="btn btn-primary" ng-click="showmodal(7)">Movimiento</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(8)">Interacci&oacute;n</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
                 </div>
               </div>
             </div>
@@ -274,6 +276,24 @@
                 <label class="col-sm-2 control-label">Aleatorio</label>
                 <div class="col-sm-1">
                   <input type="checkbox" class="form-control" ng-model="rs" name="rs" id="rs" />
+                </div>
+              </div>
+              <!-- Modal Script -->
+
+              <!-- Modal Script -->
+              <div class="form-group" ng-show="modal == 10">
+                <label class="col-sm-2 control-label">Audio</label>
+                <div class="col-sm-10">
+                  <select name="emocion" id="" ng-model="thesound" class="form-control">
+                    <option value="" selected>Ninguno</option>
+                    <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" ng-show="modal == 10">
+                <label class="col-sm-2 control-label">Esperar</label>
+                <div class="col-sm-1">
+                  <input type="checkbox" class="form-control" ng-model="waitsound" name="rs" id="rs" />
                 </div>
               </div>
               <!-- Modal Script -->
