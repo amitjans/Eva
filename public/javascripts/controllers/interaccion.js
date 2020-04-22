@@ -70,6 +70,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $scope.icon = true;
       $scope.reset();
       $scope.list();
+      $scope.node = [];
+      $('#inicio').click();
       id = 0;
     }, function errorCallback(response) {
     });
@@ -79,7 +81,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     $http.delete('/api/interaccion/' + id).then(function successCallback(response) {
       $scope.list();
     }, function errorCallback(response) {
-    });;
+    });
   }
 
   $scope.add = function () {
@@ -89,6 +91,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $scope.reset();
       $scope.list();
       id = 0;
+      $scope.node = [];
+      $('#inicio').click();
   }
 
   $scope.unified = function (id) {
@@ -193,7 +197,26 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       default:
         break;
     }
-    $scope.common(node[node.length - 1].key);
+    if ($scope.key == 0) {
+      $scope.common(node[node.length - 1].key);      
+    } else {
+      for (let i = 0; i < node.length; i++) {
+        if (node[i].key === $scope.key) {
+          node[node.length - 1].key = node[i].key;
+          node[node.length - 1].name = node[i].name;
+          node.splice(i,1);
+          break;
+        }        
+      }
+      if (node[node.length - 1].type == 'speak') {
+        $http.delete('/api/interaccion/rec/' + node[node.length - 1].key).then(function successCallback(response) {
+        }, function errorCallback(response) {
+        });
+      }
+      $scope.node = node;
+      reload();
+      $("#myModal").modal('hide');
+    }
   }
 
   $scope.setemocion = function () {
@@ -246,10 +269,67 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     node.push({ key: Date.now(), name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
   }
 
+  $scope.updatenode = function (l){
+    $scope.key = l.key;
+    $scope.name = l.name;
+    $scope.type = l.type;
+    $scope.color = l.color;
+    $scope.isGroup = l.isGroup;
+    $scope.group = '' + l.group;
+    switch (l.type) {
+      case 'emotion':
+        $scope.emocion = l.emotion;
+        $scope.velocidad = l.speed;
+        $scope.nivel = l.level == 2;
+        $scope.showmodal(1);
+        break;
+      case 'speak':
+        $scope.texto = l.text;
+        $scope.showmodal(2);
+        break;
+      case 'listen':
+        $scope.showmodal(3);
+        break;
+      case 'wait':
+        $scope.wait = l.wait;
+        $scope.showmodal(4);
+        break;
+      case 'for':
+        $scope.it = l.iteraciones;
+        $scope.showmodal(5);
+        break;
+      case 'if':
+        $scope.texto = l.text;
+        $scope.showmodal(6);
+        break;
+      case 'mov':
+        $scope.movement = l.mov;
+        $scope.showmodal(7);
+        break;
+      case 'int':
+        $scope.int = l.int;
+        $scope.showmodal(8);
+        break;
+      case 'script':
+        $scope.sc = l.sc;
+        $scope.random = l.random;
+        $scope.showmodal(9);
+        break;
+      case 'sound':
+        $scope.thesound = l.src;
+        $scope.showmodal(10);
+        break;
+      default:
+        break;
+    }
+  }
+
   $scope.list();
   $scope.slist();
   $scope.soundlist();
   $scope.rs = false;
   $scope.nivel = false;
   $scope.waitsound = false;
+  $scope.key = 0;
+  $scope.node = [];
 }]);
