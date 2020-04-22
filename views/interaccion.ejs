@@ -47,36 +47,62 @@
   <div class="container" ng-controller="interaccion">
     <div class="row">
       <div class="col-md-4">
-        <div class="card">
-          <div class="card-header bgm-bluegray">
-            <h2>Listado de Interacciones <small></small></h2>
-          </div>
-          <div class="card-body table-responsive">
-            <table class="table" id="data-table-basic">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th colspan="2">Opciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="l in listado">
-                  <td>{{ l.nombre }}</td>
-                  <td><span class="btn btn-default" ng-click="unified(l._id)"><i class="fa fa-expand fa-sm"></i></span>
-                  </td>
-                  <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
-                  <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-primary" ng-click="add()">Agregar Interaccion</button>
+        <br>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a id="inicio" href="#home" aria-controls="home" role="tab" data-toggle="tab">Listado de Interacciones</a></li>
+          <li role="presentation" ng-show="node.length > 0"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Nodos</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="card-body table-responsive">
+              <table class="table" id="data-table-basic">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th colspan="2">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="l in listado">
+                    <td>{{ l.nombre }}</td>
+                    <td><span class="btn btn-default" ng-click="unified(l._id)"><i class="fa fa-expand fa-sm"></i></span>
+                    </td>
+                    <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
+                    <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="button" class="btn btn-primary" ng-click="add()">Agregar Interaccion</button>
+                </div>
               </div>
             </div>
           </div>
+          <div role="tabpanel" class="tab-pane" id="profile">
+            <div class="card-body table-responsive" style="overflow-y:scroll; height: 575px">
+              <table class="table" id="data-table-basic">
+                <thead>
+                  <tr>
+                    <th>Nodo</th>
+                    <th>Tipo</th>
+                    <th colspan="2">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="l in node">
+                    <td>{{ l.name }}</td>
+                    <td>{{ l.type }}</td>
+                    <td><span class="btn btn-default" ng-show="l.type !== 'listen'" ng-click="updatenode(l)"><i class="fa fa-edit fa-sm"></i></span></td>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
       </div>
       <div class="col-md-8">
         <div class="card z-depth-1" >
@@ -138,27 +164,25 @@
             </div>
             <div class="modal-body">
               <div class="form-horizontal" role="form">
-              <div ng-show="!!node">
-                <div class="form-group">
+                <div class="form-group" ng-show="node.length > 0">
                   <label class="col-sm-2 control-label">Grupo</label>
                   <div class="col-sm-10">
-                    <select name="emocion" id="" ng-model="group" class="form-control">
+                    <select name="group" id="" ng-model="group" class="form-control">
                       <option value="" selected>Ninguno</option>
                       <option ng-repeat="item in node" ng-show="item.isGroup" value="{{item.key}}">
                         {{ item.name }}</option>
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-show="node.length > 0 && key == 0">
                   <label class="col-sm-2 control-label">Anterior</label>
                   <div class="col-sm-10">
-                    <select name="emocion" id="" ng-model="link" class="form-control">
+                    <select name="link" id="" ng-model="link" class="form-control">
                       <option value="" selected>Ninguno</option>
                       <option ng-repeat="item in node" value="{{item.key}}">{{ item.name }}</option>
                     </select>
                   </div>
                 </div>
-              </div>
               <!-- Modal Emocion -->
               <div class="form-group" ng-show="modal == 1">
                 <label class="col-sm-2 control-label">Emoci&oacute;n</label>

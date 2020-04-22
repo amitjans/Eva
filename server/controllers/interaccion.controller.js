@@ -1,4 +1,5 @@
 const interaccion = require('../models/interaccion');
+const fs = require('fs');
 const interaccioncontroller = {};
 
 interaccioncontroller.getList = async (req, res) => {
@@ -34,7 +35,15 @@ interaccioncontroller.delete = async (req, res) => {
     const { id } = req.params;
     await interaccion.findOneAndRemove({ _id: id });
     res.status(200).json({
-        mensaje: 'Tipo de bicicleta eliminado'
+        mensaje: 'interaccion eliminada'
+    });
+}
+
+interaccioncontroller.deleterec = async (req, res) => {
+    const { id } = req.params;
+    fs.unlink('./temp/' + id + '.wav', (err) => {
+        if (err) throw err;
+        res.status(200).json({ mensaje: 'Audio eliminado' });
     });
 }
 
