@@ -31,11 +31,15 @@ app.get('/interaccion', function (req, res) {
 app.get('/script', function (req, res) {
 	res.render('script');
 });
+app.get('/scriptdata', function (req, res) {
+	res.render('scriptdata');
+});
 app.get('/audio', function (req, res) {
 	res.render('audio');
 });
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
+app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
 app.use('/api/audio', require('./server/routes/audio.routes.js'));
 
 const { mongoose } = require('./server/database');
@@ -304,13 +308,13 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 				}
 			} else if (aux[0].type === 'script'){
 				if (s.length == 0) {
-					s = JSON.parse((await script.findById(aux[0].sc)).data);
+					s = (await script.findById(aux[0].sc).populate('data')).data;
 					if (aux[0].random) {
 						s = random.randomize(s);
 					}
 				}
 				sactual = s.shift();
-				await social.speak(sactual.hablar);
+				await social.speak(sactual.campo1);
 			} else {
 				await ProcessNode(aux[0]);
 			}
@@ -319,7 +323,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 			aux.sort(function (a, b) { return a.text === b.text ? 0 : a.text < b.text ? 1 : -1; });
 			for (let c = 0; c < aux.length; c++) {
 				if (aux[c].text === '%') {
-					if (Compare(sactual.respuesta, respuesta[respuesta.length - 1]) > 1) {
+					if (Compare(sactual.campo2, respuesta[respuesta.length - 1]) > 1) {
 						aux = nodeutils.NextNode(links, aux[c], nodes);
 						break;
 					}
