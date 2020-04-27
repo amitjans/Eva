@@ -73,7 +73,7 @@ var preguntas = [
     { pregunta: '¿Cuál es la nacionalidad de Pablo Neruda?', respuesta: 'Chileno', audio: './interacciones/exp3files/questions/70.wav', respaudio: './interacciones/exp3files/answers/70.wav', analyze: false },
     { pregunta: '¿Qué veterano músico es la canción "Tears in Heaven"?', respuesta: 'Eric Clapton', audio: './interacciones/exp3files/questions/71.wav', respaudio: './interacciones/exp3files/answers/71.wav', analyze: false },
     { pregunta: '¿A quién le crecía la nariz cuando mentía?', respuesta: 'Pinocho', audio: './interacciones/exp3files/questions/72.wav', respaudio: './interacciones/exp3files/answers/72.wav', analyze: false },
-    { pregunta: '¿A que esta asociada la campana de Gauss?', respuesta: 'el cálculo de probabilidades', audio: './interacciones/exp3files/questions/73.wav', respaudio: './interacciones/exp3files/answers/73.wav', analyze: false },
+    { pregunta: '¿A que esta asociada la campana de Gauss?', respuesta: 'probabilidades', audio: './interacciones/exp3files/questions/73.wav', respaudio: './interacciones/exp3files/answers/73.wav', analyze: false },
     { pregunta: '¿Quién traicionó a Jesús?', respuesta: 'Judas', audio: './interacciones/exp3files/questions/74.wav', respaudio: './interacciones/exp3files/answers/74.wav', analyze: false },
     { pregunta: '¿De qué estado fue emperador Napoleón Bonaparte?', respuesta: 'Francia', audio: './interacciones/exp3files/questions/75.wav', respaudio: './interacciones/exp3files/answers/75.wav', analyze: false },
     { pregunta: '¿Cómo se llama el proceso por el cual las plantas obtienen alimento?', respuesta: 'Fotosíntesis', audio: './interacciones/exp3files/questions/76.wav', respaudio: './interacciones/exp3files/answers/76.wav', analyze: false },
