@@ -37,6 +37,9 @@ app.get('/scriptdata', function (req, res) {
 app.get('/audio', function (req, res) {
 	res.render('audio');
 });
+app.get('/qaa', function (req, res) {
+	res.render('qaa');
+});
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
@@ -63,16 +66,6 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
-/* Codigo de Robot +/
- *
- * */
-
-var apiai = require('apiai');
-var appai = apiai("8921709f76374a34a31a1fa46d55799b");
-var optionsAPI = {
-	sessionId: '5bd69057-bd3b-471e-96c4-1bb61df59528'//'<unique session id>'
-};
 
 var request;
 
@@ -123,10 +116,12 @@ var kill = require('tree-kill');
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 var social = new SocialRobot(credentials.config, credentials.credentials);
+module.exports.social = social;
 
 var exp1 = require('./interacciones/exp1');
 var exp2 = require('./interacciones/exp2');
 var exp3 = require('./interacciones/exp3');
+var preguntas = require('./interacciones/exp3qaa');
 var random = require('./utils/Random');
 var gn = require('./interacciones/common/getname');
 var p = require('./interacciones/common/platica');
@@ -275,6 +270,46 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	social.resetlog();
 	await ProcessFlow(nodes, links, fnodes, 0);
 	social.savelogs('');
+});
+
+index.get('/interaccion/qaa', async function (req, res) {
+    if (req.query.id === 'ini') {
+        res.status(200).json(preguntas.getPreguntas());
+    } else if (req.query.id === 'name') {
+        res.status(200).json();
+        await social.play('./interacciones/exp3files/hola.wav');
+    } else if (req.query.id === 'exp') {
+        res.status(200).json();
+        await social.play('./interacciones/exp3files/explicacion2.wav');
+    } else if (req.query.id === 'gusto') {
+        res.status(200).json();
+        await social.play('./interacciones/exp1files/gusto.wav');
+    } else if (req.query.id === 'p') {
+		res.status(200).json();
+		await social.play('./interacciones/exp3files/questions/' + req.query.q + '.wav');
+    } else if (req.query.id === 'r') {
+		res.status(200).json();
+		//Respuesta(social, evaId, pregunta, expression, correctas, i)
+        await exp3.Respuesta(social, evaId, { respaudio: './interacciones/exp3files/answers/' + req.query.q + '.wav' }, parseInt(req.query.e), parseInt(req.query.ok), parseInt(req.query.i));
+    } else if (req.query.id === 'otra') {
+		res.status(200).json();
+        await social.play('./interacciones/exp3files/otra.wav');
+    } else if (req.query.id === 'otrasi') {
+		res.status(200).json();
+		await exp3.OtraRonda(social, 'si');
+    } else if (req.query.id === 'otrano') {
+		res.status(200).json();
+		await exp3.OtraRonda(social, 'no');
+    } else if (req.query.id === 'end') {
+        res.status(200).json();
+        await exp3.Despedida(social);
+    } else if (req.query.id === 'resumen') {
+		res.status(200).json();
+		// Resumen(social, correctas, total)
+        await exp3.Resumen(social, parseInt(req.query.ok), parseInt(req.query.t));
+    } else {
+		res.status(200).json();
+	}
 });
 
 async function ProcessFlow(nodes, links, fnodes, ini) {
