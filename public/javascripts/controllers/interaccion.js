@@ -155,6 +155,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case 9:
         $scope.ModalName = 'Script';
         break;
+      case 10:
+        $scope.ModalName = 'Audio';
+        break;
+      case 11:
+        $scope.ModalName = 'Animación Led';
+        break;
       default:
         break;
     }
@@ -193,6 +199,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 10:
         node.push({ key: Date.now(), name: "Audio_" + id, type: "sound", src: $scope.thesound, wait: $scope.waitsound, color: "lightblue", isGroup: false, group: $scope.group });
+        break;
+      case 11:
+        node.push({ key: Date.now(), name: "Leds_" + id, type: "led", anim: $scope.leds, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       default:
         break;
@@ -291,7 +300,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.showmodal(3);
         break;
       case 'wait':
-        $scope.wait = l.wait;
+        $scope.time = l.time;
         $scope.showmodal(4);
         break;
       case 'for':
@@ -318,6 +327,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case 'sound':
         $scope.thesound = l.src;
         $scope.showmodal(10);
+        break;
+      case 'led':
+        $scope.leds = l.anim;
+        $scope.showmodal(11);
         break;
       default:
         break;

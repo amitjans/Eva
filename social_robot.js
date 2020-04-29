@@ -30,6 +30,7 @@ var time = 0;
 var emotional = true;
 
 var lastlevel = 0;
+var ledsanimation = spawn('./leds/stop');
 
 class SocialRobot {
   constructor(configuration, credentials) {
@@ -74,7 +75,7 @@ class SocialRobot {
    * 
    * @param {String} message to speak 
    */
-  speak(message) {
+  speak(message, anim, ctrl) {
 
     if (!this._tts) {
       throw new Error('SocialRobot is not configured to speak.');
@@ -105,7 +106,7 @@ class SocialRobot {
             fs.writeFileSync(info.path, repairedFile);
             console.log('audio.wav written with a corrected wav header');
             console.info('SocialRobot speaking: ' + message);
-            resolve(self.play(info.path))
+            resolve(self.play(info.path, anim, ctrl))
           })
           .catch(err => {
             console.log(err);
@@ -148,7 +149,7 @@ class SocialRobot {
    * 
    * @param {String} soundFile to play
    */
-  play(soundFile, anim) {
+  play(soundFile, anim, ctrl = true) {
     // capture 'this' context
     var self = this;
 
@@ -159,9 +160,9 @@ class SocialRobot {
         player.on('complete',function(){
           console.info('> audio playback finished!!');
           self._isPlaying = false;
-          speakAnimation.stdin.pause();
-          speakAnimation.kill();
-          let stopAnimation = spawn('./leds/stop');
+          if (ctrl) {
+            self.ledsanimstop();            
+          }
           resolve(soundFile);
         });
 
@@ -169,7 +170,9 @@ class SocialRobot {
           console.error('> an audio playback error has ocurred');
           reject();
         });
-        let speakAnimation = spawn('./leds/' + (anim || 'hablaT_v2'));
+        if (ctrl || !!anim) {
+          self.ledsanim((anim || 'hablaT_v2'));
+        }
         player.play(soundFile);
       });
     }  
@@ -180,6 +183,16 @@ class SocialRobot {
   
   movement(type){
     port.write(type);
+  }
+
+  ledsanim(value){
+    ledsanimation = spawn('./leds/' + value);
+  }
+
+  ledsanimstop(){
+    ledsanimation.stdin.pause();
+    ledsanimation.kill();
+    ledsanimation = spawn('./leds/stop');
   }
 
   sleep(ms) {
