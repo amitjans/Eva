@@ -273,6 +273,7 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 });
 
 index.get('/interaccion/qaa', async function (req, res) {
+	social.ledsanimstop();
     if (req.query.id === 'ini') {
         res.status(200).json(preguntas.getPreguntas());
     } else if (req.query.id === 'name') {
@@ -307,6 +308,9 @@ index.get('/interaccion/qaa', async function (req, res) {
 		res.status(200).json();
 		// Resumen(social, correctas, total)
         await exp3.Resumen(social, parseInt(req.query.ok), parseInt(req.query.t));
+    } else if (req.query.id === 'listen') {
+		res.status(200).json();
+		social.ledsanim('escuchaT');
     } else {
 		res.status(200).json();
 	}
