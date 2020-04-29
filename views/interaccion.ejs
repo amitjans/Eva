@@ -168,6 +168,7 @@
                   <button type="button" class="btn btn-primary" ng-click="showmodal(8)">Interacci&oacute;n</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
                 </div>
               </div>
             </div>
@@ -325,7 +326,7 @@
               </div>
               <!-- Modal Script -->
 
-              <!-- Modal Script -->
+              <!-- Modal Sonidos -->
               <div class="form-group" ng-show="modal == 10">
                 <label class="col-sm-2 control-label">Audio</label>
                 <div class="col-sm-10">
@@ -341,7 +342,28 @@
                   <input type="checkbox" class="form-control" ng-model="waitsound" name="rs" id="rs" />
                 </div>
               </div>
-              <!-- Modal Script -->
+              <!-- Modal Sonidos -->
+
+              <!-- Modal Leds -->
+              <div class="form-group" ng-show="modal == 11">
+                <label class="col-sm-2 control-label">Leds</label>
+                <div class="col-sm-10">
+                  <select name="leds" id="" ng-model="leds" class="form-control">
+                    <option value="stop">Parar</option>
+                    <option value="escuchaT">Escuchar</option>
+                    <option value="hablaT_v2">Hablar</option>
+                    <option value="anger">Ira</option>
+                    <option value="anger_v2">Ira 2</option>
+                    <option value="joy">Alegria</option>
+                    <option value="joy_v2">Alegria 2</option>
+                    <option value="sad">Tristeza</option>
+                    <option value="sad_v2">Tristeza v2</option>
+                    <option value="surprise">Sorpresa</option>
+                    <option value="procesa">Procesa</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Modal Leds -->
               </div>
             </div>
             <div class="modal-footer">

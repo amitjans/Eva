@@ -350,6 +350,13 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 				}
 				sactual = s.shift();
 				await social.speak(sactual.campo1);
+			} else if (aux[0].type === 'led'){
+				let aux_t = nodeutils.NextNode(links, aux[0], nodes);
+				if (aux_t[0].type === 'speak' || aux_t[0].type === 'sound') {
+					aux_t[0].anim = aux[0].anim;
+					aux[0] = aux_t[0];
+				}
+				await ProcessNode(aux[0]);
 			} else {
 				await ProcessNode(aux[0]);
 			}
@@ -381,13 +388,13 @@ async function ProcessNode(element) {
 		let t = element.text;
 		if (t.includes('$')) {
 			t = nodeutils.includeAnswers(t.split(' '), respuesta);
-			await social.speak(t);
+			await social.speak(t, element.anim, !element.anim);
 		} else {
 			try {
 				if (!fs.existsSync('./temp/' + element.key + '.wav')) {
 					await social.rec(t, element.key);
 				}
-				await social.play('./temp/' + element.key + '.wav');
+				await social.play('./temp/' + element.key + '.wav', element.anim, !element.anim);
 			} catch (err) {
 				console.error(err)
 			}
@@ -403,9 +410,15 @@ async function ProcessNode(element) {
 		social.movement(element.mov);
 	} else if (element.type === 'sound') {
 		if (element.wait) {
-			await social.play('./sonidos/' + element.src + '.wav');
+			await social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
 		} else {
-			social.play('./sonidos/' + element.src + '.wav');
+			social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
+		}
+	} else if (element.type === 'led') {
+		if (element.anim === 'stop') {
+			social.ledsanimstop();
+		} else {
+			social.ledsanim(element.anim);
 		}
 	}
 }
