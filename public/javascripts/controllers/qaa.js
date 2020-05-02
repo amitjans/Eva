@@ -8,7 +8,21 @@ eva.controller('qaa', ['$scope', '$http', function ($scope, $http) {
 
   $scope.list = function () {
     $http.get('/interaccion/qaa?id=ini').then(function successCallback(response) {
-      $scope.listado = response.data;
+      $scope.listado = response.data.preguntas;
+      $scope.emotional = response.data.emotional;
+    }, function errorCallback(response) {
+    });
+  }
+
+  $scope.invertemotion = function () {
+    $http.get('/interaccion/qaa?id=emotion').then(function successCallback(response) {
+      $scope.emotional = response.data.emotional;
+    }, function errorCallback(response) {
+    });
+  }
+
+  $scope.speak = function () {
+    $http.get('/interaccion/qaa?id=speak&speak=' + $scope.stext).then(function successCallback(response) {
     }, function errorCallback(response) {
     });
   }
