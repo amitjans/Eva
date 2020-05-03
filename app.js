@@ -280,7 +280,8 @@ index.get('/interaccion/qaa', async function (req, res) {
         res.status(200).json({ preguntas: preguntas.getPreguntas(), emotional: emotion});
     } else if (req.query.id === 'name') {
         res.status(200).json();
-        await social.play('./interacciones/exp3files/hola.wav');
+		await social.play('./interacciones/exp3files/hola.wav');
+		social.ledsanim('escuchaT');
     } else if (req.query.id === 'exp') {
         res.status(200).json();
         await social.play('./interacciones/exp3files/explicacion2.wav');
@@ -290,13 +291,15 @@ index.get('/interaccion/qaa', async function (req, res) {
     } else if (req.query.id === 'p') {
 		res.status(200).json();
 		await social.play('./interacciones/exp3files/questions/' + req.query.q + '.wav');
+		social.ledsanim('escuchaT');
     } else if (req.query.id === 'r') {
 		res.status(200).json();
 		//Respuesta(social, evaId, pregunta, expression, correctas, i)
         await exp3.Respuesta(social, evaId, { respaudio: './interacciones/exp3files/answers/' + req.query.q + '.wav' }, parseInt(req.query.e), parseInt(req.query.ok), parseInt(req.query.i));
     } else if (req.query.id === 'otra') {
 		res.status(200).json();
-        await social.play('./interacciones/exp3files/otra.wav');
+		await social.play('./interacciones/exp3files/otra.wav');
+		social.ledsanim('escuchaT');
     } else if (req.query.id === 'otrasi') {
 		res.status(200).json();
 		await exp3.OtraRonda(social, 'si');

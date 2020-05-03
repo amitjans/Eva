@@ -313,6 +313,17 @@ emotions (emotion, level, leds, speed) {
               
           }
           break;
+      case 'surprise':
+          if (leds) {
+            var animation = spawn('./leds/joy_v2');
+          }
+          if (level >= 1) {
+            this.movement('u');
+          }
+          if (level >= 2) {
+              
+          }
+          break;
       default:
           break;
   }

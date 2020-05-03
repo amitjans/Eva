@@ -214,6 +214,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
           node[node.length - 1].key = node[i].key;
           node[node.length - 1].name = node[i].name;
           node.splice(i,1);
+          $scope.key = 0;
           break;
         }        
       }
