@@ -130,6 +130,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     switch (value) {
       case 1:
         $scope.ModalName = 'Emoción';
+        $scope.ncommon = 'Movimiento';
         break;
       case 2:
         $scope.ModalName = 'Hablar';
@@ -154,9 +155,11 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 9:
         $scope.ModalName = 'Script';
+        $scope.ncommon = 'Aleatorio';
         break;
       case 10:
         $scope.ModalName = 'Audio';
+        $scope.ncommon = 'Esperar';
         break;
       case 11:
         $scope.ModalName = 'Animación Led';
@@ -195,10 +198,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.setint();
         break;
       case 9:
-        node.push({ key: Date.now(), name: "Script_" + id, type: "script", sc: $scope.thescript, random: $scope.rs, color: "lightblue", isGroup: false, group: $scope.group });
+        node.push({ key: Date.now(), name: "Script_" + id, type: "script", sc: $scope.thescript, random: $scope.ccommon, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 10:
-        node.push({ key: Date.now(), name: "Audio_" + id, type: "sound", src: $scope.thesound, wait: $scope.waitsound, color: "lightblue", isGroup: false, group: $scope.group });
+        node.push({ key: Date.now(), name: "Audio_" + id, type: "sound", src: $scope.thesound, wait: $scope.ccommon, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 11:
         node.push({ key: Date.now(), name: "Leds_" + id, type: "led", anim: $scope.leds, color: "lightblue", isGroup: false, group: $scope.group });
@@ -247,7 +250,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       default:
         break;
     }
-    node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: ($scope.nivel ? 2 : 0), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
+    node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: ($scope.ccommon ? 2 : 0), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
   }
 
   $scope.setint = function () {
@@ -290,7 +293,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case 'emotion':
         $scope.emocion = l.emotion;
         $scope.velocidad = l.speed;
-        $scope.nivel = l.level == 2;
+        $scope.ccommon = l.level == 2;
         $scope.showmodal(1);
         break;
       case 'speak':
@@ -322,11 +325,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 'script':
         $scope.sc = l.sc;
-        $scope.random = l.random;
+        $scope.ccommon = l.random;
         $scope.showmodal(9);
         break;
       case 'sound':
         $scope.thesound = l.src;
+        $scope.ccommon = l.wait;
         $scope.showmodal(10);
         break;
       case 'led':
@@ -341,9 +345,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.list();
   $scope.slist();
   $scope.soundlist();
-  $scope.rs = false;
-  $scope.nivel = false;
-  $scope.waitsound = false;
+  $scope.ccommon = false;
   $scope.key = 0;
   $scope.node = [];
 }]);

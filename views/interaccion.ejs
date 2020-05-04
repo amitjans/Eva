@@ -169,6 +169,7 @@
                   <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
+                  {{ key }}
                 </div>
               </div>
             </div>
@@ -216,12 +217,6 @@
                     <option value="sad">Tristeza</option>
                     <option value="anger">Ira</option>
                   </select>
-                </div>
-              </div>
-              <div class="form-group" ng-show="modal == 1">
-                <label class="col-sm-2 control-label">Movimiento</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-control" ng-model="nivel" name="nivel" id="nivel" />
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 1">
@@ -318,12 +313,6 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 9">
-                <label class="col-sm-2 control-label">Aleatorio</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-control" ng-model="rs" name="rs" id="rs" />
-                </div>
-              </div>
               <!-- Modal Script -->
 
               <!-- Modal Sonidos -->
@@ -334,12 +323,6 @@
                     <option value="" selected>Ninguno</option>
                     <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}</option>
                   </select>
-                </div>
-              </div>
-              <div class="form-group" ng-show="modal == 10">
-                <label class="col-sm-2 control-label">Esperar</label>
-                <div class="col-sm-1">
-                  <input type="checkbox" class="form-control" ng-model="waitsound" name="rs" id="rs" />
                 </div>
               </div>
               <!-- Modal Sonidos -->
@@ -364,6 +347,16 @@
                 </div>
               </div>
               <!-- Modal Leds -->
+
+              <!-- Modal Common -->
+              <div class="form-group" ng-show="modal == 10 || modal == 9 || modal == 1">
+                <label class="col-sm-2 control-label">{{ ncommon }}</label>
+                <div class="col-sm-1">
+                  <input type="checkbox" class="form-control" ng-model="ccommon" name="rs" id="rs" />
+                </div>
+              </div>
+              <!-- Modal Common -->
+
               </div>
             </div>
             <div class="modal-footer">
