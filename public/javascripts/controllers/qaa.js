@@ -56,8 +56,8 @@ eva.controller('qaa', ['$scope', '$http', function ($scope, $http) {
     });
   }
 
-  $scope.req = function (value) {
-    $http.get('/interaccion/qaa?id=' + value).then(function successCallback(response) {
+  $scope.req = function (value, opt) {
+    $http.get('/interaccion/qaa?id=' + value + '&opt=' + (opt || '')).then(function successCallback(response) {
     }, function errorCallback(response) {
     });
   }
