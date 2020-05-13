@@ -92,6 +92,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $scope.list();
       id = 0;
       $scope.node = [];
+      $scope.key = 0;
       $('#inicio').click();
   }
 
@@ -122,15 +123,15 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
     $scope.link = '' + identifier;
     id++;
-    reload();
-    $("#myModal").modal('hide');
   }
 
-  $scope.showmodal = function (value) {
+  $scope.showmodal = function (value, nuevo = true) {
+    if (nuevo) {
+      $scope.key = 0;
+    }
     switch (value) {
       case 1:
         $scope.ModalName = 'Emoción';
-        $scope.ncommon = 'Movimiento';
         break;
       case 2:
         $scope.ModalName = 'Hablar';
@@ -227,9 +228,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         });
       }
       $scope.node = node;
-      reload();
-      $("#myModal").modal('hide');
     }
+    reload();
+    $("#myModal").modal('hide');
   }
 
   $scope.setemocion = function () {
@@ -250,7 +251,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       default:
         break;
     }
-    node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: ($scope.ccommon ? 2 : 0), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
+    node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: parseInt($scope.level), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
   }
 
   $scope.setint = function () {
@@ -293,49 +294,49 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case 'emotion':
         $scope.emocion = l.emotion;
         $scope.velocidad = l.speed;
-        $scope.ccommon = l.level == 2;
-        $scope.showmodal(1);
+        $scope.level = l.level + '';
+        $scope.showmodal(1, false);
         break;
       case 'speak':
         $scope.texto = l.text;
-        $scope.showmodal(2);
+        $scope.showmodal(2, false);
         break;
       case 'listen':
-        $scope.showmodal(3);
+        $scope.showmodal(3, false);
         break;
       case 'wait':
         $scope.time = l.time;
-        $scope.showmodal(4);
+        $scope.showmodal(4, false);
         break;
       case 'for':
         $scope.it = l.iteraciones;
-        $scope.showmodal(5);
+        $scope.showmodal(5, false);
         break;
       case 'if':
         $scope.texto = l.text;
-        $scope.showmodal(6);
+        $scope.showmodal(6, false);
         break;
       case 'mov':
         $scope.movement = l.mov;
-        $scope.showmodal(7);
+        $scope.showmodal(7, false);
         break;
       case 'int':
         $scope.int = l.int;
-        $scope.showmodal(8);
+        $scope.showmodal(8, false);
         break;
       case 'script':
         $scope.sc = l.sc;
         $scope.ccommon = l.random;
-        $scope.showmodal(9);
+        $scope.showmodal(9, false);
         break;
       case 'sound':
         $scope.thesound = l.src;
         $scope.ccommon = l.wait;
-        $scope.showmodal(10);
+        $scope.showmodal(10, false);
         break;
       case 'led':
         $scope.leds = l.anim;
-        $scope.showmodal(11);
+        $scope.showmodal(11, false);
         break;
       default:
         break;

@@ -107,12 +107,6 @@ var enviarError = function (error, query) {
 module.exports.setIO = setIO;
 
 var fs = require('fs');
-var util = require('util');
-
-var PlayMusic = require('playmusic');
-
-var kill = require('tree-kill');
-
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 var social = new SocialRobot(credentials.config, credentials.credentials);
@@ -129,6 +123,7 @@ var p = require('./interacciones/common/platica');
 index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	res.status(200).jsonp();
 	social.resetlog();
+	social.setEmotional(true);
 	let nombre = await gn.getName(social, evaId, usuarioId);
 	await exp3.QaA(social, evaId, usuarioId);
 	await exp3.Despedida(social);
@@ -138,16 +133,25 @@ index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
 	res.status(200).jsonp();
 	social.resetlog();
-	let nombre = await gn.getName(social, evaId, usuarioId);
+	social.setEmotional(true);
+	let name = 'adrian';
+	// let nombre = await gn.getName(social, evaId, usuarioId);
+	// await p.inicial(social, evaId, usuarioId);
+	// await social.play('./interacciones/exp2files/link.wav');
 	await exp2.autopilot(social, evaId, usuarioId);
 	await exp2.Despedida(social);
 	social.savelogs(nombre);
 });
 
 var logs = require('./log');
-index.get('/interaccion/iniciarInteraccion3', function (req, res) {
-	console.log(random.generarNumeroRandom(100, 200));
+index.get('/interaccion/iniciarInteraccion3', async function (req, res) {
 	res.status(200).jsonp();
+	social.resetlog();
+	social.setEmotional(false);
+	let nombre = await gn.getName(social, evaId, usuarioId);
+	await exp3.QaA(social, evaId, usuarioId);
+	await exp3.Despedida(social);
+	social.savelogs(nombre);
 });
 
 index.get('/interaccion/iniciarInteraccion4', async function (req, res) {
@@ -232,15 +236,15 @@ var sactual;
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.findById(req.query.id);
 	var json = JSON.parse(temp.data);
-	
+
 	nodes = json.node;
 	links = json.link;
 	respuesta = [];
-	
+
 	let tempname = temp.nombre + '_expandida';
-	
+
 	await unify();
-	
+
 	const nuevointeraccion = new interaccion();
 	nuevointeraccion.nombre = tempname;
 	nuevointeraccion.data = JSON.stringify({ node: nodes, link: links });
@@ -276,40 +280,40 @@ var emotion = true;
 
 index.get('/interaccion/qaa', async function (req, res) {
 	social.ledsanimstop();
-    if (req.query.id === 'ini') {
-        res.status(200).json({ preguntas: preguntas.getPreguntas(), emotional: emotion});
-    } else if (req.query.id === 'p') {
+	if (req.query.id === 'ini') {
+		res.status(200).json({ preguntas: preguntas.getPreguntas(), emotional: emotion });
+	} else if (req.query.id === 'p') {
 		res.status(200).json();
 		await social.play('./interacciones/exp3files/questions/' + req.query.q + '.wav');
 		social.ledsanim('escuchaT');
-    } else if (req.query.id === 'r') {
+	} else if (req.query.id === 'r') {
 		res.status(200).json();
 		//Respuesta(social, evaId, pregunta, expression, correctas, i)
-        await exp3.Respuesta(social, evaId, { respaudio: './interacciones/exp3files/answers/' + req.query.q + '.wav' }, parseInt(req.query.e), parseInt(req.query.ok), parseInt(req.query.i));
-    } else if (req.query.id === 'otrasi') {
+		await exp3.Respuesta(social, evaId, { respaudio: './interacciones/exp3files/answers/' + req.query.q + '.wav' }, parseInt(req.query.e), parseInt(req.query.ok), parseInt(req.query.i));
+	} else if (req.query.id === 'otrasi') {
 		res.status(200).json();
 		await exp3.OtraRonda(social, 'si');
-    } else if (req.query.id === 'otrano') {
+	} else if (req.query.id === 'otrano') {
 		res.status(200).json();
 		await exp3.OtraRonda(social, 'no');
-    } else if (req.query.id === 'end') {
-        res.status(200).json();
-        await exp3.Despedida(social);
-    } else if (req.query.id === 'resumen') {
+	} else if (req.query.id === 'end') {
+		res.status(200).json();
+		await exp3.Despedida(social);
+	} else if (req.query.id === 'resumen') {
 		res.status(200).json();
 		// Resumen(social, correctas, total)
-        await exp3.Resumen(social, parseInt(req.query.ok), parseInt(req.query.t));
-    } else if (req.query.id === 'listen') {
+		await exp3.Resumen(social, parseInt(req.query.ok), parseInt(req.query.t));
+	} else if (req.query.id === 'listen') {
 		res.status(200).json();
 		social.ledsanim('escuchaT');
-    } else if (req.query.id === 'emotion') {
+	} else if (req.query.id === 'emotion') {
 		emotion = !emotion;
 		social.setEmotional(emotion);
 		res.status(200).json({ emotional: emotion });
-    } else if (req.query.id === 'speak') {
+	} else if (req.query.id === 'speak') {
 		res.status(200).json();
 		social.speak(req.query.speak);
-    } else {
+	} else {
 		await social.play('./interacciones/exp3files/' + req.query.id + '.wav');
 		if (!!req.query.opt) {
 			social.ledsanim('escuchaT');
@@ -347,7 +351,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 					default:
 						break;
 				}
-			} else if (aux[0].type === 'script'){
+			} else if (aux[0].type === 'script') {
 				if (s.length == 0) {
 					s = (await script.findById(aux[0].sc).populate('data')).data;
 					if (aux[0].random) {
@@ -356,7 +360,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 				}
 				sactual = s.shift();
 				await social.speak(sactual.campo1);
-			} else if (aux[0].type === 'led'){
+			} else if (aux[0].type === 'led') {
 				let aux_t = nodeutils.NextNode(links, aux[0], nodes);
 				if (aux_t[0].type === 'speak' || aux_t[0].type === 'sound') {
 					aux_t[0].anim = aux[0].anim;
@@ -364,7 +368,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 				}
 				await ProcessNode(aux[0]);
 			} else {
-				await ProcessNode(aux[0]);
+				await ProcessNode(Object.assign({}, aux[0]));
 			}
 			aux = nodeutils.NextNode(links, aux[0], nodes);
 		} else if (aux.length > 1) {
@@ -385,9 +389,20 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 	} while (n);
 }
 
+var lemotion = [];
 async function ProcessNode(element) {
 	if (element.type === 'emotion') {
-		var e = element.elements;
+		console.log(element);
+		if (element.level == -1) {
+			if (lemotion.length == 0) {
+				element.level = 0;
+			} else if (element.key == lemotion[lemotion.length - 1].key) {
+				element.level = (lemotion[lemotion.length - 1].level + 1 > 2 ? 2 : lemotion[lemotion.length - 1].level + 1);
+			}
+			lemotion.push(element);
+		}
+		console.log(lemotion.length);
+		//console.log(element);
 		social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
 	} else if (element.type === 'speak') {
 		social.templog(evaId, element.text);

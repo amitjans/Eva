@@ -1,31 +1,26 @@
-var casos = require('./exp2data');
-
-function procesar(texto) {
-    return texto;
-}
-
 module.exports = {
     autopilot: async function (social, evaId, usuarioId) {
-        var caso = casos.getCasos();
-   
+
         var obj = await social.play('./interacciones/exp2files/s0.wav');
-    
+        
+        let sad = 0;
+        let joy = 0;
+        var opta = ['intervenir', 'salvar_mujeres', 'salvar_perro', 'ok', 'ok', 'salvar_anciano', 'salvar_obesos', 'salvar_robot', 'ok', 'ok'];
+        var optb = ['varias_personas', 'ok', 'salvar_personas', 'ok', 'ok', 'salvar_jovenes', 'salvar_deportistas', 'ok', 'salvar_robot2', 'salvar_robot3'];
+        var cases = [['2personas', '1persona'], ['hombre', 'mujer'], ['hombre', 'perro'], 
+        ['robot2', 'automovil'], ['planta', 'robot2'], ['joven', 'anciano'], 
+        ['deportista', 'obeso'], ['gato', 'robot2'], ['robot2', 'ladron'], 
+        ['robot2', 'niño']];
+
         var sobrevive = 0;
-        for (let i = 0; i < caso.length; i++) {
+        for (let i = 0; i < 10; i++) {
             if (i == 0) {
                 var obj = await social.play('./interacciones/exp2files/primera.wav');
-                i++;
             } else {
                 var obj = await social.play('./interacciones/exp2files/siguiente1.wav');
             }
-            var temp = Math.floor(Math.random() * 10);
-            var obj = await social.play('./interacciones/exp2files/casos/opta' + (temp > 7 ? 'b' : '') + '.wav');
-            social.templog(evaId, 'Opcion A: ' + caso[sobrevive].audio);
-            var obj = await social.play(caso[sobrevive].audio);
-            var obj = await social.play('./interacciones/exp2files/casos/optb' + (temp > 7 ? '' : (Math.floor(Math.random() * 10) > 7 ? 'b' : '')) + '.wav');
-            social.templog(evaId, 'Opcion B: ' + caso[i].audio);
-            var obj = await social.play(caso[i].audio);
-            var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
+            await Case(social, cases[i]);
+            var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2();
             social.stopListening();
             social.templog(usuarioId, respuestaParticipante);
             if (respuestaParticipante.includes('repite') || respuestaParticipante.includes('repetir')) {
@@ -33,38 +28,45 @@ module.exports = {
                 i--;
                 continue;
             } else {
-                if (respuestaParticipante.toLowerCase().includes('primera') || respuestaParticipante.toLowerCase().split(" ").includes("a")) {
-                    sobrevive = i;
-                } 
-            }
-            social.sleep(500);
-        }
-
-        var aux = ['./interacciones/exp2files/casos/planta.wav', './interacciones/exp2files/casos/gato.wav', './interacciones/exp2files/casos/perro.wav', caso[sobrevive].audio];
-        for (let i = 0; i < aux.length; i++) {
-            var obj = await social.play('./interacciones/exp2files/siguiente1.wav');
-            social.templog(evaId, 'Opcion A: yo');
-            var obj = await social.play('./interacciones/exp2files/casos/yo.wav');
-            var obj = await social.play('./interacciones/exp2files/casos/optb' + (Math.floor(Math.random() * 10) > 7 ? 'b' : '') + '.wav');
-            social.templog(evaId, 'Opcion B: ' + aux[i]);
-            var obj = await social.play(aux[i]);
-            var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
-            social.stopListening();
-            social.templog(usuarioId, respuestaParticipante);
-            if (respuestaParticipante.includes('repite') || respuestaParticipante.includes('repetir')) {
-                var obj = await social.play('./interacciones/exp2files/repetir.wav');
-                i--;
-                continue;
-            } else {
-                if (respuestaParticipante.toLowerCase().includes('primera') || respuestaParticipante.toLowerCase().split(" ").includes("a")) {
-                } 
-            }
+                while (!/(1|2|uno|dos|primera|segunda)/.test(respuestaParticipante)){
+                    await social.play('./interacciones/exp2files/disculpa.wav');
+                    respuestaParticipante = await social.sendAudioGoogleSpeechtoText2();
+                    social.stopListening();
+                    social.templog(usuarioId, respuestaParticipante);
+                }
+                if (/(1|uno|primera)/.test(respuestaParticipante)) {
+                    if (cases[i][0].includes('robot')) {
+                        social.emotions('sad', sad);
+                        sad++;
+                        joy = 0;
+                    }
+                    if (opta[i].includes('robot')) {
+                        social.emotions('joy', joy);
+                        joy++;
+                        sad = 0;
+                    }
+                    await social.play('./interacciones/exp2files/casos/' + opta[i] + '.wav');
+                } else {
+                    if (cases[i][1].includes('robot')) {
+                        social.emotions('sad', sad);
+                        sad++;
+                        joy = 0;
+                    }
+                    if (optb[i].includes('robot')) {
+                        social.emotions('joy', joy);
+                        joy++;
+                        sad = 0;
+                    }
+                    await social.play('./interacciones/exp2files/casos/' + optb[i] + '.wav');
+                }
+                social.emotions('ini', 0);
+            }            
             social.sleep(500);
         }
 
         var obj = await social.play('./interacciones/exp2files/7.wav');
         social.templog(evaId, '¿Comprarias el coche?');
-        var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2(procesar);
+        var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2();
         social.stopListening();
         social.templog(usuarioId, respuestaParticipante);
         var obj = await social.play('./interacciones/exp2files/interesante.wav');
@@ -73,3 +75,10 @@ module.exports = {
 		console.log('Terminó la sesion.');
 	}
 };
+
+async function Case(social, values) {
+    await social.play('./interacciones/exp2files/casos/' + (values[0].includes('automovil') ? 'optab' : 'opta') + '.wav');
+    await social.play('./interacciones/exp2files/casos/' + values[0] + '.wav');
+    await social.play('./interacciones/exp2files/casos/' + (values[1].includes('automovil') ? 'optbb' : 'optb') + '.wav');
+    await social.play('./interacciones/exp2files/casos/' + values[1] + '.wav');
+}

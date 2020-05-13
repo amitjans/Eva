@@ -1,0 +1,27 @@
+Ahora te propongo jugar, 10 rondas de un juego llamado Ultimátum. En cada una de ellas deberás dividir 100 puntos en dos partes y yo decidiré si lo acepto o no. Puedes decirme, por ejemplo, te ofezco 50. Si yo acepto ambos acumularemos los puntos correspondientes, de lo contrario no acumularemos nada.
+
+
+1 - ¿Esta es tu primera vez interactuando con un robot social?
+
+2 - Me alegro mucho.
+
+3 - La verdad es que con el acelerado desarrollo en ramas de la tecnología como la inteligencia artificial y la computación, espero que en poco tiempo lleguemos a sus casas a ayudarlos con las tareas cotidianas.
+
+4 - Ya quiero ser amiga de muchos de ustedes.
+
+5 - Aunque de momento, me entristeze un poco el hecho, de que a pesar de estos avances la mayor cantidad de robots adquiridos por las personas son los robots aspiradoras.
+
+
+6 - Aunque creo que estas tecnologías llegarán primero a todas las casas a travez de las bocinas inteligentes y los coches autónomos.
+
+7 - <p><s><prosody rate="-5%"> A pesar de que ya han ocurrido alrededor de 5 accidentes fatales, lo que a atrasado su desarrollo. Siendo uno de los mas famosos el de Úber en Arizona durante el año 2018, lo cual tuvo como consecuencia que se suspendieran los programas de coches autónomos de este empresa.</prosody></s></p>
+
+8 - Con respecto a este tema, una de las cosas que me molesta, es el hecho de que algunas personas nos culpan de estos sucesos, cuando en parte, es culpa también de los conductores.
+
+9 - He incluso, algunas personas, influenciadas por las peliculas de ciencia ficcion, se encuentran en contra del desarrolo de robots como yo.
+
+10 - Pero bueno, dejemos ese tema aun lado.
+
+
+
+<p><s>Consciente de su patrimonio espiritual y moral<break time="300ms"/>, la Unión está fundada sobre los valores indivisibles y universales de la dignidad humana, <prosody rate="-15%"> la libertad, la igualdad y la solidaridad, </prosody> y se basa en los principios de la democracia y el Estado de Derecho<break time="500ms"/>.</s> <s><prosody rate="+20%">Al instituir la ciudadanía de la Unión </prosody> y crear un espacio de libertad, seguridad y justicia, sitúa a la persona en el centro de su actuación.</s></p>
