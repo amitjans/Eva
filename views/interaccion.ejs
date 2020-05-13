@@ -226,6 +226,18 @@
                     placeholder="Velocidad">
                 </div>
               </div>
+              <div class="form-group" ng-show="modal == 1">
+                <label class="col-sm-2 control-label">Nivel</label>
+                <label class="radio-inline col-sm-offset-1">
+                  <input type="radio" name="level" id="inlineRadio1" ng-model="level" value="0"> Solo Ojos
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="level" id="inlineRadio3" ng-model="level" value="2"> Movimiento
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="level" id="inlineRadio2" ng-model="level" value="-1"> Incremental
+                </label>
+              </div>
               <!-- Modal Emocion -->
 
               <!-- Modal Hablar -->
@@ -349,7 +361,7 @@
               <!-- Modal Leds -->
 
               <!-- Modal Common -->
-              <div class="form-group" ng-show="modal == 10 || modal == 9 || modal == 1">
+              <div class="form-group" ng-show="modal == 10 || modal == 9">
                 <label class="col-sm-2 control-label">{{ ncommon }}</label>
                 <div class="col-sm-1">
                   <input type="checkbox" class="form-control" ng-model="ccommon" name="rs" id="rs" />
