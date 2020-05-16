@@ -285,10 +285,10 @@ emotions (emotion, level, leds, speed) {
             var animation = spawn('./leds/sad_v2');
           }
           if (level >= 1) {
-            this.movement('d');
+            this.movement('D');
           }
           if (level >= 2) {
-            this.movement('s');
+            this.movement('S');
           }
           break;
       case 'anger':
@@ -307,7 +307,7 @@ emotions (emotion, level, leds, speed) {
             var animation = spawn('./leds/joy_v2');
           }
           if (level >= 1) {
-            this.movement('u');
+            this.movement('U');
           }
           if (level >= 2) {
               
@@ -318,7 +318,7 @@ emotions (emotion, level, leds, speed) {
             var animation = spawn('./leds/joy_v2');
           }
           if (level >= 1) {
-            this.movement('u');
+            this.movement('U');
           }
           if (level >= 2) {
               
