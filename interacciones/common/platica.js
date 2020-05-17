@@ -13,11 +13,11 @@ module.exports = {
 		social.emotions('joy', 1, false);
 		var obj = await social.play('./interacciones/platica/4.wav');
 		social.movement('c');
-		social.emotions('sad', 0, false);
+		social.emotions('sad', 1, false);
 		var obj = await social.play('./interacciones/platica/5.wav');
 		social.emotions('ini', 0);
 		var obj = await social.play('./interacciones/platica/6.wav');
-		social.emotions('sad', 1, false);
+		social.emotions('sad', 2, false);
 		var obj = await social.play('./interacciones/platica/7.wav');
 		social.movement('c');
 		social.emotions('anger', 0, false);
