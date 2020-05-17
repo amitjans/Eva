@@ -7,15 +7,12 @@ module.exports = {
         
         let sad = 0;
         let joy = 0;
-        var opta = ['intervenir', 'salvar_mujeres', 'salvar_perro', 'ok', 'ok', 'salvar_anciano', 'salvar_obesos', 'salvar_robot', 'ok', 'salvar_niño'];
-        var optb = ['varias_personas', 'ok', 'salvar_personas', 'salvar_robot', 'ok', 'salvar_jovenes', 'salvar_deportistas', 'ok', 'salvar_robot2', 'salvar_robot3'];
-        var cases = [['2personas', '1persona'], ['hombre', 'mujer'], ['hombre', 'perro'], 
-        ['robot2', 'automovil'], ['planta', 'robot2'], ['joven', 'anciano'], 
-        ['deportista', 'obeso'], ['gato', 'robot2'], ['robot2', 'ladron'], 
-        ['robot2', 'niño']];
+        var opta = ['salvar_mujeres', 'salvar_perro', 'ok', 'salvar_robot', 'salvar_anciano', 'ok', 'salvar_niño'];
+        var optb = ['ok', 'salvar_robot', 'salvar_robot2', 'ok', 'salvar_jovenes', 'salvar_robot2', 'salvar_robot3'];
+        var cases = [['hombre', 'mujer'], ['robot2', 'perro'], ['robot2', 'automovil'], ['planta', 'robot2'], ['joven', 'anciano'], ['robot2', 'ladron'], ['robot2', 'niño']];
 
         var sobrevive = 0;
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < cases.length; i++) {
             if (i == 0) {
                 var obj = await social.play('./interacciones/exp2files/primera.wav');
             } else {
