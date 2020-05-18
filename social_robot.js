@@ -190,6 +190,9 @@ class SocialRobot {
   }
   
   movement(type){
+    if (!emotional) {
+      return;
+    }
     port.write(type);
   }
 
