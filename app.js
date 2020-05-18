@@ -135,10 +135,15 @@ index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
 	social.resetlog();
 	social.setEmotional(true);
 	// let name = 'adrian';
+	console.log(social.getVoice());
+	social.setVoice('es-ES_EnriqueV3Voice');
+	es-LA_SofiaV3Voice
+	
 	let nombre = await gn.getName(social, evaId, usuarioId);
 	await p.inicial(social, evaId, usuarioId);
 	await social.play('./interacciones/exp2files/link.wav');
 	await exp2.autopilot(social, evaId, usuarioId);
+	await social.play('./interacciones/exp2files/cuestionario.wav');
 	await exp2.Despedida(social);
 	social.savelogs(nombre);
 });
@@ -273,6 +278,7 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 
 	social.resetlog();
 	await ProcessFlow(nodes, links, fnodes, 0);
+	social.setVoice('es-LA_SofiaV3Voice');
 	social.savelogs('');
 });
 
@@ -391,7 +397,9 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 
 var lemotion = [];
 async function ProcessNode(element) {
-	if (element.type === 'emotion') {
+	if (element.type === 'voice') {
+		social.setVoice(element.voice);
+	} else if (element.type === 'emotion') {
 		console.log(element);
 		if (element.level == -1) {
 			if (lemotion.length == 0) {
@@ -412,10 +420,10 @@ async function ProcessNode(element) {
 			await social.speak(t, element.anim, !element.anim);
 		} else {
 			try {
-				if (!fs.existsSync('./temp/' + element.key + '.wav')) {
-					await social.rec(t, element.key);
+				if (!fs.existsSync('./temp/' + (social.getVoice() + '_' + element.key) + '.wav')) {
+					await social.rec(t, (social.getVoice() + '_' + element.key));
 				}
-				await social.play('./temp/' + element.key + '.wav', element.anim, !element.anim);
+				await social.play('./temp/' + (social.getVoice() + '_' + element.key) + '.wav', element.anim, !element.anim);
 			} catch (err) {
 				console.error(err)
 			}

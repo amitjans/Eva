@@ -180,6 +180,14 @@ class SocialRobot {
       console.log("> Speaker in use, try playing audio later.");
     }
   }
+
+  getVoice(){
+    return this.configuration.voice;
+  }
+
+  setVoice(voice){
+    this.configuration.voice = voice;
+  }
   
   movement(type){
     port.write(type);

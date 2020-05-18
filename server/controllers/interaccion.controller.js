@@ -41,10 +41,8 @@ interaccioncontroller.delete = async (req, res) => {
 
 interaccioncontroller.deleterec = async (req, res) => {
     const { id } = req.params;
-    fs.unlink('./temp/' + id + '.wav', (err) => {
-        if (err) throw err;
-        res.status(200).json({ mensaje: 'Audio eliminado' });
-    });
+    fs.readdirSync('./temp/').filter(f => f.includes(id)).map(f => fs.unlinkSync('./temp/' + f));
+    res.status(200).json({ mensaje: 'Audio eliminado' });
 }
 
 module.exports = interaccioncontroller;

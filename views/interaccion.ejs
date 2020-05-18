@@ -169,6 +169,7 @@
                   <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(12)">Voz</button>
                   {{ key }}
                 </div>
               </div>
@@ -359,6 +360,20 @@
                 </div>
               </div>
               <!-- Modal Leds -->
+
+              <!-- Modal Voice -->
+              <div class="form-group" ng-show="modal == 12">
+                <label class="col-sm-2 control-label">Voz</label>
+                <div class="col-sm-10">
+                  <select name="voice" id="" ng-model="voice" class="form-control">
+                    <option value="es-LA_SofiaV3Voice">Sofia (es_La)</option>
+                    <option value="es-ES_EnriqueV3Voice">Enrique (es_ES)</option>
+                    <option value="es-ES_LauraV3Voice">Laura (es_ES)</option>
+                    <option value="es-US_SofiaV3Voice">Sofia (es_US)</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Modal Voice -->
 
               <!-- Modal Common -->
               <div class="form-group" ng-show="modal == 10 || modal == 9">
