@@ -165,6 +165,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case 11:
         $scope.ModalName = 'Animación Led';
         break;
+      case 12:
+        $scope.ModalName = 'Voz';
+        break;
       default:
         break;
     }
@@ -206,6 +209,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 11:
         node.push({ key: Date.now(), name: "Leds_" + id, type: "led", anim: $scope.leds, color: "lightblue", isGroup: false, group: $scope.group });
+        break;
+      case 12:
+        node.push({ key: Date.now(), name: "Voz_" + id, type: "voice", voice: $scope.voice, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       default:
         break;
@@ -338,6 +344,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.leds = l.anim;
         $scope.showmodal(11, false);
         break;
+      case 'voice':
+        $scope.voice = l.voice;
+        $scope.showmodal(12, false);
+        break;
       default:
         break;
     }
@@ -347,6 +357,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.slist();
   $scope.soundlist();
   $scope.ccommon = false;
+  $scope.voice = 'es-LA_SofiaV3Voice';
   $scope.key = 0;
   $scope.node = [];
 }]);
