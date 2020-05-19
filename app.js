@@ -133,12 +133,8 @@ index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
 	res.status(200).jsonp();
 	social.resetlog();
-	social.setEmotional(true);
-	// let name = 'adrian';
-	console.log(social.getVoice());
-	social.setVoice('es-ES_EnriqueV3Voice');
-	es-LA_SofiaV3Voice
-	
+	// social.setEmotional(true);
+	// let name = 'adrian';	
 	let nombre = await gn.getName(social, evaId, usuarioId);
 	await p.inicial(social, evaId, usuarioId);
 	await social.play('./interacciones/exp2files/link.wav');
