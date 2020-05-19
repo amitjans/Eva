@@ -107,3 +107,4 @@ credencial.json
 config-services.js
 git.sh
 temp/*
+server/database.js
