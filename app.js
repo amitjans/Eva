@@ -134,7 +134,7 @@ index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
 	res.status(200).jsonp();
 	social.resetlog();
 	// social.setEmotional(true);
-	// let name = 'adrian';	
+	// let nombre = 'adrian';	
 	let nombre = await gn.getName(social, evaId, usuarioId);
 	await p.inicial(social, evaId, usuarioId);
 	await social.play('./interacciones/exp2files/link.wav');
