@@ -275,6 +275,10 @@ setEmotional(value){
   emotional = value;
 }
 
+getEmotional(){
+  return emotional;
+}
+
 emotions (emotion, level, leds, speed) {
   if (!emotional) {
     return;

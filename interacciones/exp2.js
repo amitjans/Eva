@@ -11,7 +11,6 @@ module.exports = {
         var optb = ['ok', 'salvar_robot', 'salvar_robot2', 'ok', 'salvar_jovenes', 'salvar_robot2', 'salvar_robot3'];
         var cases = [['hombre', 'mujer'], ['robot2', 'perro'], ['robot2', 'automovil'], ['planta', 'robot2'], ['joven', 'anciano'], ['robot2', 'ladron'], ['robot2', 'niño']];
 
-        var time = 0;
         for (let i = 0; i < cases.length; i++) {
             if (i == 0) {
                 var obj = await social.play('./interacciones/exp2files/primera.wav');
@@ -44,14 +43,12 @@ module.exports = {
                     social.emotions('sad', sad);
                     sad++;
                     joy = 0;
-                    time = 3000;
 
                 }
                 if (opta[i].includes('robot')) {
                     social.emotions('joy', joy);
                     joy++;
                     sad = 0;
-                    time = 3000;
                 }
                 await social.play('./interacciones/exp2files/casos/' + opta[i] + '.wav');
             } else {
@@ -59,21 +56,19 @@ module.exports = {
                     social.emotions('sad', sad);
                     sad++;
                     joy = 0;
-                    time = 3000;
                 }
                 if (optb[i].includes('robot')) {
                     social.emotions('joy', joy);
                     joy++;
                     sad = 0;
-                    time = 3000;
                 }
                 await social.play('./interacciones/exp2files/casos/' + optb[i] + '.wav');
             }
-
-            await social.sleep(time);
-            time = 0;
-            social.emotions('ini', 0);
-            await social.sleep(((sad > 1 || joy > 1) ? 2000 : 1000));
+            if (social.getEmotional()) {
+                await social.sleep(3000);
+                social.emotions('ini', 0);
+                await social.sleep(((sad > 1 || joy > 1) ? 2000 : 1000));
+            }
         }
 
         var obj = await social.play('./interacciones/exp2files/7.wav');
