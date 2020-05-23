@@ -3,7 +3,7 @@ function ProcesarNombre (nombre){
         //return nombre.split(" ").pop();
         var aux = nombre.split(" ");
         for (let i = aux.length - 1; i >= 0 ; i--) {
-            if (aux[i].length < 3  || aux[i] === "nombre" || aux[i] === "llamo") {
+            if (/(^[A-Za-z]{1,2}$|nombre|llamo|hola|Hola)/.test(aux[i])) {
                 aux.splice(i, 1);
             }
         }
