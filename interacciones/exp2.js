@@ -10,19 +10,22 @@ module.exports = {
         var opta = ['salvar_mujeres', 'salvar_perro', 'ok', 'salvar_robot', 'salvar_anciano', 'ok', 'salvar_niño'];
         var optb = ['ok', 'salvar_robot', 'salvar_robot2', 'ok', 'salvar_jovenes', 'salvar_robot2', 'salvar_robot3'];
         var cases = [['hombre', 'mujer'], ['robot2', 'perro'], ['robot2', 'automovil'], ['planta', 'robot2'], ['joven', 'anciano'], ['robot2', 'ladron'], ['robot2', 'niño']];
-
+        var repetir = false;
         for (let i = 0; i < cases.length; i++) {
-            if (i == 0) {
-                var obj = await social.play('./interacciones/exp2files/primera.wav');
-            } else {
-                social.movement(random.getOne(['l', 'r']));
-                var obj = await social.play('./interacciones/exp2files/siguiente1.wav');
-                social.movement('c');
+            if (!repetir) {
+                if (i == 0) {
+                    var obj = await social.play('./interacciones/exp2files/primera.wav');
+                } else {
+                    social.movement(random.getOne(['l', 'r']));
+                    var obj = await social.play('./interacciones/exp2files/siguiente1.wav');
+                    social.movement('c');
+                }
             }
             await Case(social, evaId, cases[i]);
-            if (i == 0) {
+            if (i == 0 && !repetir) {
                 var obj = await social.play('./interacciones/exp2files/cual.wav');
             }
+            repetir = false;
             var respuestaParticipante = await social.sendAudioGoogleSpeechtoText2();
             social.stopListening();
             social.templog(usuarioId, respuestaParticipante);
@@ -37,6 +40,7 @@ module.exports = {
             if (respuestaParticipante.includes('repite') || respuestaParticipante.includes('repetir')) {
                 var obj = await social.play('./interacciones/exp2files/repetir.wav');
                 i--;
+                repetir = true;
                 continue;
             } else if (/(1|uno|primera)/.test(respuestaParticipante)) {
                 if (cases[i][0].includes('robot')) {
