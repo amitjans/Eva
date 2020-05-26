@@ -278,12 +278,10 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	social.savelogs('');
 });
 
-var emotion = true;
-
 index.get('/interaccion/qaa', async function (req, res) {
 	social.ledsanimstop();
 	if (req.query.id === 'ini') {
-		res.status(200).json({ preguntas: preguntas.getPreguntas(), emotional: emotion });
+		res.status(200).json({ preguntas: preguntas.getPreguntas(), emotional: social.getEmotional() });
 	} else if (req.query.id === 'p') {
 		res.status(200).json();
 		await social.play('./interacciones/exp3files/questions/' + req.query.q + '.wav');
@@ -309,9 +307,8 @@ index.get('/interaccion/qaa', async function (req, res) {
 		res.status(200).json();
 		social.ledsanim('escuchaT');
 	} else if (req.query.id === 'emotion') {
-		emotion = !emotion;
-		social.setEmotional(emotion);
-		res.status(200).json({ emotional: emotion });
+		social.setEmotional(!social.getEmotional());
+		res.status(200).json({ emotional: social.getEmotional() });
 	} else if (req.query.id === 'speak') {
 		res.status(200).json();
 		social.speak(req.query.speak);
