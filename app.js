@@ -4,10 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./server/routes/index');
-
 var logs = require('./log');
+const crypto = require('crypto');
+var fs = require('fs');
+
+var preguntas = require('./interacciones/exp3qaa');
+
+var Compare = require('./utils/Compare');
+var random = require('./utils/Random');
+var nodeutils = require('./utils/NodeUtils');
 
 var app = express();
 
@@ -67,8 +73,6 @@ app.use(function (err, req, res, next) {
 
 module.exports = app;
 
-var request;
-
 var io;
 var setIO = function (ioBase) {
 	console.log(io);
@@ -106,19 +110,21 @@ var enviarError = function (error, query) {
 
 module.exports.setIO = setIO;
 
-var fs = require('fs');
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
-var social = new SocialRobot(credentials.config, credentials.credentials);
-module.exports.social = social;
 
 var exp1 = require('./interacciones/exp1');
 var exp2 = require('./interacciones/exp2');
 var exp3 = require('./interacciones/exp3');
-var preguntas = require('./interacciones/exp3qaa');
-var random = require('./utils/Random');
+
 var gn = require('./interacciones/common/getname');
 var p = require('./interacciones/common/platica');
+const interaccion = require('./server/models/interaccion');
+const script = require('./server/models/script');
+
+
+var social = new SocialRobot(credentials.config, credentials.credentials);
+module.exports.social = social;
 
 index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	res.status(200).jsonp();
@@ -223,11 +229,6 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 	res.status(200).jsonp();
 });
 
-const interaccion = require('./server/models/interaccion');
-const script = require('./server/models/script');
-var convert = require('xml-js');
-var Compare = require('./utils/Compare');
-var nodeutils = require('./utils/NodeUtils');
 var respuesta = [];
 var nodes = [];
 var links = [];
@@ -358,7 +359,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 					}
 				}
 				sactual = s.shift();
-				await social.speak(sactual.campo1);
+				await social.speak({ key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
 			} else if (aux[0].type === 'led') {
 				let aux_t = nodeutils.NextNode(links, aux[0], nodes);
 				if (aux_t[0].type === 'speak' || aux_t[0].type === 'sound') {

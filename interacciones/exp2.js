@@ -37,7 +37,7 @@ module.exports = {
                 social.templog(usuarioId, respuestaParticipante);
             }
             
-            if (respuestaParticipante.includes('repite') || respuestaParticipante.includes('repetir')) {
+            if (/(repite|repetir)/.test(respuestaParticipante)) {
                 var obj = await social.play('./interacciones/exp2files/repetir.wav');
                 i--;
                 repetir = true;
