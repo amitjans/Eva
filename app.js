@@ -46,6 +46,9 @@ app.get('/audio', function (req, res) {
 app.get('/qaa', function (req, res) {
 	res.render('qaa');
 });
+app.get('/auto', function (req, res) {
+	res.render('auto');
+});
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
@@ -315,6 +318,54 @@ index.get('/interaccion/qaa', async function (req, res) {
 		social.speak(req.query.speak);
 	} else {
 		await social.play('./interacciones/exp3files/' + req.query.id + '.wav');
+		if (!!req.query.opt) {
+			social.ledsanim('escuchaT');
+		}
+		res.status(200).json();
+	}
+});
+
+var name = '';
+
+index.get('/interaccion/auto', async function (req, res) {
+	social.ledsanimstop();
+	if (req.query.id === 'c') {
+		res.status(200).json();
+		if (req.query.r === 'r') {
+			await social.play('./interacciones/exp2files/repetir.wav');
+		}
+		await exp2.TellCase(social, evaId, parseInt(req.query.c), req.query.r === 'r');
+		social.ledsanim('escuchaT');
+	} else if (req.query.id === 'a') {
+		res.status(200).json();
+		await exp2.Respuesta(social, usuarioId, req.query.c, req.query.opt);
+	} else if (req.query.id === 'p1') {
+		res.status(200).json();
+		await social.play('./interacciones/platica/1.wav');
+	} else if (req.query.id === 'p') {
+		res.status(200).json();
+		await p.inicial(social, evaId, usuarioId, false);
+		await social.play('./interacciones/exp2files/link.wav');
+		await social.play('./interacciones/exp2files/s0.wav');	
+	} else if (req.query.id === 'end') {
+		res.status(200).json();
+		var obj = await social.play('./interacciones/exp2files/interesante.wav');
+		await social.play('./interacciones/exp2files/cuestionario.wav');
+		await exp2.Despedida(social);
+		social.savelogs(name);
+	} else if (req.query.id === 'listen') {
+		res.status(200).json();
+		social.ledsanim('escuchaT');
+	} else if (req.query.id === 'emotion') {
+		social.setEmotional(!social.getEmotional());
+		res.status(200).json({ emotional: social.getEmotional() });
+	} else if (req.query.id === 'speak') {
+		res.status(200).json();
+		await social.speak('Mucho gusto en conocerte ' + req.query.speak);
+		name = req.query.speak;
+		social.templog(usuarioId, req.query.speak);
+	} else {
+		await social.play('./interacciones/exp' + (/(hola|gusto|bueno|ves|escuchas|empezar)/.test(req.query.id) ? 3 : 2) + 'files/' + req.query.id + '.wav');
 		if (!!req.query.opt) {
 			social.ledsanim('escuchaT');
 		}
