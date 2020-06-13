@@ -13,7 +13,7 @@ var preguntas = require('./interacciones/exp3qaa');
 
 var Compare = require('./utils/Compare');
 var random = require('./utils/Random');
-var nodeutils = require('./utils/NodeUtils');
+var nodeutils = require('./vpl/NodeUtils');
 
 var app = express();
 
@@ -124,6 +124,8 @@ var gn = require('./interacciones/common/getname');
 var p = require('./interacciones/common/platica');
 const interaccion = require('./server/models/interaccion');
 const script = require('./server/models/script');
+const vpl = require('./vpl/VPL_Node');
+const unify = require('./vpl/Unify_Node');
 
 
 var social = new SocialRobot(credentials.config, credentials.credentials);
@@ -237,6 +239,35 @@ var nodes = [];
 var links = [];
 var s = [];
 var sactual;
+var lemotion = [];
+
+function setRespuesta(value) {
+	respuesta.push(value);
+}
+function getRespuesta() {
+	return respuesta;
+}
+
+function setSactual(value) {
+	sactual = value;
+}
+function getSactual() {
+	return sactual;
+}
+
+function addlemotion(value) {
+	lemotion.push(value);
+}
+function getlemotion() {
+	return lemotion;
+}
+
+module.exports.setRespuesta = setRespuesta;
+module.exports.getRespuesta = getRespuesta;
+module.exports.setSactual = setSactual;
+module.exports.getSactual = getSactual;
+module.exports.addlemotion = addlemotion;
+module.exports.getlemotion = getlemotion;
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.findById(req.query.id);
@@ -248,7 +279,9 @@ index.get('/interaccion/unified', async function (req, res) {
 
 	let tempname = temp.nombre + '_expandida';
 
-	await unify();
+	let obj = await unify.unify(nodes, links);
+	nodes = obj.nodes;
+	links = obj.links;
 
 	const nuevointeraccion = new interaccion();
 	nuevointeraccion.nombre = tempname;
@@ -272,7 +305,9 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	links = json.link;
 	respuesta = [];
 
-	await unify();
+	let obj = await unify.unify(nodes, links);
+	nodes = obj.nodes;
+	links = obj.links;
 
 	var fnodes = nodeutils.FirstsNodes(links, nodes.slice());
 
@@ -377,6 +412,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 	let aux = [fnodes[ini]];
 	let n = true;
 	do {
+		console.log(aux);
 		if (aux.length == 1 || aux[0].type !== 'if') {
 			if (aux[0].type === 'for') {
 				for (let f = 0; f < aux[0].iteraciones; f++) {
@@ -410,27 +446,32 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 					}
 				}
 				sactual = s.shift();
-				await social.speak({ key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
-			} else if (aux[0].type === 'led') {
+				await vpl.ProcessNode(social, evaId, usuarioId, { key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
+			} else if (aux[0].type === 'led' && aux[0].anim !== 'stop') {
 				let aux_t = nodeutils.NextNode(links, aux[0], nodes);
-				if (aux_t[0].type === 'speak' || aux_t[0].type === 'sound') {
-					aux_t[0].anim = aux[0].anim;
-					aux[0] = aux_t[0];
+				if (!!aux_t[0]) {
+					if (aux_t[0].type === 'speak' || aux_t[0].type === 'sound') {
+						aux_t[0].anim = aux[0].anim;
+						aux[0] = aux_t[0];
+					}
 				}
-				await ProcessNode(aux[0]);
+				await vpl.ProcessNode(social, evaId, usuarioId, aux[0]);
 			} else {
-				await ProcessNode(Object.assign({}, aux[0]));
+				await vpl.ProcessNode(social, evaId, usuarioId, Object.assign({}, aux[0]));
 			}
 			aux = nodeutils.NextNode(links, aux[0], nodes);
 		} else if (aux.length > 1) {
-			aux.sort(function (a, b) { return a.text === b.text ? 0 : a.text < b.text ? 1 : -1; });
+			console.log(respuesta[respuesta.length - 1]);
 			for (let c = 0; c < aux.length; c++) {
-				if (aux[c].text === '%') {
-					if (Compare(sactual.campo2, respuesta[respuesta.length - 1]) > 1) {
+				if (aux[c].text.includes('%')) {
+					if (Compare((/^(%|%2)$/.test(aux[c].text) ? app.getSactual().campo2 : app.getSactual().campo1), respuesta[respuesta.length - 1]) >= aux[c].opt) {
 						aux = nodeutils.NextNode(links, aux[c], nodes);
 						break;
 					}
-				} else if (Compare((aux[c].text || ''), respuesta[respuesta.length - 1]) > 1) {
+				} else if (Compare((aux[c].text || ''), respuesta[respuesta.length - 1]) >= aux[c].opt) {
+					aux = nodeutils.NextNode(links, aux[c], nodes);
+					break;
+				} else if ((aux[c].text || '') === '') {
 					aux = nodeutils.NextNode(links, aux[c], nodes);
 					break;
 				}
@@ -438,92 +479,4 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 		}
 		n = aux.length > 0;
 	} while (n);
-}
-
-var lemotion = [];
-async function ProcessNode(element) {
-	if (element.type === 'voice') {
-		social.setVoice(element.voice);
-	} else if (element.type === 'emotion') {
-		console.log(element);
-		if (element.level == -1) {
-			if (lemotion.length == 0) {
-				element.level = 0;
-			} else if (element.key == lemotion[lemotion.length - 1].key) {
-				element.level = (lemotion[lemotion.length - 1].level + 1 > 2 ? 2 : lemotion[lemotion.length - 1].level + 1);
-			}
-			lemotion.push(element);
-		}
-		console.log(lemotion.length);
-		//console.log(element);
-		social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
-	} else if (element.type === 'speak') {
-		social.templog(evaId, element.text);
-		let t = element.text;
-		if (t.includes('$')) {
-			t = nodeutils.includeAnswers(t.split(' '), respuesta);
-			await social.speak(t, element.anim, !element.anim);
-		} else {
-			try {
-				if (!fs.existsSync('./temp/' + (social.getVoice() + '_' + element.key) + '.wav')) {
-					await social.rec(t, (social.getVoice() + '_' + element.key));
-				}
-				await social.play('./temp/' + (social.getVoice() + '_' + element.key) + '.wav', element.anim, !element.anim);
-			} catch (err) {
-				console.error(err)
-			}
-		}
-	} else if (element.type === 'listen') {
-		var r = await social.sendAudioGoogleSpeechtoText2();
-		social.stopListening();
-		respuesta.push(r);
-		social.templog(usuarioId, r);
-	} else if (element.type === 'wait') {
-		await social.sleep(element.time);
-	} else if (element.type === 'mov') {
-		social.movement(element.mov);
-	} else if (element.type === 'sound') {
-		if (element.wait) {
-			await social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
-		} else {
-			social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
-		}
-	} else if (element.type === 'led') {
-		if (element.anim === 'stop') {
-			social.ledsanimstop();
-		} else {
-			social.ledsanim(element.anim);
-		}
-	}
-}
-
-async function unify() {
-	for (let i = 0; i < nodes.length; i++) {
-		if (nodes[i].type === 'int') {
-			if (nodes[i].int.length > 1) {
-				let sub = await interaccion.findById(nodes[i].int);
-				let j = JSON.parse(sub.data);
-				let jn = j.node;
-				let jl = j.link;
-				let aux = nodeutils.FirstAndLast(jn.slice(), jl.slice());
-				for (let j = 0; j < links.length; j++) {
-					if (links[j].to === nodes[i].key) {
-						links[j].to = aux.ini[0].key;
-						for (let k = 1; k < aux.ini.length; k++) {
-							links.push({ from: links[j].from, to: aux.ini[k].key });
-						}
-					} else if (links[j].from === nodes[i].key) {
-						links[j].from = aux.end[0].key;
-						for (let l = 1; l < aux.end.length; l++) {
-							links.push({ from: aux.end[l].key, to: links[j].to });
-						}
-					}
-				}
-				nodes.splice(i, 1);
-				i = -1;
-				nodes = nodes.concat(jn);
-				links = links.concat(jl);
-			}
-		}
-	}
 }
