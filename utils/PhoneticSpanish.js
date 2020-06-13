@@ -1,5 +1,6 @@
 module.exports = function (word) {
 	var temp = word.toUpperCase();
+	temp = temp.replace(/[¿?!¡,\.]+/gi, "");
 	temp = temp.replace(/A/gi, "");
 	temp = temp.replace(/E/gi, "");
 	temp = temp.replace(/I/gi, "");

@@ -115,7 +115,7 @@
                   <tr ng-repeat="l in node">
                     <td>{{ l.name }}</td>
                     <td>{{ l.type }}</td>
-                    <td><span class="btn btn-default" ng-show="l.type !== 'listen'" ng-click="updatenode(l)"><i class="fa fa-edit fa-sm"></i></span></td>
+                    <td><span class="btn btn-default" ng-click="updatenode(l)"><i class="fa fa-edit fa-sm"></i></span></td>
                     </td>
                   </tr>
                 </tbody>
@@ -145,12 +145,10 @@
 
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="button" ng-show="icon" class="btn btn-primary btn-sm"
-                    ng-click="create()">Guardar</button>
-                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
-                    ng-click="updatesend()">Actualizar</button>
-                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
-                    ng-click="updatesendx()">Actualizar y Terminar</button>
+                  <button id="blobButton" class="btn btn-primary btn-sm">Descargar</button>
+                  <button type="button" ng-show="icon" class="btn btn-primary btn-sm" ng-click="create()">Guardar</button>
+                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm" ng-click="updatesend()">Actualizar</button>
+                  <button type="button" ng-show="!icon" class="btn btn-primary btn-sm" ng-click="updatesendx()">Actualizar y Terminar</button>
                   <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">Refrescar</button>
                 </div>
               </div>
@@ -170,7 +168,6 @@
                   <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(12)">Voz</button>
-                  {{ key }}
                 </div>
               </div>
             </div>
@@ -247,10 +244,21 @@
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="texto" placeholder="Texto a decir">
                 </div>
+                <p class="col-sm-offset-3 help-block">Utiliza '$' para incluir la &uacute;ltima respuesta, '$1' para incluir la primera y '$-1' para incluir la pen&uacute;ltima. 
+                  Utiliza '%' si tiene un nodo tipo 'Script' antes para incluir el 2do campo o '%1' para especificar el campo 1.</p>
               </div>
               <!-- Modal Hablar -->
 
               <!-- Modal Escuchar -->
+              <div class="form-group" ng-show="modal == 3">
+                <label class="col-sm-2 control-label">Obtener</label>
+                <div class="col-sm-10">
+                  <select name="listenopt" id="" ng-model="listenopt" class="form-control">
+                    <option value="">Todo</option>
+                    <option value="name">Nombre</option>
+                  </select>
+                </div>
+              </div>
               <!-- Modal Escuchar -->
 
               <!-- Modal Tiempo -->
@@ -278,6 +286,16 @@
                 <label class="col-sm-2 control-label">Condici&oacute;n</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="texto" placeholder="Condición">
+                </div>
+              </div>
+              <div class="form-group" ng-show="modal == 6">
+                <label class="col-sm-2 control-label">Comparaci&oacute;n</label>
+                <div class="col-sm-10">
+                  <select name="ifopt" id="" ng-model="ifopt" class="form-control">
+                    <option value="4">Exacta</option>
+                    <option value="3">Phon&eacute;tica</option>
+                    <option value="2">Incluye</option>
+                  </select>
                 </div>
               </div>
               <!-- Modal Condicion -->

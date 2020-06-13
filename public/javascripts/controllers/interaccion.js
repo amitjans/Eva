@@ -118,6 +118,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.common = function (identifier) {
     $scope.node = node;
     $scope.texto = '';
+    $scope.listenopt = '';
+    $scope.ifopt = '4';
     if (!!$scope.link) {
       link.push({ from: parseInt($scope.link), to: identifier });
     }
@@ -184,7 +186,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push({ key: Date.now(), name: "Hablar_" + id, type: "speak", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 3:
-        node.push({ key: Date.now(), name: "Escuchar_" + id, type: "listen", color: "lightblue", isGroup: false, group: $scope.group });
+        node.push({ key: Date.now(), name: "Escuchar_" + id, type: "listen", opt: $scope.listenopt, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 4:
         node.push({ key: Date.now(), name: "Esperar_" + id, type: "wait", color: "lightblue", time: $scope.time, isGroup: false, group: $scope.group });
@@ -193,7 +195,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push({ key: Date.now(), name: "Ciclo_" + id, type: "for", iteraciones: $scope.it, color: "lightblue", isGroup: true, group: $scope.group });
         break;
       case 6:
-        node.push({ key: Date.now(), name: "Condición_" + id, type: "if", text: $scope.texto, color: "lightblue", isGroup: false, group: $scope.group });
+        node.push({ key: Date.now(), name: "Condición_" + id, type: "if", text: $scope.texto, opt: parseInt($scope.ifopt), color: "lightblue", isGroup: false, group: $scope.group });
         break;
       case 7:
         node.push({ key: Date.now(), name: "Movimiento_" + id, type: "mov", mov: $scope.movement, color: "lightblue", isGroup: false, group: $scope.group });
@@ -308,6 +310,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.showmodal(2, false);
         break;
       case 'listen':
+        $scope.listenopt = l.opt;
         $scope.showmodal(3, false);
         break;
       case 'wait':
@@ -320,6 +323,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 'if':
         $scope.texto = l.text;
+        $scope.ifopt = '' + l.opt;
         $scope.showmodal(6, false);
         break;
       case 'mov':
@@ -359,5 +363,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.ccommon = false;
   $scope.voice = 'es-LA_SofiaV3Voice';
   $scope.key = 0;
+  $scope.ifopt = '4';
   $scope.node = [];
 }]);
