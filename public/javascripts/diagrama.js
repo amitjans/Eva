@@ -32,16 +32,37 @@ function init() {
         );
 
     // but use the default Link template, by not setting Diagram.linkTemplate
-    myDiagram.linkTemplate =
-        $(go.Link,
-            { toShortLength: 3, relinkableFrom: true, relinkableTo: true },  // allow the user to relink existing links
-            $(go.Shape,
-                { strokeWidth: 2 },
-                new go.Binding("stroke", "color")),
-            $(go.Shape,
-                { toArrow: "Standard", stroke: null },
-                new go.Binding("fill", "color"))
-        );
+    // myDiagram.linkTemplate =
+    //     $(go.Link,
+    //         { toShortLength: 3, relinkableFrom: true, relinkableTo: true },  // allow the user to relink existing links
+    //         $(go.Shape,
+    //             { strokeWidth: 2 },
+    //             new go.Binding("stroke", "color")),
+    //         $(go.Shape,
+    //             { toArrow: "Standard", stroke: null },
+    //             new go.Binding("fill", "color"))
+    //     );
+    // replace the default Link template in the linkTemplateMap
+      myDiagram.linkTemplate =
+      $(go.Link,  // the whole link panel
+        {
+            //curve: go.Link.Bezier, 
+            adjusting: go.Link.Stretch,
+            routing: go.Link.AvoidsNodes,
+            curve: go.Link.JumpOver,
+            //curve: go.Link.JumpGap, 
+            corner: 4,
+            resegmentable: true,
+            //routing: go.Link.Orthogonal,
+            relinkableFrom: true,
+            relinkableTo: true 
+        },
+        new go.Binding("curviness"),
+        $(go.Shape,  // the link shape
+          { stroke: "#000000", strokeWidth: 1 }),
+        $(go.Shape,  // the arrowhead
+          { toArrow: "standard", fill: "#000000", stroke: null, scale: 1.5 })
+      );
     //-------------------------------------------------------------------------------------------------------------------------------
     // Define the appearance and behavior for Groups:
     function groupInfo(adornment) {  // takes the tooltip or context menu, not a group node data object
