@@ -240,6 +240,7 @@ var links = [];
 var s = [];
 var sactual;
 var lemotion = [];
+var counter = {};
 
 function setRespuesta(value) {
 	respuesta.push(value);
@@ -258,8 +259,17 @@ function getSactual() {
 function addlemotion(value) {
 	lemotion.push(value);
 }
+
 function getlemotion() {
 	return lemotion;
+}
+
+function setCounter(value) {
+	counter = value;
+}
+
+function getCounter() {
+	return counter;
 }
 
 module.exports.setRespuesta = setRespuesta;
@@ -268,6 +278,8 @@ module.exports.setSactual = setSactual;
 module.exports.getSactual = getSactual;
 module.exports.addlemotion = addlemotion;
 module.exports.getlemotion = getlemotion;
+module.exports.setCounter = setCounter;
+module.exports.getCounter = getCounter;
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.findById(req.query.id);
