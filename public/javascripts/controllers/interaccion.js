@@ -170,6 +170,17 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case 12:
         $scope.ModalName = 'Voz';
         break;
+      case 13:
+        $scope.ModalName = 'Contador';
+        $scope.cnname = '';
+        $scope.counters = [];
+        let temp = node.filter(f => f.type === 'counter');
+        temp.forEach(element => {
+          if (!$scope.counters.includes(element.count)) {
+            $scope.counters.push(element.count);
+          }
+        });
+        break;
       default:
         break;
     }
@@ -214,6 +225,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 12:
         node.push({ key: Date.now(), name: "Voz_" + id, type: "voice", voice: $scope.voice, color: "lightblue", isGroup: false, group: $scope.group });
+        break;
+      case 13:
+        node.push({ key: Date.now(), name: "Contador_" + id, type: "counter", count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter, color: "lightblue", isGroup: false, group: $scope.group });
         break;
       default:
         break;
@@ -352,6 +366,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.voice = l.voice;
         $scope.showmodal(12, false);
         break;
+      case 'counter':
+        $scope.ops = l.ops;
+        $scope.vcounter = l.value;
+        $scope.showmodal(13, false);
+        $scope.cname = l.count;
+        break;
       default:
         break;
     }
@@ -364,5 +384,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.voice = 'es-LA_SofiaV3Voice';
   $scope.key = 0;
   $scope.ifopt = '4';
+  $scope.ops = "sum";
   $scope.node = [];
 }]);
