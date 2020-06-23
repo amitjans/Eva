@@ -10,11 +10,11 @@ module.exports = {
         if (element.type === 'voice') {
             social.setVoice(element.voice);
         } else if (element.type === 'emotion') {
-            ProcessEmotionNode(element)
+            ProcessEmotionNode(social, element)
         } else if (element.type === 'speak') {
             await ProcessSpeakNode(social, evaId, element);
         } else if (element.type === 'listen') {
-            await ProcessListenNode(social, element);
+            await ProcessListenNode(social, usuarioId, element);
         } else if (element.type === 'wait') {
             await social.sleep(element.time);
         } else if (element.type === 'mov') {
@@ -37,7 +37,7 @@ module.exports = {
     }
 };
 
-function ProcessEmotionNode(element) {
+function ProcessEmotionNode(social, element) {
     if (element.level == -1) {
         if (app.getlemotion().length == 0) {
             element.level = 0;
@@ -83,7 +83,7 @@ async function RecAndSpeak(social, evaId, element) {
 	}
 }
 
-async function ProcessListenNode() {
+async function ProcessListenNode(social, usuarioId, element) {
     var r = await social.sendAudioGoogleSpeechtoText2();
     social.stopListening();
     if (element.opt === 'name') {

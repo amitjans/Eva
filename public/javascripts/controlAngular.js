@@ -33,7 +33,7 @@ angular.module('evaApp', ['dndLists'])
 		});
 
 		//$scope.emociones = ['normal', 'pensar', 'triste', 'amor', 'sorpresa', 'feliz', 'miedo'];
-		$scope.emociones = ['normal', 'triste', 'triste1', 'triste2', 'ira', 'ira1', 'ira2', 'feliz', 'feliz1', 'feliz2'];
+		$scope.emociones = ['normal', 'triste', 'triste1', 'triste2', 'ira', 'ira1', 'ira2', 'feliz', 'feliz1', 'feliz2', 'salir'];
 		var iconoEmocion = ['meh-o', 'lightbulb-o', 'frown-o', 'heart-o', 'eye', 'smile-o', ''];
 		$scope.conversaciones = [
 			{
