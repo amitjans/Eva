@@ -39,15 +39,7 @@ module.exports = {
                 }
             }
         }
-        if (fnodes.length > 1) {
-            for (let j = 0; j < fnodes.length; j++) {
-                if (!fnodes[j].group) {
-                    fnodes.unshift(fnodes.splice(j, 1)[0]);
-                    break;
-                }
-            }
-        }
-        return fnodes;
+        return fnodes.sort(function(a, b){return !!a.group ? 1 : -1 });
     },
     FirstsOfGroup: function (fnodes, key) {
         for (let i = 0; i < fnodes.length; i++) {

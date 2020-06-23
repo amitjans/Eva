@@ -311,7 +311,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     $scope.type = l.type;
     $scope.color = l.color;
     $scope.isGroup = l.isGroup;
-    $scope.group = '' + l.group;
+    $scope.group = (l.group || '') + '';
     switch (l.type) {
       case 'emotion':
         $scope.emocion = l.emotion;
@@ -349,7 +349,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.showmodal(8, false);
         break;
       case 'script':
-        $scope.sc = l.sc;
+        $scope.thescript = l.sc;
         $scope.ccommon = l.random;
         $scope.showmodal(9, false);
         break;
@@ -385,5 +385,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.key = 0;
   $scope.ifopt = '4';
   $scope.ops = "sum";
+  $scope.level = '' + 0;
   $scope.node = [];
 }]);

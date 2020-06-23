@@ -156,18 +156,20 @@
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" ng-click="showmodal(1)">Emoci&oacute;n</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(12)">Voz</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(2)">Hablar</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(3)">Escuchar</button>
-                  <button type="button" class="btn btn-primary" ng-click="showmodal(4)">Esperar</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(1)">Emoci&oacute;n</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(7)">Movimiento</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
+                  <br>
+                  <br>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(5)">Ciclo</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(6)">Condici&oacute;n</button>
-                  <button type="button" class="btn btn-primary" ng-click="showmodal(7)">Movimiento</button>
+                  <button type="button" class="btn btn-primary" ng-click="showmodal(4)">Esperar</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(8)">Interacci&oacute;n</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
-                  <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
-                  <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
-                  <button type="button" class="btn btn-primary" ng-click="showmodal(12)">Voz</button>
                   <button type="button" class="btn btn-primary" ng-click="showmodal(13)">Contador</button>
                 </div>
               </div>
@@ -246,7 +248,7 @@
                   <input type="text" class="form-control input-sm" ng-model="texto" placeholder="Texto a decir">
                 </div>
                 <p class="col-sm-offset-3 help-block">Utiliza '$' para incluir la &uacute;ltima respuesta, '$1' para incluir la primera y '$-1' para incluir la pen&uacute;ltima. 
-                  Utiliza '%' si tiene un nodo tipo 'Script' antes para incluir el 2do campo o '%1' para especificar el campo 1.</p>
+                  Utiliza '%' si tiene un nodo tipo 'Script' antes para incluir el 2do campo o '%1' para especificar el campo 1. Si utiliza alg&uacute;n contador puede usar #contador para incluir el valor del mismo.</p>
               </div>
               <!-- Modal Hablar -->
 

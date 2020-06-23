@@ -230,6 +230,10 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 	if (req.query.e == 0) {
 		social.emotions('ini', 0);
 	}
+	//exit
+	if (req.query.e == 10) {
+		social.emotions('exit', 0);
+	}
 	console.log(req.query.e);
 	res.status(200).jsonp();
 });
