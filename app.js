@@ -241,7 +241,7 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 var respuesta = [];
 var nodes = [];
 var links = [];
-var s = [];
+var s = {};
 var sactual;
 var lemotion = [];
 var counter = {};
@@ -431,6 +431,13 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 		console.log(aux);
 		if (aux.length == 1 || aux[0].type !== 'if') {
 			if (aux[0].type === 'for') {
+				if (aux[0].iteraciones <= -1) {
+					let ss = nodes.filter(i => i.group === aux[0].key && i.type === 'script')[0];
+					console.log('before => ' + aux[0].name);
+					console.log('ss => ' + ss.name);
+					await LoadScriptData(ss);
+					aux[0].iteraciones = s[ss.key + ''].length;
+				}
 				for (let f = 0; f < aux[0].iteraciones; f++) {
 					await ProcessFlow(nodes, links, fnodes, nodeutils.FirstsOfGroup(fnodes, aux[0].key));
 				}
@@ -455,13 +462,8 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 						break;
 				}
 			} else if (aux[0].type === 'script') {
-				if (s.length == 0) {
-					s = (await script.findById(aux[0].sc).populate('data')).data;
-					if (aux[0].random) {
-						s = random.randomize(s);
-					}
-				}
-				sactual = s.shift();
+				await LoadScriptData(aux);
+				sactual = s[aux[0].key + ''].shift();
 				await vpl.ProcessNode(social, evaId, usuarioId, { key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
 			} else if (aux[0].type === 'led' && aux[0].anim !== 'stop') {
 				let aux_t = nodeutils.NextNode(links, aux[0], nodes);
@@ -495,4 +497,17 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 		}
 		n = aux.length > 0;
 	} while (n);
+}
+
+async function LoadScriptData(item) {
+	try {
+		if (!s[item.key + '']) {
+			s[item.key + ''] = (await script.findById(item.sc).populate('data')).data;
+			if (item.random) {
+				s[item.key + ''] = random.randomize(s[item.key + '']);
+			}
+		}	
+	} catch (error) {
+		console.error();
+	}
 }

@@ -1,6 +1,7 @@
 var fs = require('fs');
 const crypto = require('crypto');
 
+var random = require('../utils/Random');
 var gn = require('../interacciones/common/getname');
 var nodeutils = require('./NodeUtils');
 var app = require('../app');
@@ -52,6 +53,12 @@ function ProcessEmotionNode(social, element) {
 async function ProcessSpeakNode(social, evaId, element) {
     social.templog(evaId, element.text);
     let t = element.text;
+    if (t.includes('/')) {
+        t = random.getOne(t.split('/'));
+        element.key = crypto.createHash('md5').update(t).digest("hex");
+        element.text = t;
+    }
+
     if (t.includes('$')) {
         t = nodeutils.includeAnswers(t.split(' '), app.getRespuesta());
         await social.speak(t, element.anim, !element.anim);
