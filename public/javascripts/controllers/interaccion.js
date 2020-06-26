@@ -26,6 +26,21 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     });
   }
 
+  $scope.filters = function () {
+    $http.get('/api/filters').then(function successCallback(response) {
+      $scope.filterslist = response.data;
+    }, function errorCallback(response) {
+    });
+  }
+
+  $scope.iniciarInteracciong = function (id) {
+    $http.get('interaccion/iniciarInteracciong?id=' + id)
+      .then(function (res) {
+      }, function (error) {
+        console.log(error);
+      });
+  };
+
   $scope.create = function () {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
     $http.post('/api/interaccion', json).then(function successCallback(response) {
@@ -380,6 +395,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.list();
   $scope.slist();
   $scope.soundlist();
+  $scope.filters();
   $scope.ccommon = false;
   $scope.voice = 'es-LA_SofiaV3Voice';
   $scope.key = 0;

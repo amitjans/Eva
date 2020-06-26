@@ -10,6 +10,11 @@ module.exports = {
                     let sub = await interaccion.findById(nodes[i].int);
                     let j = JSON.parse(sub.data);
                     let jn = j.node;
+                    if (!!nodes[i].group) {
+                        for (let k = 0; k < jn.length; k++) {
+                            jn[k].group = nodes[i].group;
+                        }
+                    }
                     let jl = j.link;
                     let aux = nodeutils.FirstAndLast(jn.slice(), jl.slice());
                     for (let j = 0; j < links.length; j++) {
