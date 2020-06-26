@@ -2,7 +2,7 @@ var fs = require('fs');
 const crypto = require('crypto');
 
 var random = require('../utils/Random');
-var gn = require('../interacciones/common/getname');
+var lf = require('./ListeningFilters');
 var nodeutils = require('./NodeUtils');
 var app = require('../app');
 
@@ -93,8 +93,8 @@ async function RecAndSpeak(social, evaId, element) {
 async function ProcessListenNode(social, usuarioId, element) {
     var r = await social.sendAudioGoogleSpeechtoText2();
     social.stopListening();
-    if (element.opt === 'name') {
-        r = gn.ProcesarNombre(r);
+    if (element.opt !== '') {
+        r = lf[element.opt](r)[0];
     }
     app.setRespuesta(r);
     social.templog(usuarioId, r);

@@ -53,6 +53,7 @@ app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
 app.use('/api/audio', require('./server/routes/audio.routes.js'));
+app.use('/api/filters', require('./server/routes/listeningfilters.routes.js'));
 
 const { mongoose } = require('./server/database');
 
@@ -433,8 +434,6 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 			if (aux[0].type === 'for') {
 				if (aux[0].iteraciones <= -1) {
 					let ss = nodes.filter(i => i.group === aux[0].key && i.type === 'script')[0];
-					console.log('before => ' + aux[0].name);
-					console.log('ss => ' + ss.name);
 					await LoadScriptData(ss);
 					aux[0].iteraciones = s[ss.key + ''].length;
 				}
@@ -462,7 +461,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 						break;
 				}
 			} else if (aux[0].type === 'script') {
-				await LoadScriptData(aux);
+				await LoadScriptData(aux[0]);
 				sactual = s[aux[0].key + ''].shift();
 				await vpl.ProcessNode(social, evaId, usuarioId, { key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
 			} else if (aux[0].type === 'led' && aux[0].anim !== 'stop') {
