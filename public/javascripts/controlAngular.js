@@ -1,5 +1,4 @@
-angular.module('evaApp', ['dndLists'])
-	.controller('ControlEvaController', function ($scope, $http, $sce) {
+eva.controller('ControlEvaController', function ($scope, $http, $sce) {
 		//var controlList = this;
 		$scope.listen = true;
 		$scope.interacciones = [];

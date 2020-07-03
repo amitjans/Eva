@@ -1,4 +1,3 @@
-var eva = angular.module('evaApp', []);
 eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.listado = [];
   $scope.accion = 'Agregar';
@@ -403,4 +402,5 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.ops = "sum";
   $scope.level = '' + 0;
   $scope.node = [];
+  init();
 }]);

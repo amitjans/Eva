@@ -159,5 +159,3 @@ function myCallback(blob) {
 function reload() {
     myDiagram.model = new go.GraphLinksModel(node, link);
 }
-
-init();

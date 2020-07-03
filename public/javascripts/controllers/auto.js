@@ -1,5 +1,4 @@
-var eva = angular.module('evaApp', []);
-eva.controller('qaa', ['$scope', '$http', function ($scope, $http) {
+eva.controller('auto', ['$scope', '$http', function ($scope, $http) {
   $scope.listado = [];
   $scope.pregunta;
   var i = 0;

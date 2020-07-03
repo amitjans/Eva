@@ -1,0 +1,153 @@
+<div class="container" ng-controller="ControlEvaController as controlList">
+  <div class="row">
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-repeat="error in errores">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+      <strong>Cuidado!</strong> {{error.error}} <strong>{{error.query}}</strong>.
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a role="button" class="btn btn-info btn-lg col-md-1 col-md-offset-11 col-xs-4 col-xs-offset-8"
+        data-toggle="collapse" data-target="#panelLogs" aria-expanded="false" aria-controls="panelLogs"
+        ng-click="mostrarLog=!mostrarLog">Logs&nbsp;<i ng-show="!mostrarLog" class="fa fa-chevron-circle-down fa-lg"
+          aria-hidden="true"></i><i ng-show="mostrarLog" class="fa fa-chevron-circle-up fa-lg"
+          aria-hidden="true"></i></a>
+      <hr />
+    </div>
+  </div>
+  <div class="row">
+    <div id="panelLogs" class="col-md-12 collapse">
+      <br />
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Interacciones</h3>
+          </div>
+          <div class="panel-body" id="containerLogs">
+            <div class="{{interaccion.class}}" ng-repeat="(index, interaccion) in interacciones">
+              <strong>
+                {{interaccion.fecha | date:"dd/MM @ h:mm:ss a"}} {{interaccion.autor}}:
+              </strong>
+              <em ng-bind-html="renderHtml(interaccion.mensaje)">
+
+              </em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;Control Script</h2>
+      <h3>{{textoScript}}</h3>
+    </div>
+    <div class="col-md-6">
+      <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
+      <hr />
+      <div class="row">
+        <div class="col-md-4">
+          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteraccion1()">
+            <i class="fa fa-comments"></i>&nbsp;QaA</button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="iniciarInteraccion2()">
+            <i class="fa fa-car"></i>&nbsp; Aut&oacute;nomo</button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-lg btn-info btn-block" type="button" ng-click="iniciarInteraccion3()">
+            <i class="fa fa-comments"></i>&nbsp;Interacción 3</button>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="col-md-5 col-md-offset-1">
+          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteraccion4()">
+            <i class="fa fa-credit-card"></i>&nbsp;Ultimatum</button>
+        </div>
+        <div class="col-md-5">
+          <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="iniciarInteraccion5()">
+            <i class="fa fa-credit-card"></i>&nbsp;Ultimatum :)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h2><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>&nbsp;Emociones</h2>
+      <hr />
+      <div class="col-xs-4 col-md-3" ng-repeat="(key, emocion) in emociones">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{emocion}}</h3>
+          </div>
+          <div class="panel-body">
+            <button class="btn btn-default btn-lg"><img src="/images/{{emocion}}.png" class="img-responsive"
+                ng-click="enviarEmocion(key)"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
+      <hr />
+      <div class="row">
+        <div class="col-md-4" ng-repeat="item in interactions">
+          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteracciong(item._id)">
+            <i class="fa fa-comments"></i>&nbsp;{{ item.nombre }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2><i class="fa fa-quote-left fa-lg" aria-hidden="true"></i>&nbsp;Frases</h2>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Personalizada</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Frase personalizada!" ng-model="mensaje"
+                      ng-keydown="enviarMensaje2($event)">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" ng-click="enviarMensaje()">Enviar&nbsp;<i
+                          class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
+                    </span>
+                  </div><!-- /input-group -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>&nbsp;Conversaciones</h2>
+      <hr />
+      <div class="col-xs-4 col-md-3" ng-repeat="(key, conversacion) in conversaciones">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{conversacion.nombre}}</h3>
+          </div>
+          <div class="panel-body">
+            <button id="btnSaludo" type="button" class="btn btn-default btn-lg btn-block"><img
+                src="/images/{{conversacion.nombre}}.png" class="img-responsive"
+                ng-click="enviarConversacion(conversacion)"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

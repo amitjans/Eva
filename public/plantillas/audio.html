@@ -1,0 +1,43 @@
+<div class="container" ng-controller="audio">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bgm-bluegray">
+                    <h2>Listado de Audios <small></small></h2>
+                </div>
+                <div class="card-body table-responsive" style="overflow-y:scroll; height: 600px">
+                    <table class="table" id="data-table-basic">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="l in listado">
+                                <td>{{ l.nombre }}</td>
+                                <td><span class="btn btn-default" ng-click="details(l.nombre)"><i
+                                            class="fa fa-play fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="delete(l.nombre)"><i
+                                            class="fa fa-trash fa-sm"></i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bgm-bluegray">
+                    <h2>Agregar Audio <small></small></h2>
+                </div>
+                <div class="card-body">
+                    <br />
+                    <form action="/api/audio" class="dropzone">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
