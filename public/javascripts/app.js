@@ -4,27 +4,35 @@ eva.config(['$locationProvider', '$routeProvider',
         $locationProvider.hashPrefix('!');
         $routeProvider.
         when('/controlAngular', {
-            templateUrl: '/plantillas/controlAngular.html'
+            templateUrl: '/plantillas/controlAngular.html',
+            activetab: "controlAngular"
         }).
-        
         when('/interaccion', {
-            templateUrl: '/plantillas/interaccion.html'
+            templateUrl: '/plantillas/interaccion.html',
+            activetab: "interaccion"
         }).
         when('/audio', {
-            templateUrl: '/plantillas/audio.html'
+            templateUrl: '/plantillas/audio.html',
+            activetab: "audio"
         }).
         when('/script', {
-            templateUrl: '/plantillas/script.html'
+            templateUrl: '/plantillas/script.html',
+            activetab: "script"
         }).
         when('/scriptdata', {
-            templateUrl: '/plantillas/scriptdata.html'
+            templateUrl: '/plantillas/scriptdata.html',
+            activetab: "script"
         }).
         when('/qaa', {
-            templateUrl: '/plantillas/qaa.html'
+            templateUrl: '/plantillas/qaa.html',
+            activetab: "manual"
         }).
         when('/auto', {
-            templateUrl: '/plantillas/auto.html'
-        })/*.
-        otherwise('/controlAngular');*/
+            templateUrl: '/plantillas/auto.html',
+            activetab: "manual"
+        }).
+        otherwise('/controlAngular');
     }
-]);
+]).run(function ($rootScope, $route) {
+    $rootScope.$route = $route;
+});
