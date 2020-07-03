@@ -10,21 +10,15 @@ var _ = require('underscore');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/cara', function(req, res, next) {
-  res.render('cara', { title: 'Cara de Eva' });
-});
-router.get('/control', function(req, res, next) {
-  res.render('control', { title: 'Control de Eva' });
-});
-
-router.get('/controlAngular', function(req, res, next) {
-  res.render('controlAngular', { title: 'Control de Eva' });
-});
-
-router.get('/video', function(req, res, next) {
-  res.render('video', { title: 'Videos de Eva' });
-});
-
+// router.get('/cara', function(req, res, next) {
+//   res.render('cara', { title: 'Cara de Eva' });
+// });
+// router.get('/control', function(req, res, next) {
+//   res.render('control', { title: 'Control de Eva' });
+// });
+// router.get('/video', function(req, res, next) {
+//   res.render('video', { title: 'Videos de Eva' });
+// });
 var YouTube = require('youtube-node');
 var youTube = new YouTube();
 youTube.setKey('AIzaSyDffvIgtg347SsSSsefgwkSZfv593asdWw');

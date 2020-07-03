@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+    <title>Eva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/dropzone.min.css">
+    <style>
+        .ui-loader {
+          display: none;
+        }
+    
+        .right {
+          right: 40%;
+        }
+      </style>
+</head>
+
+<body ng-app="evaApp">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Control de Eva</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/#!/controlAngular">Inicio</a></li>
+                    <li class=""><a href="/#!/interaccion">Interacción</a></li>
+                    <li class="dropdown">
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" target="_blank">
+                          Script
+                          <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="drop2">
+                          <li><a href="/#!/script">Scripts</a></li>
+                          <li><a href="/#!/scriptdata">Datos</a></li>
+                          <!-- <li role="separator" class="divider"></li>
+                          <li><a href="#">Separated link</a></li> -->
+                        </ul>
+                      </li>
+                    <li class=""><a href="/#!/audio">Audios</a></li>
+                    <li class="dropdown">
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" target="_blank">
+                            I. Manual
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="drop2">
+                            <li><a href="/#!/qaa">QaA</a></li>
+                            <li><a href="/#!/auto">Automovil Aut&oacute;nomo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <section id="content" ng-view>
+      
+    </section>
+
+    <div class="container">
+        <footer>
+            <p>&copy; 2020 CICESE</p>
+        </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src="/javascripts/app.js"></script>
+    <script type="text/javascript" src="/javascripts/controlAngular.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/audio.js"></script>
+    <script type="text/javascript" src="/javascripts/dropzone.min.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/script.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/scriptdata.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/auto.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/qaa.js"></script>
+    <script type="text/javascript" src="/javascripts/go.js"></script>
+    <script type="text/javascript" src="/javascripts/diagrama-min.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/interaccion.js"></script>
+</body>
+
 </html>

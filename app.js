@@ -31,24 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', require('./server/routes/users'));
-app.get('/interaccion', function (req, res) {
-	res.render('interaccion');
-});
-app.get('/script', function (req, res) {
-	res.render('script');
-});
-app.get('/scriptdata', function (req, res) {
-	res.render('scriptdata');
-});
-app.get('/audio', function (req, res) {
-	res.render('audio');
-});
-app.get('/qaa', function (req, res) {
-	res.render('qaa');
-});
-app.get('/auto', function (req, res) {
-	res.render('auto');
-});
+
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
@@ -293,6 +276,7 @@ index.get('/interaccion/unified', async function (req, res) {
 	nodes = json.node;
 	links = json.link;
 	respuesta = [];
+	counter = {};
 
 	let tempname = temp.nombre + '_expandida';
 

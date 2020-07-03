@@ -1,4 +1,3 @@
-var eva = angular.module('evaApp', []);
 eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
     $scope.listado = [];
     $scope.icon = true;

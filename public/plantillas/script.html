@@ -1,0 +1,66 @@
+<div class="container" ng-controller="script">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bgm-bluegray">
+                    <h2>Listado de Scripts <small>
+                            <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
+                                data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
+                        </small>
+                    </h2>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table" id="data-table-basic">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="l in listado">
+                                <td>{{ l.nombre }}</td>
+                                <td>{{ l.data.length }}</td>
+                                <td><span class="btn btn-default" ng-click="update(l)"><i
+                                            class="fa fa-edit fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i
+                                            class="fa fa-trash fa-sm"></i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Emocion -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ accion }} Script</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nombre</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">Salvar</button>
+                    <button type="button" ng-show="!icon" ng-click="updatesend()"
+                        class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Emocion -->
+</div>

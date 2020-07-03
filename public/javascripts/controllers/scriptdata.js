@@ -1,4 +1,3 @@
-var eva = angular.module('evaApp', []);
 eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     $scope.listado = [];
     $scope.accion = 'Agregar';
