@@ -275,8 +275,6 @@ index.get('/interaccion/unified', async function (req, res) {
 
 	nodes = json.node;
 	links = json.link;
-	respuesta = [];
-	counter = {};
 
 	let tempname = temp.nombre + '_expandida';
 
@@ -305,6 +303,7 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	nodes = json.node;
 	links = json.link;
 	respuesta = [];
+	counter = {};
 
 	let obj = await unify.unify(nodes, links);
 	nodes = obj.nodes;
@@ -464,7 +463,30 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 		} else if (aux.length > 1) {
 			console.log(respuesta[respuesta.length - 1]);
 			for (let c = 0; c < aux.length; c++) {
-				if (aux[c].text.includes('%')) {
+				if (aux[c].text.includes('#')) {
+					let param = aux[c].text.split(' ');
+					let tempc = '';
+					let tempv = 0;
+					let tempo = '';
+					for (let i = 0; i < param.length; i++) {
+						if (param[i].includes('#')) {
+							tempc = param[i].substring(1);
+						} else if (/^[\d]+$/.test(param[i])) {
+							tempv = parseInt(param[i]);
+						} else {
+							tempo = param[i];
+						}
+					}
+					console.log(aux[c].text);
+					console.log(tempo);
+					console.log(tempc);
+					console.log(tempv);
+					console.log(counter[tempc]);
+					if ((!!tempo || tempo === '==') && counter[tempc] == tempv) {
+						aux = nodeutils.NextNode(links, aux[c], nodes);
+						break;
+					}
+				} else if (aux[c].text.includes('%')) {
 					if (Compare((/^(%|%2)$/.test(aux[c].text) ? app.getSactual().campo2 : app.getSactual().campo1), respuesta[respuesta.length - 1]) >= aux[c].opt) {
 						aux = nodeutils.NextNode(links, aux[c], nodes);
 						break;

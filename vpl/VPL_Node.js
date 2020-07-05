@@ -110,6 +110,8 @@ function ProcessCounterNode(element) {
         temp[element.count] = (temp[element.count] || 0) * parseInt(element.value);
     } else if (element.ops === 'div') {
         temp[element.count] = (temp[element.count] || 0) / parseInt(element.value);
+    } else if (element.ops === 'assign'){
+        temp[element.count] = parseInt(element.value);
     }
     app.setCounter(temp);
 }
