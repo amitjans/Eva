@@ -9,11 +9,68 @@ function init() {
     myDiagram = $(go.Diagram, "myDiagramDiv",  // create a Diagram for the DIV HTML element
         {
             "undoManager.isEnabled": true,
+            mouseDrop: function (e) { finishDrop(e, null); },
             //layout: $(go.TreeLayout)
             //layout: $(go.LayeredDigraphLayout)
             layout: $(go.TreeLayout, { angle: 90, sorting: go.TreeLayout.SortingAscending })
         });
 
+    function nodeInfo(d) {  // Tooltip info for a node data object
+        var str = "";
+        switch (d.type) {
+            case 'emotion':
+                str = 'Emoción: ' + d.emotion;
+                break;
+            case 'speak':
+                let t = d.text;
+                if (t.length > 30) {
+                    let until = Math.floor(t.length / 30);
+                    let temp = Array.from(t);
+                    for (let i = 0; i < until; i++) {
+                        temp[t.indexOf(" ", ((i + 1) * 30))] = '\n';
+                    }
+                    t = temp.join('');
+                }
+                str = 'Texto: ' + t;
+                break;
+            case 'listen':
+                str = 'Filtro: ' + d.opt;
+                break;
+            case 'wait':
+                str = 'Espera: ' + d.time + ' milisegundos';
+                break;
+            case 'for':
+                str = 'Ciclo: ' + d.iteraciones + ' iteraciones';
+                break;
+            case 'if':
+                str = 'Condición: ' + d.text;
+                break;
+            case 'mov':
+                str = 'Movimiento: ' + d.mov;
+                break;
+            case 'int':
+                str = 'Interacción';
+                break;
+            case 'script':
+                str = 'Script';
+                break;
+            case 'sound':
+                str = 'Sonido: ' + d.src + '\nEsperar: ' + d.wait;
+                break;
+            case 'led':
+                str = 'Animación: ' + d.anim;
+                break;
+            case 'voice':
+                str = 'Voz: ' + d.voice;
+                break;
+            case 'counter':
+                str = 'Contador: ' + d.count + '\nValor: ' + d.value;
+                break;
+            default:
+                break;
+        }
+        return str;
+    }
     // define a simple Node template
     myDiagram.nodeTemplate =
         $(go.Node, "Auto",  // the Shape will go around the TextBlock
@@ -28,7 +85,14 @@ function init() {
             $(go.TextBlock,
                 { margin: 8, font: "bold 14px sans-serif", stroke: '#333' }, // Specify a margin to add some room around the text
                 // TextBlock.text is bound to Node.data.key
-                new go.Binding("text", "name"))
+                new go.Binding("text", "name")),
+            { // this tooltip Adornment is shared by all nodes
+                toolTip:
+                    $("ToolTip",
+                        $(go.TextBlock, { margin: 4 },  // the tooltip shows the result of calling nodeInfo(data)
+                            new go.Binding("text", "", nodeInfo))
+                    )
+            }
         );
 
     // but use the default Link template, by not setting Diagram.linkTemplate
@@ -43,26 +107,26 @@ function init() {
     //             new go.Binding("fill", "color"))
     //     );
     // replace the default Link template in the linkTemplateMap
-      myDiagram.linkTemplate =
-      $(go.Link,  // the whole link panel
-        {
-            //curve: go.Link.Bezier, 
-            adjusting: go.Link.Stretch,
-            routing: go.Link.AvoidsNodes,
-            curve: go.Link.JumpOver,
-            //curve: go.Link.JumpGap, 
-            corner: 4,
-            resegmentable: true,
-            //routing: go.Link.Orthogonal,
-            relinkableFrom: true,
-            relinkableTo: true 
-        },
-        new go.Binding("curviness"),
-        $(go.Shape,  // the link shape
-          { stroke: "#000000", strokeWidth: 1 }),
-        $(go.Shape,  // the arrowhead
-          { toArrow: "standard", fill: "#000000", stroke: null, scale: 1.5 })
-      );
+    myDiagram.linkTemplate =
+        $(go.Link,  // the whole link panel
+            {
+                //curve: go.Link.Bezier, 
+                adjusting: go.Link.Stretch,
+                routing: go.Link.AvoidsNodes,
+                curve: go.Link.JumpOver,
+                //curve: go.Link.JumpGap, 
+                corner: 4,
+                resegmentable: true,
+                //routing: go.Link.Orthogonal,
+                relinkableFrom: true,
+                relinkableTo: true
+            },
+            new go.Binding("curviness"),
+            $(go.Shape,  // the link shape
+                { stroke: "#000000", strokeWidth: 1 }),
+            $(go.Shape,  // the arrowhead
+                { toArrow: "standard", fill: "#000000", stroke: null, scale: 1.5 })
+        );
     //-------------------------------------------------------------------------------------------------------------------------------
     // Define the appearance and behavior for Groups:
     function groupInfo(adornment) {  // takes the tooltip or context menu, not a group node data object
@@ -74,13 +138,23 @@ function init() {
         });
         return "Ciclo: " + g.data.name + "\n" + mems + " acciones y " + links + " enlaces";
     }
+    function finishDrop(e, grp) {
+        var ok = (grp !== null
+            ? grp.addMembers(grp.diagram.selection, true)
+            : e.diagram.commandHandler.addTopLevelParts(e.diagram.selection, true));
+        if (!ok) e.diagram.currentTool.doCancel();
+    }
     // Groups consist of a title in the color given by the group node data
     // above a translucent gray rectangle surrounding the member parts
     myDiagram.groupTemplate =
-        $(go.Group, "Vertical",
+        $(go.Group, "Auto",
             {
-                selectionObjectName: "PANEL",  // selection handle goes around shape, not label
-                ungroupable: true,  // enable Ctrl-Shift-G to ungroup a selected Group
+                computesBoundsAfterDrag: true,
+                // when the selection is dropped into a Group, add the selected Parts into that Group;
+                // if it fails, cancel the tool, rolling back any changes
+                mouseDrop: finishDrop,
+                handlesDragDropForMembers: true,  // don't need to define handlers on member Nodes and Links
+                // Groups containing Groups lay out their members horizontally
                 layout: $(go.TreeLayout, { angle: 90, sorting: go.TreeLayout.SortingAscending })
             },
             $(go.TextBlock,
@@ -140,21 +214,21 @@ function myCallback(blob) {
 
     // IE 11
     if (window.navigator.msSaveBlob !== undefined) {
-      window.navigator.msSaveBlob(blob, filename);
-      return;
+        window.navigator.msSaveBlob(blob, filename);
+        return;
     }
 
     document.body.appendChild(a);
-    requestAnimationFrame(function() {
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+    requestAnimationFrame(function () {
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
     });
-  }
+}
 
-  function makeBlob() {
+function makeBlob() {
     var blob = myDiagram.makeImageData({ scale: 1, background: "white", returnType: "blob", callback: myCallback });
-  }
+}
 
 function reload() {
     myDiagram.model = new go.GraphLinksModel(node, link);
