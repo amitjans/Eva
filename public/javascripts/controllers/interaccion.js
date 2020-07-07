@@ -99,15 +99,15 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.add = function () {
-      $scope.updateid = '';
-      $scope.accion = 'Agregar';
-      $scope.icon = true;
-      $scope.reset();
-      $scope.list();
-      id = 0;
-      $scope.node = [];
-      $scope.key = 0;
-      $('#inicio').click();
+    $scope.updateid = '';
+    $scope.accion = 'Agregar';
+    $scope.icon = true;
+    $scope.reset();
+    $scope.list();
+    id = 0;
+    $scope.node = [];
+    $scope.key = 0;
+    $('#inicio').click();
   }
 
   $scope.unified = function (id) {
@@ -247,16 +247,16 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
     }
     if ($scope.key == 0) {
-      $scope.common(node[node.length - 1].key);      
+      $scope.common(node[node.length - 1].key);
     } else {
       for (let i = 0; i < node.length; i++) {
         if (node[i].key === $scope.key) {
           node[node.length - 1].key = node[i].key;
           node[node.length - 1].name = node[i].name;
-          node.splice(i,1);
+          node.splice(i, 1);
           $scope.key = 0;
           break;
-        }        
+        }
       }
       if (node[node.length - 1].type == 'speak') {
         $http.delete('/api/interaccion/rec/' + node[node.length - 1].key).then(function successCallback(response) {
@@ -270,24 +270,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.setemocion = function () {
-    var color = "lightgray";
-    switch ($scope.emocion) {
-      case 'joy':
-        color = "lightyellow";
-        break;
-      case 'sad':
-        color = "lightblue";
-        break;
-      case 'surprised':
-        color = 'lightgreen';
-        break;
-      case 'anger':
-        color = "red";
-        break;
-      default:
-        break;
-    }
-    node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: parseInt($scope.level), speed: $scope.velocidad, color: color, isGroup: false, group: $scope.group });
+    var color = { joy: "lightyellow", sad: "lightblue", surprised: "lightgreen", anger: "red", ini: "lightgray" };
+    node.push({ key: Date.now(), name: "Emoción_" + id, type: "emotion", emotion: $scope.emocion, level: parseInt($scope.level), speed: $scope.velocidad, color: color[$scope.emocion], isGroup: false, group: $scope.group });
   }
 
   $scope.setint = function () {
@@ -319,7 +303,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     node.push({ key: Date.now(), name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
   }
 
-  $scope.updatenode = function (l){
+  $scope.updatenode = function (l) {
     $scope.key = l.key;
     $scope.name = l.name;
     $scope.type = l.type;
@@ -389,6 +373,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       default:
         break;
     }
+  }
+
+  $scope.autoif = function () {
+    $scope.ifopt = (/[=<>!]+/.test($scope.texto) ? '5' : $scope.ifopt);
   }
 
   $scope.list();
