@@ -110,6 +110,7 @@
                 <button type="button" class="btn btn-primary" ng-click="showmodal(8)">Interacci&oacute;n</button>
                 <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
                 <button type="button" class="btn btn-primary" ng-click="showmodal(13)">Contador</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal(14)">Api Rest</button>
               </div>
             </div>
           </div>
@@ -382,6 +383,36 @@
                 </label>
               </div>
               <!-- Modal Counter -->
+
+              <!-- Modal Api -->
+              <div class="form-group" ng-show="modal == 14">
+                <label class="col-sm-2 control-label">Versi&oacute;n</label>
+                <label class="radio-inline col-sm-offset-1">
+                  <input type="radio" name="version" id="inlineRadio4" ng-model="version" value="http"> Http
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="version" id="inlineRadio5" ng-model="version" value="https"> Https
+                </label>
+              </div>
+              <div class="form-group" ng-show="modal == 14">
+                <label class="col-sm-2 control-label">Servidor</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control input-sm" ng-model="host" ng-change="autoversion()" placeholder="Host">
+                </div>
+              </div>
+              <div class="form-group" ng-show="modal == 14">
+                <label class="col-sm-2 control-label">Consulta</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control input-sm" ng-model="path" placeholder="?item=value&...">
+                </div>
+              </div>
+              <div class="form-group" ng-show="modal == 14">
+                <label class="col-sm-2 control-label">Puerto</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control input-sm" ng-model="port" placeholder="Puerto">
+                </div>
+              </div>
+              <!-- Modal Api -->
 
               <!-- Modal Common -->
               <div class="form-group" ng-show="modal == 10 || modal == 9">
