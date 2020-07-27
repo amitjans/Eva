@@ -112,7 +112,6 @@ const vpl = require('./vpl/VPL_Node');
 const unify = require('./vpl/Unify_Node');
 const ifnode = require('./vpl/If_Node');
 
-
 var social = new SocialRobot(credentials.config, credentials.credentials);
 module.exports.social = social;
 
@@ -230,6 +229,7 @@ var s = {};
 var sactual;
 var lemotion = [];
 var counter = {};
+var apidata = {};
 
 function setRespuesta(value) {
 	respuesta.push(value);
@@ -261,6 +261,14 @@ function getCounter() {
 	return counter;
 }
 
+function setApi(key, value) {
+	apidata[key] = value;
+}
+
+function getApi(key) {
+	return apidata[key];
+}
+
 module.exports.setRespuesta = setRespuesta;
 module.exports.getRespuesta = getRespuesta;
 module.exports.setSactual = setSactual;
@@ -269,6 +277,8 @@ module.exports.addlemotion = addlemotion;
 module.exports.getlemotion = getlemotion;
 module.exports.setCounter = setCounter;
 module.exports.getCounter = getCounter;
+module.exports.setApi = setApi;
+module.exports.getApi = getApi;
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.findById(req.query.id);

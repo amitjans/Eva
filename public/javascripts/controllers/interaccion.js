@@ -195,6 +195,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
           }
         });
         break;
+      case 14:
+        $scope.ModalName = 'Api Rest';
+        break;
       default:
         break;
     }
@@ -242,6 +245,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 13:
         node.push({ key: Date.now(), name: "Contador_" + id, type: "counter", count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter, color: "lightblue", isGroup: false, group: $scope.group });
+        break;
+      case 14:
+        node.push({ key: Date.now(), name: "Api_" + id, type: "api", version: $scope.version, host: $scope.host, path: $scope.path, port: ($scope.port == 0 || !!!$scope.port ? '' : $scope.port), color: "lightblue", isGroup: false, group: $scope.group });
         break;
       default:
         break;
@@ -370,6 +376,13 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.showmodal(13, false);
         $scope.cname = l.count;
         break;
+      case 'api':
+        $scope.version = l.version;
+        $scope.host = l.host;
+        $scope.path = l.path;
+        $scope.port = (l.port || 0);
+        $scope.showmodal(14, false);
+        break;
       default:
         break;
     }
@@ -377,6 +390,14 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.autoif = function () {
     $scope.ifopt = (/[=<>!]+/.test($scope.texto) ? '5' : $scope.ifopt);
+  }
+
+  $scope.autoversion = function () {
+    if ($scope.host.startsWith('https://')) {
+      $scope.version = 'https';
+    } else if ($scope.host.startsWith('http://')) {
+      $scope.version = 'http';
+    }
   }
 
   $scope.list();
@@ -389,6 +410,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.ifopt = '4';
   $scope.ops = "sum";
   $scope.level = '' + 0;
+  $scope.version = 'https';
   $scope.node = [];
   init();
 }]);
