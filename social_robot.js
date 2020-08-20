@@ -189,9 +189,27 @@ class SocialRobot {
     this.configuration.voice = voice;
   }
   
-  movement(type){
+  movement(type, onestep = false){
     if (!emotional) {
       return;
+    }
+    if (onestep) {
+      switch (type) {
+        case 'u':
+          type = 't';
+          break;
+        case 'd':
+          type = 'g';
+          break;
+        case 'l':
+          type = 'f';
+          break;
+        case 'r':
+          type = 'h';
+          break;
+        default:
+          break;
+      }
     }
     port.write(type);
   }
