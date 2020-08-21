@@ -8,7 +8,7 @@ const audio = require('../controllers/audio.controller');
 const storage = multer.diskStorage({
 	destination: path.join(__dirname, '../../sonidos'),
 	filename: (req, file, cb) => {
-		cb(null, file.originalname);
+		cb(null, file.originalname.replace(/ /gi, '_'));
 	}
 });
 

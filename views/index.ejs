@@ -8,15 +8,13 @@
     <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/dropzone.min.css">
-    <style>
-        .ui-loader {
-          display: none;
-        }
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     
-        .right {
-          right: 40%;
-        }
-      </style>
+    <style>
+        .dropzone { border: 2px dashed #0087F7; }
+        .ui-loader { display: none; }
+        .right { right: 40%; }
+    </style>
 </head>
 
 <body ng-app="evaApp">
@@ -49,16 +47,6 @@
                         </ul>
                       </li>
                     <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/#!/audio">Audios</a></li>
-                    <li class="dropdown" ng-class="{'active': $route.current.activetab == 'manual'}">
-                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" target="_blank">
-                            I. Manual
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/#!/qaa">QaA</a></li>
-                            <li><a href="/#!/auto">Automovil Aut&oacute;nomo</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -74,23 +62,24 @@
             <p>&copy; 2020 CICESE</p>
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-    <script type="text/javascript" src="/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src="/javascripts/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src="/javascripts/dropzone.min.js"></script>
+    <script type="text/javascript" src="/javascripts/go.js"></script>
+
     <script type="text/javascript" src="/javascripts/app.js"></script>
     <script type="text/javascript" src="/javascripts/controlAngular.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/audio.js"></script>
-    <script type="text/javascript" src="/javascripts/dropzone.min.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/script.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/scriptdata.js"></script>
-    <script type="text/javascript" src="/javascripts/controllers/auto.js"></script>
-    <script type="text/javascript" src="/javascripts/controllers/qaa.js"></script>
-    <script type="text/javascript" src="/javascripts/go.js"></script>
     <script type="text/javascript" src="/javascripts/diagrama-min.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/interaccion.js"></script>
 </body>
