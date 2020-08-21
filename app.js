@@ -9,9 +9,6 @@ var logs = require('./log');
 const crypto = require('crypto');
 var fs = require('fs');
 
-var preguntas = require('./interacciones/exp3qaa');
-
-var Compare = require('./utils/Compare');
 var random = require('./utils/Random');
 var nodeutils = require('./vpl/NodeUtils');
 
@@ -100,12 +97,6 @@ module.exports.setIO = setIO;
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 
-var exp1 = require('./interacciones/exp1');
-var exp2 = require('./interacciones/exp2');
-var exp3 = require('./interacciones/exp3');
-
-var gn = require('./interacciones/common/getname');
-var p = require('./interacciones/common/platica');
 const interaccion = require('./server/models/interaccion');
 const script = require('./server/models/script');
 const vpl = require('./vpl/VPL_Node');
@@ -116,60 +107,60 @@ var social = new SocialRobot(credentials.config, credentials.credentials);
 module.exports.social = social;
 
 index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
-	res.status(200).jsonp();
-	social.resetlog();
-	social.setEmotional(true);
-	let nombre = await gn.getName(social, evaId, usuarioId);
-	await exp3.QaA(social, evaId, usuarioId);
-	await exp3.Despedida(social);
-	social.savelogs(nombre);
+	// res.status(200).jsonp();
+	// social.resetlog();
+	// social.setEmotional(true);
+	// let nombre = await gn.getName(social, evaId, usuarioId);
+	// await exp3.QaA(social, evaId, usuarioId);
+	// await exp3.Despedida(social);
+	// social.savelogs(nombre);
 });
 
 index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
-	res.status(200).jsonp();
-	social.resetlog();
-	// social.setEmotional(true);
-	// let nombre = 'adrian';	
-	let nombre = await gn.getName(social, evaId, usuarioId);
-	await p.inicial(social, evaId, usuarioId);
-	await social.play('./interacciones/exp2files/link.wav');
-	await exp2.autopilot(social, evaId, usuarioId);
-	await social.play('./interacciones/exp2files/cuestionario.wav');
-	await exp2.Despedida(social);
-	social.savelogs(nombre);
+	// res.status(200).jsonp();
+	// social.resetlog();
+	// // social.setEmotional(true);
+	// // let nombre = 'adrian';	
+	// let nombre = await gn.getName(social, evaId, usuarioId);
+	// await p.inicial(social, evaId, usuarioId);
+	// await social.play('./interacciones/exp2files/link.wav');
+	// await exp2.autopilot(social, evaId, usuarioId);
+	// await social.play('./interacciones/exp2files/cuestionario.wav');
+	// await exp2.Despedida(social);
+	// social.savelogs(nombre);
 });
 
 var logs = require('./log');
 index.get('/interaccion/iniciarInteraccion3', async function (req, res) {
-	res.status(200).jsonp();
-	social.resetlog();
-	social.setEmotional(false);
-	let nombre = await gn.getName(social, evaId, usuarioId);
-	await exp3.QaA(social, evaId, usuarioId);
-	await exp3.Despedida(social);
-	social.savelogs(nombre);
+	// res.status(200).jsonp();
+	// social.resetlog();
+	// social.setEmotional(false);
+	// let nombre = await gn.getName(social, evaId, usuarioId);
+	// await exp3.QaA(social, evaId, usuarioId);
+	// await exp3.Despedida(social);
+	// social.savelogs(nombre);
 });
 
 index.get('/interaccion/iniciarInteraccion4', async function (req, res) {
-	res.status(200).jsonp();
-	social.resetlog();
-	social.setEmotional(false);
-	let nombre = await gn.getName(social, evaId, usuarioId);
-	await p.inicial(social, evaId, usuarioId);
-	await exp1.Ultimatum(social, evaId, usuarioId);
-	await exp1.Despedida(social);
-	social.savelogs(nombre);
+	// res.status(200).jsonp();
+	// social.resetlog();
+	// social.setEmotional(false);
+	// let nombre = await gn.getName(social, evaId, usuarioId);
+	// await p.inicial(social, evaId, usuarioId);
+	// await exp1.Ultimatum(social, evaId, usuarioId);
+	// await exp1.Despedida(social);
+	// social.savelogs(nombre);
 });
 
 index.get('/interaccion/iniciarInteraccion5', async function (req, res) {
-	res.status(200).jsonp();
-	social.resetlog();
-	social.setEmotional(true);
-	let nombre = await gn.getName(social, evaId, usuarioId);
-	await p.inicial(social, evaId, usuarioId);
-	await exp1.Ultimatum(social, evaId, usuarioId);
-	await exp1.Despedida(social);
-	social.savelogs(nombre);
+	// res.status(200).jsonp();
+	// social.resetlog();
+	// social.setEmotional(true);
+	// let nombre = await gn.getName(social, evaId, usuarioId);
+	// await p.inicial(social, evaId, usuarioId);
+	// await exp1.Ultimatum(social, evaId, usuarioId);
+	// await exp1.Despedida(social);
+	// social.savelogs(nombre);
 });
 
 var lastlevel = 0;
@@ -215,7 +206,7 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 		social.emotions('ini', 0);
 	}
 	//exit
-	if (req.query.e == 10) {
+	if (req.query.e == 9) {
 		social.emotions('exit', 0);
 	}
 	console.log(req.query.e);
@@ -328,97 +319,6 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	social.savelogs('');
 });
 
-index.get('/interaccion/qaa', async function (req, res) {
-	social.ledsanimstop();
-	if (req.query.id === 'ini') {
-		res.status(200).json({ preguntas: preguntas.getPreguntas(), emotional: social.getEmotional() });
-	} else if (req.query.id === 'p') {
-		res.status(200).json();
-		await social.play('./interacciones/exp3files/questions/' + req.query.q + '.wav');
-		social.ledsanim('escuchaT');
-	} else if (req.query.id === 'r') {
-		res.status(200).json();
-		//Respuesta(social, evaId, pregunta, expression, correctas, i)
-		await exp3.Respuesta(social, evaId, { respaudio: './interacciones/exp3files/answers/' + req.query.q + '.wav' }, parseInt(req.query.e), parseInt(req.query.ok), parseInt(req.query.i));
-	} else if (req.query.id === 'otrasi') {
-		res.status(200).json();
-		await exp3.OtraRonda(social, 'si');
-	} else if (req.query.id === 'otrano') {
-		res.status(200).json();
-		await exp3.OtraRonda(social, 'no');
-	} else if (req.query.id === 'end') {
-		res.status(200).json();
-		await exp3.Despedida(social);
-	} else if (req.query.id === 'resumen') {
-		res.status(200).json();
-		// Resumen(social, correctas, total)
-		await exp3.Resumen(social, parseInt(req.query.ok), parseInt(req.query.t));
-	} else if (req.query.id === 'listen') {
-		res.status(200).json();
-		social.ledsanim('escuchaT');
-	} else if (req.query.id === 'emotion') {
-		social.setEmotional(!social.getEmotional());
-		res.status(200).json({ emotional: social.getEmotional() });
-	} else if (req.query.id === 'speak') {
-		res.status(200).json();
-		social.speak(req.query.speak);
-	} else {
-		await social.play('./interacciones/exp3files/' + req.query.id + '.wav');
-		if (!!req.query.opt) {
-			social.ledsanim('escuchaT');
-		}
-		res.status(200).json();
-	}
-});
-
-var name = '';
-
-index.get('/interaccion/auto', async function (req, res) {
-	social.ledsanimstop();
-	if (req.query.id === 'c') {
-		res.status(200).json();
-		if (req.query.r === 'r') {
-			await social.play('./interacciones/exp2files/repetir.wav');
-		}
-		await exp2.TellCase(social, evaId, parseInt(req.query.c), req.query.r === 'r');
-		social.ledsanim('escuchaT');
-	} else if (req.query.id === 'a') {
-		res.status(200).json();
-		await exp2.Respuesta(social, usuarioId, req.query.c, req.query.opt);
-	} else if (req.query.id === 'p1') {
-		res.status(200).json();
-		await social.play('./interacciones/platica/1.wav');
-	} else if (req.query.id === 'p') {
-		res.status(200).json();
-		await p.inicial(social, evaId, usuarioId, false);
-		await social.play('./interacciones/exp2files/link.wav');
-		await social.play('./interacciones/exp2files/s0.wav');	
-	} else if (req.query.id === 'end') {
-		res.status(200).json();
-		var obj = await social.play('./interacciones/exp2files/interesante.wav');
-		await social.play('./interacciones/exp2files/cuestionario.wav');
-		await exp2.Despedida(social);
-		social.savelogs(name);
-	} else if (req.query.id === 'listen') {
-		res.status(200).json();
-		social.ledsanim('escuchaT');
-	} else if (req.query.id === 'emotion') {
-		social.setEmotional(!social.getEmotional());
-		res.status(200).json({ emotional: social.getEmotional() });
-	} else if (req.query.id === 'speak') {
-		res.status(200).json();
-		await social.speak('Mucho gusto en conocerte ' + req.query.speak);
-		name = req.query.speak;
-		social.templog(usuarioId, req.query.speak);
-	} else {
-		await social.play('./interacciones/exp' + (/(hola|gusto|bueno|ves|escuchas|empezar)/.test(req.query.id) ? 3 : 2) + 'files/' + req.query.id + '.wav');
-		if (!!req.query.opt) {
-			social.ledsanim('escuchaT');
-		}
-		res.status(200).json();
-	}
-});
-
 async function ProcessFlow(nodes, links, fnodes, ini) {
 	let aux = [fnodes[ini]];
 	let n = true;
@@ -433,26 +333,6 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 				}
 				for (let f = 0; f < aux[0].iteraciones; f++) {
 					await ProcessFlow(nodes, links, fnodes, nodeutils.FirstsOfGroup(fnodes, aux[0].key));
-				}
-			} else if (aux[0].type === 'int') {
-				switch (aux[0].int) {
-					case '0':
-						respuesta.push(await gn.getName(social, evaId, usuarioId));
-						break;
-					case '1':
-						await exp1.Ultimatum(social, evaId, usuarioId);
-						break;
-					case '2':
-						await exp2.autopilot(social, evaId, usuarioId);
-						break;
-					case '3':
-						await exp3.QaA(social, evaId, usuarioId);
-						break;
-					case '4':
-						await p.inicial(social, evaId, usuarioId);
-						break;
-					default:
-						break;
 				}
 			} else if (aux[0].type === 'script') {
 				await LoadScriptData(aux[0]);

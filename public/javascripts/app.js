@@ -23,14 +23,6 @@ eva.config(['$locationProvider', '$routeProvider',
             templateUrl: '/plantillas/scriptdata.html',
             activetab: "script"
         }).
-        when('/qaa', {
-            templateUrl: '/plantillas/qaa.html',
-            activetab: "manual"
-        }).
-        when('/auto', {
-            templateUrl: '/plantillas/auto.html',
-            activetab: "manual"
-        }).
         otherwise('/controlAngular');
     }
 ]).run(function ($rootScope, $route) {
