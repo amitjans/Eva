@@ -58,5 +58,11 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
         });;
     }
 
+    $scope.speak = function (value) {
+        $http.get('/speak?speak=' + value).then(function successCallback(response) {
+        }, function errorCallback(response) {
+        });
+    }
+
     $scope.slist();
 }]);

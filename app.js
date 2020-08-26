@@ -106,6 +106,11 @@ const ifnode = require('./vpl/If_Node');
 var social = new SocialRobot(credentials.config, credentials.credentials);
 module.exports.social = social;
 
+index.get('/speak', async function (req, res) {
+	await social.speak(req.query.speak);
+	res.status(200).jsonp();
+});
+
 index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	// res.status(200).jsonp();
 	// social.resetlog();
