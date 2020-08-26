@@ -9,22 +9,6 @@ function iniciarEmocion(tipo){
 	socket.emit('new-message',tipo);
 }
 
-
-/*$(document).on("pagecreate","#pageone",function(){
-  $("#btnNormal").on("tap",function(){
-    socket.emit('new-message',1);
-  });
-  $("#btnPensar").on("tap",function(){
-    socket.emit('new-message',2);
-  });
-  $("#btnTriste").on("tap",function(){
-    socket.emit('new-message',3);
-  });
-  $("#btnAmor").on("tap",function(){
-    socket.emit('new-message',4);
-  });                       
-});*/
-
 $(document).ready(function(){
 	$("#btnNormal").on("tap",function(){
 		socket.emit('new-message',{tipo:1});
