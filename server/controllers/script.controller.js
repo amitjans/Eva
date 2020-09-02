@@ -7,9 +7,10 @@ scriptcontroller.getList = async (req, res) => {
 }
 
 scriptcontroller.scriptdata = async (req, res) => {
-    const list = await script.findById(req.params.id).populate('data');
-    res.status(200).json(list.data);
+    res.status(200).json((await script.findById(req.params.id).populate('data')).data);
 }
+
+scriptcontroller.getData = async (value) => (await script.findById(value).populate('data')).data;
 
 scriptcontroller.details = async (req, res) => {
     const scripts = await script.findById(req.params.id);

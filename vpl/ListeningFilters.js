@@ -7,7 +7,6 @@ Array.prototype.unique = function (a) {
 module.exports = {
     Nombre: function (value) {
         if (value.includes(" ")) {
-            //return nombre.split(" ").pop();
             var aux = value.split(" ");
             for (let i = aux.length - 1; i >= 0; i--) {
                 if (/(^[A-Za-z]{1,2}$|nombre|llamo|hola|Hola)/.test(aux[i])) {

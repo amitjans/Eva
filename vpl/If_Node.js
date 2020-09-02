@@ -1,5 +1,6 @@
 var nodeutils = require('./NodeUtils');
 var app = require('../app');
+var Compare = require('../utils/Compare');
 
 module.exports = {
     ConditionNode: function (ifnodes, links, nodes) {
@@ -14,21 +15,7 @@ module.exports = {
                 for (let i = 0; i < token.length; i++) {
                     if (token[i].type === 'opr' && i > 0 && (i + 1 < token.length)) {
                         if (/^[\d]+$/.test(token[i - 1].value) && /^[\d]+$/.test(token[i + 1].value)) {
-                            let value1 = parseInt(token[i - 1].value);
-                            let value2 = parseInt(token[i + 1].value);
-                            if (token[i].value === 'equal') {
-                                result = value1 == value2;
-                            } else if (token[i].value === 'greater') {
-                                result = value1 > value2;
-                            } else if (token[i].value === 'less') {
-                                result = value1 < value2;
-                            } else if (token[i].value === 'greateror') {
-                                result = value1 >= value2;
-                            } else if (token[i].value === 'lessor') {
-                                result = value1 <= value2;
-                            } else if (token[i].value === 'notequal') {
-                                result = value1 != value2;
-                            }
+                            result = MathComparison(token, i);
                         }
                     }
                 }
@@ -38,10 +25,19 @@ module.exports = {
             } else if ((ifnodes[c].text || '') === '') {
                 return nodeutils.NextNode(links, ifnodes[c], nodes);
             } else if (ifnodes[c].text.includes('%')) {
-                if (Compare((/^(%|%2)$/.test(ifnodes[c].text) ? app.getSactual().campo2 : app.getSactual().campo1), respuesta[respuesta.length - 1]) >= ifnodes[c].opt) {
+                if (Compare(app.getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))], app.getRespuesta(true)) >= ifnodes[c].opt) {
                     return nodeutils.NextNode(links, ifnodes[c], nodes);
                 }
-            } else if (Compare((ifnodes[c].text || ''), respuesta[respuesta.length - 1]) >= ifnodes[c].opt) {
+            } else if (ifnodes[c].text.includes('/')) {
+                let sub = ifnodes[c].text.split('/');
+                console.log('--------------------------------' + ifnodes[c].text + '------------------------------------------' + sub.length)
+                for (let i = 0; i < sub.length; i++) {
+                    console.log(sub[i]);
+                    if (Compare(sub[i], app.getRespuesta(true)) >= ifnodes[c].opt) {
+                        return nodeutils.NextNode(links, ifnodes[c], nodes);
+                    }                    
+                }
+            } else if (Compare((ifnodes[c].text || ''), app.getRespuesta(true)) >= ifnodes[c].opt) {
                 return nodeutils.NextNode(links, ifnodes[c], nodes);
             }
         }
@@ -74,6 +70,24 @@ function CreateToken(param) {
             auxopr.value = 'lessor';
         }
         return auxopr;
+    }
+}
+
+function MathComparison(token, pos) {
+    let value1 = parseInt(token[pos - 1].value);
+    let value2 = parseInt(token[pos + 1].value);
+    if (token[pos].value === 'equal') {
+        return value1 == value2;
+    } else if (token[pos].value === 'greater') {
+        return value1 > value2;
+    } else if (token[pos].value === 'less') {
+        return value1 < value2;
+    } else if (token[pos].value === 'greateror') {
+        return value1 >= value2;
+    } else if (token[pos].value === 'lessor') {
+        return value1 <= value2;
+    } else if (token[pos].value === 'notequal') {
+        return value1 != value2;
     }
 }
 

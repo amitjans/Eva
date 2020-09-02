@@ -19,10 +19,12 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.create = function () {
-        var json = { campo1: $scope.c1, campo2: $scope.c2, script: $scope.script };
+        var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
         $http.post('/api/scriptdata', json).then(function successCallback(response) {
             $scope.c1 = '';
             $scope.c2 = '';
+            $scope.c3 = '';
+            $scope.c4 = '';
             $('#myModal').modal('hide');
             $scope.list();
         }, function errorCallback(response) {
@@ -33,16 +35,20 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
         $scope.updateid = l._id;
         $scope.c1 = l.campo1;
         $scope.c2 = l.campo2;
+        $scope.c3 = l.campo3;
+        $scope.c4 = l.campo4;
         $scope.icon = false;
         $scope.accion = 'Editar';
         $('#myModal').modal('show');
     }
 
     $scope.updatesend = function () {
-        var json = { campo1: $scope.c1, campo2: $scope.c2 };
+        var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
         $http.put('/api/scriptdata/' + $scope.updateid, json).then(function successCallback(response) {
-            $scope.campo1 = '';
-            $scope.campo2 = '';
+            $scope.c1 = '';
+            $scope.c2 = '';
+            $scope.c3 = '';
+            $scope.c4 = '';
             $scope.icon = true;
             $('#myModal').modal('hide');
             $scope.list();

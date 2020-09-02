@@ -1,13 +1,13 @@
 var fs = require('fs');
 var nodeutils = require('./NodeUtils');
-const interaccion = require('../server/models/interaccion');
+const interaccion = require('../server/controllers/interaccion.controller');
 
 module.exports = {
     unify: async function (nodes, links) {
         for (let i = 0; i < nodes.length; i++) {
             if (nodes[i].type === 'int') {
                 if (nodes[i].int.length > 1) {
-                    let sub = await interaccion.findById(nodes[i].int);
+                    let sub = await interaccion.getThis(nodes[i].int);
                     let j = JSON.parse(sub.data);
                     let jn = j.node;
                     if (!!nodes[i].group) {
