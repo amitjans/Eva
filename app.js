@@ -96,7 +96,6 @@ var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 
 const interaccion = require('./server/controllers/interaccion.controller');
-const script = require('./server/models/script');
 const vpl = require('./vpl/VPL_Node');
 const unify = require('./vpl/Unify_Node');
 const ifnode = require('./vpl/If_Node');
@@ -251,12 +250,8 @@ module.exports.getScript = getScript;
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.getThis(req.query.id);
-	var json = JSON.parse(temp.data);
 
-	nodes = json.node;
-	links = json.link;
-
-	let obj = await unify.unify(nodes, links);
+	let obj = await unify.unify(temp.data.node, temp.data.link);
 
 	await interaccion.createThis(temp.nombre + '_expandida', { node: obj.nodes, link: obj.links });
 
@@ -272,14 +267,11 @@ index.get('/interaccion/audio', async function (req, res) {
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	res.status(200).jsonp();
 	const temp = await interaccion.getThis(req.query.id);
-	var json = JSON.parse(temp.data);
-
-	nodes = json.node;
-	links = json.link;
+	
 	respuesta = [];
 	counter = {};
 
-	let obj = await unify.unify(nodes, links);
+	let obj = await unify.unify(temp.data.node, temp.data.link);
 	nodes = obj.nodes;
 	links = obj.links;
 
