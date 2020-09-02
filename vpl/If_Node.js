@@ -30,9 +30,7 @@ module.exports = {
                 }
             } else if (ifnodes[c].text.includes('/')) {
                 let sub = ifnodes[c].text.split('/');
-                console.log('--------------------------------' + ifnodes[c].text + '------------------------------------------' + sub.length)
                 for (let i = 0; i < sub.length; i++) {
-                    console.log(sub[i]);
                     if (Compare(sub[i], app.getRespuesta(true)) >= ifnodes[c].opt) {
                         return nodeutils.NextNode(links, ifnodes[c], nodes);
                     }                    
