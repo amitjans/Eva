@@ -80,7 +80,7 @@ async function ProcessSpeakNode(social, evaId, element) {
             rec = false;
             temp[i] = replaceWhatWasHeard(temp[i]);
         } else if(temp[i].includes('%')) {
-            temp[i] = (/^(%|%2)$/.test(temp[i]) ? app.getSactual().campo2 : app.getSactual().campo1);
+            temp[i] = app.getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))];
         } else if(temp[i].includes('#')) {
             if (/^#[\w\d]+$/.test(temp[i])) {
                 temp[i] = app.getCounter()[temp[i].substring(1)];

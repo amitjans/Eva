@@ -13,14 +13,23 @@ interaccioncontroller.details = async (req, res) => {
     res.status(200).json(interaccion);
 }
 
+interaccioncontroller.getThis = async (value) => await interaccion.findById(value);
+
 interaccioncontroller.create = async (req, res) => {
-    const nuevointeraccion = new interaccion();
-    nuevointeraccion.nombre = req.body.nombre;
-    nuevointeraccion.data = JSON.stringify(req.body.data);
-    await nuevointeraccion.save();
+    const obj = new interaccion();
+    obj.nombre = req.body.nombre;
+    obj.data = JSON.stringify(req.body.data);
+    await obj.save();
     res.status(200).json({
         status: 'interaccion guardado'
     });
+}
+
+interaccioncontroller.createThis = async (nombre, data) => {
+    const obj = new interaccion();
+    obj.nombre = nombre;
+    obj.data = JSON.stringify(data);
+    await obj.save();
 }
 
 interaccioncontroller.edit = async (req, res) => {

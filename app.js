@@ -7,9 +7,7 @@ var bodyParser = require('body-parser');
 var index = require('./server/routes/index');
 var logs = require('./log');
 const crypto = require('crypto');
-var fs = require('fs');
 
-var random = require('./utils/Random');
 var nodeutils = require('./vpl/NodeUtils');
 
 var app = express();
@@ -97,11 +95,12 @@ module.exports.setIO = setIO;
 var SocialRobot = require('./social_robot');
 var credentials = require('./config-services');
 
-const interaccion = require('./server/models/interaccion');
+const interaccion = require('./server/controllers/interaccion.controller');
 const script = require('./server/models/script');
 const vpl = require('./vpl/VPL_Node');
 const unify = require('./vpl/Unify_Node');
 const ifnode = require('./vpl/If_Node');
+const LoadScriptData = require('./vpl/Script_Node');
 
 var social = new SocialRobot(credentials.config, credentials.credentials);
 module.exports.social = social;
@@ -112,60 +111,23 @@ index.get('/speak', async function (req, res) {
 });
 
 index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
-	// res.status(200).jsonp();
-	// social.resetlog();
-	// social.setEmotional(true);
-	// let nombre = await gn.getName(social, evaId, usuarioId);
-	// await exp3.QaA(social, evaId, usuarioId);
-	// await exp3.Despedida(social);
-	// social.savelogs(nombre);
+	res.status(200).jsonp();
 });
 
 index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
-	// res.status(200).jsonp();
-	// social.resetlog();
-	// // social.setEmotional(true);
-	// // let nombre = 'adrian';	
-	// let nombre = await gn.getName(social, evaId, usuarioId);
-	// await p.inicial(social, evaId, usuarioId);
-	// await social.play('./interacciones/exp2files/link.wav');
-	// await exp2.autopilot(social, evaId, usuarioId);
-	// await social.play('./interacciones/exp2files/cuestionario.wav');
-	// await exp2.Despedida(social);
-	// social.savelogs(nombre);
+	res.status(200).jsonp();
 });
 
-var logs = require('./log');
 index.get('/interaccion/iniciarInteraccion3', async function (req, res) {
-	// res.status(200).jsonp();
-	// social.resetlog();
-	// social.setEmotional(false);
-	// let nombre = await gn.getName(social, evaId, usuarioId);
-	// await exp3.QaA(social, evaId, usuarioId);
-	// await exp3.Despedida(social);
-	// social.savelogs(nombre);
+	res.status(200).jsonp();
 });
 
 index.get('/interaccion/iniciarInteraccion4', async function (req, res) {
-	// res.status(200).jsonp();
-	// social.resetlog();
-	// social.setEmotional(false);
-	// let nombre = await gn.getName(social, evaId, usuarioId);
-	// await p.inicial(social, evaId, usuarioId);
-	// await exp1.Ultimatum(social, evaId, usuarioId);
-	// await exp1.Despedida(social);
-	// social.savelogs(nombre);
+	res.status(200).jsonp();
 });
 
 index.get('/interaccion/iniciarInteraccion5', async function (req, res) {
-	// res.status(200).jsonp();
-	// social.resetlog();
-	// social.setEmotional(true);
-	// let nombre = await gn.getName(social, evaId, usuarioId);
-	// await p.inicial(social, evaId, usuarioId);
-	// await exp1.Ultimatum(social, evaId, usuarioId);
-	// await exp1.Despedida(social);
-	// social.savelogs(nombre);
+	res.status(200).jsonp();
 });
 
 var lastlevel = 0;
@@ -230,8 +192,9 @@ var apidata = {};
 function setRespuesta(value) {
 	respuesta.push(value);
 }
-function getRespuesta() {
-	return respuesta;
+
+function getRespuesta(last = false) {
+	return last ? respuesta[respuesta.length - 1] : respuesta;
 }
 
 function setSactual(value) {
@@ -265,6 +228,14 @@ function getApi(key) {
 	return apidata[key];
 }
 
+function setScript(value) {
+	s = value;
+}
+
+function getScript() {
+	return s;
+}
+
 module.exports.setRespuesta = setRespuesta;
 module.exports.getRespuesta = getRespuesta;
 module.exports.setSactual = setSactual;
@@ -275,24 +246,20 @@ module.exports.setCounter = setCounter;
 module.exports.getCounter = getCounter;
 module.exports.setApi = setApi;
 module.exports.getApi = getApi;
+module.exports.setScript = setScript;
+module.exports.getScript = getScript;
 
 index.get('/interaccion/unified', async function (req, res) {
-	const temp = await interaccion.findById(req.query.id);
+	const temp = await interaccion.getThis(req.query.id);
 	var json = JSON.parse(temp.data);
 
 	nodes = json.node;
 	links = json.link;
 
-	let tempname = temp.nombre + '_expandida';
-
 	let obj = await unify.unify(nodes, links);
-	nodes = obj.nodes;
-	links = obj.links;
 
-	const nuevointeraccion = new interaccion();
-	nuevointeraccion.nombre = tempname;
-	nuevointeraccion.data = JSON.stringify({ node: nodes, link: links });
-	await nuevointeraccion.save();
+	await interaccion.createThis(temp.nombre + '_expandida', { node: obj.nodes, link: obj.links });
+
 	res.status(200).jsonp();
 });
 
@@ -304,7 +271,7 @@ index.get('/interaccion/audio', async function (req, res) {
 
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	res.status(200).jsonp();
-	const temp = await interaccion.findById(req.query.id);
+	const temp = await interaccion.getThis(req.query.id);
 	var json = JSON.parse(temp.data);
 
 	nodes = json.node;
@@ -358,21 +325,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 			aux = nodeutils.NextNode(links, aux[0], nodes);
 		} else if (aux.length > 1 && aux[0].type === 'if') {
 			aux = ifnode.ConditionNode(aux, links, nodes);
-			console.log('nuevo nodo: ' + aux);
 		}
 		n = aux.length > 0;
 	} while (n);
-}
-
-async function LoadScriptData(item) {
-	try {
-		if (!s[item.key + '']) {
-			s[item.key + ''] = (await script.findById(item.sc).populate('data')).data;
-			if (item.random) {
-				s[item.key + ''] = random.randomize(s[item.key + '']);
-			}
-		}	
-	} catch (error) {
-		console.error();
-	}
 }

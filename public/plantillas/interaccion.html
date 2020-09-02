@@ -235,6 +235,7 @@
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="texto" ng-change="autoif()" placeholder="Condición">
                 </div>
+                <p class="col-sm-offset-3 help-block">Utiliza #&NestedLessLess;contador&NestedGreaterGreater; para comparar contra este.</p>
               </div>
               <div class="form-group" ng-show="modal == 6">
                 <label class="col-sm-2 control-label">Comparaci&oacute;n</label>
@@ -272,11 +273,6 @@
                 <label class="col-sm-2 control-label">Interacci&oacute;n</label>
                 <div class="col-sm-10">
                   <select name="int" id="" ng-model="int" class="form-control">
-                    <option value="0">Obtener Nombre</option>
-                    <option value="1">Ultim&aacute;tum</option>
-                    <option value="2">Coches Aut&oacute;nomos</option>
-                    <option value="3">Preguntas y Respuestas</option>
-                    <option value="4">Pl&aacute;tica</option>
                     <option ng-repeat="i in listado" value="{{i._id}}">{{ i.nombre }}</option>
                   </select>
                 </div>
@@ -291,6 +287,7 @@
                     <option value="" selected>Ninguno</option>
                     <option ng-repeat="item in slistado" value="{{item._id}}">{{ item.nombre }}</option>
                   </select>
+                  <p class="col-sm-offset-3 help-block">Este nodo incluye la funci&oacute;n de hablar, leyendo el primer campo del elemento del escript que se est&eacute; ejecutando en ese momento</p>
                 </div>
               </div>
               <!-- Modal Script -->
