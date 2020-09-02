@@ -55,7 +55,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     $scope.updateid = l._id;
     $scope.icon = false;
     $scope.accion = 'Editar';
-    var data = JSON.parse(l.data);
+    var data = l.data;
     node = data.node;
     link = data.link;
     $scope.node = node;

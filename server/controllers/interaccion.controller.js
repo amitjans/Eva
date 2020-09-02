@@ -4,16 +4,22 @@ const interaccioncontroller = {};
 
 interaccioncontroller.getList = async (req, res) => {
     const interacciones = await interaccion.find();
-    res.status(200).json(interacciones);
+    let temp = [];
+    for (let i = 0; i < interacciones.length; i++) {
+        temp.push({ _id: interacciones[i]._id, nombre: interacciones[i].nombre, data: JSON.parse(interacciones[i].data) });
+    }
+    res.status(200).json(temp);
 }
 
 interaccioncontroller.details = async (req, res) => {
-    const interaccion = await interaccion.findById(req.params.id);
-    console.log(interaccion);
-    res.status(200).json(interaccion);
+    let temp = await interaccion.findById(req.params.id);
+    res.status(200).json({ _id: temp._id, nombre: temp.nombre, data: JSON.parse(temp.data) });
 }
 
-interaccioncontroller.getThis = async (value) => await interaccion.findById(value);
+interaccioncontroller.getThis = async (value) => {
+    const temp = await interaccion.findById(value);
+    return { _id: temp._id, nombre: temp.nombre, data: JSON.parse(temp.data) };
+}
 
 interaccioncontroller.create = async (req, res) => {
     const obj = new interaccion();
