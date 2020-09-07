@@ -2,14 +2,16 @@ module.exports = {
     FirstAndLast: function (nodes, links) {
         let result = { ini: [], end: [] };
         for (let i = 0; i < nodes.length; i++) {
-            let from = FromSomeone(nodes[i], links);
-            let to = ToSomeone(nodes[i], links);
-            if (from && to) {
-                continue;
-            } else if (from) {
-                result.end.push(nodes[i]);
-            } else {
-                result.ini.push(nodes[i]);
+            if (!nodes[i].group) {
+                let from = FromSomeone(nodes[i], links);
+                let to = ToSomeone(nodes[i], links);
+                if (from && to) {
+                    continue;
+                } else if (from) {
+                    result.end.push(nodes[i]);
+                } else {
+                    result.ini.push(nodes[i]);
+                }
             }
         }
         return result;

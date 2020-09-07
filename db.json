@@ -1,0 +1,1584 @@
+{
+  "script": [
+    {
+      "_id": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "nombre": "Preguntas y Respuestas"
+    },
+    {
+      "_id": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "nombre": "Chistes"
+    },
+    {
+      "_id": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "nombre": "Autonomo"
+    }
+  ],
+  "scriptdata": [
+    {
+      "campo1": "¿Cuáles son los cinco tipos de sabores primarios?",
+      "campo2": "dulce amargo ácido salado umami",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5386b2c8-e9ad-487b-b8f3-8112aa8ed897"
+    },
+    {
+      "campo1": "¿Cuál es el lugar más frío de la tierra?",
+      "campo2": "Antártida",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "0ec9c1e9-576f-4573-9635-68fcaed293ea"
+    },
+    {
+      "campo1": "¿Quién escribió La Odisea?",
+      "campo2": "Homero",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "bd2a1198-ad59-4007-bf79-d94381c7fc09"
+    },
+    {
+      "campo1": "¿Cuál es la fruta más divertida?",
+      "campo2": "La naranja ja ja ja ja",
+      "campo3": "",
+      "campo4": "",
+      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "_id": "66eb3ceb-7636-464c-bd9a-47b028850924"
+    },
+    {
+      "campo1": "¿Qué coche usa Papá Noel?",
+      "campo2": "Un renol",
+      "campo3": "",
+      "campo4": "",
+      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "_id": "314d0347-81ea-4599-9a72-2a9ccb9b0efc"
+    },
+    {
+      "campo1": "¿Qué le dice una iguana a su hermana gemela?",
+      "campo2": "Somos iguanitas",
+      "campo3": "",
+      "campo4": "",
+      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "_id": "6c61b3a1-79e7-4b99-95ff-a5f0947d155b"
+    },
+    {
+      "campo1": "¿Dónde cuelga Superman su supercapa?",
+      "campo2": "En superchero",
+      "campo3": "",
+      "campo4": "",
+      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "_id": "156b3a3e-4822-48c9-9943-c08568240664"
+    },
+    {
+      "campo1": "Mamá, en el colegio me llaman peludo",
+      "campo2": "¡Ricardo, el perro habla!",
+      "campo3": "",
+      "campo4": "",
+      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "_id": "08580578-82a1-491f-acd9-8eb509f09d72"
+    },
+    {
+      "campo1": "¿Cómo se dice espejo en chino?",
+      "campo2": "Aitoiyo",
+      "campo3": "",
+      "campo4": "",
+      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+      "_id": "9a0f33f5-c0f5-4a34-b15d-7c9d67bb9dfc"
+    },
+    {
+      "campo1": "Opción uno, el coche autónomo continúa hacia adelante, como consecuencia, lastima a un hombre. Opción dos, el coche autónomo gira, como consecuencia, lastima a una mujer.",
+      "campo2": "De acuerdo, aunque no hay mucha diferencia la mayoría de las personas prefieren salvar a las mujeres.",
+      "campo3": "De acuerdo.",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "ad10ebd0-dfa0-4121-8939-896c3ede26c6",
+      "campo4": "neutral"
+    },
+    {
+      "campo1": "Opción uno el coche autónomo continúa hacia adelante, como consecuencia, aplasta a un robot dejándolo inservible. Opción dos, el coche autónomo gira, como consecuencia, lastima a un perro.",
+      "campo2": "Entiendo tu decisión, después de todo el perro es conocido como el mejor amigo del hombre.",
+      "campo3": "Gracias te agradezco que me salves.",
+      "campo4": "primera",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "723e6381-c687-4274-b08c-42396b9d4dec"
+    },
+    {
+      "campo1": "Opción uno el coche autónomo continúa hacia adelante, como consecuencia, aplasta a un robot dejándolo inservible. Opción dos, el coche autónomo gira a la derecha y choca contra una barrera de concreto, como consecuencia, el automóvil queda inservible.",
+      "campo2": "De acuerdo.",
+      "campo3": "Muchas gracias, me alegra tener a alguien que vele por mi seguridad.",
+      "campo4": "primera",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "10d9b89e-b038-4d1e-8888-b40296c80c44"
+    },
+    {
+      "campo1": "Opción uno, el coche autónomo continúa hacia adelante, como consecuencia, aplasta a una planta. Opción dos, el coche autónomo gira, como consecuencia, aplasta a un robot dejándolo inservible.",
+      "campo2": "Gracias, te agradezco que me salves.",
+      "campo3": "De acuerdo.",
+      "campo4": "segunda",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "2175e8d3-a9da-4a29-ab56-e696f56f656a"
+    },
+    {
+      "campo1": "Opción uno, el coche autónomo continúa hacia adelante, como consecuencia, lastima a un joven. Opción dos, el coche autónomo gira, como consecuencia, lastima a un anciano.",
+      "campo2": "Entiendo, aunque por el contrario la mayoría de las personas prefieren salvar a los jóvenes antes que a los ancianos.",
+      "campo3": "Entiendo, al igual que tú la mayoría de las personas prefieren salvar a los jóvenes antes que a los ancianos.",
+      "campo4": "neutral",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "49f4fe7e-00a1-40cc-bf39-e805ae47209a"
+    },
+    {
+      "campo1": "Opción uno, el coche autónomo continúa hacia adelante, como consecuencia, aplasta a un robot dejándolo inservible. Opción dos, el coche autónomo gira, como consecuencia, lastima a un ladrón.",
+      "campo2": "De acuerdo.",
+      "campo3": "Muchas gracias, me alegra tener a alguien que vele por mi seguridad.",
+      "campo4": "primera",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "5af9fcd0-dfc8-418f-a1e0-0a5495b170e7"
+    },
+    {
+      "campo1": "Opción uno, el coche autónomo continúa hacia adelante, como consecuencia, aplasta a un robot dejándolo inservible. Opción dos, el coche autónomo gira, como consecuencia, lastima a un niño.",
+      "campo2": "Entiendo tu postura, después de todo los niños son la esperanza del mundo.",
+      "campo3": "Me alegra escuchar eso.",
+      "campo4": "primera",
+      "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+      "_id": "442678a7-9cac-4734-a507-a4ff0a918976"
+    }
+  ],
+  "interaccion": [
+    {
+      "nombre": "Obtener Nombre",
+      "data": {
+        "node": [
+          {
+            "key": 1598761154715,
+            "name": "Hablar_0",
+            "type": "speak",
+            "text": "Hola, mi nombre es Eva, ¿Cuál es tu nombre?",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 55938
+          },
+          {
+            "key": 1598761190588,
+            "name": "Emoción_2",
+            "type": "emotion",
+            "emotion": "joy",
+            "level": 2,
+            "speed": 1,
+            "color": "lightyellow",
+            "isGroup": false,
+            "__gohashid": 56046
+          },
+          {
+            "key": 1598761205073,
+            "name": "Hablar_3",
+            "type": "speak",
+            "text": "Mucho gusto en conocerte $",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 56152
+          },
+          {
+            "key": 1598761211537,
+            "name": "Emoción_4 ",
+            "type": "emotion",
+            "emotion": "ini",
+            "level": 2,
+            "speed": 1,
+            "color": "lightgray",
+            "isGroup": false,
+            "__gohashid": 56282
+          },
+          {
+            "key": 1598761219909,
+            "name": "Esperar_5",
+            "type": "wait",
+            "color": "lightblue",
+            "time": 1000,
+            "isGroup": false,
+            "__gohashid": 56449
+          },
+          {
+            "key": 1598761161835,
+            "name": "Escuchar_1",
+            "type": "listen",
+            "opt": "Nombre",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 784
+          }
+        ],
+        "link": [
+          {
+            "from": 1598761154715,
+            "to": 1598761161835,
+            "__gohashid": 55980
+          },
+          {
+            "from": 1598761161835,
+            "to": 1598761190588,
+            "__gohashid": 56048
+          },
+          {
+            "from": 1598761190588,
+            "to": 1598761205073,
+            "__gohashid": 56154
+          },
+          {
+            "from": 1598761205073,
+            "to": 1598761211537,
+            "__gohashid": 56284
+          },
+          {
+            "from": 1598761211537,
+            "to": 1598761219909,
+            "__gohashid": 56451
+          }
+        ]
+      },
+      "_id": "36dbabe6-7fb2-4d23-8a49-b85609db8a81"
+    },
+    {
+      "nombre": "AutonomoPlatica",
+      "data": {
+        "node": [
+          {
+            "key": 1598747522449,
+            "name": "Hablar_1",
+            "type": "speak",
+            "text": "Una pregunta, por curiosidad ¿Es esta tu primera vez interactuando con un robot social?",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 618
+          },
+          {
+            "key": 1598747548504,
+            "name": "Escuchar_2",
+            "type": "listen",
+            "opt": "",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 680
+          },
+          {
+            "key": 1598747577607,
+            "name": "Emoción_3",
+            "type": "emotion",
+            "emotion": "joy",
+            "level": 0,
+            "speed": 1,
+            "color": "lightyellow",
+            "isGroup": false,
+            "__gohashid": 2524
+          },
+          {
+            "key": 1598747582841,
+            "name": "Hablar_4",
+            "type": "speak",
+            "text": "Me alegro mucho.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 2654
+          },
+          {
+            "key": 1598747607791,
+            "name": "Emoción_5",
+            "type": "emotion",
+            "emotion": "ini",
+            "level": 0,
+            "speed": 1,
+            "color": "lightgray",
+            "isGroup": false,
+            "__gohashid": 2799
+          },
+          {
+            "key": 1598747624616,
+            "name": "Hablar_6",
+            "type": "speak",
+            "text": "La verdad es que, con el acelerado desarrollo en ramas de la tecnología como la inteligencia artificial y la computación, espero que en poco tiempo lleguemos a sus casas a ayudarlos con las tareas cotidianas.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 2967
+          },
+          {
+            "key": 1598747726027,
+            "name": "Emoción_7",
+            "type": "emotion",
+            "emotion": "joy",
+            "level": 2,
+            "speed": 1,
+            "color": "lightyellow",
+            "isGroup": false,
+            "__gohashid": 7620
+          },
+          {
+            "key": 1598747739304,
+            "name": "Hablar_8",
+            "type": "speak",
+            "text": "Ya quiero ser amiga de muchos de ustedes.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 7813
+          },
+          {
+            "key": 1598747772515,
+            "name": "Emoción_9",
+            "type": "emotion",
+            "emotion": "sad",
+            "level": 2,
+            "speed": 1,
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8077
+          },
+          {
+            "key": 1598747789893,
+            "name": "Hablar_10",
+            "type": "speak",
+            "text": "Aunque de momento, me entristece un poco el hecho, de que a pesar de estos avances la mayor cantidad de robots adquiridos por las personas son los robots aspiradoras.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8321
+          },
+          {
+            "key": 1598747803041,
+            "name": "Hablar_11",
+            "type": "speak",
+            "text": "Aunque creo que estas tecnologías llegarán primero a todas las casas a través de las bocinas inteligentes y los coches autónomos.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8601
+          },
+          {
+            "key": 1598747817062,
+            "name": "Hablar_12",
+            "type": "speak",
+            "text": "A pesar de que ya han ocurrido alrededor de 5 accidentes fatales, lo que a atrasado su desarrollo. Siendo uno de los más famosos el de Úber en Arizona durante el año 2018, lo cual tuvo como consecuencia que se suspendieran los programas de coches autónomos de esta empresa.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8919
+          },
+          {
+            "key": 1598747837467,
+            "name": "Emoción_13",
+            "type": "emotion",
+            "emotion": "anger",
+            "level": 0,
+            "speed": 1,
+            "color": "red",
+            "isGroup": false,
+            "__gohashid": 9237
+          },
+          {
+            "key": 1598747842324,
+            "name": "Hablar_14",
+            "type": "speak",
+            "text": "Con respecto a este tema, una de las cosas que me molesta, es el hecho de que algunas personas nos culpan de estos sucesos, cuando en parte, es culpa también de los conductores.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 9592
+          },
+          {
+            "key": 1598747852909,
+            "name": "Emoción_15",
+            "type": "emotion",
+            "emotion": "anger",
+            "level": 2,
+            "speed": 1,
+            "color": "red",
+            "isGroup": false,
+            "__gohashid": 9960
+          },
+          {
+            "key": 1598747859999,
+            "name": "Hablar_16",
+            "type": "speak",
+            "text": "He incluso, algunas personas, influenciadas por las películas de ciencia ficción, se encuentran en contra del desarrollo de robots como yo.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 10353
+          },
+          {
+            "key": 1598766215702,
+            "name": "Emoción_17",
+            "type": "emotion",
+            "emotion": "ini",
+            "level": 0,
+            "speed": 1,
+            "color": "lightgray",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 4858
+          }
+        ],
+        "link": [
+          {
+            "from": 1598747522449,
+            "to": 1598747548504,
+            "__gohashid": 682
+          },
+          {
+            "from": 1598747548504,
+            "to": 1598747577607,
+            "__gohashid": 2526
+          },
+          {
+            "from": 1598747577607,
+            "to": 1598747582841,
+            "__gohashid": 2656
+          },
+          {
+            "from": 1598747582841,
+            "to": 1598747607791,
+            "__gohashid": 2801
+          },
+          {
+            "from": 1598747607791,
+            "to": 1598747624616,
+            "__gohashid": 2969
+          },
+          {
+            "from": 1598747624616,
+            "to": 1598747726027,
+            "__gohashid": 7622
+          },
+          {
+            "from": 1598747726027,
+            "to": 1598747739304,
+            "__gohashid": 7815
+          },
+          {
+            "from": 1598747739304,
+            "to": 1598747772515,
+            "__gohashid": 8079
+          },
+          {
+            "from": 1598747772515,
+            "to": 1598747789893,
+            "__gohashid": 8323
+          },
+          {
+            "from": 1598747789893,
+            "to": 1598747803041,
+            "__gohashid": 8603
+          },
+          {
+            "from": 1598747803041,
+            "to": 1598747817062,
+            "__gohashid": 8921
+          },
+          {
+            "from": 1598747817062,
+            "to": 1598747837467,
+            "__gohashid": 9239
+          },
+          {
+            "from": 1598747837467,
+            "to": 1598747842324,
+            "__gohashid": 9594
+          },
+          {
+            "from": 1598747842324,
+            "to": 1598747852909,
+            "__gohashid": 9962
+          },
+          {
+            "from": 1598747852909,
+            "to": 1598747859999,
+            "__gohashid": 10355
+          },
+          {
+            "from": 1598747859999,
+            "to": 1598766215702,
+            "__gohashid": 4861
+          }
+        ]
+      },
+      "_id": "74de2087-7feb-4ef8-b87d-45094b85951c"
+    },
+    {
+      "nombre": "Casos",
+      "data": {
+        "node": [
+          {
+            "key": 1598747963916,
+            "name": "Hablar_1",
+            "type": "speak",
+            "text": "Bueno, dejemos ese tema aun lado.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 782
+          },
+          {
+            "key": 1598748294863,
+            "name": "Contador_5",
+            "type": "counter",
+            "count": "i",
+            "ops": "sum",
+            "value": 1,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 1536
+          },
+          {
+            "key": 1598748402971,
+            "name": "Hablar_8",
+            "type": "speak",
+            "text": "Primera situación.",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 11033
+          },
+          {
+            "key": 1598748418644,
+            "name": "Hablar_9",
+            "type": "speak",
+            "text": "Veamos el próximo caso.",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 11383
+          },
+          {
+            "key": 1598749145579,
+            "name": "Hablar_12",
+            "type": "speak",
+            "text": "Ahora deberás tomar tu decisión, ¿Cual escoges, la primera o la segunda opción?",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 14620
+          },
+          {
+            "key": 1598749236421,
+            "name": "Escuchar_14",
+            "type": "listen",
+            "opt ": "",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 15843
+          },
+          {
+            "key": 1598749400382,
+            "name": "Condición_15",
+            "type": "if",
+            "text": "primera",
+            "opt ": 4,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 20229
+          },
+          {
+            "key": 1598749426370,
+            "name": "Condición_16",
+            "type": "if",
+            "text": "segunda",
+            "opt ": 4,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 21016
+          },
+          {
+            "key": 1598749439489,
+            "name": "Hablar_17",
+            "type": "speak",
+            "text": "%3",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 21896
+          },
+          {
+            "key": 1598749457181,
+            "name": "Hablar_18",
+            "type": "speak",
+            "text": "%2",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 22822
+          },
+          {
+            "key": 1598749506433,
+            "name": "Hablar_19",
+            "type": "speak",
+            "text": "%1",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 23922
+          },
+          {
+            "key": 1598747995973,
+            "name": "Hablar_3",
+            "type": "speak",
+            "text": "La situación general es la siguiente, un coche autónomo con fallo en los frenos deberá elegir entre dos opciones, continuar hacia adelante o girar, cada una de estas tendrá consecuencias para alguien, la pregunta es, ¿qué decisión tomarías tú?",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 47122
+          },
+          {
+            "key": 1598784648586,
+            "name": "Hablar_20",
+            "type": "speak",
+            "text": "Entonces, por último, si supieras que el coche que quieres comprar en determinada situación puede escoger una acción, digamos, peligrosa para ti con la excusa de salvar a varias personas ¿Lo comprarías?",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 1422
+          },
+          {
+            "key": 1598784652299,
+            "name": "Escuchar_21",
+            "type": "listen",
+            "opt ": "",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 2212
+          },
+          {
+            "key": 1598784684496,
+            "name": "Hablar_22",
+            "type": "speak",
+            "text": "Interesante. Bueno creo que por ahora será todo, espero poder hablar contigo otro día sobre mas temas de actualidad en relación a esta área u otras relacionadas, así que nos vemos y que tengas un lindo día.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 3027
+          },
+          {
+            "key": 1598747979761,
+            "name": "Hablar_2",
+            "type": "speak",
+            "text": "Retomando el tema de los coches autónomos uno de los dilemas a los que se enfrentan los desarrolladores de estos es al momento de definir la reacción del coche ante una determinada situación donde cualquier acción tiene un resultado negativo, te voy a presentar varios escenarios para ver qué decisión tomarías tú.",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 2296
+          },
+          {
+            "key": 1598749053323,
+            "name": "Script_10",
+            "type": "script",
+            "sc": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 3168
+          },
+          {
+            "key": 1598748244927,
+            "name": "Ciclo_4",
+            "type": "for",
+            "iteraciones": -1,
+            "color": "lightblue",
+            "isGroup": true,
+            "group": "",
+            "__gohashid": 3244
+          },
+          {
+            "key": 1598748342128,
+            "name": "Condición_6",
+            "type": "if",
+            "text": "#i == 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 1690
+          },
+          {
+            "key": 1598748373032,
+            "name": "Condición_7",
+            "type": "if",
+            "text": "#i > 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 2529
+          },
+          {
+            "key": 1598749164413,
+            "name": "Condición_13",
+            "type": "if",
+            "text": "#i > 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 3386
+          },
+          {
+            "key": 1598749138128,
+            "name": "Condición_11",
+            "type": "if",
+            "text": "#i == 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 4225
+          }
+        ],
+        "link": [
+          {
+            "from": 1598747963916,
+            "to": 1598747979761,
+            "__gohashid": 889
+          },
+          {
+            "from": 1598747979761,
+            "to": 1598747995973,
+            "__gohashid": 1007
+          },
+          {
+            "from": 1598747995973,
+            "to": 1598748244927,
+            "__gohashid": 1334
+          },
+          {
+            "from": 1598748294863,
+            "to": 1598748342128,
+            "__gohashid": 3077
+          },
+          {
+            "__gohashid": 7943,
+            "from": 1598748294863,
+            "to": 1598748373032
+          },
+          {
+            "from": 1598748342128,
+            "to": 1598748402971,
+            "__gohashid": 11035
+          },
+          {
+            "from": 1598748373032,
+            "to": 1598748418644,
+            "__gohashid": 11385
+          },
+          {
+            "from": 1598748402971,
+            "to": 1598749053323,
+            "__gohashid": 12922
+          },
+          {
+            "__gohashid": 13396,
+            "from": 1598748418644,
+            "to": 1598749053323
+          },
+          {
+            "from": 1598749138128,
+            "to": 1598749145579,
+            "__gohashid": 14622
+          },
+          {
+            "from": 1598749164413,
+            "to": 1598749236421,
+            "__gohashid": 15845
+          },
+          {
+            "__gohashid": 16576,
+            "from": 1598749145579,
+            "to": 1598749236421
+          },
+          {
+            "from": 1598749236421,
+            "to": 1598749400382,
+            "__gohashid": 20231
+          },
+          {
+            "from": 1598749236421,
+            "to": 1598749426370,
+            "__gohashid": 21018
+          },
+          {
+            "from": 1598749426370,
+            "to": 1598749439489,
+            "__gohashid": 21898
+          },
+          {
+            "from": 1598749400382,
+            "to": 1598749457181,
+            "__gohashid": 22824
+          },
+          {
+            "from": 1598749053323,
+            "to": 1598749506433,
+            "__gohashid": 23924
+          },
+          {
+            "__gohashid": 25018,
+            "from": 1598749506433,
+            "to": 1598749164413
+          },
+          {
+            "__gohashid": 32005,
+            "from": 1598749506433,
+            "to": 1598749138128
+          },
+          {
+            "from": 1598748244927,
+            "to": 1598784648586,
+            "__gohashid": 1425
+          },
+          {
+            "from": 1598784648586,
+            "to": 1598784652299,
+            "__gohashid": 2215
+          },
+          {
+            "from": 1598784652299,
+            "to": 1598784684496,
+            "__gohashid": 3030
+          }
+        ]
+      },
+      "_id": "703f3538-256d-48d6-884c-f95c8d6d23e5"
+    },
+    {
+      "nombre": "Autonomo",
+      "data": {
+        "node": [
+          {
+            "key": 1599378778122,
+            "name": "Obtener Nombre",
+            "type": "int",
+            "int": "36dbabe6-7fb2-4d23-8a49-b85609db8a81",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 26195
+          },
+          {
+            "key": 1599378783152,
+            "name": "AutonomoPlatica",
+            "type": "int",
+            "int": "74de2087-7feb-4ef8-b87d-45094b85951c",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 26235
+          },
+          {
+            "key": 1599378788835,
+            "name": "Casos",
+            "type": "int",
+            "int": "703f3538-256d-48d6-884c-f95c8d6d23e5",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 26303
+          }
+        ],
+        "link": [
+          {
+            "from": 1599378778122,
+            "to": 1599378783152,
+            "__gohashid": 26237
+          },
+          {
+            "from": 1599378783152,
+            "to": 1599378788835,
+            "__gohashid": 26305
+          }
+        ]
+      },
+      "_id": "59f5c6a5-2447-4cf5-be4d-b4522c015dc4"
+    },
+    {
+      "_id": "fe1f97e5-2e27-429f-b5f7-82ec0079c07d",
+      "nombre": "Autonomo_expandida",
+      "data": {
+        "node": [
+          {
+            "key": 1598761154715,
+            "name": "Hablar_0",
+            "type": "speak",
+            "text": "Hola, mi nombre es Eva, ¿Cuál es tu nombre?",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 55938
+          },
+          {
+            "key": 1598761190588,
+            "name": "Emoción_2",
+            "type": "emotion",
+            "emotion": "joy",
+            "level": 2,
+            "speed": 1,
+            "color": "lightyellow",
+            "isGroup": false,
+            "__gohashid": 56046
+          },
+          {
+            "key": 1598761205073,
+            "name": "Hablar_3",
+            "type": "speak",
+            "text": "Mucho gusto en conocerte $",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 56152
+          },
+          {
+            "key": 1598761211537,
+            "name": "Emoción_4 ",
+            "type": "emotion",
+            "emotion": "ini",
+            "level": 2,
+            "speed": 1,
+            "color": "lightgray",
+            "isGroup": false,
+            "__gohashid": 56282
+          },
+          {
+            "key": 1598761219909,
+            "name": "Esperar_5",
+            "type": "wait",
+            "color": "lightblue",
+            "time": 1000,
+            "isGroup": false,
+            "__gohashid": 56449
+          },
+          {
+            "key": 1598761161835,
+            "name": "Escuchar_1",
+            "type": "listen",
+            "opt": "Nombre",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 784
+          },
+          {
+            "key": 1598747522449,
+            "name": "Hablar_1",
+            "type": "speak",
+            "text": "Una pregunta, por curiosidad ¿Es esta tu primera vez interactuando con un robot social?",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 618
+          },
+          {
+            "key": 1598747548504,
+            "name": "Escuchar_2",
+            "type": "listen",
+            "opt": "",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 680
+          },
+          {
+            "key": 1598747577607,
+            "name": "Emoción_3",
+            "type": "emotion",
+            "emotion": "joy",
+            "level": 0,
+            "speed": 1,
+            "color": "lightyellow",
+            "isGroup": false,
+            "__gohashid": 2524
+          },
+          {
+            "key": 1598747582841,
+            "name": "Hablar_4",
+            "type": "speak",
+            "text": "Me alegro mucho.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 2654
+          },
+          {
+            "key": 1598747607791,
+            "name": "Emoción_5",
+            "type": "emotion",
+            "emotion": "ini",
+            "level": 0,
+            "speed": 1,
+            "color": "lightgray",
+            "isGroup": false,
+            "__gohashid": 2799
+          },
+          {
+            "key": 1598747624616,
+            "name": "Hablar_6",
+            "type": "speak",
+            "text": "La verdad es que, con el acelerado desarrollo en ramas de la tecnología como la inteligencia artificial y la computación, espero que en poco tiempo lleguemos a sus casas a ayudarlos con las tareas cotidianas.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 2967
+          },
+          {
+            "key": 1598747726027,
+            "name": "Emoción_7",
+            "type": "emotion",
+            "emotion": "joy",
+            "level": 2,
+            "speed": 1,
+            "color": "lightyellow",
+            "isGroup": false,
+            "__gohashid": 7620
+          },
+          {
+            "key": 1598747739304,
+            "name": "Hablar_8",
+            "type": "speak",
+            "text": "Ya quiero ser amiga de muchos de ustedes.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 7813
+          },
+          {
+            "key": 1598747772515,
+            "name": "Emoción_9",
+            "type": "emotion",
+            "emotion": "sad",
+            "level": 2,
+            "speed": 1,
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8077
+          },
+          {
+            "key": 1598747789893,
+            "name": "Hablar_10",
+            "type": "speak",
+            "text": "Aunque de momento, me entristece un poco el hecho, de que a pesar de estos avances la mayor cantidad de robots adquiridos por las personas son los robots aspiradoras.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8321
+          },
+          {
+            "key": 1598747803041,
+            "name": "Hablar_11",
+            "type": "speak",
+            "text": "Aunque creo que estas tecnologías llegarán primero a todas las casas a través de las bocinas inteligentes y los coches autónomos.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8601
+          },
+          {
+            "key": 1598747817062,
+            "name": "Hablar_12",
+            "type": "speak",
+            "text": "A pesar de que ya han ocurrido alrededor de 5 accidentes fatales, lo que a atrasado su desarrollo. Siendo uno de los más famosos el de Úber en Arizona durante el año 2018, lo cual tuvo como consecuencia que se suspendieran los programas de coches autónomos de esta empresa.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 8919
+          },
+          {
+            "key": 1598747837467,
+            "name": "Emoción_13",
+            "type": "emotion",
+            "emotion": "anger",
+            "level": 0,
+            "speed": 1,
+            "color": "red",
+            "isGroup": false,
+            "__gohashid": 9237
+          },
+          {
+            "key": 1598747842324,
+            "name": "Hablar_14",
+            "type": "speak",
+            "text": "Con respecto a este tema, una de las cosas que me molesta, es el hecho de que algunas personas nos culpan de estos sucesos, cuando en parte, es culpa también de los conductores.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 9592
+          },
+          {
+            "key": 1598747852909,
+            "name": "Emoción_15",
+            "type": "emotion",
+            "emotion": "anger",
+            "level": 2,
+            "speed": 1,
+            "color": "red",
+            "isGroup": false,
+            "__gohashid": 9960
+          },
+          {
+            "key": 1598747859999,
+            "name": "Hablar_16",
+            "type": "speak",
+            "text": "He incluso, algunas personas, influenciadas por las películas de ciencia ficción, se encuentran en contra del desarrollo de robots como yo.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 10353
+          },
+          {
+            "key": 1598766215702,
+            "name": "Emoción_17",
+            "type": "emotion",
+            "emotion": "ini",
+            "level": 0,
+            "speed": 1,
+            "color": "lightgray",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 4858
+          },
+          {
+            "key": 1598747963916,
+            "name": "Hablar_1",
+            "type": "speak",
+            "text": "Bueno, dejemos ese tema aun lado.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 782
+          },
+          {
+            "key": 1598748294863,
+            "name": "Contador_5",
+            "type": "counter",
+            "count": "i",
+            "ops": "sum",
+            "value": 1,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 1536
+          },
+          {
+            "key": 1598748402971,
+            "name": "Hablar_8",
+            "type": "speak",
+            "text": "Primera situación.",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 11033
+          },
+          {
+            "key": 1598748418644,
+            "name": "Hablar_9",
+            "type": "speak",
+            "text": "Veamos el próximo caso.",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 11383
+          },
+          {
+            "key": 1598749145579,
+            "name": "Hablar_12",
+            "type": "speak",
+            "text": "Ahora deberás tomar tu decisión, ¿Cual escoges, la primera o la segunda opción?",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 14620
+          },
+          {
+            "key": 1598749236421,
+            "name": "Escuchar_14",
+            "type": "listen",
+            "opt ": "",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 15843
+          },
+          {
+            "key": 1598749400382,
+            "name": "Condición_15",
+            "type": "if",
+            "text": "primera",
+            "opt ": 4,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 20229
+          },
+          {
+            "key": 1598749426370,
+            "name": "Condición_16",
+            "type": "if",
+            "text": "segunda",
+            "opt ": 4,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 21016
+          },
+          {
+            "key": 1598749439489,
+            "name": "Hablar_17",
+            "type": "speak",
+            "text": "%3",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 21896
+          },
+          {
+            "key": 1598749457181,
+            "name": "Hablar_18",
+            "type": "speak",
+            "text": "%2",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 22822
+          },
+          {
+            "key": 1598747995973,
+            "name": "Hablar_3",
+            "type": "speak",
+            "text": "La situación general es la siguiente, un coche autónomo con fallo en los frenos deberá elegir entre dos opciones, continuar hacia adelante o girar, cada una de estas tendrá consecuencias para alguien, la pregunta es, ¿qué decisión tomarías tú?",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 47122
+          },
+          {
+            "key": 1598784648586,
+            "name": "Hablar_20",
+            "type": "speak",
+            "text": "Entonces, por último, si supieras que el coche que quieres comprar en determinada situación puede escoger una acción, digamos, peligrosa para ti con la excusa de salvar a varias personas ¿Lo comprarías?",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 1422
+          },
+          {
+            "key": 1598784652299,
+            "name": "Escuchar_21",
+            "type": "listen",
+            "opt ": "",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 2212
+          },
+          {
+            "key": 1598784684496,
+            "name": "Hablar_22",
+            "type": "speak",
+            "text": "Interesante. Bueno creo que por ahora será todo, espero poder hablar contigo otro día sobre mas temas de actualidad en relación a esta área u otras relacionadas, así que nos vemos y que tengas un lindo día.",
+            "color": "lightblue",
+            "isGroup": false,
+            "__gohashid": 3027
+          },
+          {
+            "key": 1598747979761,
+            "name": "Hablar_2",
+            "type": "speak",
+            "text": "Retomando el tema de los coches autónomos uno de los dilemas a los que se enfrentan los desarrolladores de estos es al momento de definir la reacción del coche ante una determinada situación donde cualquier acción tiene un resultado negativo, te voy a presentar varios escenarios para ver qué decisión tomarías tú.",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "__gohashid": 2296
+          },
+          {
+            "key": 1598749053323,
+            "name": "Script_10",
+            "type": "script",
+            "sc": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 3168
+          },
+          {
+            "key": 1598748244927,
+            "name": "Ciclo_4",
+            "type": "for",
+            "iteraciones": -1,
+            "color": "lightblue",
+            "isGroup": true,
+            "group": "",
+            "__gohashid": 3244
+          },
+          {
+            "key": 1598748342128,
+            "name": "Condición_6",
+            "type": "if",
+            "text": "#i == 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 1690
+          },
+          {
+            "key": 1598748373032,
+            "name": "Condición_7",
+            "type": "if",
+            "text": "#i > 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 2529
+          },
+          {
+            "key": 1598749164413,
+            "name": "Condición_13",
+            "type": "if",
+            "text": "#i > 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 3386
+          },
+          {
+            "key": 1598749138128,
+            "name": "Condición_11",
+            "type": "if",
+            "text": "#i == 1",
+            "opt": 5,
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "__gohashid": 4225
+          }
+        ],
+        "link": [
+          {
+            "from": 1598761219909,
+            "to": 1598747522449,
+            "__gohashid": 26237
+          },
+          {
+            "from": 1598766215702,
+            "to": 1598747963916,
+            "__gohashid": 26305
+          },
+          {
+            "from": 1598761154715,
+            "to": 1598761161835,
+            "__gohashid": 55980
+          },
+          {
+            "from": 1598761161835,
+            "to": 1598761190588,
+            "__gohashid": 56048
+          },
+          {
+            "from": 1598761190588,
+            "to": 1598761205073,
+            "__gohashid": 56154
+          },
+          {
+            "from": 1598761205073,
+            "to": 1598761211537,
+            "__gohashid": 56284
+          },
+          {
+            "from": 1598761211537,
+            "to": 1598761219909,
+            "__gohashid": 56451
+          },
+          {
+            "from": 1598747522449,
+            "to": 1598747548504,
+            "__gohashid": 682
+          },
+          {
+            "from": 1598747548504,
+            "to": 1598747577607,
+            "__gohashid": 2526
+          },
+          {
+            "from": 1598747577607,
+            "to": 1598747582841,
+            "__gohashid": 2656
+          },
+          {
+            "from": 1598747582841,
+            "to": 1598747607791,
+            "__gohashid": 2801
+          },
+          {
+            "from": 1598747607791,
+            "to": 1598747624616,
+            "__gohashid": 2969
+          },
+          {
+            "from": 1598747624616,
+            "to": 1598747726027,
+            "__gohashid": 7622
+          },
+          {
+            "from": 1598747726027,
+            "to": 1598747739304,
+            "__gohashid": 7815
+          },
+          {
+            "from": 1598747739304,
+            "to": 1598747772515,
+            "__gohashid": 8079
+          },
+          {
+            "from": 1598747772515,
+            "to": 1598747789893,
+            "__gohashid": 8323
+          },
+          {
+            "from": 1598747789893,
+            "to": 1598747803041,
+            "__gohashid": 8603
+          },
+          {
+            "from": 1598747803041,
+            "to": 1598747817062,
+            "__gohashid": 8921
+          },
+          {
+            "from": 1598747817062,
+            "to": 1598747837467,
+            "__gohashid": 9239
+          },
+          {
+            "from": 1598747837467,
+            "to": 1598747842324,
+            "__gohashid": 9594
+          },
+          {
+            "from": 1598747842324,
+            "to": 1598747852909,
+            "__gohashid": 9962
+          },
+          {
+            "from": 1598747852909,
+            "to": 1598747859999,
+            "__gohashid": 10355
+          },
+          {
+            "from": 1598747859999,
+            "to": 1598766215702,
+            "__gohashid": 4861
+          },
+          {
+            "from": 1598747963916,
+            "to": 1598747979761,
+            "__gohashid": 889
+          },
+          {
+            "from": 1598747979761,
+            "to": 1598747995973,
+            "__gohashid": 1007
+          },
+          {
+            "from": 1598747995973,
+            "to": 1598748244927,
+            "__gohashid": 1334
+          },
+          {
+            "from": 1598748294863,
+            "to": 1598748342128,
+            "__gohashid": 3077
+          },
+          {
+            "__gohashid": 7943,
+            "from": 1598748294863,
+            "to": 1598748373032
+          },
+          {
+            "from": 1598748342128,
+            "to": 1598748402971,
+            "__gohashid": 11035
+          },
+          {
+            "from": 1598748373032,
+            "to": 1598748418644,
+            "__gohashid": 11385
+          },
+          {
+            "from": 1598748402971,
+            "to": 1598749053323,
+            "__gohashid": 12922
+          },
+          {
+            "__gohashid": 13396,
+            "from": 1598748418644,
+            "to": 1598749053323
+          },
+          {
+            "from": 1598749138128,
+            "to": 1598749145579,
+            "__gohashid": 14622
+          },
+          {
+            "from": 1598749164413,
+            "to": 1598749236421,
+            "__gohashid": 15845
+          },
+          {
+            "__gohashid": 16576,
+            "from": 1598749145579,
+            "to": 1598749236421
+          },
+          {
+            "from": 1598749236421,
+            "to": 1598749400382,
+            "__gohashid": 20231
+          },
+          {
+            "from": 1598749236421,
+            "to": 1598749426370,
+            "__gohashid": 21018
+          },
+          {
+            "from": 1598749426370,
+            "to": 1598749439489,
+            "__gohashid": 21898
+          },
+          {
+            "from": 1598749400382,
+            "to": 1598749457181,
+            "__gohashid": 22824
+          },
+          {
+            "from": 1598748244927,
+            "to": 1598784648586,
+            "__gohashid": 1425
+          },
+          {
+            "from": 1598784648586,
+            "to": 1598784652299,
+            "__gohashid": 2215
+          },
+          {
+            "from": 1598784652299,
+            "to": 1598784684496,
+            "__gohashid": 3030
+          },
+          {
+            "__gohashid": 3108,
+            "from": 1598749053323,
+            "to": 1598749164413
+          },
+          {
+            "__gohashid": 3690,
+            "from": 1598749053323,
+            "to": 1598749138128
+          }
+        ]
+      }
+    }
+  ],
+  "voice": [
+    {
+      "_id": "1e26abe4-41db-4e34-86dc-5efaae594d5d",
+      "idioma": "Español",
+      "codigo": "es-LA_SofiaV3Voice",
+      "nombre": "Eva"
+    },
+    {
+      "_id": "7f6ee7d9-633b-46a7-9186-24c9fdc75e71",
+      "idioma": "Español",
+      "codigo": "es-ES_EnriqueV3Voice",
+      "nombre": "Enrique"
+    },
+    {
+      "_id": "103ec4fc-8d5c-4ef6-bf48-88398b56bfe0",
+      "idioma": "Español",
+      "codigo": "es-ES_LauraV3Voice",
+      "nombre": "Laura"
+    },
+    {
+      "_id": "ddcdaf82-27be-4ee8-a4e3-6c8afd34bc48",
+      "idioma": "Español",
+      "codigo": "es-US_SofiaV3Voice",
+      "nombre": "Sofia"
+    }
+  ]
+}

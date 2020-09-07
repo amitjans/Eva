@@ -23,6 +23,10 @@ eva.config(['$locationProvider', '$routeProvider',
             templateUrl: '/plantillas/scriptdata.html',
             activetab: "script"
         }).
+        when('/voice', {
+            templateUrl: '/plantillas/voice.html',
+            activetab: "voice"
+        }).
         otherwise('/controlAngular');
     }
 ]).run(function ($rootScope, $route) {
