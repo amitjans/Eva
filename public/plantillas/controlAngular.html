@@ -47,30 +47,9 @@
       <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
       <hr />
       <div class="row">
-        <div class="col-md-4">
-          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteraccion1()">
-            <i class="fa fa-comments"></i>&nbsp;QaA</button>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="iniciarInteraccion2()">
-            <i class="fa fa-car"></i>&nbsp; Aut&oacute;nomo</button>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-lg btn-info btn-block" type="button" ng-click="iniciarInteraccion3()">
-            <i class="fa fa-comments"></i>&nbsp;Interacción 3</button>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="col-md-5 col-md-offset-1">
-          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteraccion4()">
-            <i class="fa fa-credit-card"></i>&nbsp;Ultimatum</button>
-        </div>
-        <div class="col-md-5">
-          <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="iniciarInteraccion5()">
-            <i class="fa fa-credit-card"></i>&nbsp;Ultimatum :)</button>
+        <div class="col-md-6" ng-repeat="item in interactions">
+          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteracciong(item._id)">
+            <i class="fa fa-comments"></i>&nbsp;{{ item.nombre }}</button><br>
         </div>
       </div>
     </div>
@@ -87,19 +66,6 @@
             <button class="btn btn-default btn-lg"><img src="/images/{{emocion}}.png" class="img-responsive"
                 ng-click="enviarEmocion(key)"></button>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
-      <hr />
-      <div class="row">
-        <div class="col-md-4" ng-repeat="item in interactions">
-          <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteracciong(item._id)">
-            <i class="fa fa-comments"></i>&nbsp;{{ item.nombre }}</button>
         </div>
       </div>
     </div>

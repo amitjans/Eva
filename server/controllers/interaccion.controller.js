@@ -1,54 +1,41 @@
-const interaccion = require('../models/interaccion');
+const { getConnection } = require('../database');
+const { v4 } = require('uuid');
 const fs = require('fs');
 const interaccioncontroller = {};
 
 interaccioncontroller.getList = async (req, res) => {
-    const interacciones = await interaccion.find();
-    let temp = [];
-    for (let i = 0; i < interacciones.length; i++) {
-        temp.push({ _id: interacciones[i]._id, nombre: interacciones[i].nombre, data: JSON.parse(interacciones[i].data) });
-    }
-    res.status(200).json(temp);
+    res.status(200).json(getConnection().get('interaccion').value());
 }
 
 interaccioncontroller.details = async (req, res) => {
-    let temp = await interaccion.findById(req.params.id);
-    res.status(200).json({ _id: temp._id, nombre: temp.nombre, data: JSON.parse(temp.data) });
+    res.status(200).json(getConnection().get('interaccion').find({ _id: req.params.id }).value());
 }
 
-interaccioncontroller.getThis = async (value) => {
-    const temp = await interaccion.findById(value);
-    return { _id: temp._id, nombre: temp.nombre, data: JSON.parse(temp.data) };
-}
+interaccioncontroller.getThis = async (value) => getConnection().get('interaccion').find({ _id: value }).value();
 
 interaccioncontroller.create = async (req, res) => {
-    const obj = new interaccion();
-    obj.nombre = req.body.nombre;
-    obj.data = JSON.stringify(req.body.data);
-    await obj.save();
-    res.status(200).json({
-        status: 'interaccion guardado'
+    const obj = req.body;
+    obj._id = v4();
+    getConnection().get('interaccion').push(obj).write();
+    res.status(201).json({
+        status: 'scriptdata guardada'
     });
 }
 
 interaccioncontroller.createThis = async (nombre, data) => {
-    const obj = new interaccion();
-    obj.nombre = nombre;
-    obj.data = JSON.stringify(data);
-    await obj.save();
+    getConnection().get('interaccion').push({ _id: v4(), nombre: nombre, data: data }).write();
 }
 
+
 interaccioncontroller.edit = async (req, res) => {
-    const { id } = req.params;
-    await interaccion.findByIdAndUpdate(id, { nombre: req.body.nombre, data: JSON.stringify(req.body.data) }, { new: true });
+    const result = await getConnection().get('interaccion').find({ _id: req.params.id }).assign(req.body).write();
     res.status(200).json({
-        status: 'interaccion guardado'
+        status: 'script guardado'
     });
 }
 
 interaccioncontroller.delete = async (req, res) => {
-    const { id } = req.params;
-    await interaccion.findOneAndRemove({ _id: id });
+    const result = getConnection().get('interaccion').remove({ _id: req.params.id }).write();
     res.status(200).json({
         mensaje: 'interaccion eliminada'
     });

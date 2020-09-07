@@ -1,43 +1,39 @@
-const script = require('../models/script');
+const { getConnection } = require('../database');
+const { v4 } = require('uuid');
 const scriptcontroller = {};
 
-scriptcontroller.getList = async (req, res) => {
-    const scripts = await script.find();
-    res.status(200).json(scripts);
+scriptcontroller.getList = (req, res) => {
+    res.status(200).json(getConnection().get('script').value());
 }
 
 scriptcontroller.scriptdata = async (req, res) => {
-    res.status(200).json((await script.findById(req.params.id).populate('data')).data);
+    const result = await getConnection().get('scriptdata').filter({ script: req.params.id }).value();
+    res.status(200).json(result);
 }
 
-scriptcontroller.getData = async (value) => (await script.findById(value).populate('data')).data;
+scriptcontroller.getData = async (value) => await getConnection().get('scriptdata').filter({ script: value }).value();
 
-scriptcontroller.details = async (req, res) => {
-    const scripts = await script.findById(req.params.id);
-    console.log(scripts);
-    res.status(200).json(scripts);
+scriptcontroller.details = (req, res) => {
+    res.status(200).json(getConnection().get('script').find({ _id: req.params.id }).value());
 }
 
 scriptcontroller.create = async (req, res) => {
-    const nuevoscript = new script();
-    nuevoscript.nombre = req.body.nombre;
-    await nuevoscript.save();
+    const nuevoscript = { _id: v4(), nombre: req.body.nombre };
+    getConnection().get('script').push(nuevoscript).write();
     res.status(200).json({
         status: 'script guardado'
     });
 }
 
 scriptcontroller.edit = async (req, res) => {
-    const { id } = req.params;
-    await script.findByIdAndUpdate(id, { nombre: req.body.nombre }, { new: true });
+    const result = await getConnection().get('script').find({ _id: req.params.id }).assign(req.body).write();
     res.status(200).json({
         status: 'script guardado'
     });
 }
 
 scriptcontroller.delete = async (req, res) => {
-    const { id } = req.params;
-    await script.findOneAndRemove({ _id: id });
+    const result = getConnection().get('script').remove({ _id: req.params.id }).write();
     res.status(200).json({
         mensaje: 'script eliminado'
     });

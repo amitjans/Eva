@@ -16,6 +16,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       $scope.slistado = response.data;
     }, function errorCallback(response) {
     });
+    $http.get('/api/voice').then(function successCallback(response) {
+      $scope.vlistado = response.data;
+    }, function errorCallback(response) {
+    });
   }
 
   $scope.soundlist = function () {

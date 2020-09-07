@@ -330,10 +330,7 @@
                 <label class="col-sm-2 control-label">Voz</label>
                 <div class="col-sm-10">
                   <select name="voice" id="" ng-model="voice" class="form-control">
-                    <option value="es-LA_SofiaV3Voice">Sofia (es_La)</option>
-                    <option value="es-ES_EnriqueV3Voice">Enrique (es_ES)</option>
-                    <option value="es-ES_LauraV3Voice">Laura (es_ES)</option>
-                    <option value="es-US_SofiaV3Voice">Sofia (es_US)</option>
+                    <option ng-repeat="item in vlistado" value="{{item.codigo}}">{{ item.nombre + ' (' + item.idioma + ')' }}</option>
                   </select>
                 </div>
               </div>

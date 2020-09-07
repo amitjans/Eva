@@ -1,38 +1,33 @@
-const scriptdata = require('../models/scriptdata');
-const script = require('../models/script');
+const { getConnection } = require('../database');
+const { v4 } = require('uuid');
 const scriptdatacontroller = {};
 
-scriptdatacontroller.getList = async (req, res) => res.status(200).json(await scriptdata.find().populate('script'));
+scriptdatacontroller.getList = async (req, res) => {
+    res.status(200).json(getConnection().get('scriptdata').value());
+}
 
-scriptdatacontroller.details = async (req, res) => res.status(200).json(await scriptdata.findById(req.params.id).populate('script'));
+scriptdatacontroller.details = async (req, res) => {
+    res.status(200).json(getConnection().get('script').find({ _id: req.params.id }).value());
+}
 
 scriptdatacontroller.create = async (req, res) => {
-    const temp = await script.findById(req.body.script);
-    const obj = new scriptdata(req.body);
-    obj.script = temp;
-    await obj.save();
-    temp.data.push(obj);
-    await temp.save();
+    const obj = req.body;
+    obj._id = v4();
+    getConnection().get('scriptdata').push(obj).write();
     res.status(201).json({
         status: 'scriptdata guardada'
     });
 }
 
 scriptdatacontroller.edit = async (req, res) => {
-    const { id } = req.params;
-    var obj = await scriptdata.findByIdAndUpdate(id, { $set: req.body }, { new: true });
+    const result = await getConnection().get('scriptdata').find({ _id: req.params.id }).assign(req.body).write();
     res.status(200).json({
         status: 'scriptdata actualizado'
     });
 }
 
 scriptdatacontroller.delete = async (req, res) => {
-    const { id } = req.params;
-    var temp = await scriptdata.findOneAndRemove({ _id: id });
-    const s = await script.findById(temp.script._id);
-    var i = s.data.indexOf(temp);
-    s.data.splice(i, 1);
-    await s.save();
+    const result = getConnection().get('scriptdata').remove({ _id: req.params.id }).write();
     res.status(200).json({
         mensaje: 'scriptdata eliminado'
     });

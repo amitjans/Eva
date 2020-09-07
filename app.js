@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./server/routes/index');
-var logs = require('./log');
 const crypto = require('crypto');
 
 var nodeutils = require('./vpl/NodeUtils');
@@ -26,14 +25,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', require('./server/routes/users'));
-
-app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
-app.use('/api/script', require('./server/routes/script.routes.js'));
-app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
 app.use('/api/audio', require('./server/routes/audio.routes.js'));
+app.use('/api/voice', require('./server/routes/voice.routes.js'));
+app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/filters', require('./server/routes/listeningfilters.routes.js'));
+app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
+app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 
-const { mongoose } = require('./server/database');
+// Para usar mongodb
+// const { mongoose } = require('./server/database');
+// Para usar lowdb
+const { createConnection } = require('./server/database');
+createConnection();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -113,22 +116,6 @@ index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	res.status(200).jsonp();
 });
 
-index.get('/interaccion/iniciarInteraccion2', async function (req, res) {
-	res.status(200).jsonp();
-});
-
-index.get('/interaccion/iniciarInteraccion3', async function (req, res) {
-	res.status(200).jsonp();
-});
-
-index.get('/interaccion/iniciarInteraccion4', async function (req, res) {
-	res.status(200).jsonp();
-});
-
-index.get('/interaccion/iniciarInteraccion5', async function (req, res) {
-	res.status(200).jsonp();
-});
-
 var lastlevel = 0;
 
 index.get('/interaccion/iniciaremocion', function (req, res) {
@@ -180,8 +167,6 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 });
 
 var respuesta = [];
-var nodes = [];
-var links = [];
 var s = {};
 var sactual;
 var lemotion = [];
@@ -250,11 +235,8 @@ module.exports.getScript = getScript;
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.getThis(req.query.id);
-
-	let obj = await unify.unify(temp.data.node, temp.data.link);
-
-	await interaccion.createThis(temp.nombre + '_expandida', { node: obj.nodes, link: obj.links });
-
+    let obj = await unify.unifyByInt(temp);
+	await interaccion.createThis(temp.nombre + '_expandida', obj);
 	res.status(200).jsonp();
 });
 
@@ -266,19 +248,15 @@ index.get('/interaccion/audio', async function (req, res) {
 
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	res.status(200).jsonp();
-	const temp = await interaccion.getThis(req.query.id);
 	
 	respuesta = [];
 	counter = {};
 
-	let obj = await unify.unify(temp.data.node, temp.data.link);
-	nodes = obj.nodes;
-	links = obj.links;
-
-	var fnodes = nodeutils.FirstsNodes(links, nodes.slice());
+	let obj = await unify.unifyById(req.query.id);
+	var fnodes = nodeutils.FirstsNodes(obj.link, obj.node.slice());
 
 	social.resetlog();
-	await ProcessFlow(nodes, links, fnodes, 0);
+	await ProcessFlow(obj.node, obj.link, fnodes, 0);
 	social.setVoice('es-LA_SofiaV3Voice');
 	social.savelogs('');
 });
@@ -287,7 +265,6 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
 	let aux = [fnodes[ini]];
 	let n = true;
 	do {
-		console.log(aux);
 		if (aux.length == 1 || aux[0].type !== 'if') {
 			if (aux[0].type === 'for') {
 				if (aux[0].iteraciones <= -1) {
