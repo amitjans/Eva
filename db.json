@@ -137,6 +137,1054 @@
       "campo4": "primera",
       "script": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
       "_id": "442678a7-9cac-4734-a507-a4ff0a918976"
+    },
+    {
+      "campo1": "¿Cómo se llama la Reina del Reino Unido?",
+      "campo2": "Isabel Segunda",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b8056215-010e-44d3-979a-d167944f726f"
+    },
+    {
+      "campo1": "¿En qué continente está Ecuador?",
+      "campo2": "Américano",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "68cf6575-0dde-4353-a2ce-8bb99b737e77"
+    },
+    {
+      "campo1": "¿Dónde originaron los juegos olímpicos?",
+      "campo2": "Grecia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "0ee252a6-6bb0-4083-b038-2ebb5b25765e"
+    },
+    {
+      "campo1": "¿Qué tipo de animal es la ballena?",
+      "campo2": "Mamífero marino",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "9b81c781-0135-4da8-b399-6ec89367c884"
+    },
+    {
+      "campo1": "¿Cuándo acabó la II Guerra Mundial?",
+      "campo2": "1945",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b2988c8b-62f8-4ee6-b035-ecea7bffe7bd"
+    },
+    {
+      "campo1": "¿Quién es el autor de el Quijote?",
+      "campo2": "Miguel de Cervantes",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "137aee8e-400f-4c37-b949-404f5ebf5c1f"
+    },
+    {
+      "campo1": "¿Quién pintó “la última cena”?",
+      "campo2": "Leonardo da Vinci",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "7777ad71-93ba-43ef-95e0-33e6b45c4552"
+    },
+    {
+      "campo1": "¿En qué país se encuentra la torre de Pisa?",
+      "campo2": "Italia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "c994db2e-f213-4797-ac19-b3218edff3a9"
+    },
+    {
+      "campo1": "Qué son los humanos: ¿omnívoros, herbívoros o carnívoros?",
+      "campo2": "Omnívoros",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "43963297-aef6-4a33-b168-2821fcb70f7f"
+    },
+    {
+      "campo1": "¿Cómo se denomina el resultado de la multiplicación?",
+      "campo2": "Producto",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "c560d726-91f9-4760-97c3-ee1c0eda2948"
+    },
+    {
+      "campo1": "¿Cuál es el océano más grande?",
+      "campo2": "El Océano Pacífico",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "a036f0cc-92a3-431d-bc91-1f9daa8d97ef"
+    },
+    {
+      "campo1": "¿Qué año llegó Cristóbal Colón a América?",
+      "campo2": "1492",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "45e632fa-8958-4eac-846f-31e1ee390ab3"
+    },
+    {
+      "campo1": "¿Qué producto cultiva más Guatemala?",
+      "campo2": "Café",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "589084c2-b1e5-407a-b4ee-4654b6d418bd"
+    },
+    {
+      "campo1": "¿Quién es el famoso Rey de Rock en los Estados Unidos?",
+      "campo2": "Elvis Presley",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "acd1ecd1-94be-413d-9b40-b00ad1f4156e"
+    },
+    {
+      "campo1": "¿Cómo se llama el nuevo presidente de los Estados Unidos?",
+      "campo2": "Donald Trump",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "64a260ca-8a61-4904-b074-5e8b8a193ea7"
+    },
+    {
+      "campo1": "¿Qué significa FIFA?",
+      "campo2": "Federación Internacional de Fútbol Asociación",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "ce5eb3f7-bf77-421e-984f-add90643fadb"
+    },
+    {
+      "campo1": "¿En qué se especializa la cartografía?",
+      "campo2": "Mapas",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5cccbc4c-b435-4bf9-a6e9-e08e3dec9ab9"
+    },
+    {
+      "campo1": "¿Cuál es el país más grande del mundo?",
+      "campo2": "Rusia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "ce182086-10d6-4f64-b734-2bb450da1649"
+    },
+    {
+      "campo1": "¿Dónde se encuentra la famosa Torre Eiffel?",
+      "campo2": "París, Francia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5ff73b3b-ebe5-484f-ac5c-8d6b3098ff2a"
+    },
+    {
+      "campo1": "¿Qué deporte practicaba Michael Jordan?",
+      "campo2": "Baloncesto",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "7e0b303f-b26b-4ae3-91f5-e9d8a7652f10"
+    },
+    {
+      "campo1": "¿En qué año comenzó la II Guerra Mundial?",
+      "campo2": "1939",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5ddfb8be-baf2-4cd0-9c90-d819e029c0f4"
+    },
+    {
+      "campo1": "Si 50 es el 100%, ¿cuánto es el 90%?",
+      "campo2": "45",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b900fc7e-cad8-4207-b40d-cc3a5dc1a2c5"
+    },
+    {
+      "campo1": "¿Cuál es tercer planeta en el sistema solar?",
+      "campo2": "Tierra",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "0d0361b9-da95-4cd8-b18c-764bcd1a0ad6"
+    },
+    {
+      "campo1": "¿Qué país tiene forma de bota?",
+      "campo2": "Italia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "c1b23fde-718f-48e4-bacb-b7c7da760908"
+    },
+    {
+      "campo1": "¿Cuál es la moneda del Reino Unido?",
+      "campo2": "libra",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f4dab2e3-cc20-4299-9737-77edd49f6235"
+    },
+    {
+      "campo1": "¿De qué colores es la bandera de México?",
+      "campo2": "Verde blanco rojo",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "be30dab5-fb08-4945-af68-25d84dc12ba8"
+    },
+    {
+      "campo1": "¿Cuál es país más poblado de la Tierra?",
+      "campo2": "China",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "6b141ec5-6e79-4855-9ecf-e11102b268df"
+    },
+    {
+      "campo1": "¿En qué lugar del cuerpo se produce la insulina?",
+      "campo2": "Páncreas",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "7c736b1d-3f1f-4921-bb93-c65cad087dd0"
+    },
+    {
+      "campo1": "¿Quién es Justin Timberlake?",
+      "campo2": "cantante",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "6f30930d-bcfb-4442-a58e-cbeea917f540"
+    },
+    {
+      "campo1": "¿Cuál es el color que representa la esperanza?",
+      "campo2": "Verde",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f978cd46-55cb-4bc0-b2d3-eb58ad4de188"
+    },
+    {
+      "campo1": "¿Qué rama de la Biología estudia los animales?",
+      "campo2": "zoología",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "bc2b9c7b-5f1c-4337-85eb-61cbf1199f03"
+    },
+    {
+      "campo1": "¿Cómo se llama la capital de Mongolia?",
+      "campo2": "Ulan Bator",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "2a2a9c20-ef63-44f1-864a-e84a61a11758"
+    },
+    {
+      "campo1": "¿Cuál es el río más largo del mundo?",
+      "campo2": "Amazonas",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "8ae6ea2e-11eb-4666-b80d-0a62fa9498c8"
+    },
+    {
+      "campo1": "¿Cuantos huesos tiene en el cuerpo humano de un adulto?",
+      "campo2": "206",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "d0be5cf6-d4f6-44a0-8639-b6f2c0ed45fa"
+    },
+    {
+      "campo1": "¿Dónde se encuentra la Sagrada Familia?",
+      "campo2": "Barcelona",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "6e5fe9e8-f29e-4442-a6c4-f000c1c04606"
+    },
+    {
+      "campo1": "¿Quién es el padre del psicoanálisis?",
+      "campo2": "Sigmund Freud",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "d402bd52-046d-4876-8c2a-f2383b9d7b57"
+    },
+    {
+      "campo1": "¿Cuál es el disco más vendido de la historia?",
+      "campo2": "Thriller",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "8183ae4c-451f-4f26-8339-4c19b2565510"
+    },
+    {
+      "campo1": "¿Cómo se llama el himno nacional de Francia?",
+      "campo2": "La Marsellesa",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5d7a810d-14ed-45b2-9f94-999f9b2ae0bf"
+    },
+    {
+      "campo1": "¿Con qué se fabricaba el pergamino?",
+      "campo2": "Piel de animales",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "7943c1f4-a0a5-444e-a21a-5b8dd2b602e1"
+    },
+    {
+      "campo1": "¿A qué país pertenecen los cariocas?",
+      "campo2": "Brasil",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "4ef13add-c2b7-4f27-8387-d4bf559512fa"
+    },
+    {
+      "campo1": "¿Qué veterano músico es la canción Tears in Heaven?",
+      "campo2": "Eric Clapton",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "9b77767b-128c-471e-bec6-ed9aee269e04"
+    },
+    {
+      "campo1": "¿Qué día celebran los cristianos la festividad de la Epifanía de Jesús?",
+      "campo2": "6 de enero",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "557bb60c-8265-4abd-9cdd-1e980c0dac86"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Croacia?",
+      "campo2": "Zagreb",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "87a7c7ea-d9af-43a3-a0ab-8042fe4d9161"
+    },
+    {
+      "campo1": "¿Cuál es el metal más caro del mundo?",
+      "campo2": "Rodio",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5ba2d352-d3cd-4481-8f6a-9d5c90e3e8ac"
+    },
+    {
+      "campo1": "¿En qué país se encuentra el estadio de Wembley?",
+      "campo2": "Reino Unido Londres",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "901d7e9b-e47f-46fa-8720-4d42150137b1"
+    },
+    {
+      "campo1": "¿Quién es el secretario general de la Organización de Naciones Unidas?",
+      "campo2": "António Gutierres",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "c351fda3-305f-42d2-a811-eaec2b0de349"
+    },
+    {
+      "campo1": "¿En qué año se aprobó la actual Constitución española?",
+      "campo2": "1978",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "fc08c02f-9a7e-4b8e-8bd3-a1da43043c5f"
+    },
+    {
+      "campo1": "¿Cuál es el ave voladora más grande del mundo en la actualidad?",
+      "campo2": "Cóndor andino",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "389f369b-d4dc-4e8d-a8b5-86d768ef1e30"
+    },
+    {
+      "campo1": "¿En qué año apareció en el mercado el primer videojuego protagonizado por Super Mario?",
+      "campo2": "1981",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "dd54988f-6f53-4e75-8099-82e264be012c"
+    },
+    {
+      "campo1": "¿Cuál es el idioma más antiguo de los que sobreviven en Europa?",
+      "campo2": "Vasco",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "04766039-53b3-40cb-8eb7-45920b6b5c24"
+    },
+    {
+      "campo1": "¿Cuál es el país con más camellos salvajes?",
+      "campo2": "Australia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "0769444f-35eb-4afb-a5d8-815b952fd17d"
+    },
+    {
+      "campo1": "¿Cuántos corazones tienen los pulpos?",
+      "campo2": "3",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "3589d8bf-c3de-4bc0-a771-60654eeb6f36"
+    },
+    {
+      "campo1": "¿Cuándo se extinguieron los mamuts?",
+      "campo2": "4000 años",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "84a138ea-2d75-44cc-b9eb-d61b71cd9796"
+    },
+    {
+      "campo1": "¿Cuál es el área del arte protagonista en los premios Grammy?",
+      "campo2": "Música",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f7e8c6ba-26b0-40ed-871f-d66c285622ec"
+    },
+    {
+      "campo1": "¿De qué estilo arquitectónico es la Catedral de Notre Dame en París?",
+      "campo2": "Gótico",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f3be023c-d85a-42a9-a4ba-d3707341a068"
+    },
+    {
+      "campo1": "¿Cuántas patas tiene la araña?",
+      "campo2": "8",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "3f7dfee9-dba1-46aa-9f15-5981cfe7c95f"
+    },
+    {
+      "campo1": "¿Cómo se llama el animal más rápido del mundo?",
+      "campo2": "Guepardo",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "2ee93638-ab5a-4028-9f02-b1e207b35645"
+    },
+    {
+      "campo1": "¿Cuál es la ciudad de los rascacielos?",
+      "campo2": "Nueva York",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "92675b23-ddc7-4059-aada-fa64671d77cd"
+    },
+    {
+      "campo1": "¿De qué país es el futbolista Zlatan Ibrahimović?",
+      "campo2": "Suecia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "aca820c9-7a3a-4eaa-a1fc-4acdeb986dd0"
+    },
+    {
+      "campo1": "¿En qué país se encuentra el famoso monumento Taj Mahal?",
+      "campo2": "India",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "54edcc8a-2dc1-4f6c-81ca-23e72618be80"
+    },
+    {
+      "campo1": "¿Cuál es el nombre de la lengua oficial en china?",
+      "campo2": "Mandarín",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "0af20ed9-da1f-47d2-bcaf-5d3b32661bc6"
+    },
+    {
+      "campo1": "Quién va a la cárcel: ¿el imputado, el acusado, el condenado?",
+      "campo2": "Condenado",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "55db0a94-beb1-46cd-b9e6-9ce86b592822"
+    },
+    {
+      "campo1": "¿Quién era el general de los nazis en la Segunda Guerra Mundial?",
+      "campo2": "Adolf Hitler",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "69e55fd6-147a-4d9a-940a-ce0b93fbb29a"
+    },
+    {
+      "campo1": "¿Cómo le llaman a los textos de autores desconocidos?",
+      "campo2": "Anónimo",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f3fa4536-4f1d-4fb5-b3c2-870b8d29e9ef"
+    },
+    {
+      "campo1": "¿Cuál fue el primer metal que empleó el hombre?",
+      "campo2": "Cobre",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f37d4da6-670a-4385-8be8-a5a58e8b535a"
+    },
+    {
+      "campo1": "¿Cómo se llama la estación espacial rusa?",
+      "campo2": "Mir",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f64cd897-d8d6-40fc-a8c7-0917ad24f96b"
+    },
+    {
+      "campo1": "¿Qué instrumento óptico permite ver los astros de cerca?",
+      "campo2": "Telescopio",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "6306202a-486f-4142-a6bf-6cb30233c772"
+    },
+    {
+      "campo1": "¿Cuál es el área del arte protagonista en los Premios Óscar?",
+      "campo2": "Cine",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "434029b3-d65d-4e39-b77f-204b7db933f4"
+    },
+    {
+      "campo1": "¿Cuál es el primero de la lista de los números primos?",
+      "campo2": "2",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "d5c63c7b-bced-4ef4-bc7a-a333bb83cb8a"
+    },
+    {
+      "campo1": "¿Cómo se le llama a una colección de revistas, diarios y publicaciones periódicas?",
+      "campo2": "Hemeroteca",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "973bd1e8-c351-4164-8440-a143cf52a638"
+    },
+    {
+      "campo1": "¿Cuál es el único mamífero capaz de volar?",
+      "campo2": "Murciélago",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "3fb79738-353b-4922-8746-4411a0e680c2"
+    },
+    {
+      "campo1": "¿Cuál es el libro sagrado del Islam?",
+      "campo2": "corán",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "484105cb-48eb-4287-aa5d-92548dc6a277"
+    },
+    {
+      "campo1": "¿Qué es más pequeño, un átomo o una molécula?",
+      "campo2": "átomo",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "801d76a8-af6e-4eb0-b549-8b0e9b01becc"
+    },
+    {
+      "campo1": "¿Qué grasas hacen tan saludable el aceite de oliva?",
+      "campo2": "monoinsaturadas",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "6643b195-2e6f-40e2-99dc-bce37ec5a827"
+    },
+    {
+      "campo1": "¿Qué era el Concorde?",
+      "campo2": "Avión supersónico",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "dcbf9181-013a-47b9-bb2b-3d504a90630d"
+    },
+    {
+      "campo1": "¿Quién ganó el mundial de 2014?",
+      "campo2": "Alemania",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "cb13e368-8376-4fdc-9e7b-717cd7a2b203"
+    },
+    {
+      "campo1": "¿Quién escribió Hamlet?",
+      "campo2": "William Shakespeare",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "9770d91c-e664-42ea-9e2a-480b5b993c97"
+    },
+    {
+      "campo1": "¿Cuál es la moneda oficial de Estados Unidos?",
+      "campo2": "Dólar",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "a1b3535b-0d5a-47a0-95c2-405bc5aafcce"
+    },
+    {
+      "campo1": "¿A qué país pertenece la ciudad de Varsovia?",
+      "campo2": "Polonia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "ccdea09d-ac87-45df-aba6-e2cfa0087d15"
+    },
+    {
+      "campo1": "¿Cuál es la nacionalidad de Pablo Neruda?",
+      "campo2": "Chileno Chile",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "9bcbe24c-cc49-415d-8cb5-a71e9d1a87b1"
+    },
+    {
+      "campo1": "¿A quién le crecía la nariz cuando mentía?",
+      "campo2": "Pinocho",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "8dc2be9e-00b4-4421-8ae8-e8000dac4175"
+    },
+    {
+      "campo1": "¿A que esta asociada la campana de Gauss?",
+      "campo2": "probabilidades",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "70b75e85-d9fe-41cb-9482-91a281aae681"
+    },
+    {
+      "campo1": "¿Quién traicionó a Jesús?",
+      "campo2": "Judas",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f3ff3384-c367-4cee-aa20-50f63c456666"
+    },
+    {
+      "campo1": "¿De qué estado fue emperador Napoleón Bonaparte?",
+      "campo2": "Francia",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "bd664892-bef4-4cba-9b83-7cf88bf035ab"
+    },
+    {
+      "campo1": "¿Cómo se llama el proceso por el cual las plantas obtienen alimento?",
+      "campo2": "Fotosíntesis",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "53e39ec0-699e-409b-9afd-b4d36d8dec9d"
+    },
+    {
+      "campo1": "¿Cómo se llama la energía contenida en el núcleo de los átomos?",
+      "campo2": "Energía nuclear",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "08012c7f-d0ad-44cf-83d9-1c7592623c69"
+    },
+    {
+      "campo1": "¿Dónde está la Casa Blanca?",
+      "campo2": "Washington DC",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "8412930b-027d-4795-87ec-67115b5a2a72"
+    },
+    {
+      "campo1": "¿De qué está recubierto el cuerpo de los peces?",
+      "campo2": "Escamas",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "4d336d88-7ef6-4f4a-9a9c-672a9115d176"
+    },
+    {
+      "campo1": "¿Cuánto vale el número pi?",
+      "campo2": "3,1416",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "74714eb3-9fec-4d65-94c0-93551f7a7d30"
+    },
+    {
+      "campo1": "El triángulo que tiene sus tres lados iguales ¿Cómo se llama?",
+      "campo2": "Equilátero",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "7e0bf331-738f-4a3d-91f5-683cf34ad08f"
+    },
+    {
+      "campo1": "¿Cuáles son las notas musicales?",
+      "campo2": "Do re mi fa sol la si",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "f28b48d8-fc1c-43a7-9403-5bae30662b25"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Dinamarca?",
+      "campo2": "Copenhague",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "ba31c980-ba71-4520-b312-401c63d1e608"
+    },
+    {
+      "campo1": "¿Quién es el protagonista de la película Rocky?",
+      "campo2": "Sylvester Stallone",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "2b102824-af8b-4c2a-844d-cea9a7ddd929"
+    },
+    {
+      "campo1": "¿De qué lengua proviene el español?",
+      "campo2": "Latín",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "e0872e30-66ea-43a2-b0b9-76a343cc51c5"
+    },
+    {
+      "campo1": "¿Quién es el presidente de España?",
+      "campo2": "Pedro Sánchez",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "9aedac77-0167-456d-814c-b4638576dbd1"
+    },
+    {
+      "campo1": "¿En qué país se usó la primera bomba atómica en combate?",
+      "campo2": "Hiroshima",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "327ac5a9-e0f1-4455-a328-9712e93a5a14"
+    },
+    {
+      "campo1": "¿Cuántos años tiene un lustro?",
+      "campo2": "5",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "adb06a52-7380-49d5-8343-0f40b48fa34e"
+    },
+    {
+      "campo1": "¿Qué es más grande un átomo o una célula?",
+      "campo2": "célula",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "8c9cda2f-9296-4040-90c0-0fe1f058c2f6"
+    },
+    {
+      "campo1": "¿Dónde se encuentra la capa de ozono?",
+      "campo2": "Atmósfera",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "62839545-b14e-4b44-9137-b80dfa3ba25f"
+    },
+    {
+      "campo1": "¿Quién sabía que no sabía nada?",
+      "campo2": "Platón",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "35dff7cd-aa68-47c3-a320-037bfc17ae33"
+    },
+    {
+      "campo1": "¿En qué país se encuentra la Universidad de Cambridge?",
+      "campo2": "Reino Unido",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "55b958fb-a5bd-44b6-80ad-0e18e36a037d"
+    },
+    {
+      "campo1": "¿Qué es un ovíparo?",
+      "campo2": "Un animal que nace de un huevo",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "cab318e5-cc0a-4e9e-b5aa-2d0e42336bda"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Francia?",
+      "campo2": "París",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "a2f47f98-4b8c-4e23-8cd7-783e08300a3a"
+    },
+    {
+      "campo1": "¿Cuándo empezó la Primera Guerra Mundial?",
+      "campo2": "1914",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "ad1c71d2-2341-421f-8663-1b94cec8ca28"
+    },
+    {
+      "campo1": "¿Qué deporte practica profesionalmente Roger Federer?",
+      "campo2": "Tenis",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b1ec1114-ccef-40f3-82e1-61ec8a3a83a9"
+    },
+    {
+      "campo1": "¿Qué instrumento tocaba Paco de Lucía?",
+      "campo2": "Guitarra",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "2aa9ba7a-3b2d-4682-b81c-52f9daa738bb"
+    },
+    {
+      "campo1": "¿Qué es un animal carnívoro?",
+      "campo2": "Que come carne",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "406e422b-4249-40b3-a946-70d94e7119b8"
+    },
+    {
+      "campo1": "¿Cómo se llama el procedimiento de subir la bandera?",
+      "campo2": "Izar",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "a38520f3-4090-4258-a21d-87d011bb160a"
+    },
+    {
+      "campo1": "¿Cómo se llama el estadio del F.C. Barcelona?",
+      "campo2": "Camp Nou",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5c41a8cd-42d3-448f-8983-93e7a1c2dbe8"
+    },
+    {
+      "campo1": "¿Qué enfermedad padecía Stephen Hawking?",
+      "campo2": "Esclerosis Lateral Amiotrófica",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b3a68a4a-2708-44ca-9ac3-1808dbf09e55"
+    },
+    {
+      "campo1": "¿Cómo se llama el fundador de Facebook?",
+      "campo2": "Mark Zuckerberg",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "e6b99cf7-9324-4956-8ffa-34cb865298de"
+    },
+    {
+      "campo1": "¿Qué es un ebook?",
+      "campo2": "Libro en formato digital",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "15fc43e5-221d-4692-aa75-5e48d54e9556"
+    },
+    {
+      "campo1": "¿En qué isla está situado el Teide?",
+      "campo2": "Tenerife",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "67b0606c-a6fe-4366-8c50-80d029460378"
+    },
+    {
+      "campo1": "¿Cuáles son los dos países con mayor cantidad de musulmanes?",
+      "campo2": "Indonesia India",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "5e3c5e54-47a9-4981-846a-4ba1751da26c"
+    },
+    {
+      "campo1": "¿Cuál es el animal que tiene mayor facilidad para repetir las frases y palabras que escucha?",
+      "campo2": "Loro Cuervo",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "77137553-77a3-4d24-80f3-880a95756936"
+    },
+    {
+      "campo1": "¿Existen animales inmortales?",
+      "campo2": "La Medusa Turritopsis nutricula",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b30ecaf7-0328-486f-a35f-2fcd163ffcab"
+    },
+    {
+      "campo1": "¿Cuál es el país con mayor porcentaje de budistas?",
+      "campo2": "Camboya",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b08a3b89-0bde-4022-b607-e3f6ffd4edd0"
+    },
+    {
+      "campo1": "¿Cuál es el ave voladora más pesada del mundo en la actualidad?",
+      "campo2": "Avutarda kori",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "23e0b2eb-0da3-4d89-abcd-fb1812632f60"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Canadá?",
+      "campo2": "Ottawa",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "9185f16c-1d85-4b04-9ecc-53373ec8e699"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Rusia?",
+      "campo2": "Moscú",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "c345e142-d859-47f9-9117-9e6fe592bc3f"
+    },
+    {
+      "campo1": "¿Cuál es la capital de España?",
+      "campo2": "Madrid",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "4d16ba6a-2948-469a-b87b-4c58b6ce8c59"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Colombia?",
+      "campo2": "Bogotá",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "3034ee07-df86-4cbe-a1b9-9c96ba9bd10c"
+    },
+    {
+      "campo1": "¿Cuál es la capital de EU?",
+      "campo2": "Washington DC",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "cc98c667-14da-4911-9d6d-2c6b249adfbf"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Argentina?",
+      "campo2": "Buenos Aires",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "ca794bad-f69b-47bd-91dd-be145e0126b3"
+    },
+    {
+      "campo1": "¿Cuál es la capital de Perú?",
+      "campo2": "Lima",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "e9784ba6-c9d6-4c9d-8f65-1db0cee03b04"
+    },
+    {
+      "campo1": "¿Con cuántos países hace frontera México?",
+      "campo2": "3",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "bbb42ca4-d2c5-4677-b735-d62d930415fe"
+    },
+    {
+      "campo1": "¿Qué es un mitómano?",
+      "campo2": "mentiroso",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "10fc0851-8fd8-4818-96cd-c03c3fee25cd"
+    },
+    {
+      "campo1": "En la tabla periódica CA representa a:",
+      "campo2": "Calcio",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "b30c1b20-2d8b-41a5-9d14-dc6272c3edec"
+    },
+    {
+      "campo1": "¿Cuál es el estado más grande de México?",
+      "campo2": "Chihuahua",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "28de95d9-8f5a-4534-a0bf-158ecf8ae3b0"
+    },
+    {
+      "campo1": "¿En que fecha ocurrió la masacre de Tlatelolco?",
+      "campo2": "2 de octubre de 1968",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "c622bb4f-eefa-451e-9613-2d1e952e4b93"
+    },
+    {
+      "campo1": "Nombre de los Niños Héroes",
+      "campo2": "Agustín Melgar Fernando Montes de Oca Francisco Márquez Juan de la Barrera Juan Escutia Vicente Suárez",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "31c77fe7-d575-424e-aab8-0ccac68a72d8"
+    },
+    {
+      "campo1": "¿Cuál es la montaña más alta del mundo?",
+      "campo2": "Everest",
+      "campo3": "",
+      "campo4": "",
+      "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
+      "_id": "67a41102-654f-4999-89e1-7b711a89ef9a"
     }
   ],
   "interaccion": [

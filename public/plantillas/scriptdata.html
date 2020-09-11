@@ -28,36 +28,80 @@
                         </small>
                     </h2>
                 </div>
-                <div class="card-body table-responsive">
-                    <table class="table" id="data-table-basic">
-                        <thead>
-                            <tr>
-                                <th>Campo 1</th>
-                                <th>Campo 2</th>
-                                <th>Campo 3</th>
-                                <th>Campo 4</th>
-                                <th colspan="2">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="l in listado">
-                                <td>{{ l.campo1 }}</td>
-                                <td>{{ l.campo2 }}</td>
-                                <td>{{ l.campo3 }}</td>
-                                <td>{{ l.campo4 }}</td>
-                                <td><span class="btn btn-default" ng-click="update(l)"><i
-                                            class="fa fa-edit fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i
-                                            class="fa fa-trash fa-sm"></i></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div>
+                    <div id="example_wrapper" class="dataTables_wrapper">
+                        <div class="dataTables_length" id="example_length">
+                            <label>Mostrar
+                                <select name="example_length" aria-controls="example" class="" ng-model="limit"
+                                    ng-change="dataTable()">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> registros</label></div>
+                        <div id="example_filter" class="dataTables_filter">
+                            <label>Buscar:<input type="search" class="" placeholder="" aria-controls="example"
+                                    ng-model="q" ng-change="dataTable()"></label>
+                        </div>
+                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                            aria-describedby="example_info">
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        style="width: 225px;"> Campo 1</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        style="width: 225px;"> Campo 2</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        style="width: 225px;"> Campo 3</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        style="width: 225px;"> Campo 4</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="2"
+                                        style="width: 100px;">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
+                                    <td>{{ l.campo1 }}</td>
+                                    <td>{{ l.campo2 }}</td>
+                                    <td>{{ l.campo3 }}</td>
+                                    <td>{{ l.campo4 }}</td>
+                                    <td><span class="btn btn-default" ng-click="update(l)"><i
+                                                class="fa fa-edit fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="delete(l._id)"><i
+                                                class="fa fa-trash fa-sm"></i></span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">Campo 1</th>
+                                    <th rowspan="1" colspan="1">Campo 2</th>
+                                    <th rowspan="1" colspan="1">Campo 3</th>
+                                    <th rowspan="1" colspan="1">Campo 4</th>
+                                    <th rowspan="1" colspan="2">Opciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de
+                            {{ ((to == 0) ? 0 : from) }} a
+                            {{ to > temp.length ? temp.length : to }} de
+                            {{ temp.length }} registros</div>
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
+                                class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}"
+                                aria-controls="example" data-dt-idx="0" tabindex="-1" id="example_previous"
+                                ng-click="dataTable(-1)">Anterior</a>
+                            <!-- <span>
+                                <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
+                                <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
+                            </span> -->
+                            <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}"
+                                aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next"
+                                ng-click="dataTable(1)">Siguiente</a></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Emocion -->
+    <!-- Modal Script -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -72,28 +116,32 @@
                             <label class="col-sm-2 control-label">Campo 1</label>
                             <div class="input-group col-sm-9">
                                 <input type="text" class="form-control" ng-model="c1">
-                                <div class="input-group-addon" ng-click="speak(c1)"><i class="fa fa-volume-up fa-sm"></i></div>
+                                <div class="input-group-addon" ng-click="speak(c1)"><i
+                                        class="fa fa-volume-up fa-sm"></i></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Campo 2</label>
                             <div class="input-group col-sm-9">
                                 <input type="text" class="form-control" ng-model="c2">
-                                <div class="input-group-addon" ng-click="speak(c2)"><i class="fa fa-volume-up fa-sm"></i></div>
+                                <div class="input-group-addon" ng-click="speak(c2)"><i
+                                        class="fa fa-volume-up fa-sm"></i></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Campo 3</label>
                             <div class="input-group col-sm-9">
                                 <input type="text" class="form-control" ng-model="c3">
-                                <div class="input-group-addon" ng-click="speak(c3)"><i class="fa fa-volume-up fa-sm"></i></div>
+                                <div class="input-group-addon" ng-click="speak(c3)"><i
+                                        class="fa fa-volume-up fa-sm"></i></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Campo 4</label>
                             <div class="input-group col-sm-9">
                                 <input type="text" class="form-control" ng-model="c4">
-                                <div class="input-group-addon" ng-click="speak(c4)"><i class="fa fa-volume-up fa-sm"></i></div>
+                                <div class="input-group-addon" ng-click="speak(c4)"><i
+                                        class="fa fa-volume-up fa-sm"></i></div>
                             </div>
                         </div>
                     </div>
@@ -107,5 +155,5 @@
             </div>
         </div>
     </div>
-    <!-- Modal Emocion -->
+    <!-- Modal Script -->
 </div>

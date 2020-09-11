@@ -14,9 +14,7 @@ interaccioncontroller.details = async (req, res) => {
 interaccioncontroller.getThis = async (value) => getConnection().get('interaccion').find({ _id: value }).value();
 
 interaccioncontroller.create = async (req, res) => {
-    const obj = req.body;
-    obj._id = v4();
-    getConnection().get('interaccion').push(obj).write();
+    getConnection().get('interaccion').push(Object.assign({ _id: v4() }, req.body)).write();
     res.status(201).json({
         status: 'scriptdata guardada'
     });
