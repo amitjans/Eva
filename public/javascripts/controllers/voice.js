@@ -81,11 +81,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
             }
         }
 
-        if ($scope.temp.length < $scope.to) {
-            $scope.to = $scope.temp.length;
-        } else {
-            $scope.to = $scope.limit * ($scope.page + 1);
-        }
+        $scope.to = ($scope.temp.length < $scope.to) ? $scope.temp.length : $scope.limit * ($scope.page + 1);
 
         $scope.sublist = $scope.temp.slice($scope.from - 1, $scope.to);
     }

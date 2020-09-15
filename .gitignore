@@ -107,4 +107,4 @@ credencial.json
 config-services.js
 git.sh
 temp/*
-server/database.js
+public/javascripts/go.js
