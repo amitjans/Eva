@@ -53,7 +53,7 @@
                         </table>
                         <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de
                             {{ ((to == 0) ? 0 : from) }} a
-                            {{ to }} de
+                            {{ to > temp.length ? temp.length : to }} de
                             {{ temp.length }} registros</div>
                         <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
                                 class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}"
