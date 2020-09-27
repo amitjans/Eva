@@ -5,7 +5,7 @@ eva.controller('script', ['$scope', '$http', function ($scope, $http) {
     $scope.updateid;
 
     $scope.list = function () {
-      $http.get('/api/script').then(function successCallback(response) {
+      $http.get('/api/common?db=script').then(function successCallback(response) {
           $scope.listado = response.data;
       }, function errorCallback(response) {
       });
@@ -13,7 +13,7 @@ eva.controller('script', ['$scope', '$http', function ($scope, $http) {
 
     $scope.create = function () {
       var json = { nombre: $scope.nombre };
-      $http.post('/api/script', json).then(function successCallback(response) {
+      $http.post('/api/common?db=script', json).then(function successCallback(response) {
         $scope.nombre = '';
         $('#myModal').modal('hide');
         $scope.list();
@@ -31,7 +31,7 @@ eva.controller('script', ['$scope', '$http', function ($scope, $http) {
 
     $scope.updatesend = function () {
       var json = { nombre: $scope.nombre };
-      $http.put('/api/script/' + $scope.updateid, json).then(function successCallback(response) {
+      $http.put('/api/common/' + $scope.updateid + '?db=script', json).then(function successCallback(response) {
         $scope.nombre = '';
         $scope.icon = true;
         $('#myModal').modal('hide');
@@ -42,7 +42,7 @@ eva.controller('script', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-      $http.delete('/api/script/' + id).then(function successCallback(response) {
+      $http.delete('/api/common/' + id + '?db=script').then(function successCallback(response) {
         $scope.list();
       }, function errorCallback(response) {
       });;

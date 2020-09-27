@@ -2628,5 +2628,104 @@
       "codigo": "es-US_SofiaV3Voice",
       "nombre": "Sofia"
     }
+  ],
+  "led": [
+    {
+      "_id": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+      "nombre": "Parar",
+      "codigo": "stop"
+    },
+    {
+      "_id": "6a42a11e-806d-4152-a050-69ff9c8bb396",
+      "nombre": "Escuchar",
+      "codigo": "escuchaT"
+    },
+    {
+      "_id": "97e674ba-c607-449d-9a09-56beaca59a76",
+      "nombre": "Hablar",
+      "codigo": "hablaT_v2"
+    },
+    {
+      "_id": "1b8b1fa9-7ff4-416d-879c-8281f2bf0b3b",
+      "nombre": "Ira",
+      "codigo": "anger"
+    },
+    {
+      "_id": "8d01c1cf-a6d4-4e91-b126-b5a42c16bbe8",
+      "nombre": "Ira V2",
+      "codigo": "anger_v2"
+    },
+    {
+      "_id": "bdb4762a-73b9-4929-b7a2-297642dfad22",
+      "nombre": "Alegría",
+      "codigo": "joy"
+    },
+    {
+      "_id": "9ae9e8f9-3d62-4ff7-8647-e311aca4fb55",
+      "nombre": "Alegria V2",
+      "codigo": "joy_v2"
+    },
+    {
+      "_id": "4b489d28-41b3-465c-abc8-255e71adbad0",
+      "nombre": "Tristeza",
+      "codigo": "sad"
+    },
+    {
+      "_id": "17c2c31e-8662-402e-9bdf-ce490aab7b84",
+      "nombre": "Tristeza v2",
+      "codigo": "sad_v2"
+    },
+    {
+      "_id": "5fd13f4d-63c7-47dd-a01f-571ba8e8b87e",
+      "nombre": "Sorpresa",
+      "codigo": "surprise"
+    },
+    {
+      "_id": "d3d4c51c-7c07-4d30-8e32-77bc5a32969b",
+      "nombre": "Procesa",
+      "codigo": "procesa"
+    }
+  ],
+  "mov": [
+    {
+      "_id": "8b759b43-b6a1-41fa-882d-b550c5c95772",
+      "nombre": "Si",
+      "codigo": "n"
+    },
+    {
+      "_id": "a2e210e1-b2de-4a52-929e-d6421c92068a",
+      "nombre": "No",
+      "codigo": "s"
+    },
+    {
+      "_id": "5c549ee1-77e1-44bb-8d70-8c32e4a1177d",
+      "nombre": "Centrar",
+      "codigo": "c"
+    },
+    {
+      "_id": "a29499e8-994a-4f95-a62d-e840741a849b",
+      "nombre": "Derecha",
+      "codigo": "r"
+    },
+    {
+      "_id": "426f0449-211f-43c5-8e30-c19c8ac6768e",
+      "nombre": "Izquierda",
+      "codigo": "l"
+    },
+    {
+      "_id": "aeb7fcf6-b701-48fa-9a74-a8a2d78228aa",
+      "nombre": "Arriba",
+      "codigo": "u"
+    },
+    {
+      "_id": "08fafec6-2b69-4aef-8a2a-509a8db8f7d2",
+      "nombre": "Abajo",
+      "codigo": "d"
+    },
+    {
+      "_id": "738efdd7-9f09-45ab-bb3d-d0d09e6d6ba6",
+      "nombre": "Ira",
+      "codigo": "a"
+    }
   ]
 }

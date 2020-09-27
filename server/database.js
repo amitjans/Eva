@@ -6,7 +6,7 @@ let db;
 async function createConnection() {
     const adapter = new FileAsync('db.json');
     db = await low(adapter);
-    db.defaults({script: [], scriptdata: [], interaccion: [], voice: []}).write();
+    db.defaults({script: [], scriptdata: [], interaccion: [], voice: [], led: [], mov: []}).write();
 }
 
 const getConnection = () => db;

@@ -21,7 +21,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.slist = function () {
-        $http.get('/api/script').then(function successCallback(response) {
+        $http.get('/api/common?db=script').then(function successCallback(response) {
             $scope.slistado = response.data;
         }, function errorCallback(response) {
         });
@@ -29,7 +29,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
 
     $scope.create = function () {
         var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
-        $http.post('/api/scriptdata', json).then(function successCallback(response) {
+        $http.post('/api/common?db=scriptdata', json).then(function successCallback(response) {
             $scope.c1 = '';
             $scope.c2 = '';
             $scope.c3 = '';
@@ -53,7 +53,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
 
     $scope.updatesend = function () {
         var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
-        $http.put('/api/scriptdata/' + $scope.updateid, json).then(function successCallback(response) {
+        $http.put('/api/common/' + $scope.updateid + '?db=scriptdata', json).then(function successCallback(response) {
             $scope.c1 = '';
             $scope.c2 = '';
             $scope.c3 = '';
@@ -67,7 +67,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/scriptdata/' + id).then(function successCallback(response) {
+        $http.delete('/api/common/' + id + '?db=scriptdata').then(function successCallback(response) {
             $scope.list();
         }, function errorCallback(response) {
         });;
