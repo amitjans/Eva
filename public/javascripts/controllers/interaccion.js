@@ -1,8 +1,11 @@
 eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.listado = [];
+  $scope.led = [];
+  $scope.mov = [];
   $scope.accion = 'Agregar';
   $scope.icon = true;
   $scope.updateid;
+  var modalname = ['', 'Emoción', 'Hablar', 'Escuchar', 'Tiempo', 'Ciclo', 'Condición', 'Movimiento', 'Interacción', 'Script', 'Audio', 'Animación Led', 'Voz', 'Contador', 'Api Rest'];
 
   $scope.list = function () {
     $http.get('/api/interaccion').then(function successCallback(response) {
@@ -12,24 +15,26 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.slist = function () {
-    $http.get('/api/script').then(function successCallback(response) {
+    $http.get('/api/common?db=script').then(function successCallback(response) {
       $scope.slistado = response.data;
     }, function errorCallback(response) {
     });
-    $http.get('/api/voice').then(function successCallback(response) {
+    $http.get('/api/common?db=voice').then(function successCallback(response) {
       $scope.vlistado = response.data;
     }, function errorCallback(response) {
     });
-  }
-
-  $scope.soundlist = function () {
+    $http.get('api/common?db=led').then(function successCallback(response) {
+      $scope.led = response.data;
+    }, function errorCallback(response) {
+    });
+    $http.get('/api/common?db=mov').then(function successCallback(response) {
+      $scope.mov = response.data;
+    }, function errorCallback(response) {
+    });
     $http.get('/api/audio').then(function successCallback(response) {
       $scope.soundlistado = response.data;
     }, function errorCallback(response) {
     });
-  }
-
-  $scope.filters = function () {
     $http.get('/api/filters').then(function successCallback(response) {
       $scope.filterslist = response.data;
     }, function errorCallback(response) {
@@ -149,47 +154,15 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     if (nuevo) {
       $scope.key = 0;
     }
+    $scope.ModalName = modalname[value];
     switch (value) {
-      case 1:
-        $scope.ModalName = 'Emoción';
-        break;
-      case 2:
-        $scope.ModalName = 'Hablar';
-        break;
-      case 3:
-        $scope.ModalName = 'Escuchar';
-        break;
-      case 4:
-        $scope.ModalName = 'Tiempo';
-        break;
-      case 5:
-        $scope.ModalName = 'Ciclo';
-        break;
-      case 6:
-        $scope.ModalName = 'Condición';
-        break;
-      case 7:
-        $scope.ModalName = 'Movimiento';
-        break;
-      case 8:
-        $scope.ModalName = 'Interacción';
-        break;
       case 9:
-        $scope.ModalName = 'Script';
         $scope.ncommon = 'Aleatorio';
         break;
       case 10:
-        $scope.ModalName = 'Audio';
         $scope.ncommon = 'Esperar';
         break;
-      case 11:
-        $scope.ModalName = 'Animación Led';
-        break;
-      case 12:
-        $scope.ModalName = 'Voz';
-        break;
       case 13:
-        $scope.ModalName = 'Contador';
         $scope.cnname = '';
         $scope.counters = [];
         let temp = node.filter(f => f.type === 'counter');
@@ -198,9 +171,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
             $scope.counters.push(element.count);
           }
         });
-        break;
-      case 14:
-        $scope.ModalName = 'Api Rest';
         break;
       default:
         break;
@@ -286,30 +256,11 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.setint = function () {
     let temp = '';
-    switch ($scope.int) {
-      case '0':
-        temp = 'Obtener Nombre';
-        break;
-      case '1':
-        temp = 'Ultimatum';
-        break;
-      case '2':
-        temp = 'Coches Autonomos';
-        break;
-      case '3':
-        temp = 'Preguntas y Respuestas';
-        break;
-      case '4':
-        temp = 'Platica';
-        break;
-      default:
-        $scope.listado.forEach(element => {
-          if (element._id === $scope.int) {
-            temp = element.nombre;
-          }
-        });
-        break;
-    }
+    $scope.listado.forEach(element => {
+      if (element._id === $scope.int) {
+        temp = element.nombre;
+      }
+    });
     node.push({ key: Date.now(), name: temp, type: "int", int: $scope.int, color: "lightblue", isGroup: false, group: $scope.group });
   }
 
@@ -406,8 +357,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.list();
   $scope.slist();
-  $scope.soundlist();
-  $scope.filters();
   $scope.ccommon = false;
   $scope.voice = 'es-LA_SofiaV3Voice';
   $scope.key = 0;

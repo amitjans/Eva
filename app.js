@@ -25,12 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', require('./server/routes/users'));
-app.use('/api/audio', require('./server/routes/audio.routes.js'));
-app.use('/api/voice', require('./server/routes/voice.routes.js'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
+app.use('/api/audio', require('./server/routes/audio.routes.js'));
 app.use('/api/filters', require('./server/routes/listeningfilters.routes.js'));
-app.use('/api/scriptdata', require('./server/routes/scriptdata.routes.js'));
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
+app.use('/api/common', require('./server/routes/common.routes.js'));
 
 // Para usar mongodb
 // const { mongoose } = require('./server/database');

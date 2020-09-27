@@ -255,14 +255,7 @@
                 <label class="col-sm-2 control-label">Movimiento</label>
                 <div class="col-sm-10">
                   <select name="nivel" id="" ng-model="movement" class="form-control">
-                    <option value="n">Si</option>
-                    <option value="s">No</option>
-                    <option value="c">Centrar</option>
-                    <option value="r">Derecha</option>
-                    <option value="l">Izquierda</option>
-                    <option value="u">Arriba</option>
-                    <option value="d">Abajo</option>
-                    <option value="a">Ira</option>
+                    <option ng-repeat="m in mov" value="{{ m.codigo }}">{{ m.nombre }}</option>
                   </select>
                 </div>
               </div>
@@ -309,17 +302,7 @@
                 <label class="col-sm-2 control-label">Leds</label>
                 <div class="col-sm-10">
                   <select name="leds" id="" ng-model="leds" class="form-control">
-                    <option value="stop">Parar</option>
-                    <option value="escuchaT">Escuchar</option>
-                    <option value="hablaT_v2">Hablar</option>
-                    <option value="anger">Ira</option>
-                    <option value="anger_v2">Ira 2</option>
-                    <option value="joy">Alegria</option>
-                    <option value="joy_v2">Alegria 2</option>
-                    <option value="sad">Tristeza</option>
-                    <option value="sad_v2">Tristeza v2</option>
-                    <option value="surprise">Sorpresa</option>
-                    <option value="procesa">Procesa</option>
+                    <option ng-repeat="m in led" value="{{ m.codigo }}">{{ m.nombre }}</option>
                   </select>
                 </div>
               </div>

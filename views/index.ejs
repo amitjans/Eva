@@ -48,6 +48,8 @@
                       </li>
                     <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/#!/audio">Audios</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'voice'}"><a href="/#!/voice">Voz</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'led'}"><a href="/#!/led">Led</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/#!/mov">Movimiento</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -78,6 +80,8 @@
 
     <script type="text/javascript" src="/javascripts/app.js"></script>
     <script type="text/javascript" src="/javascripts/controlAngular.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/led.js"></script>
+    <script type="text/javascript" src="/javascripts/controllers/mov.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/audio.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/voice.js"></script>
     <script type="text/javascript" src="/javascripts/controllers/script.js"></script>
