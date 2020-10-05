@@ -8,7 +8,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   var modalname = ['', 'Emoción', 'Hablar', 'Escuchar', 'Tiempo', 'Ciclo', 'Condición', 'Movimiento', 'Interacción', 'Script', 'Audio', 'Animación Led', 'Voz', 'Contador', 'Api Rest'];
 
   $scope.list = function () {
-    $http.get('/api/interaccion').then(function successCallback(response) {
+    $http.get('/api/common?db=interaccion').then(function successCallback(response) {
       $scope.listado = response.data;
     }, function errorCallback(response) {
     });
@@ -51,7 +51,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.create = function () {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
-    $http.post('/api/interaccion', json).then(function successCallback(response) {
+    $http.post('/api/common?db=interaccion', json).then(function successCallback(response) {
       $scope.reset();
       $scope.list();
       id = 0;
@@ -80,14 +80,14 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.updatesend = function () {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
-    $http.put('/api/interaccion/' + $scope.updateid, json).then(function successCallback(response) {
+    $http.put('/api/common/' + $scope.updateid + '?db=interaccion', json).then(function successCallback(response) {
     }, function errorCallback(response) {
     });
   }
 
   $scope.updatesendx = function () {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
-    $http.put('/api/interaccion/' + $scope.updateid, json).then(function successCallback(response) {
+    $http.put('/api/common/' + $scope.updateid + '?db=interaccion', json).then(function successCallback(response) {
       $scope.updateid = '';
       $scope.accion = 'Agregar';
       $scope.icon = true;
@@ -101,7 +101,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.delete = function (id) {
-    $http.delete('/api/interaccion/' + id).then(function successCallback(response) {
+    $http.delete('/api/common/' + id + '?db=interaccion').then(function successCallback(response) {
       $scope.list();
     }, function errorCallback(response) {
     });
