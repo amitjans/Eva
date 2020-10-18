@@ -95,22 +95,22 @@
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" ng-click="showmodal(12)">Voz</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(2)">Hablar</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(3)">Escuchar</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(1)">Emoci&oacute;n</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(7)">Movimiento</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(11)">Leds</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(10)">Audio</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('voice')">Voz</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('speak')">Hablar</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('listen')">Escuchar</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('emotion')">Emoci&oacute;n</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('mov')">Movimiento</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('led')">Leds</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('sound')">Audio</button>
                 <br>
                 <br>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(5)">Ciclo</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(6)">Condici&oacute;n</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(4)">Esperar</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(8)">Interacci&oacute;n</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(9)">Script</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(13)">Contador</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal(14)">Api Rest</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('for')">Ciclo</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('if')">Condici&oacute;n</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('wait')">Esperar</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('int')">Interacci&oacute;n</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('script')">Script</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('counter')">Contador</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('api')">Api Rest</button>
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Agregar {{ ModalName }}</h4>
+            <h4 class="modal-title" id="myModalLabel"> {{ accion }} {{ ModalName }}</h4>
           </div>
           <div class="modal-body">
             <div class="form-horizontal" role="form">
@@ -148,7 +148,7 @@
                 </div>
               </div>
               <!-- Modal Emocion -->
-              <div class="form-group" ng-show="modal == 1">
+              <div class="form-group" ng-show="modal == 'emotion'">
                 <label class="col-sm-2 control-label">Emoci&oacute;n</label>
                 <div class="col-sm-10">
                   <select name="emocion" id="" ng-model="emocion" class="form-control">
@@ -160,14 +160,14 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 1">
+              <div class="form-group" ng-show="modal == 'emotion'">
                 <label class="col-sm-2 control-label">Velocidad</label>
                 <div class="col-sm-10">
                   <input type="number" min="0" class="form-control input-sm" ng-model="velocidad"
                     placeholder="Velocidad">
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 1 && emocion != 'ini' && !!emocion">
+              <div class="form-group" ng-show="modal == 'emotion' && emocion != 'ini' && !!emocion">
                 <label class="col-sm-2 control-label">Nivel</label>
                 <label class="radio-inline col-sm-offset-1">
                   <input type="radio" name="level" id="inlineRadio1" ng-model="level" value="0"> Solo Ojos
@@ -182,7 +182,7 @@
               <!-- Modal Emocion -->
 
               <!-- Modal Hablar -->
-              <div class="form-group" ng-show="modal == 2">
+              <div class="form-group" ng-show="modal == 'speak'">
                 <label class="col-sm-2 control-label">Di&aacute;logo</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="texto" placeholder="Texto a decir">
@@ -196,7 +196,7 @@
               <!-- Modal Hablar -->
 
               <!-- Modal Escuchar -->
-              <div class="form-group" ng-show="modal == 3">
+              <div class="form-group" ng-show="modal == 'listen'">
                 <label class="col-sm-2 control-label">Obtener</label>
                 <div class="col-sm-10">
                   <select name="listenopt" id="" ng-model="listenopt" class="form-control">
@@ -208,7 +208,7 @@
               <!-- Modal Escuchar -->
 
               <!-- Modal Tiempo -->
-              <div class="form-group" ng-show="modal == 4">
+              <div class="form-group" ng-show="modal == 'wait'">
                 <label class="col-sm-2 control-label">Tiempo (ms)</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="time"
@@ -218,7 +218,7 @@
               <!-- Modal Tiempo -->
 
               <!-- Modal Ciclo -->
-              <div class="form-group" ng-show="modal == 5">
+              <div class="form-group" ng-show="modal == 'for'">
                 <label class="col-sm-2 control-label">Iteraciones</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="it" placeholder="Cantidad de iteraciones"
@@ -230,14 +230,14 @@
               <!-- Modal Ciclo -->
 
               <!-- Modal Condicion -->
-              <div class="form-group" ng-show="modal == 6">
+              <div class="form-group" ng-show="modal == 'if'">
                 <label class="col-sm-2 control-label">Condici&oacute;n</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="texto" ng-change="autoif()" placeholder="Condición">
                 </div>
                 <p class="col-sm-offset-3 help-block">Utiliza #&NestedLessLess;contador&NestedGreaterGreater; para comparar contra este.</p>
               </div>
-              <div class="form-group" ng-show="modal == 6">
+              <div class="form-group" ng-show="modal == 'if'">
                 <label class="col-sm-2 control-label">Comparaci&oacute;n</label>
                 <div class="col-sm-10">
                   <select name="ifopt" id="" ng-model="ifopt" class="form-control">
@@ -251,7 +251,7 @@
               <!-- Modal Condicion -->
 
               <!-- Modal Movimiento -->
-              <div class="form-group" ng-show="modal == 7">
+              <div class="form-group" ng-show="modal == 'mov'">
                 <label class="col-sm-2 control-label">Movimiento</label>
                 <div class="col-sm-10">
                   <select name="nivel" id="" ng-model="movement" class="form-control">
@@ -262,7 +262,7 @@
               <!-- Modal Movimiento -->
 
               <!-- Modal Interaccion -->
-              <div class="form-group" ng-show="modal == 8">
+              <div class="form-group" ng-show="modal == 'int'">
                 <label class="col-sm-2 control-label">Interacci&oacute;n</label>
                 <div class="col-sm-10">
                   <select name="int" id="" ng-model="int" class="form-control">
@@ -273,7 +273,7 @@
               <!-- Modal Interaccion -->
 
               <!-- Modal Script -->
-              <div class="form-group" ng-show="modal == 9">
+              <div class="form-group" ng-show="modal == 'script'">
                 <label class="col-sm-2 control-label">Script</label>
                 <div class="col-sm-10">
                   <select name="emocion" id="" ng-model="thescript" class="form-control">
@@ -286,7 +286,7 @@
               <!-- Modal Script -->
 
               <!-- Modal Sonidos -->
-              <div class="form-group" ng-show="modal == 10">
+              <div class="form-group" ng-show="modal == 'sound'">
                 <label class="col-sm-2 control-label">Audio</label>
                 <div class="col-sm-10">
                   <select name="emocion" id="" ng-model="thesound" class="form-control">
@@ -298,7 +298,7 @@
               <!-- Modal Sonidos -->
 
               <!-- Modal Leds -->
-              <div class="form-group" ng-show="modal == 11">
+              <div class="form-group" ng-show="modal == 'led'">
                 <label class="col-sm-2 control-label">Leds</label>
                 <div class="col-sm-10">
                   <select name="leds" id="" ng-model="leds" class="form-control">
@@ -309,7 +309,7 @@
               <!-- Modal Leds -->
 
               <!-- Modal Voice -->
-              <div class="form-group" ng-show="modal == 12">
+              <div class="form-group" ng-show="modal == 'voice'">
                 <label class="col-sm-2 control-label">Voz</label>
                 <div class="col-sm-10">
                   <select name="voice" id="" ng-model="voice" class="form-control">
@@ -320,14 +320,14 @@
               <!-- Modal Voice -->
 
               <!-- Modal Counter -->
-              <div class="form-group" ng-show="modal == 13">
+              <div class="form-group" ng-show="modal == 'counter'">
                 <label class="col-sm-2 control-label">Contador</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="cnname" ng-change="cname = ''"
                     placeholder="Nombre del Contador">
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 13">
+              <div class="form-group" ng-show="modal == 'counter'">
                 <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-10">
                   <select name="cname" id="" ng-model="cname" class="form-control" ng-change="cnname = ''">
@@ -335,13 +335,13 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 13">
+              <div class="form-group" ng-show="modal == 'counter'">
                 <label class="col-sm-2 control-label">Contador</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="vcounter" min="0" placeholder="0">
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 13">
+              <div class="form-group" ng-show="modal == 'counter'">
                 <label class="col-sm-2 control-label">Operaci&oacute;n</label>
                 <label class="radio-inline col-sm-offset-1">
                   <input type="radio" name="ops" id="inlineRadio4" ng-model="ops" value="sum"> Suma
@@ -362,7 +362,7 @@
               <!-- Modal Counter -->
 
               <!-- Modal Api -->
-              <div class="form-group" ng-show="modal == 14">
+              <div class="form-group" ng-show="modal == 'api'">
                 <label class="col-sm-2 control-label">Versi&oacute;n</label>
                 <label class="radio-inline col-sm-offset-1">
                   <input type="radio" name="version" id="inlineRadio4" ng-model="version" value="http"> Http
@@ -371,19 +371,19 @@
                   <input type="radio" name="version" id="inlineRadio5" ng-model="version" value="https"> Https
                 </label>
               </div>
-              <div class="form-group" ng-show="modal == 14">
+              <div class="form-group" ng-show="modal == 'api'">
                 <label class="col-sm-2 control-label">Servidor</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="host" ng-change="autoversion()" placeholder="Host">
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 14">
+              <div class="form-group" ng-show="modal == 'api'">
                 <label class="col-sm-2 control-label">Consulta</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="path" placeholder="?item=value&...">
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 14">
+              <div class="form-group" ng-show="modal == 'api'">
                 <label class="col-sm-2 control-label">Puerto</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="port" placeholder="Puerto">
@@ -392,7 +392,7 @@
               <!-- Modal Api -->
 
               <!-- Modal Common -->
-              <div class="form-group" ng-show="modal == 10 || modal == 9">
+              <div class="form-group" ng-show="modal == 'script' || modal == 'sound'">
                 <label class="col-sm-2 control-label">{{ ncommon }}</label>
                 <div class="col-sm-1">
                   <input type="checkbox" class="form-control" ng-model="ccommon" name="rs" id="rs" />
