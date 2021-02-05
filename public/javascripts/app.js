@@ -35,6 +35,10 @@ eva.config(['$locationProvider', '$routeProvider',
             templateUrl: '/plantillas/mov.html',
             activetab: "mov"
         }).
+        when('/woo', {
+            templateUrl: '/plantillas/woo.html',
+            activetab: "woo"
+        }).
         otherwise('/controlAngular');
     }
 ]).run(function ($rootScope, $route) {
