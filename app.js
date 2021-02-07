@@ -99,6 +99,7 @@ var credentials = require('./config-services');
 const interaccion = require('./server/controllers/interaccion.controller');
 const unify = require('./vpl/Unify_Node');
 const process = require('./vpl/VPL_Process');
+const nodes = require('./vpl/VPL_Node');
 
 
 var social = new SocialRobot(credentials.config, credentials.credentials);
@@ -106,6 +107,11 @@ module.exports.social = social;
 
 index.get('/speak', async function (req, res) {
 	await social.speak(req.query.speak);
+	res.status(200).jsonp();
+});
+
+index.post('/nodes', async function (req, res) {
+	await nodes.ProcessNode(social, evaId, usuarioId, req.body);
 	res.status(200).jsonp();
 });
 

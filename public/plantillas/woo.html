@@ -7,11 +7,21 @@
                 <div class="form-horizontal" role="form">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Mago de Oz</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
                             <select name="" ng-model="wooid" ng-change="loadcomands()" id="" class="form-control">
-                                <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.nombre }}</option>
+                                <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.name }}</option>
                             </select>
                         </div>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"><i
+                                class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"
+                            ng-click="update()" ng-show="!!wooid"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="delete()" ng-show="!!wooid"><i
+                                class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-default" ng-show="!!wooid" ng-click="updatesend(false)"><i
+                                class="fa fa-cloud-upload">&nbsp;Salvar</i></button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddcs"
+                            ng-show="!!wooid"><i class="fa fa-plus">&nbsp;Comando</i></button>
                     </div>
                 </div>
             </div>
@@ -48,10 +58,14 @@
                                 <tr ng-repeat="l in commands" role="row" class="{{ $even ? 'even' : 'odd'}}">
                                     <td>{{ l.nombre }}</td>
                                     <td>{{ l.desc }}</td>
-                                    <td id="{{ l.id }}" ><i class="fa fa-certificate fa-sm" aria-hidden="true" style="color: black;"></i></td>
-                                    <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="execute(l)"><i class="fa fa-play fa-sm"></i></span></td>
+                                    <td id="{{ l.order }}"><i class="fa fa-certificate fa-sm" aria-hidden="true"
+                                            style="color: black;"></i></td>
+                                    <td><span class="btn btn-default" ng-click="ucommand($index)"><i
+                                                class="fa fa-edit fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="cdelete($index)"><i
+                                                class="fa fa-trash fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="execute(l)"><i
+                                                class="fa fa-play fa-sm"></i></span></td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -68,28 +82,132 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <th style="text-align: center;" colspan="4">Emociones</th>
+                <th></th>
+                <th style="text-align: center;" colspan="3">Movimiento</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('joy', 0)"><p>&#128512;</p></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('joy', 1)"><p>&#128513;</p></button></td>
+                <td></td><td style="width: 100px;"></td>
+                <td></td>
+                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-up"></i></button></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('ini', 0)"><p>&#128528;</p></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 0)"><p>&#128542;</p></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 1)"><p>&#128546;</p></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 2)"><p>&#128557;</p></button></td>
+                <td style="width: 100px;"></td>
+                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i></button></td>
+                <td><button type="button" class="btn btn-default"><i class="fa fa-circle"></i></button></td>
+                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-right"></i></button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('anger', 0)"><p>&#128544;</p></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="emotions('anger', 1)"><p>&#128545;</p></button></td>
+                <td style="width: 100px;"></td>
+                <td></td>
+                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-down"></i></button></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+
     <!-- Modal Script -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="wooaddid" tabindex="-1" role="dialog" aria-labelledby="wooadd">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ accion }}</h4>
+                    <h4 class="modal-title" id="wooadd">{{ accion }}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-horizontal" role="form">
+                    <div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Nombre</label>
                             <input type="text" class="form-control" ng-model="name">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Orden</label>
+                            <input type="text" class="form-control" ng-model="order" placeholder="Separados por coma">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" ng-show="icon" ng-click="create(name)" class="btn btn-primary">Salvar</button>
-                    <button type="button" ng-show="!icon" ng-click="updatesend()"
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">Salvar</button>
+                    <button type="button" ng-show="!icon" ng-click="updatesend(true)"
                         class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Script -->
+
+    <!-- Modal Script -->
+    <div class="modal fade" id="wooaddcs" tabindex="-1" role="dialog" aria-labelledby="wooaddcs">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="wooadd">{{ accion }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tipo</label>
+                            <select name="" ng-model="tipo" id="" class="form-control col-sm-10">
+                                <option value="speak" selected>Hablar</option>
+                                <option value="sound">Sonido</option>
+                                <option value="led">Led</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group" ng-show="tipo == 'speak'">
+                            <label class="col-sm-2 control-label">Texto</label>
+                            <input type="text" class="form-control col-sm-10" ng-model="text">
+                        </div>
+                        <div class="form-group" ng-show="tipo == 'sound'">
+                            <label class="col-sm-2 control-label">Audio</label>
+                            <div class="col-sm-10">
+                                <select name="" id="" ng-model="thesound" class="form-control">
+                                    <option value="" selected>Ninguno</option>
+                                    <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="tipo == 'led'">
+                            <label class="col-sm-2 control-label">Leds</label>
+                            <div class="col-sm-10">
+                                <select name="leds" id="" ng-model="leds" class="form-control">
+                                    <option ng-repeat="m in led" value="{{ m.codigo }}">{{ m.nombre }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Orden</label>
+                            <input type="number" class="form-control col-sm-10" ng-model="corder">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">Salvar</button>
+                    <!-- <button type="button" ng-show="!icon" ng-click="updatesend()" class="btn btn-primary">Actualizar</button> -->
                 </div>
             </div>
         </div>
