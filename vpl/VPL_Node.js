@@ -13,6 +13,7 @@ module.exports = {
         } else if (element.type === 'emotion') {
             ProcessEmotionNode(social, element)
         } else if (element.type === 'speak') {
+            social.ledsanimstop();
             await ProcessSpeakNode(social, evaId, element);
         } else if (element.type === 'listen') {
             await ProcessListenNode(social, usuarioId, element);

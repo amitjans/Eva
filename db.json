@@ -2742,5 +2742,203 @@
       "nombre": "Ira",
       "codigo": "a"
     }
+  ],
+  "woo": [
+    {
+      "_id": "738fefcf-b309-4ead-85be-a2bce7d736ed",
+      "name": "Interacción 1",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "¿Hola María, como se encuentra hoy?",
+          "desc": "¿Hola María, como se encuentra hoy?",
+          "order": 0
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Yo estoy perfectamente María, por cierto, te ves muy bonita hoy",
+          "desc": "Yo estoy perfectamente María, por cierto, te ves muy bonita hoy",
+          "order": 1
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Ya es hora de comer María. Que rica se ve tu sopa de tortilla",
+          "desc": "Ya es hora de comer María. Que rica se ve tu sopa de tortilla",
+          "order": 2
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 4
+        }
+      ],
+      "order": [
+        "0",
+        "4",
+        "1",
+        "4",
+        "2",
+        "4"
+      ]
+    },
+    {
+      "_id": "fc0c9f42-e282-449c-9777-e8f6d58dc2d6",
+      "name": "Interacción 2",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "María, que rica la sopa de tortilla que te sirvieron, deberías probarla",
+          "desc": "María, que rica la sopa de tortilla que te sirvieron, deberías probarla",
+          "order": 0
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "María, ¿por qué no comes?",
+          "desc": "María, ¿por qué no comes?",
+          "order": 1
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "¿Te gustaría que te la calentaran?",
+          "desc": "¿Te gustaría que te la calentaran?",
+          "order": 2
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    },
+    {
+      "_id": "67eb0d6d-44b9-42a3-a69e-b6707858c256",
+      "name": "Interacción 3",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Juan mira que rica comida, siéntate otra vez para que comas",
+          "desc": "Juan mira que rica comida, siéntate otra vez para que comas",
+          "order": 0
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Juan, su sopa de cebolla se mira muy rica, deberías terminar de comer",
+          "desc": "Juan, su sopa de cebolla se mira muy rica, deberías terminar de comer",
+          "order": 1
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    },
+    {
+      "_id": "d18b29ed-3f40-4674-93f5-65c346dd29ab",
+      "name": "Interacción 4",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "¿Te gustaría escuchar música de los panchos mientras comes?",
+          "desc": "¿Te gustaría escuchar música de los panchos mientras comes?",
+          "order": 0
+        },
+        {
+          "type": "sound",
+          "nombre": "Audio",
+          "src": "Sabor a mi - Los panchos",
+          "desc": "Sabor a mi - Los panchos",
+          "order": 1
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    },
+    {
+      "_id": "ccaa1644-bbba-491a-b07c-3e1264bbe893",
+      "name": "Interacción 5",
+      "command": [
+        {
+          "type": "sound",
+          "nombre": "Audio",
+          "src": "Javier Solis - Sombras (Video)",
+          "desc": "Javier Solis - Sombras (Video)",
+          "order": 0
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Juan, es hora de comer, te voy a poner una música instrumental",
+          "desc": "Juan, es hora de comer, te voy a poner una música instrumental",
+          "order": 1
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    },
+    {
+      "_id": "dbb5b23f-d0d5-4d7a-bb98-b79e130b601f",
+      "name": "Interacción 6",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Juan, que rica se ve tu sopa de mariscos que te prepararon.",
+          "desc": "Juan, que rica se ve tu sopa de mariscos que te prepararon.",
+          "order": 0
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    },
+    {
+      "_id": "9f88074b-4008-4dc0-b276-25211549d9fe",
+      "name": "Interacción 7",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Juan, ya casi es hora de la comida, tienes hambre.",
+          "desc": "Juan, ya casi es hora de la comida, tienes hambre.",
+          "order": 0
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "¿No se te antoja una sopita de tortilla?",
+          "desc": "¿No se te antoja una sopita de tortilla?",
+          "order": 1
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    },
+    {
+      "_id": "10fdeee8-cd6c-4d42-92b3-9bb6b3629940",
+      "name": "Interacción 8",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Juan, que rica la sopa de tortilla que te preparo tu hija.",
+          "desc": "Juan, que rica la sopa de tortilla que te preparo tu hija.",
+          "order": 0
+        }
+      ],
+      "order": [
+        "0"
+      ]
+    }
   ]
 }
