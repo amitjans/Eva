@@ -50,7 +50,7 @@
                                         style="width: 600px;"> Descripcion</th>
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                                         style="width: 75px;"> Estado</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="3"
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="2"
                                         style="width: 100px;">Opciones</th>
                                 </tr>
                             </thead>
@@ -60,8 +60,8 @@
                                     <td>{{ l.desc }}</td>
                                     <td id="{{ l.order }}"><i class="fa fa-certificate fa-sm" aria-hidden="true"
                                             style="color: black;"></i></td>
-                                    <td><span class="btn btn-default" ng-click="ucommand($index)"><i
-                                                class="fa fa-edit fa-sm"></i></span></td>
+                                    <!-- <td><span class="btn btn-default" ng-click="ucommand($index)"><i 
+                                                class="fa fa-edit fa-sm"></i></span></td>-->
                                     <td><span class="btn btn-default" ng-click="cdelete($index)"><i
                                                 class="fa fa-trash fa-sm"></i></span></td>
                                     <td><span class="btn btn-default" ng-click="execute(l)"><i
@@ -73,7 +73,7 @@
                                     <th rowspan="1" colspan="1">Nombre</th>
                                     <th rowspan="1" colspan="1">Descripción</th>
                                     <th rowspan="1" colspan="1">Estado</th>
-                                    <th rowspan="1" colspan="3">Opciones</th>
+                                    <th rowspan="1" colspan="2">Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -96,7 +96,7 @@
                 <td><button type="button" class="btn btn-default" ng-click="emotions('joy', 1)"><p>&#128513;</p></button></td>
                 <td></td><td style="width: 100px;"></td>
                 <td></td>
-                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-up"></i></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="mov('u')"><i class="fa fa-arrow-up"></i></button></td>
                 <td></td>
             </tr>
             <tr>
@@ -105,9 +105,9 @@
                 <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 1)"><p>&#128546;</p></button></td>
                 <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 2)"><p>&#128557;</p></button></td>
                 <td style="width: 100px;"></td>
-                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i></button></td>
-                <td><button type="button" class="btn btn-default"><i class="fa fa-circle"></i></button></td>
-                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-right"></i></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="mov('l')"><i class="fa fa-arrow-left"></i></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="mov('c')"><i class="fa fa-circle"></i></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="mov('r')"><i class="fa fa-arrow-right"></i></button></td>
             </tr>
             <tr>
                 <td></td>
@@ -116,7 +116,7 @@
                 <td><button type="button" class="btn btn-default" ng-click="emotions('anger', 1)"><p>&#128545;</p></button></td>
                 <td style="width: 100px;"></td>
                 <td></td>
-                <td><button type="button" class="btn btn-default"><i class="fa fa-arrow-down"></i></button></td>
+                <td><button type="button" class="btn btn-default" ng-click="mov('d')"><i class="fa fa-arrow-down"></i></button></td>
                 <td></td>
             </tr>
         </table>
