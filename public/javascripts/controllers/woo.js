@@ -42,7 +42,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
         // }
     }
 
-    $scope.execute = function name(obj) {
+    $scope.execute = function (obj) {
         $http.post('/nodes', obj).then(function successCallback(response) {
         }, function errorCallback(response) {
         });
@@ -51,8 +51,14 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
         $('#' + ($scope.tempwwo.order[$scope.z]) + ' i').css('color', 'yellow');
     }
 
-    $scope.emotions = function name(emotion, level) {
+    $scope.emotions = function (emotion, level) {
         $http.post('/nodes', { type: 'emotion', emotion: emotion, level: level, speed: 2.0 }).then(function successCallback(response) {
+        }, function errorCallback(response) {
+        });
+    }
+
+    $scope.mov = function (dir) {
+        $http.post('/nodes', { type: 'mov', mov: dir }).then(function successCallback(response) {
         }, function errorCallback(response) {
         });
     }
