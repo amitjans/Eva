@@ -11,7 +11,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.z = 0;
     $scope.wooid = '';
     $scope.commands = [];
-    $scope.tempwwo = {};
+    $scope.tempwoo = {};
     $scope.tempid = -1;
 
     $scope.list = function () {
@@ -32,23 +32,19 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.loadcomands = function () {
         for (let i = 0; i < $scope.listado.length; i++) {
             if ($scope.listado[i]._id == $scope.wooid) {
-                $scope.tempwwo = $scope.listado[i];
-                $scope.commands = $scope.tempwwo.command;
+                $scope.tempwoo = $scope.listado[i];
+                $scope.commands = $scope.tempwoo.command.sort(((a, b) => a.order - b.order));
             }
         }
-        // $scope.z = 0;
-        // while (!!$('#' + ($scope.tempwwo.order[$scope.z]) + ' i')) {
-        //     $('#' + ($scope.tempwwo.order[$scope.z]) + ' i').css('color', 'black');    
-        // }
     }
 
     $scope.execute = function (obj) {
         $http.post('/nodes', obj).then(function successCallback(response) {
         }, function errorCallback(response) {
         });
-        $('#' + ($scope.tempwwo.order[$scope.z]) + ' i').css('color', 'black');
+        $('#' + ($scope.tempwoo.order[$scope.z]) + ' i').css('color', 'black');
         $scope.z = $scope.z + 1;
-        $('#' + ($scope.tempwwo.order[$scope.z]) + ' i').css('color', 'yellow');
+        $('#' + ($scope.tempwoo.order[$scope.z]) + ' i').css('color', 'yellow');
     }
 
     $scope.emotions = function (emotion, level) {
@@ -67,8 +63,8 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.create = function () {
         $http.post('/api/common?db=woo', { name: $scope.name, command: [], order: $scope.order.split(',') }).then(function successCallback(response) {
             $scope.list();
-            $scope.tempwwo = response.data.obj;
-            $scope.wooid = $scope.tempwwo._id;
+            $scope.tempwoo = response.data.obj;
+            $scope.wooid = $scope.tempwoo._id;
             $scope.name = '';
             $scope.order = '';
             $('#wooaddid').modal('hide');
@@ -80,27 +76,29 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.update = function (l) {
         $scope.icon = false;
         $scope.accion = 'Editar';
-        $scope.name = $scope.tempwwo.name;
-        $scope.order = $scope.tempwwo.order.join(',');
+        $scope.name = $scope.tempwoo.name;
+        $scope.order = $scope.tempwoo.order.join(',');
     }
 
     $scope.updatesend = function (flag) {
-        var json = { name: $scope.name || $scope.tempwwo.name, command: $scope.commands };
+        var json = { name: $scope.name || $scope.tempwoo.name, command: $scope.commands };
         if (flag) {
             Object.assign(json, { order: $scope.order.split(',') });
         }
-        $http.put('/api/common/' + $scope.tempwwo._id + '?db=woo', json).then(function successCallback(response) {
+        $http.put('/api/common/' + $scope.tempwoo._id + '?db=woo', json).then(function successCallback(response) {
             $scope.name = '';
             $scope.order = '';
             $scope.icon = true;
             $('#wooaddid').modal('hide');
             $scope.list();
             $scope.accion = 'Agregar';
+            notify('Interacción guardada correctamente');
         }, function errorCallback(response) {
+            notify('A ocurrido un error al guardar la interacción', 'danger');
         });
     }
     $scope.delete = function () {
-        $http.delete('/api/common/' + $scope.tempwwo._id + '?db=woo').then(function successCallback(response) {
+        $http.delete('/api/common/' + $scope.tempwoo._id + '?db=woo').then(function successCallback(response) {
             $scope.list();
         }, function errorCallback(response) {
         });
@@ -132,6 +130,8 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
                 $scope.commands[$scope.tempid] = { type: 'led', nombre: 'Leds', anim: $scope.leds, desc: $scope.leds, order: $scope.corder };
             }
         }
+        $scope.commands.sort(((a, b) => a.order - b.order));
+        $scope.tempid = -1;
         $('#wooaddcs').modal('hide');
     }
 
@@ -150,11 +150,17 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     }
     //endcrudcommandswoo
 
-    $scope.speak = function (value) {
-        $http.get('/speak?speak=' + value).then(function successCallback(response) {
-        }, function errorCallback(response) {
+    function notify(messaje, type = 'success') {
+        $.notify(messaje, {
+            animate: {
+                enter: 'animated fadeInRight',
+                exit: 'animated fadeOutRight'
+            },
+            type: type,
+            placement: {
+                from: "bottom"
+            }
         });
     }
-
     $scope.list();
 }]);
