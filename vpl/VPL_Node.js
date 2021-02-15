@@ -22,6 +22,7 @@ module.exports = {
         } else if (element.type === 'mov') {
             social.movement(element.mov);
         } else if (element.type === 'sound') {
+            social.ledsanimstop();
             if (element.wait) {
                 await social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
             } else {

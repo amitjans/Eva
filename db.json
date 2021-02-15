@@ -2751,22 +2751,22 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "¿Hola María, como se encuentra hoy?",
-          "desc": "¿Hola María, como se encuentra hoy?",
+          "text": "Hola Roberto, ¿cómo te encuentras hoy?",
+          "desc": "Hola Roberto, ¿cómo te encuentras hoy?",
           "order": 0
         },
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Yo estoy perfectamente María, por cierto, te ves muy bonita hoy",
-          "desc": "Yo estoy perfectamente María, por cierto, te ves muy bonita hoy",
+          "text": "Yo estoy perfectamente Roberto, por cierto, que guapo estás hoy",
+          "desc": "Yo estoy perfectamente Roberto, por cierto, que guapo estás hoy",
           "order": 1
         },
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Ya es hora de comer María. Que rica se ve tu sopa de tortilla",
-          "desc": "Ya es hora de comer María. Que rica se ve tu sopa de tortilla",
+          "text": "Ya es hora de comer Roberto. Que rica se ve tu sopa de tortilla",
+          "desc": "Ya es hora de comer Roberto. Que rica se ve tu sopa de tortilla",
           "order": 2
         },
         {
@@ -2793,27 +2793,54 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "María, que rica la sopa de tortilla que te sirvieron, deberías probarla",
-          "desc": "María, que rica la sopa de tortilla que te sirvieron, deberías probarla",
+          "text": "Roberto, que rico el caldo de pollo que te sirvieron, deberías probarlo",
+          "desc": "Roberto, que rico el caldo de pollo que te sirvieron, deberías probarlo",
           "order": 0
         },
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "María, ¿por qué no comes?",
-          "desc": "María, ¿por qué no comes?",
+          "text": "Roberto, ¿por qué no comes?",
+          "desc": "Roberto, ¿por qué no comes?",
           "order": 1
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 2
         },
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "¿Te gustaría que te la calentaran?",
-          "desc": "¿Te gustaría que te la calentaran?",
-          "order": 2
+          "text": "¿Te gustaría que te lo calienten?",
+          "desc": "¿Te gustaría que te lo calienten?",
+          "order": 3
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Muy bien, ahora le digo a tu hijo",
+          "desc": "Muy bien, ahora le digo a tu hijo",
+          "order": 4
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "El caldo está frío",
+          "desc": "El caldo está frío",
+          "order": 5
         }
       ],
       "order": [
-        "0"
+        "0",
+        "1",
+        "2",
+        "3",
+        "2",
+        "4",
+        "5"
       ]
     },
     {
@@ -2823,15 +2850,15 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Juan mira que rica comida, siéntate otra vez para que comas",
-          "desc": "Juan mira que rica comida, siéntate otra vez para que comas",
+          "text": "Roberto mira que rica comida, siéntate otra vez para que comas",
+          "desc": "Roberto mira que rica comida, siéntate otra vez para que comas",
           "order": 0
         },
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Juan, su sopa de cebolla se mira muy rica, deberías terminar de comer",
-          "desc": "Juan, su sopa de cebolla se mira muy rica, deberías terminar de comer",
+          "text": "Roberto, tu birria se mira muy rica, deberías terminar de comer",
+          "desc": "Roberto, tu birria se mira muy rica, deberías terminar de comer",
           "order": 1
         }
       ],
@@ -2846,8 +2873,8 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "¿Te gustaría escuchar música de los panchos mientras comes?",
-          "desc": "¿Te gustaría escuchar música de los panchos mientras comes?",
+          "text": "Roberto, ¿Te gustaría escuchar música de los panchos mientras comes?",
+          "desc": "Roberto, ¿Te gustaría escuchar música de los panchos mientras comes?",
           "order": 0
         },
         {
@@ -2855,6 +2882,13 @@
           "nombre": "Audio",
           "src": "Sabor a mi - Los panchos",
           "desc": "Sabor a mi - Los panchos",
+          "order": 2
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
           "order": 1
         }
       ],
@@ -2876,13 +2910,22 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Juan, es hora de comer, te voy a poner una música instrumental",
-          "desc": "Juan, es hora de comer, te voy a poner una música instrumental",
+          "text": "Roberto, es hora de comer, te voy a poner una música instrumental",
+          "desc": "Roberto, es hora de comer, te voy a poner una música instrumental",
           "order": 1
+        },
+        {
+          "type": "sound",
+          "nombre": "Audio",
+          "src": "instrumental",
+          "desc": "instrumental",
+          "order": 2
         }
       ],
       "order": [
-        "0"
+        "0",
+        "1",
+        "2"
       ]
     },
     {
@@ -2892,13 +2935,29 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Juan, que rica se ve tu sopa de mariscos que te prepararon.",
-          "desc": "Juan, que rica se ve tu sopa de mariscos que te prepararon.",
+          "text": "Roberto, que rica se ve la sopa de mariscos que te prepararon",
+          "desc": "Roberto, que rica se ve la sopa de mariscos que te prepararon",
           "order": 0
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 1
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "stop",
+          "desc": "stop",
+          "order": 2
         }
       ],
       "order": [
-        "0"
+        "0",
+        "1",
+        "2"
       ]
     },
     {
@@ -2908,20 +2967,46 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Juan, ya casi es hora de la comida, tienes hambre.",
-          "desc": "Juan, ya casi es hora de la comida, tienes hambre.",
+          "text": "Roberto, ya casi es hora de la comida, ¿tienes hambre?",
+          "desc": "Roberto, ya casi es hora de la comida, ¿tienes hambre?",
           "order": 0
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 1
         },
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "¿No se te antoja una sopita de tortilla?",
-          "desc": "¿No se te antoja una sopita de tortilla?",
-          "order": 1
+          "text": "¿No se te antoja un pozole?",
+          "desc": "¿No se te antoja un pozole?",
+          "order": 2
+        },
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Bien, en 10 minutos comemos, por lo pronto te pongo un poco de música para cantar",
+          "desc": "Bien, en 10 minutos comemos, por lo pronto te pongo un poco de música para cantar",
+          "order": 3
+        },
+        {
+          "type": "sound",
+          "nombre": "Audio",
+          "src": "solamente una vez",
+          "desc": "solamente una vez",
+          "order": 4
         }
       ],
       "order": [
-        "0"
+        "0",
+        "1",
+        "2",
+        "1",
+        "3",
+        "4"
       ]
     },
     {
@@ -2931,13 +3016,93 @@
         {
           "type": "speak",
           "nombre": "Hablar",
-          "text": "Juan, que rica la sopa de tortilla que te preparo tu hija.",
-          "desc": "Juan, que rica la sopa de tortilla que te preparo tu hija.",
+          "text": "“Roberto, que rico el caldillo de machaca que te preparo tu hija",
+          "desc": "“Roberto, que rico el caldillo de machaca que te preparo tu hija",
           "order": 0
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 1
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "stop",
+          "desc": "stop",
+          "order": 2
         }
       ],
       "order": [
-        "0"
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    {
+      "_id": "22f7bfb2-e748-42b5-92d5-2ce0954b40d9",
+      "name": "Interacción 10",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Roberto, ¿qué canción te gustaría escuchar mientras disfrutas tu caldo tlalpeño?",
+          "desc": "Roberto, ¿qué canción te gustaría escuchar mientras disfrutas tu caldo tlalpeño?",
+          "order": 0
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 1
+        },
+        {
+          "type": "sound",
+          "nombre": "Audio",
+          "src": "el triste",
+          "desc": "el triste",
+          "order": 2
+        }
+      ],
+      "order": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    {
+      "_id": "4538dee8-f19f-4d32-be7a-ece0e120674e",
+      "name": "Interacción 9",
+      "command": [
+        {
+          "type": "speak",
+          "nombre": "Hablar",
+          "text": "Roberto, la sopa que te preparó tu hijo está muy rica. Come hoy la sopa y mañana comemos hamburguesa",
+          "desc": "Roberto, la sopa que te preparó tu hijo está muy rica. Come hoy la sopa y mañana comemos hamburguesa",
+          "order": 0
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "escuchaT",
+          "desc": "escuchaT",
+          "order": 1
+        },
+        {
+          "type": "led",
+          "nombre": "Leds",
+          "anim": "stop",
+          "desc": "stop",
+          "order": 2
+        }
+      ],
+      "order": [
+        "0",
+        "1",
+        "2"
       ]
     }
   ]
