@@ -2616,6 +2616,526 @@
           }
         ]
       }
+    },
+    {
+      "_id": "ead1d398-fb01-4e31-9524-6af17767eba5",
+      "nombre": "Presentacion Brazil",
+      "data": {
+        "node": [
+          {
+            "key": 1614193009110,
+            "name": "Voz_0",
+            "type": "voice",
+            "color": "lightblue",
+            "isGroup": false,
+            "voice": "pt-BR_IsabelaV3Voice",
+            "__gohashid": 530
+          },
+          {
+            "key": 1614193167582,
+            "name": "Hablar_1",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "text": "Olá, meu nome é Eva e sou um robô social desenvolvido na CICESE.",
+            "__gohashid": 661
+          },
+          {
+            "key": 1614193769038,
+            "name": "Movimiento_3",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "mov": "u",
+            "__gohashid": 1148
+          },
+          {
+            "key": 1614193809582,
+            "name": "Tiempo_5",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "time": 1000,
+            "__gohashid": 1726
+          },
+          {
+            "key": 1614193824078,
+            "name": "Movimiento_6",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "mov": "c",
+            "__gohashid": 1991
+          },
+          {
+            "key": 1614193829182,
+            "name": "Tiempo_7",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "time": 1000,
+            "__gohashid": 2305
+          },
+          {
+            "key": 1614193848982,
+            "name": "Hablar_8",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "text": "Para baixo.",
+            "__gohashid": 2668
+          },
+          {
+            "key": 1614193753118,
+            "name": "Hablar_2",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "Meus criadores me dotaram de várias capacidades de movimentação. Por exemplo, posso mover minha cabeça para cima.",
+            "__gohashid": 3163
+          },
+          {
+            "key": 1614193900253,
+            "name": "Movimiento_9",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "mov": "d",
+            "__gohashid": 3703
+          },
+          {
+            "key": 1614193903029,
+            "name": "Tiempo_10",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 1000,
+            "__gohashid": 4165
+          },
+          {
+            "key": 1614193910221,
+            "name": "Movimiento_11",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "mov": "c",
+            "__gohashid": 4676
+          },
+          {
+            "key": 1614193923301,
+            "name": "Hablar_12",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "E para ambos os lados.",
+            "__gohashid": 5236
+          },
+          {
+            "key": 1614193939550,
+            "name": "Tiempo_14",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 1000,
+            "__gohashid": 6503
+          },
+          {
+            "key": 1614193949262,
+            "name": "Tiempo_16",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 1000,
+            "__gohashid": 7966
+          },
+          {
+            "key": 1614193955286,
+            "name": "Movimiento_17",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "mov": "c",
+            "__gohashid": 8771
+          },
+          {
+            "key": 1614193976798,
+            "name": "Hablar_18",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "Também posso mostrar várias emoções, como a alegria.",
+            "__gohashid": 9650
+          },
+          {
+            "key": 1614193999686,
+            "name": "Emoción_19",
+            "type": "emotion",
+            "color": "lightyellow",
+            "isGroup": false,
+            "group": "",
+            "emotion": "joy",
+            "level": 2,
+            "speed": 2,
+            "__gohashid": 10578
+          },
+          {
+            "key": 1614194017110,
+            "name": "Emoción_21",
+            "type": "emotion",
+            "color": "lightgray",
+            "isGroup": false,
+            "group": "",
+            "emotion": "ini",
+            "level": 2,
+            "speed": 2,
+            "__gohashid": 12556
+          },
+          {
+            "key": 1614194031342,
+            "name": "Hablar_22",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "Tristeza.",
+            "__gohashid": 13606
+          },
+          {
+            "key": 1614194045958,
+            "name": "Emoción_23",
+            "type": "emotion",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "emotion": "sad",
+            "level": 2,
+            "speed": 2,
+            "__gohashid": 14732
+          },
+          {
+            "key": 1614194063038,
+            "name": "Emoción_25",
+            "type": "emotion",
+            "color": "lightgray",
+            "isGroup": false,
+            "group": "",
+            "emotion": "ini",
+            "level": 2,
+            "speed": 2,
+            "__gohashid": 17102
+          },
+          {
+            "key": 1614194082174,
+            "name": "Hablar_26",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "E a raiva.",
+            "__gohashid": 18374
+          },
+          {
+            "key": 1614194098742,
+            "name": "Emoción_27",
+            "type": "emotion",
+            "color": "red",
+            "isGroup": false,
+            "group": "",
+            "emotion": "anger",
+            "level": 2,
+            "speed": 2,
+            "__gohashid": 19669
+          },
+          {
+            "key": 1614194127102,
+            "name": "Emoción_29",
+            "type": "emotion",
+            "color": "lightgray",
+            "isGroup": false,
+            "group": "",
+            "emotion": "ini",
+            "level": 2,
+            "speed": 2,
+            "__gohashid": 22457
+          },
+          {
+            "key": 1614194161974,
+            "name": "Hablar_30",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "Actualmente los desarrolladores se encuentran trabajando en mis capacidades de visión y desplazamiento.",
+            "__gohashid": 23899
+          },
+          {
+            "key": 1614194012982,
+            "name": "Tiempo_20",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 5000,
+            "__gohashid": 32924
+          },
+          {
+            "key": 1614194054382,
+            "name": "Tiempo_24",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 10000,
+            "__gohashid": 34414
+          },
+          {
+            "key": 1614194103942,
+            "name": "Tiempo_28",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 10000,
+            "__gohashid": 35904
+          },
+          {
+            "key": 1614194560229,
+            "name": "Hablar_31",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "Feliz por tê-lo conhecido, tenha um bom dia.",
+            "__gohashid": 38911
+          },
+          {
+            "key": 1614194604445,
+            "name": "Tiempo_32",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 2000,
+            "__gohashid": 42042
+          },
+          {
+            "key": 1614194631774,
+            "name": "Tiempo_33",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 2000,
+            "__gohashid": 48706
+          },
+          {
+            "key": 1614194653926,
+            "name": "Tiempo_34",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "time": 2000,
+            "__gohashid": 53879
+          },
+          {
+            "key": 1614193930277,
+            "name": "Movimiento_13",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "mov": "R",
+            "__gohashid": 62742
+          },
+          {
+            "key": 1614193943598,
+            "name": "Movimiento_15",
+            "type": "mov",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "mov": "L",
+            "__gohashid": 64428
+          }
+        ],
+        "link": [
+          {
+            "from": 1614193009110,
+            "to": 1614193167582,
+            "__gohashid": 663
+          },
+          {
+            "from": 1614193167582,
+            "to": 1614193753118,
+            "__gohashid": 983
+          },
+          {
+            "from": 1614193753118,
+            "to": 1614193769038,
+            "__gohashid": 1150
+          },
+          {
+            "from": 1614193769038,
+            "to": 1614193809582,
+            "__gohashid": 1728
+          },
+          {
+            "from": 1614193809582,
+            "to": 1614193824078,
+            "__gohashid": 1993
+          },
+          {
+            "from": 1614193824078,
+            "to": 1614193829182,
+            "__gohashid": 2307
+          },
+          {
+            "from": 1614193829182,
+            "to": 1614193848982,
+            "__gohashid": 2670
+          },
+          {
+            "from": 1614193848982,
+            "to": 1614193900253,
+            "__gohashid": 3706
+          },
+          {
+            "from": 1614193900253,
+            "to": 1614193903029,
+            "__gohashid": 4168
+          },
+          {
+            "from": 1614193903029,
+            "to": 1614193910221,
+            "__gohashid": 4679
+          },
+          {
+            "from": 1614193910221,
+            "to": 1614193923301,
+            "__gohashid": 5239
+          },
+          {
+            "from": 1614193923301,
+            "to": 1614193930277,
+            "__gohashid": 5848
+          },
+          {
+            "from": 1614193930277,
+            "to": 1614193939550,
+            "__gohashid": 6506
+          },
+          {
+            "from": 1614193939550,
+            "to": 1614193943598,
+            "__gohashid": 7213
+          },
+          {
+            "from": 1614193943598,
+            "to": 1614193949262,
+            "__gohashid": 7969
+          },
+          {
+            "from": 1614193949262,
+            "to": 1614193955286,
+            "__gohashid": 8774
+          },
+          {
+            "from": 1614193955286,
+            "to": 1614193976798,
+            "__gohashid": 9653
+          },
+          {
+            "from": 1614193976798,
+            "to": 1614193999686,
+            "__gohashid": 10581
+          },
+          {
+            "from": 1614193999686,
+            "to": 1614194012982,
+            "__gohashid": 11558
+          },
+          {
+            "from": 1614194012982,
+            "to": 1614194017110,
+            "__gohashid": 12559
+          },
+          {
+            "from": 1614194031342,
+            "to": 1614194045958,
+            "__gohashid": 14735
+          },
+          {
+            "from": 1614194045958,
+            "to": 1614194054382,
+            "__gohashid": 15883
+          },
+          {
+            "from": 1614194054382,
+            "to": 1614194063038,
+            "__gohashid": 17105
+          },
+          {
+            "from": 1614194082174,
+            "to": 1614194098742,
+            "__gohashid": 19672
+          },
+          {
+            "from": 1614194098742,
+            "to": 1614194103942,
+            "__gohashid": 21041
+          },
+          {
+            "from": 1614194103942,
+            "to": 1614194127102,
+            "__gohashid": 22460
+          },
+          {
+            "from": 1614194161974,
+            "to": 1614194560229,
+            "__gohashid": 38914
+          },
+          {
+            "from": 1614194063038,
+            "to": 1614194604445,
+            "__gohashid": 42045
+          },
+          {
+            "__gohashid": 44384,
+            "from": 1614194604445,
+            "to": 1614194082174
+          },
+          {
+            "from": 1614194127102,
+            "to": 1614194631774,
+            "__gohashid": 48709
+          },
+          {
+            "__gohashid": 50374,
+            "from": 1614194631774,
+            "to": 1614194161974
+          },
+          {
+            "from": 1614194017110,
+            "to": 1614194653926,
+            "__gohashid": 53882
+          },
+          {
+            "__gohashid": 55596,
+            "from": 1614194653926,
+            "to": 1614194031342
+          }
+        ]
+      }
     }
   ],
   "voice": [
@@ -2642,6 +3162,12 @@
       "idioma": "Español",
       "codigo": "es-US_SofiaV3Voice",
       "nombre": "Sofia"
+    },
+    {
+      "_id": "d9153940-5b69-430d-9b35-a7bd009abeb5",
+      "idioma": "Portuges",
+      "codigo": "pt-BR_IsabelaV3Voice",
+      "nombre": "Isabela"
     }
   ],
   "led": [
@@ -2741,6 +3267,26 @@
       "_id": "738efdd7-9f09-45ab-bb3d-d0d09e6d6ba6",
       "nombre": "Ira",
       "codigo": "a"
+    },
+    {
+      "_id": "e8faf2f0-0cfe-40bb-9b40-28ddcaa50d10",
+      "nombre": "Arribax2",
+      "codigo": "U"
+    },
+    {
+      "_id": "d5a0af38-eea0-4c90-bb9b-513017f9e1df",
+      "nombre": "Abajox2",
+      "codigo": "D"
+    },
+    {
+      "_id": "4e0535ae-d2fb-48ca-975a-6547b2d23210",
+      "nombre": "Derechax2",
+      "codigo": "R"
+    },
+    {
+      "_id": "65818d32-6253-409b-8115-4beaab756657",
+      "nombre": "Izquierdax2",
+      "codigo": "L"
     }
   ],
   "woo": [
