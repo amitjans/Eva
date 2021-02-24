@@ -307,15 +307,15 @@ emotions (emotion, level, leds, speed) {
   switch (emotion) {
       case 'ini':
           if (leds){
-            var animation = spawn('./leds/base');
+            this.ledsanimstop();
           }
           if (lastlevel >= 1) {
             this.movement('c');
           }
           break;
       case 'sad':
-          if (leds) {
-            var animation = spawn('./leds/sad_v2');
+          if (leds || level >= 2) {
+            this.ledsanim('sad_v2');
           }
           if (level >= 1) {
             this.movement('D');
@@ -325,25 +325,19 @@ emotions (emotion, level, leds, speed) {
           }
           break;
       case 'anger':
-          if (leds) {
-            var animation = spawn('./leds/anger_v2');
+          if (leds || level >= 2) {
+            this.ledsanim('anger_v2');
           }
           if (level >= 1) {
               this.movement('a');
           }
-          if (level >= 2) {
-              
-          }
           break;
       case 'joy':
-          if (leds) {
-            var animation = spawn('./leds/joy_v2');
+          if (leds || level >= 2) {
+            this.ledsanim('joy_v2');
           }
           if (level >= 1) {
             this.movement('U');
-          }
-          if (level >= 2) {
-              
           }
           break;
       case 'surprise':
@@ -352,9 +346,6 @@ emotions (emotion, level, leds, speed) {
           }
           if (level >= 1) {
             this.movement('U');
-          }
-          if (level >= 2) {
-              
           }
           break;
       default:

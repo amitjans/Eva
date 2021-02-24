@@ -142,7 +142,7 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 	}
 	if (req.query.e == 5) {
 		lastlevel = 1;
-		social.emotions('anger', 1, true, 0.5);
+		social.emotions('anger', 1);
 	}
 	if (req.query.e == 6) {
 		lastlevel = 2;
@@ -157,12 +157,16 @@ index.get('/interaccion/iniciaremocion', function (req, res) {
 		lastlevel = 1;
 		social.emotions('joy', 1);
 	}
+	if (req.query.e == 9) {
+		lastlevel = 1;
+		social.emotions('joy', 2);
+	}
 	//ini
 	if (req.query.e == 0) {
 		social.emotions('ini', 0);
 	}
 	//exit
-	if (req.query.e == 9) {
+	if (req.query.e == 10) {
 		social.emotions('exit', 0);
 	}
 	console.log(req.query.e);
