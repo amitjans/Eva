@@ -6,7 +6,7 @@
 - Servomotores Dynamixel AX-12A
 
 ## Instalación
-- NodeJs 8.17.0
+- NodeJs 14.16.0
 ```bash
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 ```
@@ -14,10 +14,10 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.profile
 ```
 ```bash
-nvm install v8.17.0
+nvm install v14.16.0
 ```
 ```bash
-nvm use v8.17.0
+nvm use v14.16.0
 ```
 - Registrar la [Matrix Voice](https://matrix-io.github.io/matrix-documentation/matrix-voice/resources/microphone/) como micrófono
 
