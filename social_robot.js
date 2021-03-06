@@ -1,22 +1,28 @@
 'use strict';
 
-const fs = require('fs');
 /* Cognitive services modules */
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
+/* Google cloud speech */
+const speech = require('@google-cloud/speech');
+
+// Instantiate a DialogFlow client.
+const dialogflow = require('dialogflow');
+const uuid = require('uuid');
+
 /* Hardware modules */
-//var Speaker = require('speaker');
 var Sound = require('aplay');
 
 /*additional node modules */
+const fs = require('fs');
+const envconfig = require('dotenv').config();
 var assert = require('assert');
 const temp = require('temp').track();
 var wav = require('wav');
 const spawn = require('child_process').spawn;
 
 const record = require('node-record-lpcm16');
-const speech = require('@google-cloud/speech');
 
 const SerialPort = require('serialport')
 const port = new SerialPort('/dev/ttyUSB0', {
@@ -33,36 +39,26 @@ var lastlevel = 0;
 var ledsanimation = spawn('./leds/stop');
 
 class SocialRobot {
-  constructor(configuration, credentials) {
-    this.configuration = {};
+  constructor() {
+    this.configuration = { attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true };
     this._isPlaying = false;
-    this.configurationParameters.forEach(function (param) {
-      if (configuration != undefined && configuration[param] != undefined) {
-        this.configuration[param] = configuration[param];
-      }
-      else {
-        this.configuration[param] = this.defaultConfiguration[param];
-      }
-    }, this);
-    if (credentials != undefined && credentials.hasOwnProperty('tts')) {
-      var creds = credentials['tts'];
-      this._createServiceAPI('tts', creds);
+    if (!!process.env.TEXT_TO_SPEECH_APIKEY) {
+      this._createServiceAPI('tts');
     }
     log = '';
     time = Date.now();
     emotional = true;
   }
 
-  _createServiceAPI(service, credentials) {
-    console.info('> Social Robot initializing ' + service + ' service');
-    assert(credentials, "no credentials found for the " + service + " service");
+  _createServiceAPI(service) {
+    if (envconfig.error) {
+      throw envconfig.error
+    }
     switch (service) {
       case 'tts':
-        assert(credentials.hasOwnProperty('apikey'), "credentials for the " + service + " service missing 'apikey'");
-        assert(credentials.hasOwnProperty('url'), "credentials for the " + service + " service missing 'url'");
         this._tts = new TextToSpeechV1({
-          authenticator: new IamAuthenticator({ apikey: credentials.apikey }),
-          url: credentials.url
+          authenticator: new IamAuthenticator({ apikey: process.env.TEXT_TO_SPEECH_APIKEY }),
+          url: process.env.TEXT_TO_SPEECH_URL
         });
         break;
       default:
@@ -83,7 +79,7 @@ class SocialRobot {
     if (message == undefined) {
       throw new Error('SocialRobot tried to speak a null message.');
     }
-    
+
     var utterance = {
       text: message,
       voice: this.configuration.voice,
@@ -115,7 +111,7 @@ class SocialRobot {
     });
   }
 
-  rec(message, file) {    
+  rec(message, file) {
     var utterance = {
       text: message,
       voice: this.configuration.voice,
@@ -153,20 +149,20 @@ class SocialRobot {
     // capture 'this' context
     var self = this;
 
-    if(!self._isPlaying){
+    if (!self._isPlaying) {
       self._isPlaying = true;
-      return new Promise(function(resolve, reject){
+      return new Promise(function (resolve, reject) {
         var player = new Sound();
-        player.on('complete',function(){
+        player.on('complete', function () {
           console.info('> audio playback finished!!');
           self._isPlaying = false;
           if (ctrl) {
-            self.ledsanimstop();            
+            self.ledsanimstop();
           }
           resolve(soundFile);
         });
 
-        player.on('error', function(){
+        player.on('error', function () {
           console.error('> an audio playback error has ocurred');
           reject();
         });
@@ -175,21 +171,21 @@ class SocialRobot {
         }
         player.play(soundFile);
       });
-    }  
-    else{
+    }
+    else {
       console.log("> Speaker in use, try playing audio later.");
     }
   }
 
-  getVoice(){
+  getVoice() {
     return this.configuration.voice;
   }
 
-  setVoice(voice){
+  setVoice(voice) {
     this.configuration.voice = voice;
   }
-  
-  movement(type, onestep = false){
+
+  movement(type, onestep = false) {
     if (!emotional) {
       return;
     }
@@ -214,11 +210,11 @@ class SocialRobot {
     port.write(type);
   }
 
-  ledsanim(value){
+  ledsanim(value) {
     ledsanimation = spawn('./leds/' + value);
   }
 
-  ledsanimstop(){
+  ledsanimstop() {
     ledsanimation.stdin.pause();
     ledsanimation.kill();
     ledsanimation = spawn('./leds/stop');
@@ -229,7 +225,7 @@ class SocialRobot {
       setTimeout(resolve, ms)
     })
   }
-  
+
   sleepanim(ms) {
     var animation = spawn('./leds/countdown');
     return new Promise(resolve => {
@@ -258,8 +254,8 @@ class SocialRobot {
         .on('error', console.error)
         .on('data', function (data) {
           console.log(data.result);
-          if (data.results[0].alternatives[0]){
-          speakAnimation.kill();
+          if (data.results[0].alternatives[0]) {
+            speakAnimation.kill();
             let stopAnimation = spawn('./leds/stop');
             resolve(data.results[0].alternatives[0].transcript);
           } else {
@@ -268,7 +264,7 @@ class SocialRobot {
             resolve('la que tu quieras');
           }
         }
-      );
+        );
 
       record
         .start({
@@ -284,105 +280,134 @@ class SocialRobot {
     });
   }
 
-stopListening() {
-  if(record)
-    record.stop();
-}
-
-setEmotional(value){
-  emotional = value;
-}
-
-getEmotional(){
-  return emotional;
-}
-
-emotions (emotion, level, leds, speed) {
-  if (!emotional) {
-    return;
+  stopListening() {
+    if (record)
+      record.stop();
   }
 
-  var json = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
-  send.eyes(json);
-  switch (emotion) {
+  async dialogflow(input, proyect) {
+
+    var result;
+    const sessionId = uuid.v4();
+
+    const sessionClient = new dialogflow.SessionsClient();
+    const sessionPath = sessionClient.sessionPath(proyect || process.env.DIALOGFLOW_PROJECT_ID, sessionId);
+
+    const requestDialogflow = {
+      session: sessionPath,
+      queryInput: {
+        text: {
+          text: input,
+          languageCode: 'es-419',
+        },
+      },
+    };
+
+    const responses = await sessionClient.detectIntent(requestDialogflow);
+    console.log('Detected intent');
+    result = responses[0].queryResult;
+    if (result.intent) {
+      console.log(`  Intent: ${result.intent.displayName}`);
+    } else {
+      console.log(`  No intent matched.`);
+    }
+    return result.fulfillmentText || result.queryText;
+  }
+
+  setEmotional(value) {
+    emotional = value;
+  }
+
+  getEmotional() {
+    return emotional;
+  }
+
+  emotions(emotion, level, leds, speed) {
+    if (!emotional) {
+      return;
+    }
+
+    var json = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
+    send.eyes(json);
+    switch (emotion) {
       case 'ini':
-          if (leds){
-            this.ledsanimstop();
-          }
-          if (lastlevel >= 1) {
-            this.movement('c');
-          }
-          break;
+        if (leds) {
+          this.ledsanimstop();
+        }
+        if (lastlevel >= 1) {
+          this.movement('c');
+        }
+        break;
       case 'sad':
-          if (leds || level >= 2) {
-            this.ledsanim('sad_v2');
-          }
-          if (level >= 1) {
-            this.movement('D');
-          }
-          if (level >= 2) {
-            this.movement('S');
-          }
-          break;
+        if (leds || level >= 2) {
+          this.ledsanim('sad_v2');
+        }
+        if (level >= 1) {
+          this.movement('D');
+        }
+        if (level >= 2) {
+          this.movement('S');
+        }
+        break;
       case 'anger':
-          if (leds || level >= 2) {
-            this.ledsanim('anger_v2');
-          }
-          if (level >= 1) {
-              this.movement('a');
-          }
-          break;
+        if (leds || level >= 2) {
+          this.ledsanim('anger_v2');
+        }
+        if (level >= 1) {
+          this.movement('a');
+        }
+        break;
       case 'joy':
-          if (leds || level >= 2) {
-            this.ledsanim('joy_v2');
-          }
-          if (level >= 1) {
-            this.movement('U');
-          }
-          break;
+        if (leds || level >= 2) {
+          this.ledsanim('joy_v2');
+        }
+        if (level >= 1) {
+          this.movement('U');
+        }
+        break;
       case 'surprise':
-          if (leds) {
-            var animation = spawn('./leds/joy_v2');
-          }
-          if (level >= 1) {
-            this.movement('U');
-          }
-          break;
+        if (leds) {
+          var animation = spawn('./leds/joy_v2');
+        }
+        if (level >= 1) {
+          this.movement('U');
+        }
+        break;
       default:
-          break;
+        break;
+    }
+    lastlevel = level;
   }
-  lastlevel = level;
-}
 
-resetlog(){
-  log = '';
-  time = Date.now();
-}
+  resetlog() {
+    log = '';
+    time = Date.now();
+  }
 
-templog(who, texto) {
-  log += who.autor + ': ' + texto + '\n';
-  send.enviarMensaje(who, texto);
-}
+  templog(who, texto) {
+    log += who.autor + ': ' + texto + '\n';
+    send.enviarMensaje(who, texto);
+  }
 
-savelogs(nombre, temp){
-  logs.logs(nombre + time, (temp || log));
-  log = '';
-}
+  savelogs(nombre, temp) {
+    logs.logs(nombre + time, (temp || log));
+    log = '';
+  }
 
 }
 
-/**
- * SocialRobot module version 
- */
+  /**
+   * SocialRobot module version 
+   */
 
-//SocialRobot.prototype.version = 'v1';
-SocialRobot.prototype.defaultConfiguration = {
+  //SocialRobot.prototype.version = 'v1';
+  SocialRobot.prototype.defaultConfiguration = {
   'attentionWord': 'Eva',
-  'name':'Eva',
-  'voice':'es-LA_SofiaV3Voice',
+  'name': 'Eva',
+  'voice': 'es-LA_SofiaV3Voice',
   'ttsReconnect': true,
 };
 
-SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
+  SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
 
 module.exports = SocialRobot;

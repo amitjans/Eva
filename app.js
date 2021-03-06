@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
 var index = require('./server/routes/index');
 
 var nodeutils = require('./vpl/NodeUtils');
@@ -54,13 +55,11 @@ app.use(function (err, req, res, next) {
 	res.render('error');
 });
 
-module.exports = app;
+app.set('port', '3000');
+const server = app.listen(app.get('port'));
+var io = require('socket.io')(server);
 
-var io;
-var setIO = function (ioBase) {
-	console.log(io);
-	io = ioBase;
-}
+module.exports = app;
 
 var usuarioId = { autor: 'Usuario', class: 'text-muted' };
 var evaId = { autor: 'Robot Eva', class: 'text-danger' };
@@ -91,19 +90,13 @@ var enviarError = function (error, query) {
 	io.sockets.emit('messages', data);
 }
 
-module.exports.setIO = setIO;
-
 var SocialRobot = require('./social_robot');
-var credentials = require('./config-services');
+var social = new SocialRobot();
 
 const interaccion = require('./server/controllers/interaccion.controller');
 const unify = require('./vpl/Unify_Node');
 const process = require('./vpl/VPL_Process');
 const nodes = require('./vpl/VPL_Node');
-
-
-var social = new SocialRobot(credentials.config, credentials.credentials);
-module.exports.social = social;
 
 index.get('/speak', async function (req, res) {
 	await social.speak(req.query.speak);
@@ -116,6 +109,7 @@ index.post('/nodes', async function (req, res) {
 });
 
 index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
+	console.log(await social.dialogflow('hola'));
 	res.status(200).jsonp();
 });
 
