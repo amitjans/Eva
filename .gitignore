@@ -106,4 +106,4 @@ dist
 credencial.json
 git.sh
 temp/*
-public/javascripts/go.js
+public/js/go.js
