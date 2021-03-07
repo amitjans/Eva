@@ -79,7 +79,7 @@ TEXT_TO_SPEECH_URL=https://stream.watsonplatform.net/text-to-speech/api
 Archivo necesario para el uso de los servicios de Google:
 
 - [Archivo JSON que contiene la clave de la cuenta de servicio de Google](https://cloud.google.com/docs/authentication/getting-started)
-- Opcionalmente en el archivo '.env' de configuración de los servicios de Watson podrá contener el siguiente parámetro si se desea utlizar un proyecto de Dialogflow de Google por defecto:
+- Opcionalmente el archivo '.env' para la configuración de los servicios de Watson podrá contener el siguiente parámetro si se desea utlizar un proyecto de Dialogflow de Google por defecto:
 ```bash
 DIALOGFLOW_PROJECT_ID=google-dialogflow-proyect-name
 ```
