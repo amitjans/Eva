@@ -90,7 +90,7 @@ Archivo opcional para el inicio de la aplicación
  ```bash
  #!/bin/bash
 echo Eva
-sudo amixer cset numid=1 100% #volumen de la vocina
+sudo amixer cset numid=1 100% #volumen de la bocina
 export GOOGLE_APPLICATION_CREDENTIALS="credencial.json" #importar las credenciales de google
 npm run dev #Iniciar la aplicación
  ```
