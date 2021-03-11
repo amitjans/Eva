@@ -189,25 +189,8 @@ class SocialRobot {
     if (!emotional) {
       return;
     }
-    if (onestep) {
-      switch (type) {
-        case 'u':
-          type = 't';
-          break;
-        case 'd':
-          type = 'g';
-          break;
-        case 'l':
-          type = 'f';
-          break;
-        case 'r':
-          type = 'h';
-          break;
-        default:
-          break;
-      }
-    }
-    port.write(type);
+    var opt = { u: 't', d: 'g', l: 'f', r: 'h' };
+    port.write(onestep ? opt[type] : type);
   }
 
   ledsanim(value) {
@@ -233,8 +216,9 @@ class SocialRobot {
     })
   }
 
-  sendAudioGoogleSpeechtoText2(callback) {
-    let speakAnimation = spawn('./leds/escuchaT');
+  sendAudioGoogleSpeechtoText2(langcode, callback) {
+    this.ledsanimstop();
+    this.ledsanim('escuchaT');
     return new Promise(function (resolve, reject) {
 
       const sampleRateHertz = 16000;
@@ -244,7 +228,7 @@ class SocialRobot {
         config: {
           encoding: 'LINEAR16',
           sampleRateHertz: sampleRateHertz,
-          languageCode: 'es-MX',
+          languageCode: langcode || 'es-MX',
         },
         interimResults: false,
       };
@@ -255,11 +239,11 @@ class SocialRobot {
         .on('data', function (data) {
           console.log(data.result);
           if (data.results[0].alternatives[0]) {
-            speakAnimation.kill();
+            this.ledsanimstop();
             let stopAnimation = spawn('./leds/stop');
             resolve(data.results[0].alternatives[0].transcript);
           } else {
-            speakAnimation.kill();
+            this.ledsanimstop();
             let stopAnimation = spawn('./leds/stop');
             resolve('la que tu quieras');
           }
@@ -343,10 +327,7 @@ class SocialRobot {
           this.ledsanim('sad_v2');
         }
         if (level >= 1) {
-          this.movement('D');
-        }
-        if (level >= 2) {
-          this.movement('S');
+          this.movement(level > 1 ? 'S' : 'D');
         }
         break;
       case 'anger':
@@ -366,8 +347,8 @@ class SocialRobot {
         }
         break;
       case 'surprise':
-        if (leds) {
-          var animation = spawn('./leds/joy_v2');
+        if (leds || level >= 2) {
+          this.ledsanim('joy_v2');
         }
         if (level >= 1) {
           this.movement('U');
@@ -396,18 +377,18 @@ class SocialRobot {
 
 }
 
-  /**
-   * SocialRobot module version 
-   */
+/**
+ * SocialRobot module version 
+ */
 
-  //SocialRobot.prototype.version = 'v1';
-  SocialRobot.prototype.defaultConfiguration = {
+//SocialRobot.prototype.version = 'v1';
+SocialRobot.prototype.defaultConfiguration = {
   'attentionWord': 'Eva',
   'name': 'Eva',
   'voice': 'es-LA_SofiaV3Voice',
   'ttsReconnect': true,
 };
 
-  SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
+SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
 
 module.exports = SocialRobot;

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "pm2 start app.js",
+    "stop": "pm2 kill",
     "dev": "nodemon app --stack_size=160000 --ignore db.json"
   },
   "dependencies": {
@@ -16,7 +17,7 @@
     "ejs": "~2.5.6",
     "encoding": "^0.1.12",
     "express": "^4.17.1",
-    "ibm-watson": "^5.4.0",
+    "ibm-watson": "^6.0.3",
     "lowdb": "^1.0.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
@@ -25,7 +26,7 @@
     "request": "^2.81.0",
     "serialport": "^8.0.7",
     "serve-favicon": "^2.5.0",
-    "socket.io": "1.7.4",
+    "socket.io": "^2.4.0",
     "temp": "^0.8.3",
     "utf8": "^2.1.2",
     "uuid": "^8.3.0",

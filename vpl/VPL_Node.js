@@ -7,16 +7,16 @@ const api = require('./Api_Node');
 var app = require('../app');
 
 module.exports = {
-    ProcessNode: async function (social, evaId, usuarioId, element) {
+    ProcessNode: async function (evaId, usuarioId, element) {
         if (element.type === 'voice') {
             social.setVoice(element.voice);
         } else if (element.type === 'emotion') {
-            ProcessEmotionNode(social, element)
+            ProcessEmotionNode(element)
         } else if (element.type === 'speak') {
             social.ledsanimstop();
-            await ProcessSpeakNode(social, evaId, element);
+            await ProcessSpeakNode(evaId, element);
         } else if (element.type === 'listen') {
-            await ProcessListenNode(social, usuarioId, element);
+            await ProcessListenNode(usuarioId, element);
         } else if (element.type === 'wait') {
             await social.sleep(element.time);
         } else if (element.type === 'mov') {
@@ -48,11 +48,15 @@ module.exports = {
             let data = await api.Api(element.version + '://' + element.host, element.path, element.port);
             app.setApi(element.name.toLowerCase(), data);
 		    console.log('respuesta: ' + api.Getdata(app.getApi(element.name.toLowerCase()), 'gender'));
-        } 
+        } else if (element.type === 'dialogflow'){
+            let aux = await social.dialogflow(element.text.includes('$') ? replaceWhatWasHeard(element.text) : element.text, element.project || '');
+            social.ledsanimstop();
+            await ProcessSpeakNode(evaId, {type: 'speak', text: aux});
+        }
     }
 };
 
-function ProcessEmotionNode(social, element) {
+function ProcessEmotionNode(element) {
     if (element.level == -1) {
         if (app.getlemotion().length == 0) {
             element.level = 0;
@@ -64,7 +68,7 @@ function ProcessEmotionNode(social, element) {
     social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
 }
 
-async function ProcessSpeakNode(social, evaId, element) {
+async function ProcessSpeakNode(evaId, element) {
     let t = element.text;
     if (t.includes('/')) {
         t = random.getOne(t.split('/'));
@@ -90,13 +94,13 @@ async function ProcessSpeakNode(social, evaId, element) {
         }
     }
     if (rec) {
-        await RecAndSpeak(social, evaId, { key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: temp.join(' ') });
+        await RecAndSpeak(evaId, { key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: temp.join(' ') });
     } else {
         await social.speak(temp.join(' '), element.anim, !element.anim);
     } 
 }
 
-async function RecAndSpeak(social, evaId, element) {
+async function RecAndSpeak(evaId, element) {
 	try {
 		if (!fs.existsSync('./temp/' + (social.getVoice() + '_' + element.key) + '.wav')) {
 			await social.rec(element.text, (social.getVoice() + '_' + element.key));
@@ -108,7 +112,7 @@ async function RecAndSpeak(social, evaId, element) {
 	}
 }
 
-async function ProcessListenNode(social, usuarioId, element) {
+async function ProcessListenNode(usuarioId, element) {
     var r = await social.sendAudioGoogleSpeechtoText2();
     social.stopListening();
     if (element.opt !== '') {

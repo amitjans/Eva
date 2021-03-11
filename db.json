@@ -3136,6 +3136,34 @@
           }
         ]
       }
+    },
+    {
+      "_id": "293dc782-ee23-4810-b699-948a8d918bae",
+      "nombre": "Dialogflow",
+      "data": {
+        "node": [
+          {
+            "key": 1615338027607,
+            "name": "Ciclo_0",
+            "type": "for",
+            "color": "lightblue",
+            "isGroup": true,
+            "iteraciones": 3,
+            "__gohashid": 530
+          },
+          {
+            "key": 1615338047207,
+            "name": "Dialogflow_2",
+            "type": "dialogflow",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1615338027607,
+            "text": "Hola",
+            "__gohashid": 923
+          }
+        ],
+        "link": []
+      }
     }
   ],
   "voice": [
@@ -3168,6 +3196,180 @@
       "idioma": "Portuges",
       "codigo": "pt-BR_IsabelaV3Voice",
       "nombre": "Isabela"
+    },
+    {
+      "_id": "aa79490c-ce70-4ded-aab0-0d0885f9c481",
+      "idioma": "Arabic",
+      "codigo": "ar-MS_OmarVoice",
+      "nombre": "Omar"
+    },
+    {
+      "_id": "e8a8c8ef-d525-4fab-829d-6c149ded0cd7",
+      "idioma": "Chinese",
+      "codigo": "zh-CN_LiNaVoice",
+      "nombre": "Lina"
+    },
+    {
+      "_id": "d96d64d7-3b60-49e7-9040-0bcc943346af",
+      "idioma": "Chinese",
+      "codigo": "zh-CN_WangWeiVoice",
+      "nombre": "WangWei"
+    },
+    {
+      "_id": "c6ce4a76-36f7-4c8e-b1d8-78c1f6668f41",
+      "idioma": "Chinese",
+      "codigo": "zh-CN_ZhangJingVoice",
+      "nombre": "ZhangJing"
+    },
+    {
+      "_id": "f4852817-9eeb-4d55-ac5d-5a149824fe33",
+      "idioma": "Dutch",
+      "codigo": "nl-NL_EmmaVoice",
+      "nombre": "Emma"
+    },
+    {
+      "_id": "31642143-ed3d-4bcd-b963-6afd17a58900",
+      "idioma": "Dutch",
+      "codigo": "nl-NL_LiamVoice",
+      "nombre": "Liam"
+    },
+    {
+      "_id": "dac9287d-805d-452a-bf48-d4b90b144f4f",
+      "idioma": "English (Australian)",
+      "codigo": "en-AU_CraigVoice",
+      "nombre": "Craig"
+    },
+    {
+      "_id": "808f652a-363d-4430-a873-98df971f4243",
+      "idioma": "English (Australian)",
+      "codigo": "en-AU_MadisonVoice",
+      "nombre": "Madison"
+    },
+    {
+      "_id": "f99730d9-f95e-4813-8b61-ba4caf2b309f",
+      "idioma": "English (United Kingdom)",
+      "codigo": "en-GB_CharlotteV3Voice",
+      "nombre": "Charlotte"
+    },
+    {
+      "_id": "d52998f9-c528-4b66-b2ac-8585c9897aff",
+      "idioma": "English (United Kingdom)",
+      "codigo": "en-GB_JamesV3Voice",
+      "nombre": "James"
+    },
+    {
+      "_id": "868489a6-2fcd-4df5-bdf1-e26d1d4f44ce",
+      "idioma": "English (United Kingdom)",
+      "codigo": "en-GB_KateV3Voice",
+      "nombre": "Kate"
+    },
+    {
+      "_id": "684c5b1f-b940-4c65-95e0-73ff3402dd4c",
+      "idioma": "English (United States)",
+      "codigo": "en-US_AllisonV3Voice",
+      "nombre": "Allison"
+    },
+    {
+      "_id": "d97e2e43-576d-4a59-a437-11fed1b931b3",
+      "idioma": "English (United States)",
+      "codigo": "en-US_EmilyV3Voice",
+      "nombre": "Emily"
+    },
+    {
+      "_id": "264701d5-662f-48ea-b3ca-c1be9a83dd11",
+      "idioma": "English (United States)",
+      "codigo": "en-US_HenryV3Voice",
+      "nombre": "Henry"
+    },
+    {
+      "_id": "e6c8220f-3584-4575-9d61-a4c0fc6bb7bc",
+      "idioma": "English (United States)",
+      "codigo": "en-US_KevinV3Voice",
+      "nombre": "Kevin"
+    },
+    {
+      "_id": "ccaffd76-57bc-4ca5-8729-21e87598fa7a",
+      "idioma": "English (United States)",
+      "codigo": "en-US_LisaV3Voice",
+      "nombre": "Lisa"
+    },
+    {
+      "_id": "2f3dac9c-0496-4f20-b6ee-e279cacc9ec1",
+      "idioma": "English (United States)",
+      "codigo": "en-US_MichaelV3Voice",
+      "nombre": "Michael"
+    },
+    {
+      "_id": "7686d4fd-de94-487d-925d-45a6ffaeb286",
+      "idioma": "English (United States)",
+      "codigo": "en-US_OliviaV3Voice",
+      "nombre": "Olivia"
+    },
+    {
+      "_id": "198908a9-147b-43a0-96e6-274e33c1cfcc",
+      "idioma": "French",
+      "codigo": "fr-FR_NicolasV3Voice",
+      "nombre": "Nicolas"
+    },
+    {
+      "_id": "baad57cd-2cec-4318-a69e-fe5e7c330b9b",
+      "idioma": "French",
+      "codigo": "fr-FR_ReneeV3Voice",
+      "nombre": "Renee"
+    },
+    {
+      "_id": "856e1cd4-09aa-4391-bcf5-c84770eae1ed",
+      "idioma": "German",
+      "codigo": "de-DE_BirgitV3Voice",
+      "nombre": "Birgit"
+    },
+    {
+      "_id": "4c988403-0f8b-49f1-8c11-b44439ddaf23",
+      "idioma": "German",
+      "codigo": "de-DE_DieterV3Voice",
+      "nombre": "Dieter"
+    },
+    {
+      "_id": "930bd13d-8360-47bd-9c42-19a93fef79a8",
+      "idioma": "German",
+      "codigo": "de-DE_ErikaV3Voice",
+      "nombre": "Erika"
+    },
+    {
+      "_id": "5d4fbfc5-b373-4317-beb1-a7f76668f956",
+      "idioma": "Italian",
+      "codigo": "it-IT_FrancescaV3Voice",
+      "nombre": "Francesca"
+    },
+    {
+      "_id": "79d94bb2-8512-4c0d-99c6-7d99558b32d4",
+      "idioma": "Japanese",
+      "codigo": "ja-JP_EmiV3Voice",
+      "nombre": "Emi"
+    },
+    {
+      "_id": "2bd3cfb7-e249-47af-96a9-32752c7bbf7f",
+      "idioma": "Korean",
+      "codigo": "ko-KR_HyunjunVoice",
+      "nombre": "Hyunjun"
+    },
+    {
+      "_id": "455b1165-62a6-470f-86f0-558a5c66f6fa",
+      "idioma": "Korean",
+      "codigo": "ko-KR_SiWooVoice",
+      "nombre": "SiWoo"
+    },
+    {
+      "_id": "18592f6b-7e67-4a4d-8cd5-b231c05514f0",
+      "idioma": "Korean",
+      "codigo": "ko-KR_YoungmiVoice",
+      "nombre": "Youngmi"
+    },
+    {
+      "_id": "41dbe126-271c-4d4d-86bb-4399c722978d",
+      "idioma": "Korean",
+      "codigo": "ko-KR_YunaVoice",
+      "nombre": "Yuna"
     }
   ],
   "led": [
