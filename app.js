@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var http = require('http');
 var index = require('./server/routes/index');
 
 var nodeutils = require('./vpl/NodeUtils');
@@ -93,79 +92,11 @@ var enviarError = function (error, query) {
 var SocialRobot = require('./social_robot');
 var social = new SocialRobot();
 
+global.social = social;
+
 const interaccion = require('./server/controllers/interaccion.controller');
 const unify = require('./vpl/Unify_Node');
-const process = require('./vpl/VPL_Process');
-const nodes = require('./vpl/VPL_Node');
-
-index.get('/speak', async function (req, res) {
-	await social.speak(req.query.speak);
-	res.status(200).jsonp();
-});
-
-index.post('/nodes', async function (req, res) {
-	await nodes.ProcessNode(social, evaId, usuarioId, req.body);
-	res.status(200).jsonp();
-});
-
-index.get('/interaccion/iniciarInteraccion1', async function (req, res) {
-	console.log(await social.dialogflow('hola'));
-	res.status(200).jsonp();
-});
-
-var lastlevel = 0;
-
-index.get('/interaccion/iniciaremocion', function (req, res) {
-	//sad
-	if (req.query.e == 1) {
-		lastlevel = 0;
-		social.emotions('sad', 0);
-	}
-	if (req.query.e == 2) {
-		lastlevel = 1;
-		social.emotions('sad', 1);
-	}
-	if (req.query.e == 3) {
-		lastlevel = 2;
-		social.emotions('sad', 2);
-	}
-	//anger
-	if (req.query.e == 4) {
-		lastlevel = 0;
-		social.emotions('anger', 0);
-	}
-	if (req.query.e == 5) {
-		lastlevel = 1;
-		social.emotions('anger', 1);
-	}
-	if (req.query.e == 6) {
-		lastlevel = 2;
-		social.emotions('anger', 2);
-	}
-	//joy
-	if (req.query.e == 7) {
-		lastlevel = 0;
-		social.emotions('joy', 0);
-	}
-	if (req.query.e == 8) {
-		lastlevel = 1;
-		social.emotions('joy', 1);
-	}
-	if (req.query.e == 9) {
-		lastlevel = 1;
-		social.emotions('joy', 2);
-	}
-	//ini
-	if (req.query.e == 0) {
-		social.emotions('ini', 0);
-	}
-	//exit
-	if (req.query.e == 10) {
-		social.emotions('exit', 0);
-	}
-	console.log(req.query.e);
-	res.status(200).jsonp();
-});
+const { ProcessFlow } = require('./vpl/VPL_Process');
 
 var respuesta = [];
 var s = {};
@@ -174,69 +105,25 @@ var lemotion = [];
 var counter = {};
 var apidata = {};
 
-function setRespuesta(value) {
-	respuesta.push(value);
-}
-
-function getRespuesta(last = false) {
-	return last ? respuesta[respuesta.length - 1] : respuesta;
-}
-
-function setSactual(value) {
-	sactual = value;
-}
-function getSactual() {
-	return sactual;
-}
-
-function addlemotion(value) {
-	lemotion.push(value);
-}
-
-function getlemotion() {
-	return lemotion;
-}
-
-function setCounter(value) {
-	counter = value;
-}
-
-function getCounter() {
-	return counter;
-}
-
-function setApi(key, value) {
-	apidata[key] = value;
-}
-
-function getApi(key) {
-	return apidata[key];
-}
-
-function setScript(value) {
-	s = value;
-}
-
-function getScript() {
-	return s;
-}
-
-module.exports.setRespuesta = setRespuesta;
-module.exports.getRespuesta = getRespuesta;
-module.exports.setSactual = setSactual;
-module.exports.getSactual = getSactual;
-module.exports.addlemotion = addlemotion;
-module.exports.getlemotion = getlemotion;
-module.exports.setCounter = setCounter;
-module.exports.getCounter = getCounter;
-module.exports.setApi = setApi;
-module.exports.getApi = getApi;
-module.exports.setScript = setScript;
-module.exports.getScript = getScript;
+module.exports.getSocial = function () {
+	return social;
+};
+module.exports.setRespuesta = function (value) { respuesta.push(value); }
+module.exports.getRespuesta = function (last = false) { return last ? respuesta[respuesta.length - 1] : respuesta; }
+module.exports.setSactual = function (value) { sactual = value; };
+module.exports.getSactual = function () { return sactual; };
+module.exports.addlemotion = function (value) { lemotion.push(value); };
+module.exports.getlemotion = function () { return lemotion; };
+module.exports.setCounter = function (value) { counter = value; };
+module.exports.getCounter = function () { return counter; };
+module.exports.setApi = function (key, value) { apidata[key] = value; };
+module.exports.getApi = function (key) { return apidata[key]; };
+module.exports.setScript = function (value) { s = value };
+module.exports.getScript = function () { return s };
 
 index.get('/interaccion/unified', async function (req, res) {
 	const temp = await interaccion.getThis(req.query.id);
-    let obj = await unify.unifyByInt(temp);
+	let obj = await unify.unifyByInt(temp);
 	await interaccion.createThis(temp.nombre + '_expandida', obj);
 	res.status(200).jsonp();
 });
@@ -249,7 +136,7 @@ index.get('/interaccion/audio', async function (req, res) {
 
 index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	res.status(200).jsonp();
-	
+
 	respuesta = [];
 	counter = {};
 
@@ -257,7 +144,7 @@ index.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	var fnodes = nodeutils.FirstsNodes(obj.link, obj.node.slice());
 
 	social.resetlog();
-	await process.ProcessFlow(social, evaId, usuarioId, obj.node, obj.link, fnodes, 0);
+	await ProcessFlow(evaId, usuarioId, obj.node, obj.link, fnodes, 0);
 	social.setVoice('es-LA_SofiaV3Voice');
 	social.savelogs('');
 });

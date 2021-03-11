@@ -5,7 +5,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.accion = 'Agregar';
   $scope.icon = true;
   $scope.updateid;
-  var modalname = { emotion: 'Emoción', speak: 'Hablar', listen: 'Escuchar', wait: 'Tiempo', for: 'Ciclo', if: 'Condición', mov: 'Movimiento', int: 'Interacción', script: 'Script', sound: 'Audio', led: 'Animación Led', voice: 'Voz', counter: 'Contador', api: 'Api Rest' };
+  var modalname = { emotion: 'Emoción', speak: 'Hablar', listen: 'Escuchar', wait: 'Tiempo', for: 'Ciclo', if: 'Condición', mov: 'Movimiento', int: 'Interacción', script: 'Script', sound: 'Audio', led: 'Animación Led', voice: 'Voz', counter: 'Contador', api: 'Api Rest', dialogflow: 'Dialogflow' };
   var color = { joy: "lightyellow", sad: "lightblue", surprised: "lightgreen", anger: "red", ini: "lightgray" };
 
   $scope.list = function () {
@@ -220,6 +220,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case "api":
         node.push(Object.assign(tempobj, { version: $scope.version, host: $scope.host, path: $scope.path, port: ($scope.port == 0 || !!!$scope.port ? '' : $scope.port) }));
         break;
+      case "dialogflow":
+        node.push(Object.assign(tempobj, { text: $scope.dialogparam, project: $scope.project }));
+        break;
       default:
         break;
     }
@@ -298,6 +301,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         break;
       case 'api':
         Object.assign($scope, { version: l.version, host: l.host, path: l.path, port: (l.port || 0) });
+        break;
+      case 'dialogflow':
+        Object.assign($scope, { dialogparam: l.text, project: l.project });
         break;
       default:
         break;

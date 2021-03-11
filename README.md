@@ -16,6 +16,7 @@ source ~/.profile
 ```bash
 nvm install v14.16.0
 ```
+<!-- nvm install lts/* --reinstall-packages-from=node -->
 ```bash
 nvm use v14.16.0
 ```
@@ -43,6 +44,10 @@ sudo reboot
 ### Dependencias de la aplicación
 ```bash
 npm install
+```
+#### Dependencias para entornos de producción
+```bash
+npm install pm2 -g
 ```
 <!--
 ### Librerías
@@ -92,5 +97,5 @@ Archivo opcional para el inicio de la aplicación
 echo Eva
 sudo amixer cset numid=1 100% #volumen de la bocina
 export GOOGLE_APPLICATION_CREDENTIALS="credencial.json" #importar las credenciales de google
-npm run dev #Iniciar la aplicación
+npm start #Iniciar la aplicación
  ```
