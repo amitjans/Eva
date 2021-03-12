@@ -4,9 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var index = require('./server/routes/index');
-
-var nodeutils = require('./vpl/NodeUtils');
 
 var app = express();
 
@@ -22,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', require('./server/routes/index'));
 app.use('/users', require('./server/routes/users'));
 app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/audio', require('./server/routes/audio.routes.js'));
@@ -60,8 +57,6 @@ var io = require('socket.io')(server);
 
 module.exports = app;
 
-var usuarioId = { autor: 'Usuario', class: 'text-muted' };
-var evaId = { autor: 'Robot Eva', class: 'text-danger' };
 var indiceScript1 = 1;
 
 var enviarMensaje = function (autor, msg, media) {
@@ -82,9 +77,7 @@ module.exports.enviarMensaje = enviarMensaje;
 module.exports.eyes = eyes;
 
 var enviarError = function (error, query) {
-	var data = {};
-	data.error = error;
-	data.query = query;
+	var data = {error: error, query: query};
 	console.log(data);
 	io.sockets.emit('messages', data);
 }
@@ -94,10 +87,6 @@ var social = new SocialRobot();
 
 global.social = social;
 
-const interaccion = require('./server/controllers/interaccion.controller');
-const unify = require('./vpl/Unify_Node');
-const { ProcessFlow } = require('./vpl/VPL_Process');
-
 var respuesta = [];
 var s = {};
 var sactual;
@@ -105,9 +94,6 @@ var lemotion = [];
 var counter = {};
 var apidata = {};
 
-module.exports.getSocial = function () {
-	return social;
-};
 module.exports.setRespuesta = function (value) { respuesta.push(value); }
 module.exports.getRespuesta = function (last = false) { return last ? respuesta[respuesta.length - 1] : respuesta; }
 module.exports.setSactual = function (value) { sactual = value; };
@@ -120,31 +106,3 @@ module.exports.setApi = function (key, value) { apidata[key] = value; };
 module.exports.getApi = function (key) { return apidata[key]; };
 module.exports.setScript = function (value) { s = value };
 module.exports.getScript = function () { return s };
-
-index.get('/interaccion/unified', async function (req, res) {
-	const temp = await interaccion.getThis(req.query.id);
-	let obj = await unify.unifyByInt(temp);
-	await interaccion.createThis(temp.nombre + '_expandida', obj);
-	res.status(200).jsonp();
-});
-
-index.get('/interaccion/audio', async function (req, res) {
-	res.status(200).jsonp();
-	console.log('./sonidos/' + req.query.id + '.wav');
-	await social.play('./sonidos/' + req.query.id + '.wav');
-});
-
-index.get('/interaccion/iniciarInteracciong', async function (req, res) {
-	res.status(200).jsonp();
-
-	respuesta = [];
-	counter = {};
-
-	let obj = await unify.unifyById(req.query.id);
-	var fnodes = nodeutils.FirstsNodes(obj.link, obj.node.slice());
-
-	social.resetlog();
-	await ProcessFlow(evaId, usuarioId, obj.node, obj.link, fnodes, 0);
-	social.setVoice('es-LA_SofiaV3Voice');
-	social.savelogs('');
-});
