@@ -4,19 +4,19 @@ const crypto = require('crypto');
 var random = require('../utils/Random');
 var lf = require('./ListeningFilters');
 const api = require('./Api_Node');
-var app = require('../app');
+var { setRespuesta, getRespuesta, getSactual, addlemotion, getlemotion, setCounter, getCounter, setApi, getApi } = require('./VPL_ProcessVars');
 
 module.exports = {
-    ProcessNode: async function (evaId, usuarioId, element) {
+    ProcessNode: async function (element) {
         if (element.type === 'voice') {
             social.setVoice(element.voice);
         } else if (element.type === 'emotion') {
             ProcessEmotionNode(element)
         } else if (element.type === 'speak') {
             social.ledsanimstop();
-            await ProcessSpeakNode(evaId, element);
+            await ProcessSpeakNode(element);
         } else if (element.type === 'listen') {
-            await ProcessListenNode(usuarioId, element);
+            await ProcessListenNode(element);
         } else if (element.type === 'wait') {
             await social.sleep(element.time);
         } else if (element.type === 'mov') {
@@ -46,29 +46,30 @@ module.exports = {
                 console.log(element.path);
             }
             let data = await api.Api(element.version + '://' + element.host, element.path, element.port);
-            app.setApi(element.name.toLowerCase(), data);
-		    console.log('respuesta: ' + api.Getdata(app.getApi(element.name.toLowerCase()), 'gender'));
+            setApi(element.name.toLowerCase(), data);
+		    console.log('respuesta: ' + api.Getdata(getApi(element.name.toLowerCase()), 'gender'));
         } else if (element.type === 'dialogflow'){
             let aux = await social.dialogflow(element.text.includes('$') ? replaceWhatWasHeard(element.text) : element.text, element.project || '');
             social.ledsanimstop();
-            await ProcessSpeakNode(evaId, {type: 'speak', text: aux});
+            await ProcessSpeakNode({type: 'speak', text: aux});
         }
     }
 };
 
 function ProcessEmotionNode(element) {
     if (element.level == -1) {
-        if (app.getlemotion().length == 0) {
+        if (getlemotion().length == 0) {
             element.level = 0;
-        } else if (element.key == app.getlemotion()[app.getlemotion().length - 1].key) {
-            element.level = (app.getlemotion()[app.getlemotion().length - 1].level + 1 > 2 ? 2 : app.getlemotion()[app.getlemotion().length - 1].level + 1);
+        } else if (element.key == getlemotion()[getlemotion().length - 1].key) {
+            let { level } = getlemotion()[getlemotion().length - 1];
+            element.level = (level + 1 > 2 ? 2 : level + 1);
         }
-        app.addlemotion(element);
+        addlemotion(element);
     }
     social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
 }
 
-async function ProcessSpeakNode(evaId, element) {
+async function ProcessSpeakNode(element) {
     let t = element.text;
     if (t.includes('/')) {
         t = random.getOne(t.split('/'));
@@ -76,54 +77,54 @@ async function ProcessSpeakNode(evaId, element) {
         element.text = t;
     }
     let rec = true;
-    social.templog(evaId, element.text);
+    social.templog(element.text);
     let temp = element.text.split(' ');
     for (let i = 0; i < temp.length; i++) {
         if (temp[i].includes('@')) {
             let pos = temp[i].indexOf('.');
-            temp[i] = api.Getdata(app.getApi(temp[i].substring(1, pos).toLowerCase()), temp[i].substring(pos + 1));
+            temp[i] = api.Getdata(getApi(temp[i].substring(1, pos).toLowerCase()), temp[i].substring(pos + 1));
         } else if (temp[i].includes('$')) {
             rec = false;
             temp[i] = replaceWhatWasHeard(temp[i]);
         } else if(temp[i].includes('%')) {
-            temp[i] = app.getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))];
+            temp[i] = getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))];
         } else if(temp[i].includes('#')) {
             if (/^#[\w\d]+$/.test(temp[i])) {
-                temp[i] = app.getCounter()[temp[i].substring(1)];
+                temp[i] = getCounter()[temp[i].substring(1)];
             }
         }
     }
     if (rec) {
-        await RecAndSpeak(evaId, { key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: temp.join(' ') });
+        await RecAndSpeak({ key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: temp.join(' ') });
     } else {
         await social.speak(temp.join(' '), element.anim, !element.anim);
     } 
 }
 
-async function RecAndSpeak(evaId, element) {
+async function RecAndSpeak(element) {
 	try {
 		if (!fs.existsSync('./temp/' + (social.getVoice() + '_' + element.key) + '.wav')) {
 			await social.rec(element.text, (social.getVoice() + '_' + element.key));
 		}
         await social.play('./temp/' + (social.getVoice() + '_' + element.key) + '.wav', element.anim, !element.anim);
-        social.templog(evaId, element.text);
+        social.templog(element.text);
 	} catch (err) {
 		console.error(err)
 	}
 }
 
-async function ProcessListenNode(usuarioId, element) {
-    var r = await social.sendAudioGoogleSpeechtoText2();
+async function ProcessListenNode(element) {
+    var r = await social.sendAudioGoogleSpeechtoText2(element.langcode);
     social.stopListening();
-    if (element.opt !== '') {
+    if (!!element.opt) {
         r = lf[element.opt](r)[0];
     }
-    app.setRespuesta(r);
-    social.templog(usuarioId, r);
+    setRespuesta(r);
+    social.templog(r);
 }
 
 function ProcessCounterNode(element) {
-    let temp = app.getCounter();
+    let temp = getCounter();
     if (element.ops === 'sum') {
         temp[element.count] = (temp[element.count] || 0) + parseInt(element.value);                
     } else if (element.ops === 'rest') {
@@ -135,11 +136,11 @@ function ProcessCounterNode(element) {
     } else if (element.ops === 'assign'){
         temp[element.count] = parseInt(element.value);
     }
-    app.setCounter(temp);
+    setCounter(temp);
 }
 
 function replaceWhatWasHeard(value) {
-    let respuesta = app.getRespuesta();
+    let respuesta = getRespuesta();
     if (/\$-[\d]+/.test(value)) {
         value = respuesta[(respuesta.length - 1) - parseInt(value.substring(2))];
     } else if (/\$[\d]+/.test(value)) {

@@ -53,7 +53,8 @@ app.use(function (err, req, res, next) {
 
 app.set('port', '3000');
 const server = app.listen(app.get('port'));
-var io = require('socket.io')(server);
+const io = require('socket.io')(server);
+io.on('connection', () => { console.log('Client connected') });
 
 module.exports = app;
 
@@ -70,6 +71,7 @@ var enviarMensaje = function (autor, msg, media) {
 };
 
 var eyes = function (params) {
+	console.log(params);
 	io.sockets.emit('messages', params);
 }
 
@@ -86,23 +88,5 @@ var SocialRobot = require('./social_robot');
 var social = new SocialRobot();
 
 global.social = social;
-
-var respuesta = [];
-var s = {};
-var sactual;
-var lemotion = [];
-var counter = {};
-var apidata = {};
-
-module.exports.setRespuesta = function (value) { respuesta.push(value); }
-module.exports.getRespuesta = function (last = false) { return last ? respuesta[respuesta.length - 1] : respuesta; }
-module.exports.setSactual = function (value) { sactual = value; };
-module.exports.getSactual = function () { return sactual; };
-module.exports.addlemotion = function (value) { lemotion.push(value); };
-module.exports.getlemotion = function () { return lemotion; };
-module.exports.setCounter = function (value) { counter = value; };
-module.exports.getCounter = function () { return counter; };
-module.exports.setApi = function (key, value) { apidata[key] = value; };
-module.exports.getApi = function (key) { return apidata[key]; };
-module.exports.setScript = function (value) { s = value };
-module.exports.getScript = function () { return s };
+global.usuarioId = { autor: 'Usuario', class: 'text-muted' };
+global.evaId = { autor: 'Robot Eva', class: 'text-danger' };

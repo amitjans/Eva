@@ -1222,17 +1222,6 @@
             "__gohashid": 56152
           },
           {
-            "key": 1598761211537,
-            "name": "Emoción_4 ",
-            "type": "emotion",
-            "emotion": "ini",
-            "level": 2,
-            "speed": 1,
-            "color": "lightgray",
-            "isGroup": false,
-            "__gohashid": 56282
-          },
-          {
             "key": 1598761219909,
             "name": "Esperar_5",
             "type": "wait",
@@ -1250,6 +1239,18 @@
             "isGroup": false,
             "group": "",
             "__gohashid": 784
+          },
+          {
+            "key": 1598761211537,
+            "name": "Emoción_4 ",
+            "type": "emotion",
+            "color": "lightgray",
+            "isGroup": false,
+            "group": "",
+            "emotion": "ini",
+            "level": 2,
+            "speed": 1,
+            "__gohashid": 2005
           }
         ],
         "link": [
@@ -1606,28 +1607,6 @@
             "__gohashid": 15843
           },
           {
-            "key": 1598749400382,
-            "name": "Condición_15",
-            "type": "if",
-            "text": "primera",
-            "opt ": 4,
-            "color": "lightblue",
-            "isGroup": false,
-            "group": 1598748244927,
-            "__gohashid": 20229
-          },
-          {
-            "key": 1598749426370,
-            "name": "Condición_16",
-            "type": "if",
-            "text": "segunda",
-            "opt ": 4,
-            "color": "lightblue",
-            "isGroup": false,
-            "group": 1598748244927,
-            "__gohashid": 21016
-          },
-          {
             "key": 1598749439489,
             "name": "Hablar_17",
             "type": "speak",
@@ -1646,16 +1625,6 @@
             "isGroup": false,
             "group": 1598748244927,
             "__gohashid": 22822
-          },
-          {
-            "key": 1598749506433,
-            "name": "Hablar_19",
-            "type": "speak",
-            "text": "%1",
-            "color": "lightblue",
-            "isGroup": false,
-            "group": 1598748244927,
-            "__gohashid": 23922
           },
           {
             "key": 1598747995973,
@@ -1767,6 +1736,28 @@
             "isGroup": false,
             "group": 1598748244927,
             "__gohashid": 4225
+          },
+          {
+            "key": 1598749400382,
+            "name": "Condición_15",
+            "type": "if",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "text": "primera",
+            "opt": 3,
+            "__gohashid": 10383
+          },
+          {
+            "key": 1598749426370,
+            "name": "Condición_16",
+            "type": "if",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1598748244927,
+            "text": "segunda",
+            "opt": 3,
+            "__gohashid": 11699
           }
         ],
         "link": [
@@ -1821,11 +1812,6 @@
             "__gohashid": 14622
           },
           {
-            "from": 1598749164413,
-            "to": 1598749236421,
-            "__gohashid": 15845
-          },
-          {
             "__gohashid": 16576,
             "from": 1598749145579,
             "to": 1598749236421
@@ -1851,21 +1837,6 @@
             "__gohashid": 22824
           },
           {
-            "from": 1598749053323,
-            "to": 1598749506433,
-            "__gohashid": 23924
-          },
-          {
-            "__gohashid": 25018,
-            "from": 1598749506433,
-            "to": 1598749164413
-          },
-          {
-            "__gohashid": 32005,
-            "from": 1598749506433,
-            "to": 1598749138128
-          },
-          {
             "from": 1598748244927,
             "to": 1598784648586,
             "__gohashid": 1425
@@ -1879,6 +1850,21 @@
             "from": 1598784652299,
             "to": 1598784684496,
             "__gohashid": 3030
+          },
+          {
+            "__gohashid": 2579,
+            "from": 1598749053323,
+            "to": 1598749164413
+          },
+          {
+            "__gohashid": 2995,
+            "from": 1598749053323,
+            "to": 1598749138128
+          },
+          {
+            "__gohashid": 8466,
+            "from": 1598749164413,
+            "to": 1598749236421
           }
         ]
       },
@@ -2868,16 +2854,6 @@
             "__gohashid": 22457
           },
           {
-            "key": 1614194161974,
-            "name": "Hablar_30",
-            "type": "speak",
-            "color": "lightblue",
-            "isGroup": false,
-            "group": "",
-            "text": "Actualmente los desarrolladores se encuentran trabajando en mis capacidades de visión y desplazamiento.",
-            "__gohashid": 23899
-          },
-          {
             "key": 1614194012982,
             "name": "Tiempo_20",
             "type": "wait",
@@ -2966,6 +2942,16 @@
             "group": "",
             "mov": "L",
             "__gohashid": 64428
+          },
+          {
+            "key": 1614194161974,
+            "name": "Hablar_30",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "text": "Os desenvolvedores estão trabalhando atualmente em minha visão e recursos de rolagem.",
+            "__gohashid": 2258
           }
         ],
         "link": [
@@ -3852,6 +3838,228 @@
         "1",
         "2"
       ]
+    }
+  ],
+  "googlestt": [
+    {
+      "_id": "c6404378-2679-4b58-98a5-25223fa2e280",
+      "idioma": "Español (Argentina)",
+      "codigo": "es-AR"
+    },
+    {
+      "_id": "6a05cfb2-dd15-430e-b8b1-caf36902382a",
+      "idioma": "Español (Bolivia)",
+      "codigo": "es-BO"
+    },
+    {
+      "_id": "fbb46599-237a-415d-8c47-48c000e28894",
+      "idioma": "Español (Chile)",
+      "codigo": "es-CL"
+    },
+    {
+      "_id": "80c5be6c-00cd-4328-8fa5-f1cf6f89bf47",
+      "idioma": "Español (Colombia)",
+      "codigo": "es-CO"
+    },
+    {
+      "_id": "16cec0b0-a4e6-4a4a-8135-6328d1200535",
+      "idioma": "Español (Costa Rica)",
+      "codigo": "es-CR"
+    },
+    {
+      "_id": "de4c5caf-b1d2-4bd8-8735-b56eebfbefdb",
+      "idioma": "Español (República Dominicana)",
+      "codigo": "es-DO"
+    },
+    {
+      "_id": "28a794fd-d2a9-4dda-95d5-aed62699b0bd",
+      "idioma": "Español (Ecuador)",
+      "codigo": "es-EC"
+    },
+    {
+      "_id": "55d088c3-9e4c-47d8-8aac-79437cd749eb",
+      "idioma": "Español (El Salvador)",
+      "codigo": "es-SV"
+    },
+    {
+      "_id": "fa98dddd-45d8-4939-9171-0b0b4fc4cdf2",
+      "idioma": "Español (Guatemala)",
+      "codigo": "es-GT"
+    },
+    {
+      "_id": "26ed89ee-f938-4e62-a27a-37eae474a520",
+      "idioma": "Español (Honduras)",
+      "codigo": "es-HN"
+    },
+    {
+      "_id": "c68391d3-9290-4021-bcce-ddade1afdd56",
+      "idioma": "Español (México)",
+      "codigo": "es-MX"
+    },
+    {
+      "_id": "0b5a255e-2124-4a3e-9ddf-f70e91790f0a",
+      "idioma": "Español (Nicaragua)",
+      "codigo": "es-NI"
+    },
+    {
+      "_id": "4dd145e5-d0cb-4819-aa38-ee705bcfa317",
+      "idioma": "Español (Panamá)",
+      "codigo": "es-PA"
+    },
+    {
+      "_id": "39736e72-421b-4d0b-b444-1de8e1998d5c",
+      "idioma": "Español (Paraguay)",
+      "codigo": "es-PY"
+    },
+    {
+      "_id": "a9cc9d5b-1015-40c2-939f-8c0fe91d1410",
+      "idioma": "Español (Perú)",
+      "codigo": "es-PE"
+    },
+    {
+      "_id": "a140b5c2-6bc0-497a-9b54-367fefd479f0",
+      "idioma": "Español (Puerto Rico)",
+      "codigo": "es-PR"
+    },
+    {
+      "_id": "723982db-71bd-48af-8e58-d9eaf02ec63b",
+      "idioma": "Español (España)",
+      "codigo": "es-ES"
+    },
+    {
+      "_id": "0e56d984-8f4a-4e92-a60b-58cb6d66da4e",
+      "idioma": "Español (Estados Unidos)",
+      "codigo": "es-US"
+    },
+    {
+      "_id": "2ec59a49-5f83-49d3-ac2d-e32d0227ccd8",
+      "idioma": "Español (Uruguay)",
+      "codigo": "es-UY"
+    },
+    {
+      "_id": "de5151b9-c44f-4c2a-bc04-f621c2276f5a",
+      "idioma": "Español (Venezuela)",
+      "codigo": "es-VE"
+    },
+    {
+      "_id": "26f06d59-2e83-444c-b029-f2ccd41e753d",
+      "idioma": "Inglés (Australia)",
+      "codigo": "en-AU"
+    },
+    {
+      "_id": "75d917e4-6603-4da4-89d1-d91d0b0d30ee",
+      "idioma": "Inglés (Canadá)",
+      "codigo": "en-CA"
+    },
+    {
+      "_id": "8522ff6b-7b92-4282-a0f4-8b308af4d78c",
+      "idioma": "Inglés (Ghana)",
+      "codigo": "en-GH"
+    },
+    {
+      "_id": "7e59d03c-81da-420a-ba9e-2912cee1f2b2",
+      "idioma": "Inglés (Hong Kong)",
+      "codigo": "en-HK"
+    },
+    {
+      "_id": "d85f5c65-7b25-4ca6-83fd-bb9a9d3c25b7",
+      "idioma": "Inglés (India)",
+      "codigo": "en-IN"
+    },
+    {
+      "_id": "21068fa9-229e-4e91-84e8-526b492a2ac3",
+      "idioma": "Inglés (Irlanda)",
+      "codigo": "en-IE"
+    },
+    {
+      "_id": "f46c1e28-a13e-48b4-a3d3-0c3b697d59f2",
+      "idioma": "Inglés (Kenia)",
+      "codigo": "en-KE"
+    },
+    {
+      "_id": "baaf26b1-aae4-4cd7-b3b4-45667d7f9993",
+      "idioma": "Inglés (Nueva Zelanda)",
+      "codigo": "en-NZ"
+    },
+    {
+      "_id": "a6a77e66-0e4b-4a6f-9f8f-033eea0af31d",
+      "idioma": "Inglés (Nigeria)",
+      "codigo": "en-NG"
+    },
+    {
+      "_id": "e4a06d57-cda7-4b14-ba44-b24ac99625f1",
+      "idioma": "Inglés (Pakistán)",
+      "codigo": "en-PK"
+    },
+    {
+      "_id": "3a11c1a2-17ec-489f-b2c0-b75382fa413b",
+      "idioma": "Inglés (Filipinas)",
+      "codigo": "en-PH"
+    },
+    {
+      "_id": "8ff0b7cc-dd28-458c-aa59-9d729f87c0c8",
+      "idioma": "Inglés (Singapur)",
+      "codigo": "en-SG"
+    },
+    {
+      "_id": "814f5516-3179-44ac-8ab6-a12417fa6046",
+      "idioma": "Inglés (Sudáfrica)",
+      "codigo": "en-ZA"
+    },
+    {
+      "_id": "831bff6f-a24e-4b93-87d2-607ace0cce2b",
+      "idioma": "Inglés (Tanzania)",
+      "codigo": "en-TZ"
+    },
+    {
+      "_id": "1f25e2d6-c86f-46ac-988b-542d5f2bffd9",
+      "idioma": "Inglés (Reino Unido)",
+      "codigo": "en-GB"
+    },
+    {
+      "_id": "495af5e7-5709-4661-8804-2ce5cfd3f2ba",
+      "idioma": "Inglés (Estados Unidos)",
+      "codigo": "en-US"
+    },
+    {
+      "_id": "0a27ae7a-c7ce-459c-b4f5-fdd4c22fddf0",
+      "idioma": "Portugués (Brasil)",
+      "codigo": "pt-BR"
+    },
+    {
+      "_id": "244a13f2-6d48-4709-a8c9-8523ff7c496e",
+      "idioma": "Chino, Mandarín (Simplificado, China)",
+      "codigo": "zh"
+    },
+    {
+      "_id": "b426feec-b5b7-4f50-92aa-927ac7671a9f",
+      "idioma": "Holandés (Países Bajos)",
+      "codigo": "nl-NL"
+    },
+    {
+      "_id": "cb594522-8f86-4aef-95b0-c407449d0bbf",
+      "idioma": "Francés (Francia)",
+      "codigo": "fr-FR"
+    },
+    {
+      "_id": "d0fe5415-a370-4149-af19-6f93578fd7d6",
+      "idioma": "Alemán (Alemania)",
+      "codigo": "de-DE"
+    },
+    {
+      "_id": "ea5e09fb-a7a5-4d72-b798-61fb8bb42082",
+      "idioma": "Italiano (Italia)",
+      "codigo": "it-IT"
+    },
+    {
+      "_id": "adeae697-5ef8-49c6-b867-f232566f1a28",
+      "idioma": "Japonés (Japón)",
+      "codigo": "ja-JP"
+    },
+    {
+      "_id": "f94d094c-b055-4f31-ae34-d9dfeffa58d1",
+      "idioma": "Coreano (Corea del Sur)",
+      "codigo": "ko-KR"
     }
   ]
 }

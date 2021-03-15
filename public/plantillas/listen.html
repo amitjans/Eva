@@ -1,0 +1,107 @@
+<div class="container" ng-controller="listen">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bgm-bluegray">
+                    <h2>Listado de Voces <small>
+                            <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
+                                data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
+                        </small></h2>
+                </div>
+                <div>
+                    <div id="example_wrapper" class="dataTables_wrapper">
+                        <div class="dataTables_length" id="example_length">
+                            <label>Mostrar
+                                <select name="example_length" aria-controls="example" class="" ng-model="limit"
+                                    ng-change="dataTable()">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> registros</label></div>
+                        <div id="example_filter" class="dataTables_filter">
+                            <label>Buscar:<input type="search" class="" placeholder="" aria-controls="example"
+                                    ng-model="q" ng-change="dataTable()"></label>
+                        </div>
+                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                            aria-describedby="example_info">
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 350px;"> Idioma</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 350px;"> C&oacute;digo</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="2" style="width: 50px;">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
+                                    <td>{{ l.idioma }}</td>
+                                    <td>{{ l.codigo }}</td>
+                                    <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">Idioma</th>
+                                    <th rowspan="1" colspan="1">C&oacute;digo</th>
+                                    <th rowspan="1" colspan="2">Opciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Mostrando de
+                            {{ ((to == 0) ? 0 : from) }} a
+                            {{ to > temp.length ? temp.length : to }} de
+                            {{ temp.length }} registros</div>
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
+                                class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}"
+                                aria-controls="example" data-dt-idx="0" tabindex="-1" id="example_previous"
+                                ng-click="dataTable(-1)">Anterior</a>
+                            <!-- <span>
+                                <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
+                                <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
+                            </span> -->
+                            <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}" aria-controls="example" data-dt-idx="7" tabindex="0"
+                                id="example_next" ng-click="dataTable(1)">Siguiente</a></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Listen -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ accion }} Voz</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Idioma</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="idioma" placeholder="Nombre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&oacute;digo</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="codigo" placeholder="Nombre">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">Salvar</button>
+                    <button type="button" ng-show="!icon" ng-click="updatesend()"
+                        class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Listen -->
+</div>
