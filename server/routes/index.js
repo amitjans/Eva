@@ -6,9 +6,6 @@ const unify = require('../../vpl/Unify_Node');
 const { ProcessFlow } = require('../../vpl/VPL_Process');
 var { FirstsNodes } = require('../../vpl/NodeUtils');
 
-const usuarioId = { autor: 'Usuario', class: 'text-muted' };
-const evaId = { autor: 'Robot Eva', class: 'text-danger' };
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -20,7 +17,7 @@ router.get('/speak', async function (req, res) {
 });
 
 router.post('/nodes', async function (req, res) {
-	await nodes.ProcessNode(social, evaId, usuarioId, req.body);
+	await nodes.ProcessNode(req.body);
 	res.status(200).jsonp();
 });
 
@@ -78,7 +75,8 @@ router.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	var fnodes = FirstsNodes(obj.link, obj.node.slice());
 
 	social.resetlog();
-	await ProcessFlow(evaId, usuarioId, obj.node, obj.link, fnodes, 0);
+	await ProcessFlow(obj.node, obj.link, fnodes, 0);
+	["respuesta", "sactual", "lemotion", "counter", "apidata", "iscript"].forEach(item => { delete global[item] });
 	social.setVoice('es-LA_SofiaV3Voice');
 	social.savelogs('');
 });

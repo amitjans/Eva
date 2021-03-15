@@ -25,7 +25,11 @@ eva.config(['$locationProvider', '$routeProvider',
         }).
         when('/voice', {
             templateUrl: '/plantillas/voice.html',
-            activetab: "voice"
+            activetab: "lang"
+        }).
+        when('/listen', {
+            templateUrl: '/plantillas/listen.html',
+            activetab: "lang"
         }).
         when('/led', {
             templateUrl: '/plantillas/led.html',

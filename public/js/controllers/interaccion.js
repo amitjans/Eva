@@ -185,7 +185,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push(Object.assign(tempobj, { text: $scope.texto }));
         break;
       case "listen":
-        node.push(Object.assign(tempobj, { opt: $scope.listenopt }));
+        node.push(Object.assign(tempobj, { opt: $scope.listenopt, langcode: $scope.langcode || 'es-MX' }));
         break;
       case "wait":
         node.push(Object.assign(tempobj, { time: $scope.time }));

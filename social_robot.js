@@ -29,7 +29,7 @@ const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 9600
 })
 
-var send = require('./app');
+var { eyes } = require('./app');
 var logs = require('./log');
 var log = '';
 var time = 0;
@@ -100,8 +100,6 @@ class SocialRobot {
           })
           .then(repairedFile => {
             fs.writeFileSync(info.path, repairedFile);
-            console.log('audio.wav written with a corrected wav header');
-            console.info('SocialRobot speaking: ' + message);
             resolve(self.play(info.path, anim, ctrl))
           })
           .catch(err => {
@@ -146,7 +144,6 @@ class SocialRobot {
    * @param {String} soundFile to play
    */
   play(soundFile, anim, ctrl = true) {
-    // capture 'this' context
     var self = this;
 
     if (!self._isPlaying) {
@@ -217,56 +214,50 @@ class SocialRobot {
   }
 
   sendAudioGoogleSpeechtoText2(langcode, callback) {
-    this.ledsanimstop();
-    this.ledsanim('escuchaT');
+    const self = this;
+    self.ledsanimstop();
+    self.ledsanim('escuchaT');
+
+    const sampleRateHertz = 16000;
+    const client = new speech.SpeechClient();
+
+    const request = {
+      config: {
+        encoding: 'LINEAR16',
+        sampleRateHertz: sampleRateHertz,
+        languageCode: langcode || 'es-MX',
+      },
+      interimResults: false,
+    };
+
     return new Promise(function (resolve, reject) {
-
-      const sampleRateHertz = 16000;
-      const client = new speech.SpeechClient();
-
-      const request = {
-        config: {
-          encoding: 'LINEAR16',
-          sampleRateHertz: sampleRateHertz,
-          languageCode: langcode || 'es-MX',
-        },
-        interimResults: false,
-      };
-
       const recognizeStream = client
         .streamingRecognize(request)
         .on('error', console.error)
         .on('data', function (data) {
-          console.log(data.result);
+          self.ledsanimstop();
           if (data.results[0].alternatives[0]) {
-            this.ledsanimstop();
-            let stopAnimation = spawn('./leds/stop');
             resolve(data.results[0].alternatives[0].transcript);
           } else {
-            this.ledsanimstop();
-            let stopAnimation = spawn('./leds/stop');
-            resolve('la que tu quieras');
+            resolve('error');
           }
         }
         );
 
-      record
-        .start({
+      self.recording = record
+        .record({
           sampleRateHertz: sampleRateHertz,
           threshold: 0,
-          // Other options, see https://www.npmjs.com/package/node-record-lpcm16#options
-          verbose: false,
-          recordProgram: 'arecord', // Try also "arecord" or "sox"
+          recordProgram: 'rec',
           silence: '1.0',
-        })
-        .on('error', console.error)
-        .pipe(recognizeStream);
+        });
+      self.recording.stream().on('error', console.error).pipe(recognizeStream);
     });
   }
 
   stopListening() {
-    if (record)
-      record.stop();
+    if (this.recording)
+      this.recording.stop();
   }
 
   async dialogflow(input, proyect) {
@@ -311,23 +302,21 @@ class SocialRobot {
       return;
     }
 
-    var json = { anim: emotion, bcolor: '', speed: (speed || 2.0) };
-    send.eyes(json);
+    eyes({ anim: emotion, bcolor: '', speed: (speed || 2.0) });
     switch (emotion) {
       case 'ini':
-        if (leds) {
-          this.ledsanimstop();
-        }
-        if (lastlevel >= 1) {
-          this.movement('c');
-        }
+        this.ledsanimstop();
+        this.movement('c');
         break;
       case 'sad':
         if (leds || level >= 2) {
           this.ledsanim('sad_v2');
         }
         if (level >= 1) {
-          this.movement(level > 1 ? 'S' : 'D');
+          this.movement('D');
+        }
+        if (level >= 2) {
+          this.movement('S');
         }
         break;
       case 'anger':
@@ -377,18 +366,18 @@ class SocialRobot {
 
 }
 
-/**
- * SocialRobot module version 
- */
+  /**
+   * SocialRobot module version 
+   */
 
-//SocialRobot.prototype.version = 'v1';
-SocialRobot.prototype.defaultConfiguration = {
+  //SocialRobot.prototype.version = 'v1';
+  SocialRobot.prototype.defaultConfiguration = {
   'attentionWord': 'Eva',
   'name': 'Eva',
   'voice': 'es-LA_SofiaV3Voice',
   'ttsReconnect': true,
 };
 
-SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
+  SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
 
 module.exports = SocialRobot;

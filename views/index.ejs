@@ -35,19 +35,33 @@
                     <li ng-class="{'active': $route.current.activetab == 'controlAngular'}"><a href="/#!/controlAngular">Inicio</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'interaccion'}"><a href="/#!/interaccion">Interacción</a></li>
                     <li class="dropdown" ng-class="{'active': $route.current.activetab == 'script'}">
-                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" target="_blank">
-                          Script
-                          <span class="caret"></span>
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false" target="_blank">
+                            Script
+                            <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="drop2">
-                          <li><a href="/#!/script">Scripts</a></li>
-                          <li><a href="/#!/scriptdata">Datos</a></li>
-                          <!-- <li role="separator" class="divider"></li>
-                          <li><a href="#">Separated link</a></li> -->
+                            <li><a href="/#!/script">Scripts</a></li>
+                            <li><a href="/#!/scriptdata">Datos</a></li>
+                            <!-- <li role="separator" class="divider"></li>
+                                              <li><a href="#">Separated link</a></li> -->
                         </ul>
-                      </li>
+                    </li>
                     <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/#!/audio">Audios</a></li>
-                    <li ng-class="{'active': $route.current.activetab == 'voice'}"><a href="/#!/voice">Voz</a></li>
+                    <li class="dropdown" ng-class="{'active': $route.current.activetab == 'lang'}">
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false" target="_blank">
+                            Idioma
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="drop2">
+                            <li><a href="/#!/voice">Voz (IBM Watson)</a></li>
+                            <li role="separator" class="divider"></li>
+                            <!-- <li><a href="#">Separated link</a></li> -->
+                            <li><a href="/#!/listen">Escucha (Google)</a></li>
+                            
+                        </ul>
+                    </li>
                     <li ng-class="{'active': $route.current.activetab == 'led'}"><a href="/#!/led">Led</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/#!/mov">Movimiento</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'woo'}"><a href="/#!/woo">Mago de Oz</a></li>
@@ -68,8 +82,8 @@
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
@@ -86,6 +100,7 @@
     <script type="text/javascript" src="/js/controllers/mov.js"></script>
     <script type="text/javascript" src="/js/controllers/audio.js"></script>
     <script type="text/javascript" src="/js/controllers/voice.js"></script>
+    <script type="text/javascript" src="/js/controllers/listen.js"></script>
     <script type="text/javascript" src="/js/controllers/script.js"></script>
     <script type="text/javascript" src="/js/controllers/scriptdata.js"></script>
     <script type="text/javascript" src="/js/controllers/interaccion.js"></script>

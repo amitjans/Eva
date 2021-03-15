@@ -1,5 +1,5 @@
-var nodeutils = require('./NodeUtils');
-var app = require('../app');
+var { NextNode } = require('./NodeUtils');
+var { getCounter, getSactual, getRespuesta } = require('./VPL_ProcessVars');
 var Compare = require('../utils/Compare');
 
 module.exports = {
@@ -20,23 +20,23 @@ module.exports = {
                     }
                 }
                 if (result) {
-                    return nodeutils.NextNode(links, ifnodes[c], nodes);
+                    return NextNode(links, ifnodes[c], nodes);
                 }	
             } else if ((ifnodes[c].text || '') === '') {
-                return nodeutils.NextNode(links, ifnodes[c], nodes);
+                return NextNode(links, ifnodes[c], nodes);
             } else if (ifnodes[c].text.includes('%')) {
-                if (Compare(app.getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))], app.getRespuesta(true)) >= ifnodes[c].opt) {
-                    return nodeutils.NextNode(links, ifnodes[c], nodes);
+                if (Compare(getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))], getRespuesta(true)) >= ifnodes[c].opt) {
+                    return NextNode(links, ifnodes[c], nodes);
                 }
             } else if (ifnodes[c].text.includes('/')) {
                 let sub = ifnodes[c].text.split('/');
                 for (let i = 0; i < sub.length; i++) {
-                    if (Compare(sub[i], app.getRespuesta(true)) >= ifnodes[c].opt) {
-                        return nodeutils.NextNode(links, ifnodes[c], nodes);
+                    if (Compare(sub[i], getRespuesta(true)) >= ifnodes[c].opt) {
+                        return NextNode(links, ifnodes[c], nodes);
                     }                    
                 }
-            } else if (Compare((ifnodes[c].text || ''), app.getRespuesta(true)) >= ifnodes[c].opt) {
-                return nodeutils.NextNode(links, ifnodes[c], nodes);
+            } else if (Compare((ifnodes[c].text || ''), getRespuesta(true)) >= ifnodes[c].opt) {
+                return NextNode(links, ifnodes[c], nodes);
             }
         }
     }
@@ -44,9 +44,9 @@ module.exports = {
 
 function CreateToken(param) {
     if (param.includes('#')) {
-        return { type: 'num', value: parseInt(app.getCounter()[param.substring(1)])};
+        return { type: 'num', value: parseInt(getCounter()[param.substring(1)])};
     } else if (param.includes('$')) {
-        let resp = app.getRespuesta();
+        let resp = getRespuesta();
         for (let i = resp.length - 1; 0 <= i; i--) {
             if (/^[\d]+$/.test(resp[i])) {
                 return { type: 'num', value: parseInt(resp[i])};
