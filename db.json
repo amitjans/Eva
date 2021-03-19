@@ -3150,6 +3150,182 @@
         ],
         "link": []
       }
+    },
+    {
+      "_id": "aa6e29c7-e5f5-45ab-9d76-9ff3e5f7859e",
+      "nombre": "Contadores",
+      "data": {
+        "node": [
+          {
+            "key": 1616186799377,
+            "name": "Contador_0",
+            "type": "counter",
+            "color": "lightblue",
+            "isGroup": false,
+            "count": "a",
+            "ops": "sum",
+            "value": 0,
+            "__gohashid": 530
+          },
+          {
+            "key": 1616186841281,
+            "name": "Contador_2",
+            "type": "counter",
+            "color": "lightblue",
+            "isGroup": false,
+            "count": "a",
+            "ops": "sum",
+            "value": 11,
+            "__gohashid": 811
+          },
+          {
+            "key": 1616186859185,
+            "name": "Contador_3",
+            "type": "counter",
+            "color": "lightblue",
+            "isGroup": false,
+            "count": "b",
+            "ops": "mult",
+            "value": 6,
+            "__gohashid": 978
+          },
+          {
+            "key": 1616186866746,
+            "name": "Contador_4",
+            "type": "counter",
+            "color": "lightblue",
+            "isGroup": false,
+            "count": "b",
+            "ops": "mult",
+            "value": 2,
+            "__gohashid": 1194
+          },
+          {
+            "key": 1616186920954,
+            "name": "Hablar_5",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "text": "El contador A vale #a y el B #b",
+            "__gohashid": 1459
+          },
+          {
+            "key": 1616186818649,
+            "name": "Contador_1",
+            "type": "counter",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "count": "b",
+            "ops": "assign",
+            "value": 1,
+            "__gohashid": 992
+          }
+        ],
+        "link": [
+          {
+            "from": 1616186799377,
+            "to": 1616186818649,
+            "__gohashid": 636
+          },
+          {
+            "from": 1616186818649,
+            "to": 1616186841281,
+            "__gohashid": 813
+          },
+          {
+            "from": 1616186841281,
+            "to": 1616186859185,
+            "__gohashid": 980
+          },
+          {
+            "from": 1616186859185,
+            "to": 1616186866746,
+            "__gohashid": 1196
+          },
+          {
+            "from": 1616186866746,
+            "to": 1616186920954,
+            "__gohashid": 1461
+          }
+        ]
+      }
+    },
+    {
+      "_id": "c488a9eb-698d-4f78-bf4d-9fdf3d99fa8c",
+      "nombre": "Emocion y espera",
+      "data": {
+        "node": [
+          {
+            "key": 1616188706778,
+            "name": "Ciclo_0",
+            "type": "for",
+            "color": "lightblue",
+            "isGroup": true,
+            "iteraciones": 3,
+            "__gohashid": 530
+          },
+          {
+            "key": 1616188752114,
+            "name": "Emoción_1",
+            "type": "emotion",
+            "color": "red",
+            "isGroup": false,
+            "group": 1616188706778,
+            "emotion": "anger",
+            "level": -1,
+            "__gohashid": 609
+          },
+          {
+            "key": 1616188772321,
+            "name": "Tiempo_2",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1616188706778,
+            "time": 10000,
+            "__gohashid": 1181
+          },
+          {
+            "key": 1616189197986,
+            "name": "Emoción_3",
+            "type": "emotion",
+            "color": "lightgray",
+            "isGroup": false,
+            "group": 1616188706778,
+            "emotion": "ini",
+            "level": -1,
+            "__gohashid": 1549
+          },
+          {
+            "key": 1616189206554,
+            "name": "Tiempo_4",
+            "type": "wait",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": 1616188706778,
+            "time": 5000,
+            "__gohashid": 1756
+          }
+        ],
+        "link": [
+          {
+            "from": 1616188752114,
+            "to": 1616188772321,
+            "__gohashid": 1183
+          },
+          {
+            "from": 1616188772321,
+            "to": 1616189197986,
+            "__gohashid": 1551
+          },
+          {
+            "from": 1616189197986,
+            "to": 1616189206554,
+            "__gohashid": 1758
+          }
+        ]
+      }
     }
   ],
   "voice": [

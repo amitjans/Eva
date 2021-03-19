@@ -16,7 +16,7 @@ module.exports = {
             global.lemotion = [value];
         };
     },
-    getlemotion: () => global.lemotion,
+    getlemotion: () => global.lemotion || [],
     setCounter: (value) => { global.counter = value; },
     getCounter: () => counter,
     setApi: function (key, value) { global.apidata[key] = value; },

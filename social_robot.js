@@ -29,7 +29,7 @@ const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 9600
 })
 
-var { eyes } = require('./app');
+var { eyes, enviarMensaje } = require('./app');
 var logs = require('./log');
 var log = '';
 var time = 0;
@@ -301,7 +301,6 @@ class SocialRobot {
     if (!emotional) {
       return;
     }
-
     eyes({ anim: emotion, bcolor: '', speed: (speed || 2.0) });
     switch (emotion) {
       case 'ini':
@@ -356,7 +355,7 @@ class SocialRobot {
 
   templog(who, texto) {
     log += who.autor + ': ' + texto + '\n';
-    send.enviarMensaje(who, texto);
+    enviarMensaje(who, texto);
   }
 
   savelogs(nombre, temp) {

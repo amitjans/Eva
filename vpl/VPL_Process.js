@@ -38,7 +38,6 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
                 await ProcessNode(Object.assign({}, aux[0]));
             }
             aux = NextNode(links, aux[0], nodes);
-            console.log(aux);
         } else if (aux.length > 1 && aux[0].type === 'if') {
             aux = ConditionNode(aux, links, nodes);
         }

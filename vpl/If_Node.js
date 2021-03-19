@@ -39,6 +39,7 @@ module.exports = {
                 return NextNode(links, ifnodes[c], nodes);
             }
         }
+        return [];
     }
 };
 
