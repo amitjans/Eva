@@ -66,12 +66,10 @@ var enviarMensaje = function (autor, msg, media) {
 	data.fecha = Date.now();
 	if (media)
 		data.media = media;
-	console.log(data);
 	io.sockets.emit('messages', data);
 };
 
 var eyes = function (params) {
-	console.log(params);
 	io.sockets.emit('messages', params);
 }
 

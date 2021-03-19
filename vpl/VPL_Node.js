@@ -5,6 +5,8 @@ var random = require('../utils/Random');
 var lf = require('./ListeningFilters');
 const api = require('./Api_Node');
 var { setRespuesta, getRespuesta, getSactual, addlemotion, getlemotion, setCounter, getCounter, setApi, getApi } = require('./VPL_ProcessVars');
+const { get } = require('../server/routes');
+const { JSONCookie } = require('cookie-parser');
 
 module.exports = {
     ProcessNode: async function (element) {
@@ -57,11 +59,11 @@ module.exports = {
 };
 
 function ProcessEmotionNode(element) {
-    if (element.level == -1) {
+    if (element.level == -1 && element.emotion !== 'ini') {
         if (getlemotion().length == 0) {
             element.level = 0;
-        } else if (element.key == getlemotion()[getlemotion().length - 1].key) {
-            let { level } = getlemotion()[getlemotion().length - 1];
+        } else if (element.key == getlemotion().slice(-1)[0].key) {
+            let { level } = getlemotion().slice(-1)[0];
             element.level = (level + 1 > 2 ? 2 : level + 1);
         }
         addlemotion(element);
