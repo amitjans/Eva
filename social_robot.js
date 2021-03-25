@@ -2,6 +2,7 @@
 
 /* Cognitive services modules */
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
+const SpeechToTextV1 = require('ibm-watson/speech-to-text/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
 /* Google cloud speech */
@@ -45,6 +46,9 @@ class SocialRobot {
     if (!!process.env.TEXT_TO_SPEECH_APIKEY) {
       this._createServiceAPI('tts');
     }
+    if (!!process.env.SPEECH_TO_TEXT_APIKEY) {
+      this._createServiceAPI('stt');
+    }
     log = '';
     time = Date.now();
     emotional = true;
@@ -59,6 +63,12 @@ class SocialRobot {
         this._tts = new TextToSpeechV1({
           authenticator: new IamAuthenticator({ apikey: process.env.TEXT_TO_SPEECH_APIKEY }),
           url: process.env.TEXT_TO_SPEECH_URL
+        });
+        break;
+      case 'stt':
+        this._stt = new SpeechToTextV1({
+          authenticator: new IamAuthenticator({ apikey: process.env.SPEECH_TO_TEXT_APIKEY }),
+          url: process.env.SPEECH_TO_TEXT_URL
         });
         break;
       default:
@@ -252,6 +262,42 @@ class SocialRobot {
           silence: '1.0',
         });
       self.recording.stream().on('error', console.error).pipe(recognizeStream);
+    });
+  }
+
+  listen(langcode, callback) {
+    const self = this;
+    self.ledsanimstop();
+    self.ledsanim('escuchaT');
+
+    // const params = {
+    //   contentType: 'audio/l16; rate=44100'
+    // };
+    const params = {
+      audio: fs.createReadStream('./temp/es-LA_SofiaV3Voice_391c14092f23f4b2f18e6d5bca7dac68.wav'),
+      contentType: 'audio/wav',
+      model: 'es-MX_BroadbandModel',
+      inactivityTimeout: 1
+    };
+
+    return new Promise(function (resolve, reject) {
+      let recognizeStream = self._stt.recognize(params)
+      .then(response => {
+        console.log(response.result.results[0].alternatives[0].transcript);
+        self.ledsanimstop();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      // self.recording = record
+      //   .record({
+      //     sampleRateHertz: 16000,
+      //     threshold: 0,
+      //     recordProgram: 'rec',
+      //     silence: '1.0',
+      //   });
+      // self.recording.stream().on('error', console.error).pipe(recognizeStream);
     });
   }
 
