@@ -23,7 +23,8 @@ router.post('/nodes', async function (req, res) {
 
 router.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	//console.log(await social.dialogflow('hola'));
-	console.log(social.listen());
+	//console.log(social.listen());
+	console.log(await social.translate('mi nombre es eva', 'en-US'));
 	res.status(200).jsonp();
 });
 

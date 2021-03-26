@@ -96,10 +96,16 @@ async function ProcessSpeakNode(element) {
             }
         }
     }
+
+    let fulltext = temp.join(' ');
+    if (element.translate){
+        fulltext =  await social.translate(fulltext, social.getVoice().substring(0, 5), element.sourcelang.substring(0, 2));
+    }
+
     if (rec) {
-        await RecAndSpeak({ key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: temp.join(' ') });
+        await RecAndSpeak({ key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: fulltext });
     } else {
-        await social.speak(temp.join(' '), element.anim, !element.anim);
+        await social.speak(fulltext, element.anim, !element.anim);
     } 
 }
 

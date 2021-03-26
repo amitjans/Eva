@@ -3,6 +3,7 @@
 /* Cognitive services modules */
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const SpeechToTextV1 = require('ibm-watson/speech-to-text/v1');
+const LanguageTranslatorV3 = require('ibm-watson/language-translator/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
 /* Google cloud speech */
@@ -149,6 +150,31 @@ class SocialRobot {
     });
   }
 
+  async translate(text, target, source) {
+    if (!this._translator && !!process.env.TRANSLATOR_APIKEY) {
+      this._translator = new LanguageTranslatorV3({
+        version: '2018-05-01',
+        authenticator: new IamAuthenticator({
+          apikey: process.env.TRANSLATOR_APIKEY,
+        }),
+        serviceUrl: process.env.TRANSLATOR_URL,
+      });
+    } else { return }
+
+    if(!source) {
+      source = await this._translator.identify({ text: text })
+      .then(identifiedLanguages => {
+        console.log(identifiedLanguages.result.languages[0].language);
+        return identifiedLanguages.result.languages[0].language;
+      })
+      .catch(err => { console.log('error:', err); });
+    }
+    
+    return await this._translator.translate({ text: text, source: source, target: target })
+      .then(response => response.result.translations[0].translation)
+      .catch(err => { console.log('error: ', err); });
+  }
+
   /**
    * 
    * @param {String} soundFile to play
@@ -270,9 +296,6 @@ class SocialRobot {
     self.ledsanimstop();
     self.ledsanim('escuchaT');
 
-    // const params = {
-    //   contentType: 'audio/l16; rate=44100'
-    // };
     const params = {
       audio: fs.createReadStream('./temp/es-LA_SofiaV3Voice_391c14092f23f4b2f18e6d5bca7dac68.wav'),
       contentType: 'audio/wav',
@@ -282,13 +305,13 @@ class SocialRobot {
 
     return new Promise(function (resolve, reject) {
       let recognizeStream = self._stt.recognize(params)
-      .then(response => {
-        console.log(response.result.results[0].alternatives[0].transcript);
-        self.ledsanimstop();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(response => {
+          console.log(response.result.results[0].alternatives[0].transcript);
+          self.ledsanimstop();
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
       // self.recording = record
       //   .record({
@@ -411,18 +434,18 @@ class SocialRobot {
 
 }
 
-  /**
-   * SocialRobot module version 
-   */
+/**
+ * SocialRobot module version 
+ */
 
-  //SocialRobot.prototype.version = 'v1';
-  SocialRobot.prototype.defaultConfiguration = {
+//SocialRobot.prototype.version = 'v1';
+SocialRobot.prototype.defaultConfiguration = {
   'attentionWord': 'Eva',
   'name': 'Eva',
   'voice': 'es-LA_SofiaV3Voice',
   'ttsReconnect': true,
 };
 
-  SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
+SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
 
 module.exports = SocialRobot;

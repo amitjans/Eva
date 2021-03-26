@@ -3326,6 +3326,43 @@
           }
         ]
       }
+    },
+    {
+      "_id": "fc521cda-3667-4d8c-af40-4a97075bbc5f",
+      "nombre": "Traduccion",
+      "data": {
+        "node": [
+          {
+            "key": 1616791450026,
+            "name": "Hablar_1",
+            "type": "speak",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "translate": true,
+            "sourcelang": "es",
+            "text": "Hola, muchas gracias por estar aquí",
+            "__gohashid": 689
+          },
+          {
+            "key": 1616791406554,
+            "name": "Voz_0",
+            "type": "voice",
+            "color": "lightblue",
+            "isGroup": false,
+            "group": "",
+            "voice": "en-US_LisaV3Voice",
+            "__gohashid": 690
+          }
+        ],
+        "link": [
+          {
+            "from": 1616791406554,
+            "to": 1616791450026,
+            "__gohashid": 636
+          }
+        ]
+      }
     }
   ],
   "voice": [
