@@ -22,6 +22,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     });
     $http.get('/api/common?db=voice').then(function successCallback(response) {
       $scope.vlistado = response.data;
+      $scope.langcodelist = [];
+      for (let i = 0; i < $scope.vlistado.length; i++) {
+        let element = $scope.vlistado[i].codigo.substring(0, 2);
+        if (!$scope.langcodelist.includes(element))
+          $scope.langcodelist.push(element);
+      }
     }, function errorCallback(response) {
     });
     $http.get('api/common?db=led').then(function successCallback(response) {
@@ -152,6 +158,9 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
     $scope.ModalName = nuevo ? modalname[value] : $scope.name;
     switch (value) {
+      case 'speak':
+        $scope.ncommon = 'Traducir';
+        break;
       case 'script':
         $scope.ncommon = 'Aleatorio';
         break;
@@ -182,6 +191,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push(Object.assign(tempobj, { emotion: $scope.emocion, level: parseInt($scope.level), speed: $scope.velocidad, color: color[$scope.emocion] }));
         break;
       case "speak":
+        if ($scope.ccommon) {
+          tempobj.translate = true;
+          tempobj.sourcelang = $scope.sourcelang;
+        }
         node.push(Object.assign(tempobj, { text: $scope.texto }));
         break;
       case "listen":
@@ -264,7 +277,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         Object.assign($scope, { emocion: l.emotion, velocidad: l.speed, level: l.level + ''});
         break;
       case 'speak':
-        $scope.texto = l.text;
+        Object.assign($scope, { texto: l.text, ccommon: l.translate, sourcelang: l.sourcelang });
         break;
       case 'listen':
         $scope.listenopt = l.opt;
