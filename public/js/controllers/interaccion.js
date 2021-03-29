@@ -336,6 +336,23 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
   }
 
+  $scope.download = function (l) {
+    let filename = l.nombre + ".txt";
+    let tempobj = JSON.parse(JSON.stringify(l));
+    delete tempobj._id
+    var blob = new Blob([JSON.stringify(tempobj)], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, filename);
+  }
+
+  $scope.import = function () {
+    let tempdata = JSON.parse($('textarea').val());
+    $scope.update(tempdata);
+    $scope.updateid = 0;
+    $scope.accion = 'Agregar';
+    $scope.icon = true;
+    $('#modalimport').modal('hide');
+  }
+
   $scope.list();
   $scope.slist();
   $scope.ccommon = false;
