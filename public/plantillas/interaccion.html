@@ -409,7 +409,7 @@
               <!-- Modal Dialogflow -->
 
               <!-- Modal Common -->
-              <div class="form-group" ng-show="modal == 'script' || modal == 'sound' || modal == 'speak'">
+              <div class="form-group" ng-show="modal == 'script' || modal == 'sound' || modal == 'voice'">
                 <label class="col-sm-2 control-label">{{ ncommon }}</label>
                 <div class="col-sm-1">
                   <input type="checkbox" class="form-control" ng-model="ccommon" name="rs" id="rs" />
@@ -418,7 +418,7 @@
               <!-- Modal Common -->
 
               <!-- Modal Speak -->
-              <div class="form-group" ng-show="modal == 'speak' && ccommon">
+              <div class="form-group" ng-show="modal == 'voice' && ccommon">
                 <label class="col-sm-2 control-label">Fuente</label>
                 <div class="col-sm-10">
                   <select name="cname" id="" ng-model="sourcelang" class="form-control" ng-change="cnname = ''">

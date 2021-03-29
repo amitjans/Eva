@@ -24,7 +24,7 @@ router.post('/nodes', async function (req, res) {
 router.get('/interaccion/iniciarInteraccion1', async function (req, res) {
 	//console.log(await social.dialogflow('hola'));
 	//console.log(social.listen());
-	console.log(await social.translate('mi nombre es eva', 'en-US'));
+	console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 	res.status(200).jsonp();
 });
 
@@ -78,7 +78,7 @@ router.get('/interaccion/iniciarInteracciong', async function (req, res) {
 	social.resetlog();
 	await ProcessFlow(obj.node, obj.link, fnodes, 0);
 	["respuesta", "sactual", "lemotion", "counter", "apidata", "iscript"].forEach(item => { delete global[item] });
-	social.setVoice('es-LA_SofiaV3Voice');
+	social.setConf({ attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true });
 	social.savelogs('');
 });
 

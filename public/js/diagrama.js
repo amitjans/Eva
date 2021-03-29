@@ -74,7 +74,7 @@ function init() {
     // define a simple Node template
     myDiagram.nodeTemplate =
         $(go.Node, "Auto",  // the Shape will go around the TextBlock
-            $(go.Shape, "RoundedRectangle", { strokeWidth: 0, fill: "white" },
+            $(go.Shape, "RoundedRectangle", { strokeWidth: 0, fill: "lightblue" },
                 {
                     portId: "", cursor: "pointer",
                     fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
