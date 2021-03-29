@@ -11,7 +11,7 @@ const { JSONCookie } = require('cookie-parser');
 module.exports = {
     ProcessNode: async function (element) {
         if (element.type === 'voice') {
-            social.setVoice(element.voice);
+            social.setConf({ name: element.robotname, voice: element.voice, translate: element.translate, sourcelang: element.sourcelang, ttsReconnect: true });
         } else if (element.type === 'emotion') {
             ProcessEmotionNode(element)
         } else if (element.type === 'speak') {
@@ -82,7 +82,12 @@ async function ProcessSpeakNode(element) {
     social.templog(element.text);
     let temp = element.text.split(' ');
     for (let i = 0; i < temp.length; i++) {
-        if (temp[i].includes('@')) {
+        if (temp[i].includes('*')) {
+            if(temp[i] == '*name') {
+                temp[i] = social.getConf().name;
+            }
+        }
+        else if (temp[i].includes('@')) {
             let pos = temp[i].indexOf('.');
             temp[i] = api.Getdata(getApi(temp[i].substring(1, pos).toLowerCase()), temp[i].substring(pos + 1));
         } else if (temp[i].includes('$')) {
@@ -98,12 +103,16 @@ async function ProcessSpeakNode(element) {
     }
 
     let fulltext = temp.join(' ');
-    if (element.translate){
-        fulltext =  await social.translate(fulltext, social.getVoice().substring(0, 5), element.sourcelang.substring(0, 2));
+    let hash = crypto.createHash('md5').update(fulltext).digest("hex");
+
+    if (!!social.getConf().translate && !fs.existsSync('./temp/' + (social.getConf().voice + '_' + hash) + '.wav')){
+        console.log('antes de traduccion: ' + fulltext);
+        fulltext = await social.translate(fulltext, social.getConf().voice.substring(0, 5), social.getConf().sourcelang.substring(0, 2));
+        console.log('despues de traduccion: ' + fulltext);
     }
 
     if (rec) {
-        await RecAndSpeak({ key: crypto.createHash('md5').update(temp.join(' ')).digest("hex"), type: "speak", text: fulltext });
+        await RecAndSpeak({ key: hash, type: "speak", text: fulltext });
     } else {
         await social.speak(fulltext, element.anim, !element.anim);
     } 
@@ -111,10 +120,10 @@ async function ProcessSpeakNode(element) {
 
 async function RecAndSpeak(element) {
 	try {
-		if (!fs.existsSync('./temp/' + (social.getVoice() + '_' + element.key) + '.wav')) {
-			await social.rec(element.text, (social.getVoice() + '_' + element.key));
+		if (!fs.existsSync('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav')) {
+			await social.rec(element.text, (social.getConf().voice + '_' + element.key));
 		}
-        await social.play('./temp/' + (social.getVoice() + '_' + element.key) + '.wav', element.anim, !element.anim);
+        await social.play('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav', element.anim, !element.anim);
         social.templog(element.text);
 	} catch (err) {
 		console.error(err)

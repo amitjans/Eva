@@ -3336,23 +3336,35 @@
             "key": 1616791450026,
             "name": "Hablar_1",
             "type": "speak",
-            "color": "lightblue",
-            "isGroup": false,
             "group": "",
-            "translate": true,
-            "sourcelang": "es",
-            "text": "Hola, muchas gracias por estar aquí",
-            "__gohashid": 689
+            "text": "Hola, muchas gracias por estar aquí, mi nombre es *name",
+            "__gohashid": 1793
+          },
+          {
+            "key": 1617047422249,
+            "name": "Tiempo_4",
+            "type": "wait",
+            "time": 5000,
+            "__gohashid": 3501
+          },
+          {
+            "key": 1617045227152,
+            "name": "Hablar_2",
+            "type": "speak",
+            "group": "",
+            "text": "Bueno ahora me despido, Fue un placer conocerte",
+            "__gohashid": 4937
           },
           {
             "key": 1616791406554,
             "name": "Voz_0",
             "type": "voice",
-            "color": "lightblue",
-            "isGroup": false,
             "group": "",
-            "voice": "en-US_LisaV3Voice",
-            "__gohashid": 690
+            "translate": true,
+            "sourcelang": "es",
+            "voice": "ja-JP_EmiV3Voice",
+            "robotname": "Emi",
+            "__gohashid": 788
           }
         ],
         "link": [
@@ -3360,6 +3372,16 @@
             "from": 1616791406554,
             "to": 1616791450026,
             "__gohashid": 636
+          },
+          {
+            "from": 1616791450026,
+            "to": 1617047422249,
+            "__gohashid": 3504
+          },
+          {
+            "__gohashid": 3732,
+            "from": 1617047422249,
+            "to": 1617045227152
           }
         ]
       }

@@ -159,17 +159,13 @@ class SocialRobot {
         }),
         serviceUrl: process.env.TRANSLATOR_URL,
       });
-    } else { return }
+    } else if (!process.env.TRANSLATOR_APIKEY) { return text }
 
     if(!source) {
       source = await this._translator.identify({ text: text })
-      .then(identifiedLanguages => {
-        console.log(identifiedLanguages.result.languages[0].language);
-        return identifiedLanguages.result.languages[0].language;
-      })
+      .then(identifiedLanguages => identifiedLanguages.result.languages[0].language)
       .catch(err => { console.log('error:', err); });
     }
-    
     return await this._translator.translate({ text: text, source: source, target: target })
       .then(response => response.result.translations[0].translation)
       .catch(err => { console.log('error: ', err); });
@@ -210,12 +206,12 @@ class SocialRobot {
     }
   }
 
-  getVoice() {
-    return this.configuration.voice;
+  getConf() {
+    return this.configuration;
   }
 
-  setVoice(voice) {
-    this.configuration.voice = voice;
+  setConf(conf) {
+    this.configuration = conf;
   }
 
   movement(type, onestep = false) {

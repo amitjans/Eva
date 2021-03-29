@@ -70,7 +70,7 @@ g++ -o app app.cpp -std=c++11 -lmatrix_creator_hal
 
 ## Configuración
 
-Archivo necesario para el uso de los servicios de texto a voz de Watson:
+Archivo necesario para el uso de los servicios de Watson y de Google:
 
 - .env
 
@@ -79,12 +79,16 @@ Este archivo contendrá los siguientes parámetros:
 ```bash
 TEXT_TO_SPEECH_APIKEY=api-key
 TEXT_TO_SPEECH_URL=https://stream.watsonplatform.net/text-to-speech/api
+TRANSLATOR_APIKEY=api-key
+TRANSLATOR_URL=https://api.us-south.language-translator.watson.cloud.ibm.com/
+GOOGLE_APPLICATION_CREDENTIALS=credencial.json
 ```
 
 Archivo necesario para el uso de los servicios de Google:
 
 - [Archivo JSON que contiene la clave de la cuenta de servicio de Google](https://cloud.google.com/docs/authentication/getting-started)
-- Opcionalmente el archivo '.env' para la configuración de los servicios de Watson podrá contener el siguiente parámetro si se desea utlizar un proyecto de Dialogflow de Google por defecto:
+
+- Opcionalmente el archivo '.env' para la configuración de los servicios podrá contener el siguiente parámetro si se desea utlizar un proyecto de Dialogflow de Google por defecto:
 ```bash
 DIALOGFLOW_PROJECT_ID=google-dialogflow-proyect-name
 ```
@@ -96,6 +100,5 @@ Archivo opcional para el inicio de la aplicación
  #!/bin/bash
 echo Eva
 sudo amixer cset numid=1 100% #volumen de la bocina
-export GOOGLE_APPLICATION_CREDENTIALS="credencial.json" #importar las credenciales de google
 npm start #Iniciar la aplicación
  ```
