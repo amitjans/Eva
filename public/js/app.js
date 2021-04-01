@@ -43,6 +43,14 @@ eva.config(['$locationProvider', '$routeProvider',
             templateUrl: '/plantillas/woo.html',
             activetab: "woo"
         }).
+        when('/cloud', {
+            templateUrl: '/plantillas/cloud.html',
+            activetab: "config"
+        }).
+        when('/config', {
+            templateUrl: '/plantillas/config.html',
+            activetab: "config"
+        }).
         otherwise('/controlAngular');
     }
 ]).run(function ($rootScope, $route) {

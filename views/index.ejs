@@ -65,6 +65,19 @@
                     <li ng-class="{'active': $route.current.activetab == 'led'}"><a href="/#!/led">Led</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/#!/mov">Movimiento</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'woo'}"><a href="/#!/woo">Mago de Oz</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'cloud'}"><a href="/#!/cloud">Servicios</a></li>
+                    <li class="dropdown" ng-class="{'active': $route.current.activetab == 'config'}">
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false" target="_blank">
+                            Configuraciones
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="drop2">
+                            <li><a href="/#!/config">Robot Social</a></li>
+                            <li><a href="/#!/cloud">Servicios</a></li>
+                            
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -77,7 +90,7 @@
 
     <div class="container">
         <footer>
-            <p>&copy; 2020 CICESE</p>
+            <p>&copy; 2021 CICESE</p>
         </footer>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -89,6 +102,7 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script src="/js/bootstrap-notify.min.js"></script>
+    <script src="/js/notify-min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/angular-drag-and-drop-lists.min.js"></script>
     <script type="text/javascript" src="/js/dropzone.min.js"></script>
@@ -106,6 +120,8 @@
     <script type="text/javascript" src="/js/controllers/scriptdata.js"></script>
     <script type="text/javascript" src="/js/controllers/interaccion.js"></script>
     <script type="text/javascript" src="/js/controllers/woo.js"></script>
+    <script type="text/javascript" src="/js/controllers/cloud.js"></script>
+    <script type="text/javascript" src="/js/controllers/config.js"></script>
     <script type="text/javascript" src="/js/diagrama-min.js"></script>
 </body>
 

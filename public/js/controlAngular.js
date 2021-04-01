@@ -4,9 +4,6 @@ eva.controller('ControlEvaController', function ($scope, $http, $sce) {
 	$scope.interacciones = [];
 	$scope.resultadosMedia = [];
 	$scope.errores = [];
-	$scope.opcionTrack = { nombre: 'track', tipo: 1 };
-	$scope.opcionVideo = { nombre: 'video', tipo: 8 };
-	$scope.opcionBuscar = $scope.opcionTrack;
 	$scope.textoScript = 'textoScript';
 
 	var socket = io.connect(window.location.host, { 'forceNew': true });
@@ -31,17 +28,8 @@ eva.controller('ControlEvaController', function ($scope, $http, $sce) {
 		});
 	});
 
-	//$scope.emociones = ['normal', 'pensar', 'triste', 'amor', 'sorpresa', 'feliz', 'miedo'];
 	$scope.emociones = ['normal', 'triste', 'triste1', 'triste2', 'ira', 'ira1', 'ira2', 'feliz', 'feliz1', 'feliz2', 'salir'];
 	var iconoEmocion = ['meh-o', 'lightbulb-o', 'frown-o', 'heart-o', 'eye', 'smile-o', ''];
-	$scope.conversaciones = [
-		{ accion: 2, nombre: 'saludo', comando: 'Eva saluda' },
-		{ accion: 3, nombre: 'refranes', comando: 'Eva quiero jugar a los refranes' },
-		{ accion: 4, nombre: 'chiste', comando: 'Eva cuentame un chiste' },
-		{ accion: 5, nombre: 'aplaudir', comando: 'Eva quiero que aplaudas' },
-		{ accion: 6, nombre: 'risa', comando: 'Eva quiero que te rias' },
-		{ accion: 7, nombre: 'correcto', comando: 'la respuesta es correcta' }
-	];
 
 	$scope.indiceScript1 = 0;
 	$scope.script = $scope.script2;
@@ -67,7 +55,12 @@ eva.controller('ControlEvaController', function ($scope, $http, $sce) {
 	};
 
 	$scope.enviarMensaje = function () {
-		socket.emit('new-message', { accion: 1, mensajePersonalizado: '<speak version="1.0"><prosody rate="-15%">' + $scope.mensaje + '</prosody></speak>', autor: 'Robot Eva', class: "text-danger", mensaje: $scope.mensaje });
+		$http.post('nodes', { type: 'speak', text: $scope.mensaje })
+		.then(function (res) {
+			notify('Frase procesada correctamente');
+		}, function (error) {
+			notify('A ocurrido un error al procesar la petición', 'danger');
+		});
 		$scope.mensaje = '';
 	};
 
