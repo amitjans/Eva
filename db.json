@@ -3847,22 +3847,24 @@
           "order": 0
         },
         {
-          "type": "sound",
-          "nombre": "Audio",
-          "src": "Sabor a mi - Los panchos",
-          "desc": "Sabor a mi - Los panchos",
-          "order": 2
-        },
-        {
           "type": "led",
           "nombre": "Leds",
           "anim": "escuchaT",
           "desc": "escuchaT",
           "order": 1
+        },
+        {
+          "type": "sound",
+          "nombre": "Audio",
+          "src": "Sabor a mi - Los panchos",
+          "desc": "Sabor a mi - Los panchos",
+          "order": 2
         }
       ],
       "order": [
-        "0"
+        "0",
+        "1",
+        "2"
       ]
     },
     {

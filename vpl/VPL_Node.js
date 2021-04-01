@@ -79,7 +79,6 @@ async function ProcessSpeakNode(element) {
         element.text = t;
     }
     let rec = true;
-    social.templog(element.text);
     let temp = element.text.split(' ');
     for (let i = 0; i < temp.length; i++) {
         if (temp[i].includes('*')) {
@@ -105,12 +104,10 @@ async function ProcessSpeakNode(element) {
     let fulltext = temp.join(' ');
     let hash = crypto.createHash('md5').update(fulltext).digest("hex");
 
-    if (!!social.getConf().translate && !fs.existsSync('./temp/' + (social.getConf().voice + '_' + hash) + '.wav')){
-        console.log('antes de traduccion: ' + fulltext);
+    if (!!social.getConf().translate && !fs.existsSync('./temp/' + (social.getConf().voice + '_' + hash) + '.wav')) {
         fulltext = await social.translate(fulltext, social.getConf().voice.substring(0, 5), social.getConf().sourcelang.substring(0, 2));
-        console.log('despues de traduccion: ' + fulltext);
     }
-
+    social.templog(evaId, fulltext);
     if (rec) {
         await RecAndSpeak({ key: hash, type: "speak", text: fulltext });
     } else {
@@ -124,7 +121,6 @@ async function RecAndSpeak(element) {
 			await social.rec(element.text, (social.getConf().voice + '_' + element.key));
 		}
         await social.play('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav', element.anim, !element.anim);
-        social.templog(element.text);
 	} catch (err) {
 		console.error(err)
 	}
@@ -136,8 +132,8 @@ async function ProcessListenNode(element) {
     if (!!element.opt) {
         r = lf[element.opt](r)[0];
     }
+    social.templog(usuarioId, r);
     setRespuesta(r);
-    social.templog(r);
 }
 
 function ProcessCounterNode(element) {

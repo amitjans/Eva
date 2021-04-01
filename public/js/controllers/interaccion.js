@@ -158,7 +158,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }
     $scope.ModalName = nuevo ? modalname[value] : $scope.name;
     switch (value) {
-      case 'speak':
+      case 'voice':
         $scope.ncommon = 'Traducir';
         break;
       case 'script':

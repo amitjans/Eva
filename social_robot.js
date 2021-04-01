@@ -37,12 +37,12 @@ var log = '';
 var time = 0;
 var emotional = true;
 
-var lastlevel = 0;
 var ledsanimation = spawn('./leds/stop');
 
 class SocialRobot {
   constructor() {
-    this.configuration = { attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true };
+    // { attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true };
+    this.configuration = JSON.parse(fs.readFileSync('config.json'));
     this._isPlaying = false;
     if (!!process.env.TEXT_TO_SPEECH_APIKEY) {
       this._createServiceAPI('tts');
@@ -289,35 +289,37 @@ class SocialRobot {
 
   listen(langcode, callback) {
     const self = this;
-    self.ledsanimstop();
-    self.ledsanim('escuchaT');
+    // self.ledsanimstop();
+    // self.ledsanim('escuchaT');
 
-    const params = {
-      audio: fs.createReadStream('./temp/es-LA_SofiaV3Voice_391c14092f23f4b2f18e6d5bca7dac68.wav'),
-      contentType: 'audio/wav',
-      model: 'es-MX_BroadbandModel',
-      inactivityTimeout: 1
-    };
+    // const params = {
+    //   audio: fs.createReadStream('./test.wav'),
+    //   contentType: 'audio/wav',
+    //   model: 'es-MX_BroadbandModel'
+    // };
 
-    return new Promise(function (resolve, reject) {
-      let recognizeStream = self._stt.recognize(params)
-        .then(response => {
-          console.log(response.result.results[0].alternatives[0].transcript);
-          self.ledsanimstop();
-        })
-        .catch(err => {
-          console.log(err);
+    // return new Promise(function (resolve, reject) {
+    //   let recognizeStream = self._stt.recognize(params)
+    //     .then(response => {
+    //       resolve(response.result.results[0].alternatives[0].transcript);
+    //       self.ledsanimstop();
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+
+    const file = fs.createWriteStream('test.wav', { encoding: 'binary' })
+
+      self.recording = record
+        .record({
+          sampleRateHertz: 16000,
+          threshold: 0,
+          recordProgram: 'rec',
+          silence: '1.0',
+          thresholdEnd: '0.5'
         });
-
-      // self.recording = record
-      //   .record({
-      //     sampleRateHertz: 16000,
-      //     threshold: 0,
-      //     recordProgram: 'rec',
-      //     silence: '1.0',
-      //   });
-      // self.recording.stream().on('error', console.error).pipe(recognizeStream);
-    });
+      self.recording.stream().on('error', console.error).pipe(file);
+    // });
   }
 
   stopListening() {

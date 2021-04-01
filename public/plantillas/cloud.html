@@ -1,0 +1,83 @@
+<div class="container" ng-controller="cloud">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bgm-bluegray">
+                    <h2> Servicios<small></small></h2>
+                </div>
+                <div>
+                    <div id="example_wrapper" class="dataTables_wrapper">
+                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                            aria-describedby="example_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width: 350px;"> Servicio</th>
+                                    <th style="width: 250px;"> Variable</th>
+                                    <th style="width: 400px;"> Valor</th>
+                                    <th style="width: 100px;"> Estado</th>
+                                    <th colspan="2" style="width: 100px;">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="l in listado">
+                                    <td ng-if="!l.before" rowspan="{{ l.rowspan }}">{{ l.service }}</td>
+                                    <td>{{ l.key }}</td>
+                                    <td>{{ l.value }}</td>
+                                    <td ng-if="!l.before" rowspan="{{ l.rowspan }}"
+                                    style="text-align: center; vertical-align: middle; color: {{ l.color }} ">
+                                    <span class="fa fa-{{ l.icon }}-circle fa-2x"></span></td>
+                                    <td><span class="btn btn-default" ng-click="modal(l.key, l.value)"><i class="fa fa-edit fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="delete(l.key)"><i class="fa fa-trash fa-sm"></i></span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th> Servicio</th>
+                                    <th> Variable</th>
+                                    <th> Valor</th>
+                                    <th> Estado</th>
+                                    <th colspan="2">Opciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Voice -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Variable</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="key" placeholder="Nombre" disabled >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Valor</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="value" placeholder="Valor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-click="update()" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Voice -->
+</div>

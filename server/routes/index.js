@@ -22,9 +22,7 @@ router.post('/nodes', async function (req, res) {
 });
 
 router.get('/interaccion/iniciarInteraccion1', async function (req, res) {
-	//console.log(await social.dialogflow('hola'));
-	//console.log(social.listen());
-	console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+	console.log(social.listen());
 	res.status(200).jsonp();
 });
 

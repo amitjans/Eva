@@ -99,21 +99,5 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <h2><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>&nbsp;Conversaciones</h2>
-      <hr />
-      <div class="col-xs-4 col-md-3" ng-repeat="(key, conversacion) in conversaciones">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{{conversacion.nombre}}</h3>
-          </div>
-          <div class="panel-body">
-            <button id="btnSaludo" type="button" class="btn btn-default btn-lg btn-block"><img
-                src="/images/{{conversacion.nombre}}.png" class="img-responsive"
-                ng-click="enviarConversacion(conversacion)"></button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
