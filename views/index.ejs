@@ -58,14 +58,13 @@
                             <li><a href="/#!/voice">Voz (IBM Watson)</a></li>
                             <li role="separator" class="divider"></li>
                             <!-- <li><a href="#">Separated link</a></li> -->
-                            <li><a href="/#!/listen">Escucha (Google)</a></li>
+                            <li><a href="/#!/listen">Escucha (Google y Watson)</a></li>
                             
                         </ul>
                     </li>
                     <li ng-class="{'active': $route.current.activetab == 'led'}"><a href="/#!/led">Led</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/#!/mov">Movimiento</a></li>
                     <li ng-class="{'active': $route.current.activetab == 'woo'}"><a href="/#!/woo">Mago de Oz</a></li>
-                    <li ng-class="{'active': $route.current.activetab == 'cloud'}"><a href="/#!/cloud">Servicios</a></li>
                     <li class="dropdown" ng-class="{'active': $route.current.activetab == 'config'}">
                         <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false" target="_blank">
@@ -103,6 +102,7 @@
         crossorigin="anonymous"></script>
     <script src="/js/bootstrap-notify.min.js"></script>
     <script src="/js/notify-min.js"></script>
+    <script src="/js/datatable-min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/angular-drag-and-drop-lists.min.js"></script>
     <script type="text/javascript" src="/js/dropzone.min.js"></script>

@@ -36,7 +36,7 @@ eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
         if (way == 0) {
             $scope.temp = [];
             for (let i = 0; i < $scope.listado.length; i++) {
-                if ($scope.listado[i].nombre.includes($scope.q)) {
+                if (datafilter($scope.listado[i], $scope.q, 'nombre')) {
                     $scope.temp.push($scope.listado[i]);
                 }
             }

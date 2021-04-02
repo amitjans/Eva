@@ -20,10 +20,11 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.create = function () {
-        var json = { idioma: $scope.idioma, codigo: $scope.codigo };
+        var json = { idioma: $scope.idioma, codigo: $scope.codigo, watson: $scope.watson };
         $http.post('/api/common?db=googlestt', json).then(function successCallback(response) {
             $scope.idioma = '';
             $scope.codigo = '';
+            $scope.watson = '';
             $scope.nombre = '';
             $('#myModal').modal('hide');
             $scope.list();
@@ -35,16 +36,18 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
         $scope.updateid = l._id;
         $scope.idioma = l.idioma;
         $scope.codigo = l.codigo;
+        $scope.watson = l.watson;
         $scope.icon = false;
         $scope.accion = 'Editar';
         $('#myModal').modal('show');
     }
 
     $scope.updatesend = function () {
-        var json = { idioma: $scope.idioma, codigo: $scope.codigo };
+        var json = { idioma: $scope.idioma, codigo: $scope.codigo, watson: $scope.watson };
         $http.put('/api/common/' + $scope.updateid + '?db=googlestt', json).then(function successCallback(response) {
             $scope.idioma = '';
             $scope.codigo = '';
+            $scope.watson = '';
             $scope.icon = true;
             $('#myModal').modal('hide');
             $scope.list();
@@ -64,7 +67,7 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
         if (way == 0) {
             $scope.temp = [];
             for (let i = 0; i < $scope.listado.length; i++) {
-                if ($scope.listado[i].codigo.toLowerCase().includes($scope.q.toLowerCase()) || $scope.listado[i].idioma.toLowerCase().includes($scope.q.toLowerCase())) {
+                if (datafilter($scope.listado[i], $scope.q, 'codigo', 'watson', 'idioma')) {
                     $scope.temp.push($scope.listado[i]);
                 }
             }

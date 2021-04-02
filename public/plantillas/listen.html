@@ -28,7 +28,8 @@
                             <thead>
                                 <tr role="row">
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 350px;"> Idioma</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 350px;"> C&oacute;digo</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 175px;"> C&oacute;digo (Google)</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 175px;"> C&oacute;digo (Watson)</th>
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="2" style="width: 50px;">Opciones</th>
                                 </tr>
                             </thead>
@@ -36,6 +37,7 @@
                                 <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
                                     <td>{{ l.idioma }}</td>
                                     <td>{{ l.codigo }}</td>
+                                    <td>{{ l.watson }}</td>
                                     <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
                                     <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span></td>
                                 </tr>
@@ -43,7 +45,8 @@
                             <tfoot>
                                 <tr>
                                     <th rowspan="1" colspan="1">Idioma</th>
-                                    <th rowspan="1" colspan="1">C&oacute;digo</th>
+                                    <th rowspan="1" colspan="1">C&oacute;digo (Google)</th>
+                                    <th rowspan="1" colspan="1">C&oacute;digo (Watson)</th>
                                     <th rowspan="1" colspan="2">Opciones</th>
                                 </tr>
                             </tfoot>
@@ -87,9 +90,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">C&oacute;digo</label>
+                            <label class="col-sm-2 control-label">C&oacute;digo (Google)</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="codigo" placeholder="Nombre">
+                                <input type="text" class="form-control input-sm" ng-model="codigo" placeholder="Código">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&oacute;digo (Watson)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="watson" placeholder="Código">
                             </div>
                         </div>
                     </div>

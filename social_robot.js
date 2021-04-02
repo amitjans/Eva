@@ -245,7 +245,15 @@ class SocialRobot {
     })
   }
 
-  sendAudioGoogleSpeechtoText2(langcode, callback) {
+  async listen(service, lancode, callback){
+    if (service == 'watson') {
+      return await this.listenWatson(lancode, callback);
+    } else {
+      return await this.listenGoogle(langcode, callback);
+    }
+  }
+
+  listenGoogle(langcode, callback) {
     const self = this;
     self.ledsanimstop();
     self.ledsanim('escuchaT');
@@ -287,39 +295,36 @@ class SocialRobot {
     });
   }
 
-  listen(langcode, callback) {
-    const self = this;
-    // self.ledsanimstop();
-    // self.ledsanim('escuchaT');
+  async listenWatson(langcode, callback) {
+    this.ledsanimstop();
+    this.ledsanim('escuchaT');
+    const file = fs.createWriteStream('./test.wav', { encoding: 'binary' });
 
-    // const params = {
-    //   audio: fs.createReadStream('./test.wav'),
-    //   contentType: 'audio/wav',
-    //   model: 'es-MX_BroadbandModel'
-    // };
-
-    // return new Promise(function (resolve, reject) {
-    //   let recognizeStream = self._stt.recognize(params)
-    //     .then(response => {
-    //       resolve(response.result.results[0].alternatives[0].transcript);
-    //       self.ledsanimstop();
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-
-    const file = fs.createWriteStream('test.wav', { encoding: 'binary' })
-
-      self.recording = record
-        .record({
-          sampleRateHertz: 16000,
-          threshold: 0,
-          recordProgram: 'rec',
-          silence: '1.0',
-          thresholdEnd: '0.5'
-        });
-      self.recording.stream().on('error', console.error).pipe(file);
-    // });
+    this.recording = record
+      .record({
+        sampleRateHertz: 16000,
+        threshold: 0,
+        recordProgram: 'rec',
+        silence: '1.0'
+      });
+    this.recording.stream().on('error', console.error).pipe(file);
+    await this.sleep(3000);
+    this.recording.stop();
+    file.end();
+    const params = {
+      audio: fs.createReadStream('./test.wav'),
+      contentType: 'audio/wav',
+      model: 'es-MX_BroadbandModel'
+    };
+    return this._stt.recognize(params)
+      .then(response => {
+        this.ledsanimstop();
+        return response.result.results[0].alternatives[0].transcript;
+      })
+      .catch(err => {
+        console.log(err);
+        this.ledsanimstop();
+      });
   }
 
   stopListening() {

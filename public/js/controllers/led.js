@@ -63,7 +63,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         if (way == 0) {
             $scope.temp = [];
             for (let i = 0; i < $scope.listado.length; i++) {
-                if ($scope.listado[i].nombre.toLowerCase().includes($scope.q.toLowerCase()) || $scope.listado[i].codigo.toLowerCase().includes($scope.q.toLowerCase())) {
+                if (datafilter($scope.listado[i], $scope.q, 'nombre', 'codigo')) {
                     $scope.temp.push($scope.listado[i]);
                 }
             }

@@ -22,7 +22,7 @@ router.post('/nodes', async function (req, res) {
 });
 
 router.get('/interaccion/iniciarInteraccion1', async function (req, res) {
-	console.log(social.listen());
+	console.log(await social.listen('watson'));
 	res.status(200).jsonp();
 });
 
