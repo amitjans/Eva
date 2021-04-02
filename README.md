@@ -1,11 +1,12 @@
 # Eva
+Eva social robot main app.
 
 ## Hardware
 - Raspberry Pi 3B+ o 4B+
 - Matrix Voice
 - Servomotores Dynamixel AX-12A
 
-## Instalación
+## Requirements
 - NodeJs 14.16.0
 ```bash
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
@@ -20,7 +21,7 @@ nvm install v14.16.0
 ```bash
 nvm use v14.16.0
 ```
-- Registrar la [Matrix Voice](https://matrix-io.github.io/matrix-documentation/matrix-voice/resources/microphone/) como micrófono
+- [Matrix Voice](https://matrix-io.github.io/matrix-documentation/matrix-voice/resources/microphone/) registred as a microphone
 
 ```bash
 curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
@@ -41,11 +42,11 @@ sudo apt install matrixio-kernel-modules
 sudo reboot
 ```
 
-### Dependencias de la aplicación
+### App dependencies
 ```bash
 npm install
 ```
-#### Dependencias para entornos de producción
+#### Production dependencies
 ```bash
 npm install pm2 -g
 ```
@@ -57,42 +58,33 @@ sudo apt-get install libasound2-dev
 ```
 -->
 
-
-### Animaciones
- - Paquetes requeridos para compilar las animaciones del arreglo de luces led.
-```bash
-sudo apt-get install matrixio-creator-init libmatrixio-creator-hal libmatrixio-creator-hal-dev
-```
- - Para compilar las animaciones del arreglo de leds de la Matrix Voice
-```bash
-g++ -o app app.cpp -std=c++11 -lmatrix_creator_hal
-```
-
 ## Configuración
 
-Archivo necesario para el uso de los servicios de Watson y de Google:
+File required to use Watson and Google services:
 
 - .env
 
-Este archivo contendrá los siguientes parámetros:
+This file will contain the following parameters:
 
 ```bash
-TEXT_TO_SPEECH_APIKEY=api-key
+TEXT_TO_SPEECH_APIKEY=tts-api-key
 TEXT_TO_SPEECH_URL=https://stream.watsonplatform.net/text-to-speech/api
-TRANSLATOR_APIKEY=api-key
+SPEECH_TO_TEXT_APIKEY=stt-api-key
+SPEECH_TO_TEXT_URL=https://stream.watsonplatform.net/speech-to-text/api
+TRANSLATOR_APIKEY=translator-api-key
 TRANSLATOR_URL=https://api.us-south.language-translator.watson.cloud.ibm.com/
 GOOGLE_APPLICATION_CREDENTIALS=credencial.json
 ```
 
-Archivo necesario para el uso de los servicios de Google:
+File required to use Google services:
 
-- [Archivo JSON que contiene la clave de la cuenta de servicio de Google](https://cloud.google.com/docs/authentication/getting-started)
+- [JSON file with Google credentials](https://cloud.google.com/docs/authentication/getting-started)
 
-- Opcionalmente el archivo '.env' para la configuración de los servicios podrá contener el siguiente parámetro si se desea utlizar un proyecto de Dialogflow de Google por defecto:
+- Optionally, the '.env' file for the configuration of the services may contain the following parameter if you want to use a Google Dialogflow project by default:
 ```bash
 DIALOGFLOW_PROJECT_ID=google-dialogflow-proyect-name
 ```
-Archivo opcional para el inicio de la aplicación 
+Optional file for application start 
 
 - ini.sh
 
