@@ -39,10 +39,10 @@ eva.controller('cloud', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/cloud').then(function successCallback(response) {
+        $http.put('/api/cloud', { key: id, value: '' }).then(function successCallback(response) {
             $scope.index();
         }, function errorCallback(response) {
-        });;
+        });
     }
 
     $scope.index();

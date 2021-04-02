@@ -4081,7 +4081,8 @@
     {
       "_id": "c6404378-2679-4b58-98a5-25223fa2e280",
       "idioma": "Español (Argentina)",
-      "codigo": "es-AR"
+      "codigo": "es-AR",
+      "watson": "es-AR_BroadbandModel"
     },
     {
       "_id": "6a05cfb2-dd15-430e-b8b1-caf36902382a",
@@ -4091,12 +4092,14 @@
     {
       "_id": "fbb46599-237a-415d-8c47-48c000e28894",
       "idioma": "Español (Chile)",
-      "codigo": "es-CL"
+      "codigo": "es-CL",
+      "watson": "es-CL_BroadbandModel"
     },
     {
       "_id": "80c5be6c-00cd-4328-8fa5-f1cf6f89bf47",
       "idioma": "Español (Colombia)",
-      "codigo": "es-CO"
+      "codigo": "es-CO",
+      "watson": "es-CO_BroadbandModel"
     },
     {
       "_id": "16cec0b0-a4e6-4a4a-8135-6328d1200535",
@@ -4131,7 +4134,8 @@
     {
       "_id": "c68391d3-9290-4021-bcce-ddade1afdd56",
       "idioma": "Español (México)",
-      "codigo": "es-MX"
+      "codigo": "es-MX",
+      "watson": "es-MX_BroadbandModel"
     },
     {
       "_id": "0b5a255e-2124-4a3e-9ddf-f70e91790f0a",
@@ -4151,7 +4155,8 @@
     {
       "_id": "a9cc9d5b-1015-40c2-939f-8c0fe91d1410",
       "idioma": "Español (Perú)",
-      "codigo": "es-PE"
+      "codigo": "es-PE",
+      "watson": "es-PE_BroadbandModel"
     },
     {
       "_id": "a140b5c2-6bc0-497a-9b54-367fefd479f0",
@@ -4161,7 +4166,8 @@
     {
       "_id": "723982db-71bd-48af-8e58-d9eaf02ec63b",
       "idioma": "Español (España)",
-      "codigo": "es-ES"
+      "codigo": "es-ES",
+      "watson": "es-ES_BroadbandModel"
     },
     {
       "_id": "0e56d984-8f4a-4e92-a60b-58cb6d66da4e",
@@ -4181,7 +4187,8 @@
     {
       "_id": "26f06d59-2e83-444c-b029-f2ccd41e753d",
       "idioma": "Inglés (Australia)",
-      "codigo": "en-AU"
+      "codigo": "en-AU",
+      "watson": "en-AU_BroadbandModel"
     },
     {
       "_id": "75d917e4-6603-4da4-89d1-d91d0b0d30ee",
@@ -4251,52 +4258,62 @@
     {
       "_id": "1f25e2d6-c86f-46ac-988b-542d5f2bffd9",
       "idioma": "Inglés (Reino Unido)",
-      "codigo": "en-GB"
+      "codigo": "en-GB",
+      "watson": "en-GB_BroadbandModel"
     },
     {
       "_id": "495af5e7-5709-4661-8804-2ce5cfd3f2ba",
       "idioma": "Inglés (Estados Unidos)",
-      "codigo": "en-US"
+      "codigo": "en-US",
+      "watson": "en-US_BroadbandModel"
     },
     {
       "_id": "0a27ae7a-c7ce-459c-b4f5-fdd4c22fddf0",
       "idioma": "Portugués (Brasil)",
-      "codigo": "pt-BR"
+      "codigo": "pt-BR",
+      "watson": "pt-BR_BroadbandModel"
     },
     {
       "_id": "244a13f2-6d48-4709-a8c9-8523ff7c496e",
       "idioma": "Chino, Mandarín (Simplificado, China)",
-      "codigo": "zh"
+      "codigo": "zh",
+      "watson": "zh-CN_BroadbandModel"
     },
     {
       "_id": "b426feec-b5b7-4f50-92aa-927ac7671a9f",
       "idioma": "Holandés (Países Bajos)",
-      "codigo": "nl-NL"
+      "codigo": "nl-NL",
+      "watson": "nl-NL_BroadbandModel"
     },
     {
       "_id": "cb594522-8f86-4aef-95b0-c407449d0bbf",
       "idioma": "Francés (Francia)",
-      "codigo": "fr-FR"
+      "codigo": "fr-FR",
+      "watson": "fr-FR_BroadbandModel"
     },
     {
       "_id": "d0fe5415-a370-4149-af19-6f93578fd7d6",
       "idioma": "Alemán (Alemania)",
-      "codigo": "de-DE"
+      "codigo": "de-DE",
+      "watson": "de-DE_BroadbandModel"
     },
     {
       "_id": "ea5e09fb-a7a5-4d72-b798-61fb8bb42082",
       "idioma": "Italiano (Italia)",
-      "codigo": "it-IT"
+      "codigo": "it-IT",
+      "watson": "it-IT_BroadbandModel"
     },
     {
       "_id": "adeae697-5ef8-49c6-b867-f232566f1a28",
       "idioma": "Japonés (Japón)",
-      "codigo": "ja-JP"
+      "codigo": "ja-JP",
+      "watson": "ja-JP_BroadbandModel"
     },
     {
       "_id": "f94d094c-b055-4f31-ae34-d9dfeffa58d1",
       "idioma": "Coreano (Corea del Sur)",
-      "codigo": "ko-KR"
+      "codigo": "ko-KR",
+      "watson": "ko-KR_BroadbandModel"
     }
   ]
 }

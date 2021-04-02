@@ -83,7 +83,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
         if (way == 0) {
             $scope.temp = [];
             for (let i = 0; i < $scope.listado.length; i++) {
-                if ($scope.listado[i].campo1.toLowerCase().includes($scope.q.toLowerCase()) || $scope.listado[i].campo2.toLowerCase().includes($scope.q.toLowerCase())) {
+                if (datafilter($scope.listado[i], $scope.q, 'campo1', 'campo2')) {
                     $scope.temp.push($scope.listado[i]);
                 }
             }
