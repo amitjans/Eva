@@ -417,7 +417,6 @@ class SocialRobot {
       default:
         break;
     }
-    lastlevel = level;
   }
 
   resetlog() {

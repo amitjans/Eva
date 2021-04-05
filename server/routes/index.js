@@ -1,4 +1,5 @@
-var express = require('express');
+const express = require('express');
+const fs = require('fs');
 var router = express.Router();
 const nodes = require('../../vpl/VPL_Node');
 const interaccion = require('../controllers/interaccion.controller');
@@ -21,62 +22,31 @@ router.post('/nodes', async function (req, res) {
 	res.status(200).jsonp();
 });
 
-router.get('/interaccion/iniciarInteraccion1', async function (req, res) {
+router.get('/test', async function (req, res) {
 	console.log(await social.listen('watson'));
 	res.status(200).jsonp();
 });
 
-router.get('/interaccion/iniciaremocion', function (req, res) {
-  let id = req.query.e;
-	//sad
-	if (id >= 1 && id <= 3) {
-		social.emotions('sad', id - 1);
-	}
-	//anger
-	if (id >= 4 && id <= 6) {
-		social.emotions('anger', id - 4);
-	}
-	//joy
-	if (id >= 7 && id <= 9) {
-		social.emotions('joy', id - 7);
-	}
-	//ini
-	if (id == 0) {
-		social.emotions('ini', 0);
-	}
-	//exit
-	if (id == 10) {
-		social.emotions('exit', 0);
-	}
-	res.status(200).jsonp();
-});
-
-router.get('/interaccion/unified', async function (req, res) {
-	const temp = await interaccion.getThis(req.query.id);
+router.get('/interaccion/unified/:id', async function (req, res) {
+	const temp = await interaccion.getThis(req.params.id);
 	let obj = await unify.unifyByInt(temp);
 	await interaccion.createThis(temp.nombre + '_expandida', obj);
 	res.status(200).jsonp();
 });
 
-router.get('/interaccion/audio', async function (req, res) {
-	res.status(200).jsonp();
-	console.log('./sonidos/' + req.query.id + '.wav');
-	await social.play('./sonidos/' + req.query.id + '.wav');
-});
-
-router.get('/interaccion/iniciarInteracciong', async function (req, res) {
+router.get('/interaccion/:id', async function (req, res) {
 	res.status(200).jsonp();
 
 	respuesta = [];
 	counter = {};
 
-	let obj = await unify.unifyById(req.query.id);
+	let obj = await unify.unifyById(req.params.id);
 	var fnodes = FirstsNodes(obj.link, obj.node.slice());
 
 	social.resetlog();
 	await ProcessFlow(obj.node, obj.link, fnodes, 0);
 	["respuesta", "sactual", "lemotion", "counter", "apidata", "iscript"].forEach(item => { delete global[item] });
-	social.setConf({ attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true });
+	social.setConf(JSON.parse(fs.readFileSync('./config.json')));
 	social.savelogs('');
 });
 

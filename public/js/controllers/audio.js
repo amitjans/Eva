@@ -20,9 +20,9 @@ eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.details = function (id) {
-        $http.get('/interaccion/audio?id=' + id).then(function successCallback(response) {
+        $http.post('/nodes', { type: 'sound', src: id }).then(function successCallback(response) {
         }, function errorCallback(response) {
-        });;
+        });
     }
 
     $scope.delete = function (id) {

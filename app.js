@@ -51,7 +51,7 @@ app.use(function (err, req, res, next) {
 	res.render('error');
 });
 
-app.set('port', '3000');
+app.set('port', process.env.PORT || 3000);
 const server = app.listen(app.get('port'));
 const io = require('socket.io')(server);
 io.on('connection', () => { console.log('Client connected') });
