@@ -28,7 +28,6 @@ eva.controller('ControlEvaController', function ($scope, $http, $sce) {
 		});
 	});
 
-	$scope.emociones = ['normal', 'triste', 'triste1', 'triste2', 'ira', 'ira1', 'ira2', 'feliz', 'feliz1', 'feliz2', 'salir'];
 	var iconoEmocion = ['meh-o', 'lightbulb-o', 'frown-o', 'heart-o', 'eye', 'smile-o', ''];
 
 	$scope.indiceScript1 = 0;
@@ -82,19 +81,17 @@ eva.controller('ControlEvaController', function ($scope, $http, $sce) {
 	};
 
 
-	$scope.enviarEmocion = function (tipoE) {
-		$http.get('interaccion/iniciaremocion?e=' + tipoE)
+	$scope.enviarEmocion = function (emotion, level) {
+		$http.post('/nodes', { type: 'emotion', emotion: emotion, level: level })
 			.then(function (res) {
-				console.info('Inicio la emoción');
 			}, function (error) {
 				console.log(error);
 			});
 	};
 
 	$scope.iniciarInteracciong = function (id) {
-		$http.get('interaccion/iniciarInteracciong?id=' + id)
+		$http.get('interaccion/' + id)
 			.then(function (res) {
-				console.info('Inició interaccion con grupo g');
 			}, function (error) {
 				console.log(error);
 			});

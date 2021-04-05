@@ -49,7 +49,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.iniciarInteracciong = function (id) {
-    $http.get('interaccion/iniciarInteracciong?id=' + id)
+    $http.get('interaccion/' + id)
       .then(function (res) {
       }, function (error) {
         console.log(error);
@@ -122,7 +122,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.unified = function (id) {
-    $http.get('/interaccion/unified?id=' + id).then(function successCallback(response) {
+    $http.get('/interaccion/unified/' + id).then(function successCallback(response) {
       $scope.list();
     }, function errorCallback(response) {
     });
