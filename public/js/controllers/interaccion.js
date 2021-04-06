@@ -2,6 +2,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.listado = [];
   $scope.led = [];
   $scope.mov = [];
+  $scope.stt = [];
   $scope.accion = 'Agregar';
   $scope.icon = true;
   $scope.updateid;
@@ -36,6 +37,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     });
     $http.get('/api/common?db=mov').then(function successCallback(response) {
       $scope.mov = response.data;
+    }, function errorCallback(response) {
+    });
+    $http.get('/api/common?db=googlestt').then(function successCallback(response) {
+      $scope.stt = response.data;
     }, function errorCallback(response) {
     });
     $http.get('/api/audio').then(function successCallback(response) {
@@ -194,7 +199,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push(Object.assign(tempobj, { text: $scope.texto }));
         break;
       case "listen":
-        node.push(Object.assign(tempobj, { opt: $scope.listenopt, langcode: $scope.langcode || 'es-MX' }));
+        node.push(Object.assign(tempobj, { opt: $scope.listenopt, langcode: $scope.langcode, service: $scope.service }));
         break;
       case "wait":
         node.push(Object.assign(tempobj, { time: $scope.time }));
@@ -280,7 +285,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         Object.assign($scope, { texto: l.text });
         break;
       case 'listen':
-        $scope.listenopt = l.opt;
+        Object.assign($scope, { listenopt: l.opt, langcode: l.langcode, service: l.service });
         break;
       case 'wait':
         $scope.time = l.time;

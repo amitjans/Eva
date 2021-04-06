@@ -245,9 +245,9 @@ class SocialRobot {
     })
   }
 
-  async listen(service, lancode, callback){
+  async listen(service, langcode, callback){
     if (service == 'watson') {
-      return await this.listenWatson(lancode, callback);
+      return await this.listenWatson(langcode, callback);
     } else {
       return await this.listenGoogle(langcode, callback);
     }
@@ -314,7 +314,7 @@ class SocialRobot {
     const params = {
       audio: fs.createReadStream('./test.wav'),
       contentType: 'audio/wav',
-      model: 'es-MX_BroadbandModel'
+      model: langcode
     };
     return this._stt.recognize(params)
       .then(response => {

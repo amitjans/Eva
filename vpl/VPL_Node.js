@@ -127,7 +127,7 @@ async function RecAndSpeak(element) {
 }
 
 async function ProcessListenNode(element) {
-    var r = await social.sendAudioGoogleSpeechtoText2(element.langcode);
+    var r = await social.listen(element.service, element.langcode);
     social.stopListening();
     if (!!element.opt) {
         r = lf[element.opt](r)[0];
