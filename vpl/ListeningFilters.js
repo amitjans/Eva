@@ -7,17 +7,16 @@ Array.prototype.unique = function (a) {
 module.exports = {
     Nombre: function (value) {
         if (value.includes(" ")) {
-            var aux = value.split(" ");
+            var aux = value.trim().split(" ");
             for (let i = aux.length - 1; i >= 0; i--) {
                 if (/(^[A-Za-z]{1,2}$|nombre|llamo|hola|Hola)/.test(aux[i])) {
                     aux.splice(i, 1);
                 }
             }
             if (aux.length > 1) {
-                for (let i = aux.length - 1; i >= 0; i--) {
-                    if (aux[i][0] !== aux[i][0].toUpperCase()) {
-                        aux.splice(i, 1);
-                    }
+                let result = aux.filter(item => /^[A-Z]{1}/.test(item));
+                if (result.length > 1) {
+                    aux = result;
                 }
             }
             return [aux.unique().join(' ')];

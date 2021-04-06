@@ -199,6 +199,23 @@
 
               <!-- Modal Escuchar -->
               <div class="form-group" ng-show="modal == 'listen'">
+                <label class="col-sm-2 control-label">Servicio(STT)</label>
+                <div class="col-sm-10">
+                  <select name="service" id="" ng-model="service" class="form-control">
+                    <option value="watson">Watson</option>
+                    <option value="codigo">Google</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" ng-show="modal == 'listen'">
+                <label class="col-sm-2 control-label">Idioma</label>
+                <div class="col-sm-10">
+                  <select name="langcode" id="" ng-model="langcode" class="form-control">
+                    <option ng-repeat="item in stt" ng-show="!!item[service]" value="{{ item[service] }}">{{ item[service] }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" ng-show="modal == 'listen'">
                 <label class="col-sm-2 control-label">Obtener</label>
                 <div class="col-sm-10">
                   <select name="listenopt" id="" ng-model="listenopt" class="form-control">

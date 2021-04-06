@@ -1231,16 +1231,6 @@
             "__gohashid": 56449
           },
           {
-            "key": 1598761161835,
-            "name": "Escuchar_1",
-            "type": "listen",
-            "opt": "Nombre",
-            "color": "lightblue",
-            "isGroup": false,
-            "group": "",
-            "__gohashid": 784
-          },
-          {
             "key": 1598761211537,
             "name": "Emoción_4 ",
             "type": "emotion",
@@ -1251,6 +1241,16 @@
             "level": 2,
             "speed": 1,
             "__gohashid": 2005
+          },
+          {
+            "key": 1598761161835,
+            "name": "Escuchar_1",
+            "type": "listen",
+            "group": "",
+            "opt": "Nombre",
+            "langcode": "es-MX_BroadbandModel",
+            "service": "watson",
+            "__gohashid": 886
           }
         ],
         "link": [
