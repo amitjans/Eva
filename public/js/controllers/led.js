@@ -59,6 +59,12 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         });;
     }
 
+    $scope.execute = function (l) {
+        $http.post('/nodes', { type: 'led', anim: l.codigo }).then(function successCallback(response) {
+        }, function errorCallback(response) {
+        });;
+    }
+
     $scope.dataTable = function (way = 0) {
         if (way == 0) {
             $scope.temp = [];
