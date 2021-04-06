@@ -31,7 +31,7 @@
                                         style="width: 334px;"> Nombre</th>
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                                         style="width: 333px;"> C&oacute;digo</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="2"
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="3"
                                         style="width: 333px;">Opciones</th>
                                 </tr>
                             </thead>
@@ -39,6 +39,8 @@
                                 <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
                                     <td>{{ l.nombre }}</td>
                                     <td>{{ l.codigo }}</td>
+                                    <td><span class="btn btn-default" ng-click="execute(l)"><i
+                                        class="fa fa-play fa-sm"></i></span></td>
                                     <td><span class="btn btn-default" ng-click="update(l)"><i
                                                 class="fa fa-edit fa-sm"></i></span></td>
                                     <td><span class="btn btn-default" ng-click="delete(l._id)"><i
@@ -49,7 +51,7 @@
                                 <tr>
                                     <th rowspan="1" colspan="1">Nombre</th>
                                     <th rowspan="1" colspan="1">C&oacute;digo</th>
-                                    <th rowspan="1" colspan="2">Opciones</th>
+                                    <th rowspan="1" colspan="3">Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>
