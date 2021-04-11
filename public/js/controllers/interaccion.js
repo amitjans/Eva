@@ -223,7 +223,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push(Object.assign(tempobj, { src: $scope.thesound, wait: $scope.ccommon }));
         break;
       case "led":
-        node.push(Object.assign(tempobj, { name: "Leds_" + id, anim: $scope.leds }));
+        let base = $scope.led.filter(x => x._id == $scope.leds)[0].base;
+        node.push(Object.assign(tempobj, { name: "Leds_" + id, anim: $scope.leds, base: base }));
         break;
       case "voice":
         if ($scope.ccommon) {

@@ -3385,6 +3385,106 @@
           }
         ]
       }
+    },
+    {
+      "_id": "2bf02445-5445-4e8d-890a-3bf3a4447524",
+      "nombre": "Ejemplo animaciones leds",
+      "data": {
+        "node": [
+          {
+            "key": 1617961213553,
+            "name": "Leds_0",
+            "type": "led",
+            "group": "",
+            "anim": "489809bb-ec23-4016-80a2-04ae46e2f989",
+            "base": "joy",
+            "__gohashid": 986
+          },
+          {
+            "key": 1617961247023,
+            "name": "Leds_2",
+            "type": "led",
+            "group": "",
+            "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+            "base": "stop",
+            "__gohashid": 1349
+          },
+          {
+            "key": 1617961298842,
+            "name": "Leds_6",
+            "type": "led",
+            "group": "",
+            "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+            "base": "stop",
+            "__gohashid": 2075
+          },
+          {
+            "key": 1617961236438,
+            "name": "Tiempo_1",
+            "type": "wait",
+            "group": "",
+            "time": 3000,
+            "__gohashid": 935
+          },
+          {
+            "key": 1617961263679,
+            "name": "Tiempo_3",
+            "type": "wait",
+            "group": "",
+            "time": 1000,
+            "__gohashid": 1298
+          },
+          {
+            "key": 1617961294216,
+            "name": "Tiempo_5",
+            "type": "wait",
+            "group": "",
+            "time": 3000,
+            "__gohashid": 1661
+          },
+          {
+            "key": 1617961286473,
+            "name": "Leds_4",
+            "type": "led",
+            "group": "",
+            "anim": "6f95e2c0-af11-407d-9f20-1f6f33f44515",
+            "base": "rainbow",
+            "__gohashid": 2414
+          }
+        ],
+        "link": [
+          {
+            "from": 1617961213553,
+            "to": 1617961236438,
+            "__gohashid": 954
+          },
+          {
+            "from": 1617961236438,
+            "to": 1617961247023,
+            "__gohashid": 1072
+          },
+          {
+            "from": 1617961247023,
+            "to": 1617961263679,
+            "__gohashid": 1239
+          },
+          {
+            "from": 1617961263679,
+            "to": 1617961286473,
+            "__gohashid": 1455
+          },
+          {
+            "from": 1617961286473,
+            "to": 1617961294216,
+            "__gohashid": 1720
+          },
+          {
+            "from": 1617961294216,
+            "to": 1617961298842,
+            "__gohashid": 2034
+          }
+        ]
+      }
     }
   ],
   "voice": [
@@ -3597,57 +3697,258 @@
     {
       "_id": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
       "nombre": "Parar",
-      "codigo": "stop"
+      "codigo": "stop",
+      "base": "stop"
     },
     {
-      "_id": "6a42a11e-806d-4152-a050-69ff9c8bb396",
-      "nombre": "Escuchar",
-      "codigo": "escuchaT"
+      "_id": "376dd161-c000-431f-bdd4-dbcae24b020b",
+      "nombre": "Escucha Centro",
+      "codigo": "escuchaC",
+      "base": "escuchaC",
+      "opts": {
+        "color1": "#23fb04",
+        "led1": 6,
+        "led2": 11,
+        "led3": 3,
+        "time": 100
+      }
     },
     {
-      "_id": "97e674ba-c607-449d-9a09-56beaca59a76",
-      "nombre": "Hablar",
-      "codigo": "hablaT_v2"
+      "_id": "af777025-2ac1-438d-9480-f3c6bc87380a",
+      "nombre": "Escucha Derecha",
+      "codigo": "escuchaC",
+      "base": "escuchaC",
+      "opts": {
+        "color1": "#23fb04",
+        "led1": 11,
+        "led2": 15,
+        "led3": 3,
+        "time": 100
+      }
     },
     {
-      "_id": "1b8b1fa9-7ff4-416d-879c-8281f2bf0b3b",
+      "_id": "e334df76-756f-47b8-8b1b-436f8ec22a84",
+      "nombre": "Escucha Izquierda",
+      "codigo": "escuchaC",
+      "base": "escuchaC",
+      "opts": {
+        "color1": "#23fb04",
+        "led1": 2,
+        "led2": 6,
+        "led3": 3,
+        "time": 100
+      }
+    },
+    {
+      "_id": "adff54b1-52e0-47b8-8485-50d71efad578",
+      "nombre": "Habla Centro",
+      "codigo": "escuchaC",
+      "base": "escuchaC",
+      "opts": {
+        "color1": "#262cfb",
+        "led1": 6,
+        "led2": 11,
+        "led3": 3,
+        "time": 100
+      }
+    },
+    {
+      "_id": "86a77332-8757-4fbf-ae0e-da9e1a371921",
+      "nombre": "Habla Derecha",
+      "codigo": "escuchaC",
+      "base": "escuchaC",
+      "opts": {
+        "color1": "#262cfb",
+        "led1": 11,
+        "led2": 15,
+        "led3": 3,
+        "time": 100
+      }
+    },
+    {
+      "_id": "24eb670c-a57f-4288-8a86-8312f61b4483",
+      "nombre": "Habla Izquierda",
+      "codigo": "escuchaC",
+      "base": "escuchaC",
+      "opts": {
+        "color1": "#262cfb",
+        "led1": 2,
+        "led2": 6,
+        "led3": 3,
+        "time": 100
+      }
+    },
+    {
+      "_id": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+      "nombre": "Escucha a Todos",
+      "base": "escuchaT",
+      "opts": {
+        "color1": "#3fec04",
+        "time": 40
+      }
+    },
+    {
+      "_id": "92253fa2-c77e-4d10-ab3d-66541a4fc020",
+      "nombre": "Habla Todos",
+      "base": "escuchaT",
+      "opts": {
+        "color1": "#6b3ee3",
+        "time": 40
+      }
+    },
+    {
+      "_id": "d59eee1b-25a0-4c31-8543-638a39007d38",
       "nombre": "Ira",
-      "codigo": "anger"
+      "base": "anger",
+      "opts": {
+        "color1": "#ff0000",
+        "led1": 8,
+        "led2": 2,
+        "time": 200
+      }
     },
     {
-      "_id": "8d01c1cf-a6d4-4e91-b126-b5a42c16bbe8",
-      "nombre": "Ira V2",
-      "codigo": "anger_v2"
+      "_id": "489809bb-ec23-4016-80a2-04ae46e2f989",
+      "nombre": "Alegria",
+      "base": "joy",
+      "opts": {
+        "color1": "#64ff00",
+        "led1": 0,
+        "led2": 0,
+        "time": 400
+      }
     },
     {
-      "_id": "bdb4762a-73b9-4929-b7a2-297642dfad22",
-      "nombre": "Alegría",
-      "codigo": "joy"
-    },
-    {
-      "_id": "9ae9e8f9-3d62-4ff7-8647-e311aca4fb55",
-      "nombre": "Alegria V2",
-      "codigo": "joy_v2"
-    },
-    {
-      "_id": "4b489d28-41b3-465c-abc8-255e71adbad0",
+      "_id": "b90dc241-ccb9-4605-ad93-efe3044ac616",
       "nombre": "Tristeza",
-      "codigo": "sad"
+      "base": "sad",
+      "opts": {
+        "color1": "#000050",
+        "led1": 0,
+        "time": 280
+      }
     },
     {
-      "_id": "17c2c31e-8662-402e-9bdf-ce490aab7b84",
-      "nombre": "Tristeza v2",
-      "codigo": "sad_v2"
+      "_id": "3b04ba47-fa88-4520-a691-d089c497364f",
+      "nombre": "Ira V2",
+      "base": "emocionv2",
+      "opts": {
+        "color1": "#ff0000",
+        "led1": 13,
+        "time": 200
+      }
     },
     {
-      "_id": "5fd13f4d-63c7-47dd-a01f-571ba8e8b87e",
-      "nombre": "Sorpresa",
-      "codigo": "surprise"
+      "_id": "4fb1396f-466f-445d-8b6d-3cc7428e102d",
+      "nombre": "Alegria V2",
+      "base": "emocionv2",
+      "opts": {
+        "color1": "#64ff00",
+        "led1": 13,
+        "time": 200
+      }
     },
     {
-      "_id": "d3d4c51c-7c07-4d30-8e32-77bc5a32969b",
+      "_id": "975d6d7c-1ad0-4413-bbb2-1f36832b3be5",
+      "nombre": "Tristeza V2",
+      "base": "emocionv2",
+      "opts": {
+        "color1": "#000050",
+        "led1": 13,
+        "time": 200
+      }
+    },
+    {
+      "_id": "d824bc59-7d83-4392-a794-b97a4acdf25c",
+      "nombre": "Solo Verde",
+      "base": "noanim",
+      "opts": {
+        "color1": "#00ff00"
+      }
+    },
+    {
+      "_id": "8702fec8-7815-45ac-9ee1-5b10469712b2",
+      "nombre": "Pestañeo Rojo",
+      "base": "blink",
+      "opts": {
+        "color1": "#000000",
+        "color2": "#ff0000",
+        "time": 100
+      }
+    },
+    {
+      "_id": "6b9d4a92-908e-4630-a4d3-38ba0a166b3d",
+      "nombre": "RGB Fan",
+      "base": "rgb_fan_inspired",
+      "opts": {
+        "color1": "#2c1bfc",
+        "color2": "#ff0000",
+        "color3": "#ffff00",
+        "time": 40
+      }
+    },
+    {
+      "_id": "274e9277-63fd-4b03-9624-6f6ac0ec6a56",
+      "nombre": "Habla Todos",
+      "base": "blink",
+      "opts": {
+        "color1": "#0000ff",
+        "color2": "#00ffff",
+        "time": 50
+      }
+    },
+    {
+      "_id": "14642220-91c5-44bc-8f07-4f872c7f1cc3",
       "nombre": "Procesa",
-      "codigo": "procesa"
+      "base": "processing",
+      "opts": {
+        "color1": "#050000",
+        "color2": "#320000",
+        "led1": 5,
+        "time": 20
+      }
+    },
+    {
+      "_id": "b9fbe9c2-288f-4ce9-a78a-27d1e6689baa",
+      "nombre": "Puntos",
+      "base": "moving_dots",
+      "opts": {
+        "color1": "#280000",
+        "color2": "#000028",
+        "color3": "#003c00",
+        "color4": "#00003c",
+        "color5": "#141414",
+        "time": 100
+      }
+    },
+    {
+      "_id": "6f95e2c0-af11-407d-9f20-1f6f33f44515",
+      "nombre": "Arcoiris",
+      "base": "rainbow",
+      "opts": {
+        "time": 40
+      }
+    },
+    {
+      "_id": "43472ccf-e82c-4dad-9fcf-6bd2d5c63847",
+      "nombre": "Sorpresa",
+      "base": "surprise",
+      "opts": {
+        "color1": "#646400",
+        "color2": "#0a0a00",
+        "led1": 0,
+        "time": 400
+      }
+    },
+    {
+      "_id": "5720a164-ecf0-4de8-b094-22db1e4db3bd",
+      "nombre": "Cuenta atras",
+      "base": "countdown",
+      "opts": {
+        "color1": "#ffffff",
+        "led1": 13,
+        "time": 100
+      }
     }
   ],
   "mov": [

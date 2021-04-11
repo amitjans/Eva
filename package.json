@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@google-cloud/speech": "^4.2.0",
+    "@matrix-io/matrix-lite": "^0.4.6",
     "aplay": "^1.2.0",
     "cookie-parser": "^1.4.5",
     "dialogflow": "^1.2.0",
