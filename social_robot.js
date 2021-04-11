@@ -37,7 +37,11 @@ var log = '';
 var time = 0;
 var emotional = true;
 
-var ledsanimation = spawn('./leds/stop');
+// var ledsanimation = spawn('./leds/stop');
+var ledsanimation = require('./leds/');
+const { json } = require('express');
+var ledsanim = null;
+
 
 class SocialRobot {
   constructor() {
@@ -53,6 +57,7 @@ class SocialRobot {
     log = '';
     time = Date.now();
     emotional = true;
+    ledsanimation.stop();
   }
 
   _createServiceAPI(service) {
@@ -222,14 +227,14 @@ class SocialRobot {
     port.write(onestep ? opt[type] : type);
   }
 
-  ledsanim(value) {
-    ledsanimation = spawn('./leds/' + value);
+  ledsanim(value, properties) {
+    if (!!ledsanim) this.ledsanimstop();
+    ledsanim = ledsanimation[value](properties);
   }
 
   ledsanimstop() {
-    ledsanimation.stdin.pause();
-    ledsanimation.kill();
-    ledsanimation = spawn('./leds/stop');
+    clearInterval(ledsanim);
+    ledsanimation.stop();
   }
 
   sleep(ms) {
@@ -381,7 +386,7 @@ class SocialRobot {
         break;
       case 'sad':
         if (leds || level >= 2) {
-          this.ledsanim('sad_v2');
+          this.ledsanim('emocionv2', { color1: '#000050', led1: 13, time: 200 });
         }
         if (level >= 1) {
           this.movement('D');
@@ -392,7 +397,7 @@ class SocialRobot {
         break;
       case 'anger':
         if (leds || level >= 2) {
-          this.ledsanim('anger_v2');
+          this.ledsanim('emocionv2', { color1: '#ff0000', led1: 13, time: 200 });
         }
         if (level >= 1) {
           this.movement('a');
@@ -400,7 +405,7 @@ class SocialRobot {
         break;
       case 'joy':
         if (leds || level >= 2) {
-          this.ledsanim('joy_v2');
+          this.ledsanim('emocionv2', { color1: '#64ff00', led1: 13, time: 200 });
         }
         if (level >= 1) {
           this.movement('U');
@@ -408,7 +413,7 @@ class SocialRobot {
         break;
       case 'surprise':
         if (leds || level >= 2) {
-          this.ledsanim('joy_v2');
+          this.ledsanim('emocionv2', { color1: '#646400', led1: 13, time: 200 });
         }
         if (level >= 1) {
           this.movement('U');

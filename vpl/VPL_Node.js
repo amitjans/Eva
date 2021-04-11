@@ -1,6 +1,7 @@
 var fs = require('fs');
 const crypto = require('crypto');
 
+var led = require('../server/controllers/leds.controller');
 var random = require('../utils/Random');
 var lf = require('./ListeningFilters');
 const api = require('./Api_Node');
@@ -31,10 +32,11 @@ module.exports = {
                 social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
             }
         } else if (element.type === 'led') {
-            if (element.anim === 'stop') {
+            if (element.base === 'stop') {
                 social.ledsanimstop();
             } else {
-                social.ledsanim(element.anim);
+                let anim = await led.getData(element.anim);
+                social.ledsanim(element.base, anim.opts);
             }
         } else if (element.type === 'counter') {
             ProcessCounterNode(element);
