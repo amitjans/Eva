@@ -3419,30 +3419,6 @@
             "__gohashid": 2075
           },
           {
-            "key": 1617961236438,
-            "name": "Tiempo_1",
-            "type": "wait",
-            "group": "",
-            "time": 3000,
-            "__gohashid": 935
-          },
-          {
-            "key": 1617961263679,
-            "name": "Tiempo_3",
-            "type": "wait",
-            "group": "",
-            "time": 1000,
-            "__gohashid": 1298
-          },
-          {
-            "key": 1617961294216,
-            "name": "Tiempo_5",
-            "type": "wait",
-            "group": "",
-            "time": 3000,
-            "__gohashid": 1661
-          },
-          {
             "key": 1617961286473,
             "name": "Leds_4",
             "type": "led",
@@ -3450,6 +3426,30 @@
             "anim": "6f95e2c0-af11-407d-9f20-1f6f33f44515",
             "base": "rainbow",
             "__gohashid": 2414
+          },
+          {
+            "key": 1617961263679,
+            "name": "Tiempo_3",
+            "type": "wait",
+            "group": "",
+            "time": 2000,
+            "__gohashid": 1298
+          },
+          {
+            "key": 1617961294216,
+            "name": "Tiempo_5",
+            "type": "wait",
+            "group": "",
+            "time": 5000,
+            "__gohashid": 1661
+          },
+          {
+            "key": 1617961236438,
+            "name": "Tiempo_1",
+            "type": "wait",
+            "group": "",
+            "time": 10000,
+            "__gohashid": 5685
           }
         ],
         "link": [
@@ -3469,11 +3469,6 @@
             "__gohashid": 1239
           },
           {
-            "from": 1617961263679,
-            "to": 1617961286473,
-            "__gohashid": 1455
-          },
-          {
             "from": 1617961286473,
             "to": 1617961294216,
             "__gohashid": 1720
@@ -3482,6 +3477,11 @@
             "from": 1617961294216,
             "to": 1617961298842,
             "__gohashid": 2034
+          },
+          {
+            "__gohashid": 6867,
+            "from": 1617961263679,
+            "to": 1617961286473
           }
         ]
       }
@@ -4020,38 +4020,43 @@
       "command": [
         {
           "type": "speak",
-          "nombre": "Hablar",
           "text": "Hola Roberto, ¿cómo te encuentras hoy?",
           "desc": "Hola Roberto, ¿cómo te encuentras hoy?",
           "order": 0
         },
         {
-          "type": "speak",
-          "nombre": "Hablar",
-          "text": "Yo estoy perfectamente Roberto, por cierto, que guapo estás hoy",
-          "desc": "Yo estoy perfectamente Roberto, por cierto, que guapo estás hoy",
+          "type": "led",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
-          "type": "speak",
-          "nombre": "Hablar",
-          "text": "Ya es hora de comer Roberto. Que rica se ve tu sopa de tortilla",
-          "desc": "Ya es hora de comer Roberto. Que rica se ve tu sopa de tortilla",
+          "type": "led",
+          "base": "stop",
+          "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+          "desc": "Parar",
           "order": 2
         },
         {
-          "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "type": "speak",
+          "text": "Yo estoy perfectamente Roberto, por cierto, que guapo estás hoy",
+          "desc": "Yo estoy perfectamente Roberto, por cierto, que guapo estás hoy",
+          "order": 3
+        },
+        {
+          "type": "speak",
+          "text": "Ya es hora de comer Roberto. Que rica se ve tu sopa de tortilla",
+          "desc": "Ya es hora de comer Roberto. Que rica se ve tu sopa de tortilla",
           "order": 4
         }
       ],
       "order": [
         "0",
-        "4",
         "1",
-        "4",
+        "2",
+        "3",
+        "1",
         "2",
         "4"
       ]
@@ -4076,9 +4081,9 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 2
         },
         {
@@ -4149,9 +4154,9 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
@@ -4213,16 +4218,16 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "stop",
-          "desc": "stop",
+          "base": "stop",
+          "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+          "desc": "Parar",
           "order": 2
         }
       ],
@@ -4245,9 +4250,9 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
@@ -4294,16 +4299,16 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "stop",
-          "desc": "stop",
+          "base": "stop",
+          "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+          "desc": "Parar",
           "order": 2
         }
       ],
@@ -4326,9 +4331,9 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
@@ -4358,16 +4363,16 @@
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "escuchaT",
-          "desc": "escuchaT",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
           "order": 1
         },
         {
           "type": "led",
-          "nombre": "Leds",
-          "anim": "stop",
-          "desc": "stop",
+          "base": "stop",
+          "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+          "desc": "Parar",
           "order": 2
         }
       ],

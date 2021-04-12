@@ -1,6 +1,78 @@
 <div class="container" ng-controller="woo">
     <br>
     <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Frase</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Frase personalizada!"
+                                    ng-model="mensaje" ng-keydown="enviarMensaje2($event)">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"
+                                        ng-click="node({ type: 'speak', text: mensaje })">Enviar&nbsp;<i
+                                            class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Movimiento</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <table style="margin-left: auto; margin-right: auto;">
+                            <tr>
+                                <td></td>
+                                <td><button type="button" class="btn btn-default" ng-click="mov('u')"><i
+                                            class="fa fa-arrow-up fa-2x"></i></button></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><button type="button" class="btn btn-default" ng-click="mov('l')"><i
+                                            class="fa fa-arrow-left fa-2x"></i></button></td>
+                                <td><button type="button" class="btn btn-default" ng-click="mov('c')"><i
+                                            class="fa fa-circle fa-2x"></i></button></td>
+                                <td><button type="button" class="btn btn-default" ng-click="mov('r')"><i
+                                            class="fa fa-arrow-right fa-2x"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button type="button" class="btn btn-default" ng-click="mov('d')"><i
+                                            class="fa fa-arrow-down fa-2x"></i></button></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-3" ng-repeat="item in emotionsicon">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ item.name }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="{{ item.img }}"
+                            style="display: block; margin-left: auto; margin-right: auto; cursor: pointer; width: 50%;"
+                            ng-click="node(item)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -26,7 +98,9 @@
                     <div class="form-group" ng-show="!!wooid">
                         <label class="col-sm-2 control-label">Secuencia</label>
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-default" ng-repeat="item in tempwoo.order track by $index" disabled><i class="fa fa-action">{{ item }}</i></button>
+                            <button type="button" class="btn btn-default"
+                                ng-repeat="item in tempwoo.order track by $index" disabled><i class="fa fa-action">{{
+                                    item }}</i></button>
                         </div>
                     </div>
                 </div>
@@ -50,30 +124,31 @@
                             aria-describedby="example_info">
                             <thead>
                                 <tr role="row">
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 225px;"> Nombre</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 600px;"> Descripcion</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 35px;"> Orden</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 40px;"> Estado</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="3" style="width: 100px;">Opciones</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        style="width: 25px;"> Tipo</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        style="width: 875px;"> Descripci&oacute;n</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="3"
+                                        style="width: 100px;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="l in commands" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                    <td>{{ l.nombre }}</td>
+                                    <td id="{{ l.order }}" style="text-align: center;"><span style="color: black;"
+                                            class="fa fa-2x {{ fa_icon(l.type) }}"></span></td>
                                     <td>{{ l.desc }}</td>
-                                    <td>{{ l.order }}</td>
-                                    <td id="{{ l.order }}"><i class="fa fa-certificate fa-sm" aria-hidden="true" style="color: black;"></i></td>
-                                    <td><span class="btn btn-default" ng-click="ucommand($index)"><i class="fa fa-edit fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="cdelete($index)"><i class="fa fa-trash fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="execute(l)"><i class="fa fa-play fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="ucommand($index)"><i
+                                                class="fa fa-edit fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="cdelete($index)"><i
+                                                class="fa fa-trash fa-sm"></i></span></td>
+                                    <td><span class="btn btn-default" ng-click="execute(l)"><i
+                                                class="fa fa-play fa-sm"></i></span></td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th rowspan="1" colspan="1">Nombre</th>
+                                    <th rowspan="1" colspan="1">Tipo</th>
                                     <th rowspan="1" colspan="1">Descripción</th>
-                                    <th rowspan="1" colspan="1">Orden</th>
-                                    <th rowspan="1" colspan="1">Estado</th>
                                     <th rowspan="1" colspan="3">Opciones</th>
                                 </tr>
                             </tfoot>
@@ -82,45 +157,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <table style="margin-left: auto; margin-right: auto;">
-            <tr>
-                <th style="text-align: center;" colspan="4">Emociones</th>
-                <th></th>
-                <th style="text-align: center;" colspan="3">Movimiento</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('joy', 0)"><p>&#128512;</p></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('joy', 1)"><p>&#128513;</p></button></td>
-                <td></td><td style="width: 100px;"></td>
-                <td></td>
-                <td><button type="button" class="btn btn-default" ng-click="mov('u')"><i class="fa fa-arrow-up"></i></button></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('ini', 0)"><p>&#128528;</p></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 0)"><p>&#128542;</p></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 1)"><p>&#128546;</p></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('sad', 2)"><p>&#128557;</p></button></td>
-                <td style="width: 100px;"></td>
-                <td><button type="button" class="btn btn-default" ng-click="mov('l')"><i class="fa fa-arrow-left"></i></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="mov('c')"><i class="fa fa-circle"></i></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="mov('r')"><i class="fa fa-arrow-right"></i></button></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('anger', 0)"><p>&#128544;</p></button></td>
-                <td><button type="button" class="btn btn-default" ng-click="emotions('anger', 1)"><p>&#128545;</p></button></td>
-                <td style="width: 100px;"></td>
-                <td></td>
-                <td><button type="button" class="btn btn-default" ng-click="mov('d')"><i class="fa fa-arrow-down"></i></button></td>
-                <td></td>
-            </tr>
-        </table>
     </div>
 
 
@@ -144,7 +180,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Orden</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="order" placeholder="Separados por coma">
+                                <input type="text" class="form-control" ng-model="order"
+                                    placeholder="Separados por coma">
                             </div>
                         </div>
                     </div>
@@ -201,7 +238,7 @@
                             <label class="col-sm-2 control-label">Leds</label>
                             <div class="col-sm-10">
                                 <select name="leds" id="" ng-model="leds" class="form-control">
-                                    <option ng-repeat="m in led" value="{{ m.codigo }}">{{ m.nombre }}</option>
+                                    <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
                                 </select>
                             </div>
                         </div>
@@ -216,7 +253,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">Salvar</button>
-                    <!-- <button type="button" ng-show="!icon" ng-click="updatesend()" class="btn btn-primary">Actualizar</button> -->
                 </div>
             </div>
         </div>
