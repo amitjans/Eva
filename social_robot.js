@@ -201,7 +201,7 @@ class SocialRobot {
           reject();
         });
         if (ctrl || !!anim) {
-          self.ledsanim((anim || 'hablaT_v2'));
+          self.ledsanim('escuchaT', { color1: '#6B3EE3', time: 40 });
         }
         player.play(soundFile);
       });
@@ -227,12 +227,12 @@ class SocialRobot {
     port.write(onestep ? opt[type] : type);
   }
 
-  ledsanim(value, properties) {
+  async ledsanim(value, properties) {
     if (!!ledsanim) this.ledsanimstop();
     ledsanim = ledsanimation[value](properties);
   }
 
-  ledsanimstop() {
+  async ledsanimstop() {
     clearInterval(ledsanim);
     ledsanimation.stop();
   }
@@ -261,7 +261,7 @@ class SocialRobot {
   listenGoogle(langcode, callback) {
     const self = this;
     self.ledsanimstop();
-    self.ledsanim('escuchaT');
+    self.ledsanim('escuchaT', { color1: '#3FEC04', time: 40 });
 
     const sampleRateHertz = 16000;
     const client = new speech.SpeechClient();
@@ -302,7 +302,7 @@ class SocialRobot {
 
   async listenWatson(langcode, callback) {
     this.ledsanimstop();
-    this.ledsanim('escuchaT');
+    this.ledsanim('escuchaT', { color1: '#3FEC04', time: 40 });
     const file = fs.createWriteStream('./test.wav', { encoding: 'binary' });
 
     this.recording = record

@@ -1,5 +1,5 @@
 const matrix = require("@matrix-io/matrix-lite");
-const { modColor, hexToRgb, siguiente, anterior } = require('./leds.utils');
+const { modColor, hexToRgb, siguiente, anterior, frente } = require('./leds.utils');
 
 const escuchaC = (obj) => {
     let ledguide = obj.led1;
@@ -42,10 +42,10 @@ const escuchaT = (obj) => {
         start = true;
         until = direccion ? 0 : 4;
         while (start) {
-            pos = (ledInicio + until >= 18) ? (ledInicio + until - 18) : (ledInicio + until);
-            posdo = (pos + 9 >= 18) ? (pos + 9) - 18 : (pos + 9);
-            posn = (ledInicio - until < 0) ? (18 + (ledInicio - until)) : (ledInicio - until);
-            posndo = (posn + 9 >= 18) ? (posn + 9) - 18 : (posn + 9);
+            pos = siguiente((ledInicio - 1) + until);
+            posdo = frente(pos);
+            posn = anterior((ledInicio + 1) - until);
+            posndo = frente(posn);
 
             if (everloop[pos] == '#000000' && direccion) {
                 everloop[pos] = modColor('#000000', 3, limit);
@@ -81,9 +81,7 @@ const escuchaT = (obj) => {
         }
         if (rebaso) {
             direccion = !direccion;
-            if (direccion) {
-                ledInicio = ledInicio + 2 >= 18 ? ledInicio + 2 - 18 : ledInicio + 2;
-            }
+            ledInicio = direccion ? siguiente(ledInicio + 1) : ledInicio;
         }
         matrix.led.set(everloop);
     }, obj.time);
