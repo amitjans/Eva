@@ -1,12 +1,14 @@
 eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.listado = [];
     $scope.soundlistado = [];
+    $scope.vlistado = [];
     $scope.temp = [];
     $scope.led = [];
     $scope.accion = 'Agregar';
     $scope.icon = true;
     $scope.order = '';
     $scope.tipo = 'speak';
+    $scope.config = {};
 
     $scope.z = 0;
     $scope.wooid = '';
@@ -40,6 +42,15 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
             $scope.led = response.data;
         }, function errorCallback(response) {
         });
+        $http.get('/api/common?db=voice').then(function successCallback(response) {
+            $scope.vlistado = response.data;
+            $http.get('/config').then(function successCallback(response) {
+                $scope.config = response.data;
+                $scope.voice = $scope.config.voice;
+            }, function errorCallback(response) {
+            });
+        }, function errorCallback(response) {
+        });
     }
 
     $scope.loadcomands = function () {
@@ -68,6 +79,10 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
 
     $scope.mov = function (dir) {
         $scope.node({ type: 'mov', mov: dir });
+    }
+
+    $scope.setvoice = function (value) {
+        $scope.node(Object.assign($scope.config, { voice: $scope.voice, type: 'voice', robotname: $scope.config.name }));
     }
 
     //crud woo

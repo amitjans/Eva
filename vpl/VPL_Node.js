@@ -113,16 +113,17 @@ async function ProcessSpeakNode(element) {
     if (rec) {
         await RecAndSpeak({ key: hash, type: "speak", text: fulltext });
     } else {
-        await social.speak(fulltext, element.anim, !element.anim);
+        await social.speak(fulltext, false);
     } 
 }
 
 async function RecAndSpeak(element) {
 	try {
 		if (!fs.existsSync('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav')) {
-			await social.rec(element.text, (social.getConf().voice + '_' + element.key));
-		}
-        await social.play('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav', element.anim, !element.anim);
+			await social.speak(element.text, true, (social.getConf().voice + '_' + element.key));
+		} else {
+            await social.play('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav');
+        }
 	} catch (err) {
 		console.error(err)
 	}
