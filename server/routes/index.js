@@ -22,6 +22,10 @@ router.post('/nodes', async function (req, res) {
 	res.status(200).jsonp();
 });
 
+router.get('/config', async function (req, res) {
+	res.status(200).jsonp(social.getConf());
+});
+
 router.get('/test', async function (req, res) {
 	console.log(await social.listen('watson'));
 	res.status(200).jsonp();

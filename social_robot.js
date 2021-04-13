@@ -26,7 +26,8 @@ const spawn = require('child_process').spawn;
 
 const record = require('node-record-lpcm16');
 
-const SerialPort = require('serialport')
+const ledsanimation = require('./leds/');
+const SerialPort = require('serialport');
 const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 9600
 })
@@ -36,11 +37,6 @@ var logs = require('./log');
 var log = '';
 var time = 0;
 var emotional = true;
-
-// var ledsanimation = spawn('./leds/stop');
-var ledsanimation = require('./leds/');
-const { json } = require('express');
-var ledsanim = null;
 
 
 class SocialRobot {
@@ -57,6 +53,7 @@ class SocialRobot {
     log = '';
     time = Date.now();
     emotional = true;
+    this.leds = null;
     ledsanimation.stop();
   }
 
@@ -87,7 +84,7 @@ class SocialRobot {
    * 
    * @param {String} message to speak 
    */
-  speak(message, anim, ctrl) {
+  speak(message, rec = false, file = 'example') {
 
     if (!this._tts) {
       throw new Error('SocialRobot is not configured to speak.');
@@ -115,38 +112,9 @@ class SocialRobot {
             return self._tts.repairWavHeaderStream(audio);
           })
           .then(repairedFile => {
-            fs.writeFileSync(info.path, repairedFile);
-            resolve(self.play(info.path, anim, ctrl))
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      });
-    });
-  }
-
-  rec(message, file) {
-    var utterance = {
-      text: message,
-      voice: this.configuration.voice,
-      accept: 'audio/wav'
-    };
-
-    var self = this;
-    return new Promise(function (resolve, reject) {
-      temp.open('socialrobot', function (err, info) {
-        if (err) {
-          reject('error: could not open temporary file for writing at path: ' + info.path);
-        }
-        self._tts
-          .synthesize(utterance)
-          .then(response => {
-            const audio = response.result;
-            return self._tts.repairWavHeaderStream(audio);
-          })
-          .then(repairedFile => {
-            fs.writeFileSync('./temp/' + file + '.wav', repairedFile);
-            resolve();
+            let path = rec ? './temp/' + file + '.wav' : info.path;
+            fs.writeFileSync(path, repairedFile);
+            resolve(self.play(path));
           })
           .catch(err => {
             console.log(err);
@@ -166,10 +134,10 @@ class SocialRobot {
       });
     } else if (!process.env.TRANSLATOR_APIKEY) { return text }
 
-    if(!source) {
+    if (!source) {
       source = await this._translator.identify({ text: text })
-      .then(identifiedLanguages => identifiedLanguages.result.languages[0].language)
-      .catch(err => { console.log('error:', err); });
+        .then(identifiedLanguages => identifiedLanguages.result.languages[0].language)
+        .catch(err => { console.log('error:', err); });
     }
     return await this._translator.translate({ text: text, source: source, target: target })
       .then(response => response.result.translations[0].translation)
@@ -180,33 +148,27 @@ class SocialRobot {
    * 
    * @param {String} soundFile to play
    */
-  play(soundFile, anim, ctrl = true) {
+  async play(soundFile, obj = { base: 'escuchaT', opts: { color1: '#6B3EE3', time: 40 } }) {
     var self = this;
-
     if (!self._isPlaying) {
+      this.ledsanim(obj.base, obj.opts);
       self._isPlaying = true;
-      return new Promise(function (resolve, reject) {
+      let promise = new Promise(function (resolve, reject) {
         var player = new Sound();
         player.on('complete', function () {
           console.info('> audio playback finished!!');
           self._isPlaying = false;
-          if (ctrl) {
-            self.ledsanimstop();
-          }
           resolve(soundFile);
         });
-
         player.on('error', function () {
           console.error('> an audio playback error has ocurred');
           reject();
         });
-        if (ctrl || !!anim) {
-          self.ledsanim('escuchaT', { color1: '#6B3EE3', time: 40 });
-        }
         player.play(soundFile);
       });
-    }
-    else {
+      await promise;
+      this.ledsanimstop();
+    } else {
       console.log("> Speaker in use, try playing audio later.");
     }
   }
@@ -228,12 +190,12 @@ class SocialRobot {
   }
 
   async ledsanim(value, properties) {
-    if (!!ledsanim) this.ledsanimstop();
-    ledsanim = ledsanimation[value](properties);
+    if (!!this.leds) this.ledsanimstop();
+    this.leds = ledsanimation[value](properties);
   }
 
   async ledsanimstop() {
-    clearInterval(ledsanim);
+    clearInterval(this.leds);
     ledsanimation.stop();
   }
 
@@ -250,7 +212,7 @@ class SocialRobot {
     })
   }
 
-  async listen(service, langcode, callback){
+  async listen(service, langcode, callback) {
     if (service == 'watson') {
       return await this.listenWatson(langcode, callback);
     } else {

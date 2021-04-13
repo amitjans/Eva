@@ -3348,14 +3348,6 @@
             "__gohashid": 3501
           },
           {
-            "key": 1617045227152,
-            "name": "Hablar_2",
-            "type": "speak",
-            "group": "",
-            "text": "Bueno ahora me despido, Fue un placer conocerte",
-            "__gohashid": 4937
-          },
-          {
             "key": 1616791406554,
             "name": "Voz_0",
             "type": "voice",
@@ -3365,6 +3357,14 @@
             "voice": "ja-JP_EmiV3Voice",
             "robotname": "Emi",
             "__gohashid": 788
+          },
+          {
+            "key": 1617045227152,
+            "name": "Hablar_2",
+            "type": "speak",
+            "group": "",
+            "text": "Los mejores animes que he visto son naruto y la princesa cadaver.",
+            "__gohashid": 1119
           }
         ],
         "link": [
