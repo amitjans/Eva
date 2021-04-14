@@ -107,7 +107,6 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
 
     $scope.clear = function () {
         $scope.nombre = '';
-        $scope.codigo = '';
         $scope.icon = true;
         $('#myModal').modal('hide');
         $scope.list();

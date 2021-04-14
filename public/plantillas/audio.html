@@ -27,13 +27,17 @@
                             aria-describedby="example_info">
                             <thead>
                                 <tr role="row">
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 800px;"> Nombre</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 600px;">Nombre</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 50px;">Formato</th>
+                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 150px;">Duraci&oacute;n</th>
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="2" style="width: 200px;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
                                     <td>{{ l.nombre }}</td>
+                                    <td>{{ l.ext }}</td>
+                                    <td>{{ l.duration }}</td>
                                     <td><span class="btn btn-default" ng-click="details(l.nombre)"><i class="fa fa-play fa-sm"></i></span></td>
                                     <td><span class="btn btn-default" ng-click="delete(l.nombre)"><i class="fa fa-trash fa-sm"></i></span></td>
                                 </tr>
@@ -41,6 +45,8 @@
                             <tfoot>
                                 <tr>
                                     <th rowspan="1" colspan="1">Nombre</th>
+                                    <th rowspan="1" colspan="1">Formato</th>
+                                    <th rowspan="1" colspan="1">Duraci&oacute;n (seg)</th>
                                     <th rowspan="1" colspan="2">Opciones</th>
                                 </tr>
                             </tfoot>

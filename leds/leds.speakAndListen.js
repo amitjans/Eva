@@ -51,9 +51,8 @@ const escuchaT = (obj) => {
                 everloop[posn] = everloop[pos];
                 everloop[frente(posn)] = everloop[pos];
                 start = false;
-            }
-            if (everloop[pos] == obj.color1 && !direccion) {
-                everloop[pos] = modColor(obj.color1, -3, limit);
+            } else if (everloop[pos] == obj.color1 && !direccion) {
+                everloop[pos] = modColor(obj.color1, -3);
                 everloop[frente(pos)] = everloop[pos];
                 everloop[posn] = everloop[pos];
                 everloop[frente(posn)] = everloop[pos];
@@ -67,15 +66,8 @@ const escuchaT = (obj) => {
 
         let rebaso = true;
         for (let i = 0; i < 18; i++) {
-            if (direccion) {
-                if (everloop[i] != obj.color1) {
-                    rebaso = false;
-                }
-            } else {
-                if (everloop[i] != "#000000") {
-                    rebaso = false;
-                }
-            }
+            rebaso = (direccion) ? !(everloop[i] != obj.color1) : !(everloop[i] != "#000000");
+            if (!rebaso) break;
         }
         if (rebaso) {
             direccion = !direccion;
