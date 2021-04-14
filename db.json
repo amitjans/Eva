@@ -3949,6 +3949,38 @@
         "led1": 13,
         "time": 100
       }
+    },
+    {
+      "_id": "03223e3c-9b9e-45d9-92d1-b0734a309ee0",
+      "nombre": "Listening Start",
+      "base": "alexaListeningStart",
+      "opts": {
+        "color1": "#00ffff",
+        "color2": "#0000ff",
+        "led1": 1,
+        "time": 25
+      }
+    },
+    {
+      "_id": "2e507296-c62d-40d6-a66e-f01099cc4cf7",
+      "nombre": "Listening End",
+      "base": "alexaListeningEnd",
+      "opts": {
+        "color1": "#00ffff",
+        "color2": "#0000ff",
+        "led1": 10,
+        "time": 100
+      }
+    },
+    {
+      "_id": "57300fbd-2522-49c8-9a5e-dbbe7e94eff5",
+      "nombre": "Thinking",
+      "base": "alexaThinking",
+      "opts": {
+        "color1": "#00ffff",
+        "color2": "#0000ff",
+        "time": 50
+      }
     }
   ],
   "mov": [
