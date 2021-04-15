@@ -27,9 +27,9 @@ module.exports = {
         } else if (element.type === 'sound') {
             social.ledsanimstop();
             if (element.wait) {
-                await social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
+                await social.play('./sonidos/' + element.src + '.wav', !!element.anim ? await led.getData(element.anim) : undefined);
             } else {
-                social.play('./sonidos/' + element.src + '.wav', element.anim, !element.anim);
+                social.play('./sonidos/' + element.src + '.wav', !!element.anim ? await led.getData(element.anim) : undefined);
             }
         } else if (element.type === 'led') {
             if (element.base === 'stop') {

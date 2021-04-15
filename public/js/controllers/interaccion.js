@@ -170,6 +170,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.ncommon = 'Aleatorio';
         break;
       case 'sound':
+        $scope.leds = !!$scope.leds ? $scope.leds : '';
         $scope.ncommon = 'Esperar';
         break;
       case 'counter':
@@ -220,7 +221,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push(Object.assign(tempobj, { sc: $scope.thescript, random: $scope.ccommon }));
         break;
       case "sound":
-        node.push(Object.assign(tempobj, { src: $scope.thesound, wait: $scope.ccommon }));
+        node.push(Object.assign(tempobj, { src: $scope.thesound, wait: $scope.ccommon, anim: $scope.leds }));
         break;
       case "led":
         let base = $scope.led.filter(x => x._id == $scope.leds)[0].base;
@@ -307,7 +308,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         Object.assign($scope, { thescript: l.sc, ccommon: l.random });
         break;
       case 'sound':
-        Object.assign($scope, { thesound: l.src, ccommon: l.wait});
+        Object.assign($scope, { thesound: l.src, ccommon: l.wait, leds: l.anim });
         break;
       case 'led':
         $scope.leds = l.anim;

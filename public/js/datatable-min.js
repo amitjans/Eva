@@ -1,1 +1,0 @@
-function datafilter(e,t,...r){for(let n=0;n<r.length;n++)if(e[r[n]]&&e[r[n]].toLowerCase().includes(t.toLowerCase()))return!0;return!1}
