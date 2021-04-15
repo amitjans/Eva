@@ -3485,6 +3485,25 @@
           }
         ]
       }
+    },
+    {
+      "_id": "b648e1f3-2af5-4b5b-8a7e-409d05942cb2",
+      "nombre": "Leds con audio",
+      "data": {
+        "node": [
+          {
+            "key": 1618443458452,
+            "name": "Audio_0",
+            "type": "sound",
+            "group": "",
+            "src": "Javier Solis - Sombras (Video)",
+            "wait": true,
+            "anim": "92253fa2-c77e-4d10-ab3d-66541a4fc020",
+            "__gohashid": 795
+          }
+        ],
+        "link": []
+      }
     }
   ],
   "voice": [
@@ -3803,7 +3822,6 @@
       "opts": {
         "color1": "#ff0000",
         "led1": 8,
-        "led2": 2,
         "time": 200
       }
     },

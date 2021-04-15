@@ -28,37 +28,31 @@ const escuchaC = (obj) => {
 
 const escuchaT = (obj) => {
     let limit = hexToRgb(obj.color1);
-    let ledInicio = 0;
-    let direccion = true;
+    let ledguide = 0;
+    let dir = true;
     let everloop = new Array(matrix.led.length).fill('#000000');
     return setInterval(() => {
         for (let i = 0; i < 18; i++) {
-            if (direccion && everloop[i] != '#000000') {
+            if (dir && everloop[i] != '#000000') {
                 everloop[i] = modColor(everloop[i], 6, limit);
-            } else if (!direccion && everloop[i] != obj.color1) {
+            } else if (!dir && everloop[i] != obj.color1) {
                 everloop[i] = modColor(everloop[i], -6, limit);
             }
         }
         let start = true;
-        let until = direccion ? 0 : 4;
+        let until = dir ? 0 : 4;
         while (start) {
-            let pos = siguiente((ledInicio - 1) + until);
-            let posn = anterior((ledInicio + 1) - until);
+            let pos = siguiente((ledguide - 1) + until);
+            let posn = anterior((ledguide + 1) - until);
 
-            if (everloop[pos] == '#000000' && direccion) {
-                everloop[pos] = modColor('#000000', 3, limit);
-                everloop[frente(pos)] = everloop[pos];
-                everloop[posn] = everloop[pos];
-                everloop[frente(posn)] = everloop[pos];
-                start = false;
-            } else if (everloop[pos] == obj.color1 && !direccion) {
-                everloop[pos] = modColor(obj.color1, -3);
+            if ((everloop[pos] == '#000000' && dir) || (everloop[pos] == obj.color1 && !dir)) {
+                everloop[pos] = modColor('#000000', (everloop[pos] == '#000000' && dir) ? 6 : -6, limit);
                 everloop[frente(pos)] = everloop[pos];
                 everloop[posn] = everloop[pos];
                 everloop[frente(posn)] = everloop[pos];
                 start = false;
             }
-            until = direccion ? until + 1 : until - 1;
+            until = dir ? until + 1 : until - 1;
             if (until > 4 || until < 0) {
                 start = false;
             }
@@ -66,12 +60,12 @@ const escuchaT = (obj) => {
 
         let rebaso = true;
         for (let i = 0; i < 18; i++) {
-            rebaso = (direccion) ? !(everloop[i] != obj.color1) : !(everloop[i] != "#000000");
+            rebaso = (dir) ? !(everloop[i] != obj.color1) : !(everloop[i] != "#000000");
             if (!rebaso) break;
         }
         if (rebaso) {
-            direccion = !direccion;
-            ledInicio = direccion ? siguiente(ledInicio + 1) : ledInicio;
+            dir = !dir;
+            ledguide = dir ? siguiente(ledguide + 1) : ledguide;
         }
         matrix.led.set(everloop);
     }, obj.time);
