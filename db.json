@@ -3498,8 +3498,8 @@
             "group": "",
             "src": "Javier Solis - Sombras (Video)",
             "wait": true,
-            "anim": "92253fa2-c77e-4d10-ab3d-66541a4fc020",
-            "__gohashid": 795
+            "anim": "b90dc241-ccb9-4605-ad93-efe3044ac616",
+            "__gohashid": 634
           }
         ],
         "link": []
@@ -3822,6 +3822,7 @@
       "opts": {
         "color1": "#ff0000",
         "led1": 8,
+        "led2": 2,
         "time": 200
       }
     },

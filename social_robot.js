@@ -148,11 +148,10 @@ class SocialRobot {
    * 
    * @param {String} soundFile to play
    */
-  async play(soundFile, obj = { base: 'escuchaT', opts: { color1: '#6B3EE3', time: 40 } }) {
+  async play(soundFile, obj = { base: 'escuchaT', opts: { color1: '#6b3ee3', time: 40 } }) {
     var self = this;
     if (!self._isPlaying) {
       this.ledsanim(obj.base, obj.opts);
-      // this.ledsanim('joy', { color1: '#ff0000', led1: 1, time: 100 });
       self._isPlaying = true;
       let promise = new Promise(function (resolve, reject) {
         var player = new Sound();
