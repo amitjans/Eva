@@ -46,10 +46,6 @@ sudo reboot
 ```bash
 npm install
 ```
-#### Production dependencies
-```bash
-npm install pm2 -g
-```
 <!--
 ### Librerías
  - Requerida para compilar la dependencia "speaker".
@@ -94,3 +90,60 @@ echo Eva
 sudo amixer cset numid=1 100% #volumen de la bocina
 npm start #Iniciar la aplicación
  ```
+## Production configuration
+The following steps allow the automatic startup of the Eva software every time you turn it on.
+The first step is to install ***pm2***, a daemon process manager that keeps the Eva software online.
+```bash
+npm install pm2 -g
+```
+Then we manually run the software.
+```bash
+pm2 start ./app.js --name eva
+```
+For the automticaly launch of the software on every startup is needed to run this command and follow the instruction
+```bash
+pm2 startup
+```
+that usually is to run a command like this one:
+```bash
+sudo env PATH=$PATH:/home/pi/.config/nvm/versions/node/v14.16.0/bin /home/pi/.config/nvm/versions/node/v14.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+```
+Once done the previus steps we need to save the configurations.
+```bash
+pm2 save
+```
+
+### Optional steps
+You can use the next steps if you want to avoid writing the port value on the url of the system, otherwise, this are optional.
+First we need to use a reverse proxy, for that install nginx with this command:
+```bash
+sudo apt install nginx
+```
+Then we need to configure the reverse proxy settings, for this is needed to edit the /etc/nginx/sites-available/default file or comment the content or remove this one and create a new file 
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+The configurations inside this file should look like this:
+
+```bash
+server {
+	listen 80;
+	location / {
+		proxy_pass http://127.0.0.1:3000/;
+	}
+}
+```
+If you choose to edit the default file, simply check if everything is ok using:
+```bash
+sudo nginx -t
+```
+If you choose to create a new one, before testing it you need to create a link or a copy of this file on /etc/nginx/sites-enabled/, for this example, we create a new file and named ***eva***
+```bash
+sudo ln -s /etc/nginx/sites-available/eva /etc/nginx/sites-enabled/eva
+```
+As a final step, run the following command to restart the server to load the new configurations, also you can use ***status*** besides ***restart*** after running the second one to check if it's running.
+```bash
+sudo service nginx restart
+```
