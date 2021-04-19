@@ -213,18 +213,19 @@ class SocialRobot {
   }
 
   async listen(service, langcode, callback) {
+    this.ledsanim('escuchaT', { color1: '#3fec04', time: 40 });
+    let result = '';
     if (service == 'watson') {
-      return await this.listenWatson(langcode, callback);
+      result = await this.listenWatson(langcode, callback);
     } else {
-      return await this.listenGoogle(langcode, callback);
+      result = await this.listenGoogle(langcode, callback);
     }
+    this.ledsanimstop();
+    return result;
   }
 
   listenGoogle(langcode, callback) {
     const self = this;
-    self.ledsanimstop();
-    self.ledsanim('escuchaT', { color1: '#3FEC04', time: 40 });
-
     const sampleRateHertz = 16000;
     const client = new speech.SpeechClient();
 
@@ -242,14 +243,12 @@ class SocialRobot {
         .streamingRecognize(request)
         .on('error', console.error)
         .on('data', function (data) {
-          self.ledsanimstop();
           if (data.results[0].alternatives[0]) {
             resolve(data.results[0].alternatives[0].transcript);
           } else {
             resolve('error');
           }
-        }
-        );
+        });
 
       self.recording = record
         .record({
@@ -263,8 +262,6 @@ class SocialRobot {
   }
 
   async listenWatson(langcode, callback) {
-    this.ledsanimstop();
-    this.ledsanim('escuchaT', { color1: '#3FEC04', time: 40 });
     const file = fs.createWriteStream('./test.wav', { encoding: 'binary' });
 
     this.recording = record
@@ -285,12 +282,10 @@ class SocialRobot {
     };
     return this._stt.recognize(params)
       .then(response => {
-        this.ledsanimstop();
         return response.result.results[0].alternatives[0].transcript;
       })
       .catch(err => {
         console.log(err);
-        this.ledsanimstop();
       });
   }
 
