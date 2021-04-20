@@ -4,12 +4,8 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.temp = [];
     $scope.icon = true;
     $scope.updateid;
-    $scope.limit = '10';
-    $scope.page = 0;
-    $scope.maxpage = 0;
-    $scope.from = 1;
-    $scope.to = 10;
-    $scope.q = '';
+    Object.assign($scope, dataTableValues());
+    $scope.codes = [];
 
     $scope.list = function () {
         $http.get('/api/common?db=mov').then(function successCallback(response) {
@@ -19,6 +15,19 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
         });
     }
 
+    $scope.codes = function () {
+        $http.get('/api/mov').then(function successCallback(response) {
+            $scope.codes = response.data;
+        }, function errorCallback(response) {
+        });
+    }
+
+    $scope.execute = function (l) {
+        $http.post('/nodes', { type: 'mov', mov: l.codigo }).then(function successCallback(response) {
+        }, function errorCallback(response) {
+        });;
+    }
+
     $scope.create = function () {
         var json = { nombre: $scope.nombre, codigo: $scope.codigo };
         $http.post('/api/common?db=mov', json).then(function successCallback(response) {
@@ -26,6 +35,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
             $scope.codigo = '';
             $('#myModal').modal('hide');
             $scope.list();
+            notify('Movimiento creado correctamente');
         }, function errorCallback(response) {
         });
     }
@@ -48,6 +58,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
             $('#myModal').modal('hide');
             $scope.list();
             $scope.accion = 'Agregar';
+            notify('Movimiento actualizado correctamente');
         }, function errorCallback(response) {
         });
     }
@@ -55,8 +66,13 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.delete = function (id) {
         $http.delete('/api/common/' + id + '?db=mov').then(function successCallback(response) {
             $scope.list();
+            notify('Movimiento eliminado correctamente');
         }, function errorCallback(response) {
         });;
+    }
+
+    $scope.addCode = function (value) {
+        $scope.codigo = ($scope.codigo || '') + value;
     }
 
     $scope.dataTable = function (way = 0) {
@@ -65,4 +81,13 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.list();
+    $scope.codes();
 }]);
+
+eva.filter('trusted', ['$sce', function($sce) {
+    var div = document.createElement('div');
+    return function(text) {
+        div.innerHTML = text;
+        return $sce.trustAsHtml(div.textContent);
+    };
+}])

@@ -5,12 +5,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     $scope.accion = 'Agregar';
     $scope.icon = true;
     $scope.updateid;
-    $scope.limit = '10';
-    $scope.page = 0;
-    $scope.maxpage = 0;
-    $scope.from = 1;
-    $scope.to = 10;
-    $scope.q = '';
+    Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
         $http.get('/api/script/data/' + $scope.script).then(function successCallback(response) {
