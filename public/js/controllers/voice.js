@@ -4,12 +4,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     $scope.temp = [];
     $scope.icon = true;
     $scope.updateid;
-    $scope.limit = '10';
-    $scope.page = 0;
-    $scope.maxpage = 0;
-    $scope.from = 1;
-    $scope.to = 10;
-    $scope.q = '';
+    Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
         $http.get('/api/common?db=voice').then(function successCallback(response) {

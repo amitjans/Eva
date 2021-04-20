@@ -5,7 +5,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     $scope.temp = [];
     $scope.icon = true;
     $scope.updateid;
-    Object.assign($scope, { limit: '10', page: 0, maxpage: 0, from: 1, to: 10, q: '' });
+    Object.assign($scope, dataTableValues());
     $scope.params = { color: [], led: [], time: false };
 
     $scope.list = function () {

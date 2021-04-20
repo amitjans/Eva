@@ -9,6 +9,10 @@
     return false;
 }
 
+function dataTableValues() {
+    return { limit: '10', page: 0, maxpage: 0, from: 1, to: 10, q: '' };
+}
+
 function dataTable (listado, obj, way, ...properties) {
     if (way == 0) {
         obj.temp = [];

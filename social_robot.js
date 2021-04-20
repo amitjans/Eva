@@ -28,6 +28,7 @@ const record = require('node-record-lpcm16');
 
 const ledsanimation = require('./leds/');
 const SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline');
 const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 9600
 })
@@ -181,12 +182,28 @@ class SocialRobot {
     this.configuration = conf;
   }
 
-  movement(type, onestep = false) {
+  async movement(type, onestep = false) {
     if (!emotional) {
       return;
     }
-    var opt = { u: 't', d: 'g', l: 'f', r: 'h' };
-    port.write(onestep ? opt[type] : type);
+    if (type == 'h') {
+      let parser =  port.pipe(new Readline());
+      let temp = '';
+      parser.on('data', x => temp = x);
+      port.write(type);
+      await new Promise(resolve => {
+        const interval = setInterval(() => {
+          if (temp.length > 0) {
+            resolve('');
+            clearInterval(interval);
+          };
+        }, 250);
+      });
+      return temp;
+    } else {
+      var opt = { u: 't', d: 'g', l: 'f', r: 'h' };
+      port.write(onestep ? opt[type] : type);      
+    }
   }
 
   async ledsanim(value, properties) {
