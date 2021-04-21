@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <!-- Modal Voice -->
+    <!-- Modal Led -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -121,6 +121,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group" ng-repeat="item in params.num">
+                            <label class="col-sm-2 control-label">Num {{ item.id }}</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control input-sm" ng-model="item.model" placeholder="0">
+                            </div>
+                        </div>
                         <div class="form-group" ng-show="params.time">
                             <label class="col-sm-2 control-label">Tiempo</label>
                             <div class="col-sm-10">
@@ -138,5 +144,5 @@
             </div>
         </div>
     </div>
-    <!-- Modal Voice -->
+    <!-- Modal Led -->
 </div>

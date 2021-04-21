@@ -21,8 +21,8 @@ const blink = (obj) => {
     }, obj.time);
 }
 
-noanim['params'] = { color: 1, led: 0, time: 0 };
-blink['params'] = { color: 2, led: 0, time: 1 };
+noanim['params'] = { color: 1 };
+blink['params'] = { color: 2, time: 1 };
 
 module.exports = {
     noanim,

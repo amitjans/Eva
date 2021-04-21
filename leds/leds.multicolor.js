@@ -62,10 +62,10 @@ const rainbow = (obj) => {
     }, obj.time);
 }
 
-rgb_fan_inspired['params'] = { color: 3, led: 0, time: 1 };
+rgb_fan_inspired['params'] = { color: 3, time: 1 };
 processing['params'] = { color: 2, led: 1, time: 1 };
-moving_dots['params'] = { color: 5, led: 0, time: 1 };
-rainbow['params'] = { color: 0, led: 0, time: 1 };
+moving_dots['params'] = { color: 5, time: 1 };
+rainbow['params'] = { time: 1 };
 
 module.exports = {
     rgb_fan_inspired,
