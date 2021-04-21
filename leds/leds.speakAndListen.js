@@ -6,7 +6,7 @@ const escuchaC = (obj) => {
     let dir = 1;
     return setInterval(() => {
         let everloop = new Array(matrix.led.length).fill('#000000');
-        for (let i = -1; i < obj.led3 - 1; i++) {
+        for (let i = -1; i < obj.num1 - 1; i++) {
             everloop[(i == -1 ? ledguide : siguiente(ledguide + i))] = obj.color1;
         }
         if (dir == 1) {
@@ -76,9 +76,9 @@ const stop = () => {
     matrix.led.set(everloop);
 }
 
-escuchaC['params'] = { color: 1, led: 3, time: 1 };
-escuchaT['params'] = { color: 1, led: 0, time: 1 };
-stop['params'] = { color: 0, led: 1, time: 1 };
+escuchaC['params'] = { color: 1, led: 2, num: 1, time: 1 };
+escuchaT['params'] = { color: 1, time: 1 };
+stop['params'] = {};
 
 module.exports = {
     escuchaC,

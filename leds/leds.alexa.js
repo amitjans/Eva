@@ -93,7 +93,7 @@ const alexaThinking = (obj) => {
 
 alexaListeningStart['params'] = { color: 2, led: 1, time: 1 };
 alexaListeningEnd['params'] = { color: 2, led: 1, time: 1 };
-alexaThinking['params'] = { color: 2, led: 0, time: 1 };
+alexaThinking['params'] = { color: 2, time: 1 };
 
 module.exports = {
     alexaListeningStart,

@@ -6,7 +6,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     $scope.icon = true;
     $scope.updateid;
     Object.assign($scope, dataTableValues());
-    $scope.params = { color: [], led: [], time: false };
+    $scope.params = { color: [], led: [], num: [], time: false };
 
     $scope.list = function () {
         $http.get('/api/common?db=led').then(function successCallback(response) {
@@ -76,7 +76,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.changeform = function (opts = {}) {
-        $scope.params = { color: [], led: [], time: false };
+        $scope.params = { color: [], led: [], num: [], time: false };
         let params = $scope.listBaseAnims.filter(x => x.name == $scope.base)[0].params;
         console.log(params);
         for (let i = 1; i <= params.color; i++) {
@@ -85,6 +85,9 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         for (let i = 1; i <= params.led; i++) {
             $scope.params.led.push({ id: i, model: opts['led' + i]?.toString() || '' });
         }
+        for (let i = 1; i <= (params.num || 0); i++) {
+            $scope.params.num.push({ id: i, model: opts['num' + i] });
+        }
         $scope.params.time = !!params.time;
         if ($scope.params.time) {
             $scope.time = opts.time || 0;
@@ -92,25 +95,23 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.loadForm = function () {
-        console.log($scope.params.color);
         $scope.opts = {};
         for (let i = 0; i < $scope.params.color.length; i++) {
-            console.log($scope.params.color[i].id + ' - ' + $scope.params.color[i].model);
             $scope.opts['color' + $scope.params.color[i].id] = $scope.params.color[i].model;
         }
         for (let i = 0; i < $scope.params.led.length; i++) {
-            console.log($scope.params.led[i].id + ' - ' + $scope.params.led[i].model);
             $scope.opts['led' + $scope.params.led[i].id] = parseInt($scope.params.led[i].model);
+        }
+        for (let i = 0; i < $scope.params.num.length; i++) {
+            $scope.opts['num' + $scope.params.num[i].id] = $scope.params.num[i].model;
         }
         $scope.opts['time'] = $scope.time;
     }
 
     $scope.clear = function () {
-        $scope.nombre = '';
-        $scope.icon = true;
+        Object.assign($scope, { nombre: '', icon: true, accion: 'Agregar' });
         $('#myModal').modal('hide');
         $scope.list();
-        $scope.accion = 'Agregar';
     }
 
     $scope.dataTable = function (way = 0) {
