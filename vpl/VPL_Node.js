@@ -23,9 +23,7 @@ module.exports = {
         } else if (element.type === 'wait') {
             await social.sleep(element.time);
         } else if (element.type === 'mov') {
-            for (let i = 0; i < element.mov.length; i++) {
-                social.movement(element.mov[i]);
-            }
+            social.movement(element.mov);
         } else if (element.type === 'sound') {
             social.ledsanimstop();
             if (element.wait) {

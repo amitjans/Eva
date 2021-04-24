@@ -374,7 +374,7 @@ class SocialRobot {
           this.ledsanim('emocionv2', { color1: '#ff0000', led1: 13, time: 200 });
         }
         if (level >= 1) {
-          this.movement('a');
+          this.movement('DRRLLRRLLR');
         }
         break;
       case 'joy':
