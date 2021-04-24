@@ -4019,12 +4019,12 @@
     {
       "_id": "8b759b43-b6a1-41fa-882d-b550c5c95772",
       "nombre": "Si",
-      "codigo": "udduuddc"
+      "codigo": "N"
     },
     {
       "_id": "a2e210e1-b2de-4a52-929e-d6421c92068a",
       "nombre": "No",
-      "codigo": "LRRLLRRLLc"
+      "codigo": "S"
     },
     {
       "_id": "5c549ee1-77e1-44bb-8d70-8c32e4a1177d",
@@ -4054,7 +4054,7 @@
     {
       "_id": "738efdd7-9f09-45ab-bb3d-d0d09e6d6ba6",
       "nombre": "Ira",
-      "codigo": "a"
+      "codigo": "DRRLLRRLLR"
     },
     {
       "_id": "e8faf2f0-0cfe-40bb-9b40-28ddcaa50d10",
@@ -4079,7 +4079,7 @@
     {
       "_id": "20997a19-303e-4fd0-8929-afbc09125124",
       "nombre": "Ejemplo",
-      "codigo": "UUU"
+      "codigo": "ELLc"
     }
   ],
   "woo": [
