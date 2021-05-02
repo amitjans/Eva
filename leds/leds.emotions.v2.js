@@ -25,6 +25,7 @@ const emocionv2 = (obj) => {
         i++;
         matrix.led.set(everloop);
     }, obj.time);
+    return loop;
 }
 
 emocionv2['params'] = { color: 1, led: 1, time: 1 };

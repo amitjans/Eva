@@ -1,1 +1,1 @@
-{"name":"Eva","voice":"es-LA_SofiaV3Voice"}
+{"name":"Eva","voice":"es-LA_SofiaV3Voice","voiceled":{"_id":"92253fa2-c77e-4d10-ab3d-66541a4fc020","nombre":"Habla Todos","base":"escuchaT","opts":{"color1":"#6b3ee3","time":40}},"listen":{"_id":"c68391d3-9290-4021-bcce-ddade1afdd56","idioma":"Español (México)","codigo":"es-MX","watson":"es-MX_BroadbandModel"},"listenled":{"_id":"c085e3aa-171e-4fb4-b5ff-edcc5d5093b9","nombre":"Escucha a Todos","base":"escuchaT","opts":{"color1":"#3fec04","time":40}}}

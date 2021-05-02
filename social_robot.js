@@ -149,7 +149,7 @@ class SocialRobot {
    * 
    * @param {String} soundFile to play
    */
-  async play(soundFile, obj = { base: 'escuchaT', opts: { color1: '#6b3ee3', time: 40 } }) {
+  async play(soundFile, obj = this.configuration.voiceled) {
     var self = this;
     if (!self._isPlaying) {
       this.ledsanim(obj.base, obj.opts);
@@ -179,7 +179,7 @@ class SocialRobot {
   }
 
   setConf(conf) {
-    this.configuration = conf;
+    Object.assign(this.configuration, conf);
   }
 
   async movement(type, onestep = false) {
@@ -230,7 +230,7 @@ class SocialRobot {
   }
 
   async listen(service, langcode, callback) {
-    this.ledsanim('escuchaT', { color1: '#3fec04', time: 40 });
+    this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
     let result = '';
     if (service == 'watson') {
       result = await this.listenWatson(langcode, callback);
@@ -250,7 +250,7 @@ class SocialRobot {
       config: {
         encoding: 'LINEAR16',
         sampleRateHertz: sampleRateHertz,
-        languageCode: langcode || 'es-MX',
+        languageCode: langcode || this.configuration.listen.codigo,
       },
       interimResults: false,
     };
@@ -295,7 +295,7 @@ class SocialRobot {
     const params = {
       audio: fs.createReadStream('./test.wav'),
       contentType: 'audio/wav',
-      model: langcode
+      model: langcode || this.configuration.listen.watson
     };
     return this._stt.recognize(params)
       .then(response => {

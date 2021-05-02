@@ -27,6 +27,7 @@ const countdown = (obj) => {
         }
         matrix.led.set(everloop);
     }, obj.time);
+    return count;
 }
 
 countdown['params'] = { color: 1, led: 1, time: 1 };

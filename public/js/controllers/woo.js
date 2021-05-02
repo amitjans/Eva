@@ -25,8 +25,8 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
         { type: 'emotion', emotion: 'anger', level: 1, img: '/images/ira1.png', name: 'Ira 1', speed: 2.0 },
         { type: 'emotion', emotion: 'anger', level: 2, img: '/images/ira2.png', name: 'Ira 2', speed: 2.0 },
         { type: 'emotion', emotion: 'joy', level: 0, img: '/images/feliz.png', name: 'Alegría', speed: 2.0 },
-        { type: 'emotion', emotion: 'joy1', level: 1, img: '/images/feliz1.png', name: 'Alegría 1', speed: 2.0 },
-        { type: 'emotion', emotion: 'joy2', level: 2, img: '/images/feliz2.png', name: 'Alegría 2', speed: 2.0 }
+        { type: 'emotion', emotion: 'joy', level: 1, img: '/images/feliz1.png', name: 'Alegría 1', speed: 2.0 },
+        { type: 'emotion', emotion: 'joy', level: 2, img: '/images/feliz2.png', name: 'Alegría 2', speed: 2.0 }
     ];
 
     $scope.list = function () {

@@ -34,6 +34,9 @@
               </em>
             </div>
           </div>
+          <div class="panel-footer">
+            <button class="btn btn-primary" ng-click="export()">Exportar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -43,179 +46,13 @@
       <h2><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;Control Script</h2>
       <h3>{{textoScript}}</h3>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
       <hr />
       <div class="row">
-        <div class="col-md-6" ng-repeat="item in interactions">
+        <div class="col-md-3" ng-repeat="item in interactions">
           <button class="btn btn-lg btn-warning btn-block" type="button" ng-click="iniciarInteracciong(item._id)">
             <i class="fa fa-comments"></i>&nbsp;{{ item.nombre }}</button><br>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <h2><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>&nbsp;Emociones</h2>
-      <hr />
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">normal</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/normal.png" class="img-responsive"
-                ng-click="enviarEmocion('ini', 0)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">triste</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/triste.png" class="img-responsive"
-                ng-click="enviarEmocion('sad', 0)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">triste1</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/triste1.png" class="img-responsive"
-                ng-click="enviarEmocion('sad', 1)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">triste2</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/triste2.png" class="img-responsive"
-                ng-click="enviarEmocion('sad', 2)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">ira</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/ira.png" class="img-responsive"
-                ng-click="enviarEmocion('anger', 0)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">ira1</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/ira1.png" class="img-responsive"
-                ng-click="enviarEmocion('anger', 1)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">ira2</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/ira2.png" class="img-responsive"
-                ng-click="enviarEmocion('anger', 2)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">feliz</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/feliz.png" class="img-responsive"
-                ng-click="enviarEmocion('joy', 0)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">feliz1</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/feliz1.png" class="img-responsive"
-                ng-click="enviarEmocion('joy', 1)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">feliz2</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/feliz2.png" class="img-responsive"
-                ng-click="enviarEmocion('joy', 2)"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-4 col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">salir</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-default btn-lg"><img src="/images/salir.png" class="img-responsive"
-                ng-click="enviarEmocion('exit', 0)"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <h2><i class="fa fa-quote-left fa-lg" aria-hidden="true"></i>&nbsp;Frases</h2>
-      <hr />
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">Personalizada</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Frase personalizada!" ng-model="mensaje"
-                      ng-keydown="enviarMensaje2($event)">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" ng-click="enviarMensaje()">Enviar&nbsp;<i
-                          class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
-                    </span>
-                  </div><!-- /input-group -->
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

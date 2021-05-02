@@ -31,6 +31,7 @@ const alexaListeningStart = (obj) => {
             clearInterval(loop);
         }
     }, obj.time);
+    return loop;
 }
 
 const alexaListeningEnd = (obj) => {
@@ -74,6 +75,7 @@ const alexaListeningEnd = (obj) => {
             clearInterval(loop);
         }
     }, obj.time);
+    return loop;
 }
 
 const alexaThinking = (obj) => {
