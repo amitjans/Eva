@@ -4013,6 +4013,16 @@
         "color2": "#0000ff",
         "time": 50
       }
+    },
+    {
+      "_id": "6faf94e8-1e8d-4e5e-881c-569636d03d38",
+      "nombre": "knz1mbqu",
+      "base": "joy",
+      "opts": {
+        "color1": "#e01515",
+        "led1": 7,
+        "time": 200
+      }
     }
   ],
   "mov": [
@@ -4080,6 +4090,11 @@
       "_id": "20997a19-303e-4fd0-8929-afbc09125124",
       "nombre": "Ejemplo",
       "codigo": "ELLc"
+    },
+    {
+      "_id": "79cbd8bd-a6ac-4f1d-b397-db81adb63f91",
+      "nombre": "Favela",
+      "codigo": "QRRRZL"
     }
   ],
   "woo": [
