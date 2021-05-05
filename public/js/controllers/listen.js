@@ -33,7 +33,7 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
         $scope.codigo = l.codigo;
         $scope.watson = l.watson;
         $scope.icon = false;
-        $scope.accion = 'Editar';
+        $scope.accion = locale().COMMON.EDIT;
         $('#myModal').modal('show');
     }
 
@@ -46,7 +46,7 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
             $scope.icon = true;
             $('#myModal').modal('hide');
             $scope.list();
-            $scope.accion = 'Agregar';
+            $scope.accion = locale().COMMON.ADD;
         }, function errorCallback(response) {
         });
     }

@@ -4,29 +4,33 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.vlistado = [];
     $scope.temp = [];
     $scope.led = [];
-    $scope.accion = 'Agregar';
+    $scope.accion = locale().COMMON.ADD;
     $scope.icon = true;
     $scope.order = '';
     $scope.tipo = 'speak';
     $scope.config = {};
-
+    
     $scope.z = 0;
     $scope.wooid = '';
     $scope.commands = [];
     $scope.tempwoo = {};
     $scope.tempid = -1;
 
+    function emotion(value) {
+        return locale().INTERACTION.EMOTION_TYPE[value];
+    }
+
     $scope.emotionsicon = [
-        { type: 'emotion', emotion: 'ini', level: 0, img: '/images/normal.png', name: 'Neutral', speed: 2.0 },
-        { type: 'emotion', emotion: 'sad', level: 0, img: '/images/triste.png', name: 'Triste', speed: 2.0 },
-        { type: 'emotion', emotion: 'sad', level: 1, img: '/images/triste1.png', name: 'Triste 1', speed: 2.0 },
-        { type: 'emotion', emotion: 'sad', level: 2, img: '/images/triste2.png', name: 'Triste 2', speed: 2.0 },
-        { type: 'emotion', emotion: 'anger', level: 0, img: '/images/ira.png', name: 'Ira', speed: 2.0 },
-        { type: 'emotion', emotion: 'anger', level: 1, img: '/images/ira1.png', name: 'Ira 1', speed: 2.0 },
-        { type: 'emotion', emotion: 'anger', level: 2, img: '/images/ira2.png', name: 'Ira 2', speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 0, img: '/images/feliz.png', name: 'Alegría', speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 1, img: '/images/feliz1.png', name: 'Alegría 1', speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 2, img: '/images/feliz2.png', name: 'Alegría 2', speed: 2.0 }
+        { type: 'emotion', emotion: 'ini', level: 0, img: '/images/normal.png', name: emotion('NEUTRAL'), speed: 2.0 },
+        { type: 'emotion', emotion: 'sad', level: 0, img: '/images/triste.png', name: emotion('SAD'), speed: 2.0 },
+        { type: 'emotion', emotion: 'sad', level: 1, img: '/images/triste1.png', name: `${emotion('SAD')} 1` , speed: 2.0 },
+        { type: 'emotion', emotion: 'sad', level: 2, img: '/images/triste2.png', name: `${emotion('SAD')} 2`, speed: 2.0 },
+        { type: 'emotion', emotion: 'anger', level: 0, img: '/images/ira.png', name: emotion('ANGER'), speed: 2.0 },
+        { type: 'emotion', emotion: 'anger', level: 1, img: '/images/ira1.png', name: `${emotion('ANGER')} 1`, speed: 2.0 },
+        { type: 'emotion', emotion: 'anger', level: 2, img: '/images/ira2.png', name: `${emotion('ANGER')} 2`, speed: 2.0 },
+        { type: 'emotion', emotion: 'joy', level: 0, img: '/images/feliz.png', name: emotion('JOY'), speed: 2.0 },
+        { type: 'emotion', emotion: 'joy', level: 1, img: '/images/feliz1.png', name: `${emotion('JOY')} 1`, speed: 2.0 },
+        { type: 'emotion', emotion: 'joy', level: 2, img: '/images/feliz2.png', name: `${emotion('JOY')} 2`, speed: 2.0 }
     ];
 
     $scope.list = function () {
@@ -97,7 +101,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.update = function (l) {
-        Object.assign($scope, { icon: false, accion: 'Editar', name: $scope.tempwoo.name, order: $scope.tempwoo.order.join(',') });
+        Object.assign($scope, { icon: false, accion: locale().COMMON.EDIT, name: $scope.tempwoo.name, order: $scope.tempwoo.order.join(',') });
     }
 
     $scope.updatesend = function (flag) {
@@ -106,7 +110,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
             Object.assign(json, { order: $scope.order.split(',') });
         }
         $http.put('/api/common/' + $scope.tempwoo._id + '?db=woo', json).then(function successCallback(response) {
-            Object.assign($scope, { name: '', order: '', icon: true, accion: 'Agregar' });
+            Object.assign($scope, { name: '', order: '', icon: true, accion: locale().COMMON.ADD });
             $('#wooaddid').modal('hide');
             $scope.list();
             notify('Interacción guardada correctamente');

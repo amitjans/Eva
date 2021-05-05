@@ -4,6 +4,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     $scope.temp = [];
     $scope.icon = true;
     $scope.updateid;
+    $scope.accion = locale().COMMON.ADD;
     Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
@@ -17,11 +18,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     $scope.create = function () {
         var json = { idioma: $scope.idioma, codigo: $scope.codigo, nombre: $scope.nombre };
         $http.post('/api/common?db=voice', json).then(function successCallback(response) {
-            $scope.idioma = '';
-            $scope.codigo = '';
-            $scope.nombre = '';
-            $('#myModal').modal('hide');
-            $scope.list();
+            $scope.clear();
         }, function errorCallback(response) {
         });
     }
@@ -32,20 +29,14 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
         $scope.codigo = l.codigo;
         $scope.nombre = l.nombre;
         $scope.icon = false;
-        $scope.accion = 'Editar';
+        $scope.accion = locale().COMMON.EDIT;
         $('#myModal').modal('show');
     }
 
     $scope.updatesend = function () {
         var json = { idioma: $scope.idioma, codigo: $scope.codigo, nombre: $scope.nombre };
         $http.put('/api/common/' + $scope.updateid + '?db=voice', json).then(function successCallback(response) {
-            $scope.idioma = '';
-            $scope.codigo = '';
-            $scope.nombre = '';
-            $scope.icon = true;
-            $('#myModal').modal('hide');
-            $scope.list();
-            $scope.accion = 'Agregar';
+            $scope.clear();
         }, function errorCallback(response) {
         });
     }
@@ -60,6 +51,12 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     $scope.dataTable = function (way = 0) {
         let obj = dataTable($scope.listado, $scope, way, 'nombre', 'codigo', 'idioma');
         Object.assign($scope, obj);
+    }
+
+    $scope.clear = function () {
+        Object.assign($scope, { idioma: '', codigo: '', nombre: '', icon: true, accion: locale().COMMON.ADD });
+        $('#myModal').modal('hide');
+        $scope.list();
     }
 
     $scope.list();

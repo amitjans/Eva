@@ -1,19 +1,17 @@
 <div class="container" ng-controller="woo">
-    <br>
-    <br>
-
+    <br><br>
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Frase</h3>
+                    <h3 class="panel-title">{{'WOO.PHRASE' | translate}}</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Voz</label>
+                                    <label class="col-sm-2 control-label">{{'WOO.VOICE' | translate}}</label>
                                     <div class="col-sm-10">
                                         <select name="voice" id="" ng-model="voice" ng-change="setvoice(voice)" class="form-control">
                                             <option ng-repeat="item in vlistado" value="{{item.codigo}}">
@@ -26,11 +24,11 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Frase personalizada!"
+                                            <input type="text" class="form-control" placeholder="{{'WOO.CUSTOM_PHRASE' | translate}}!"
                                                 ng-model="mensaje" ng-keydown="enviarMensaje2($event)">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button"
-                                                    ng-click="node({ type: 'speak', text: mensaje })">Enviar&nbsp;<i
+                                                    ng-click="node({ type: 'speak', text: mensaje })">{{'WOO.SEND' | translate}}&nbsp;<i
                                                         class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
                                             </span>
                                         </div>
@@ -44,7 +42,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Movimiento</h3>
+                    <h3 class="panel-title">{{'WOO.MOVEMENT' | translate}}</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -99,7 +97,7 @@
             <div class="card">
                 <div class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Mago de Oz</label>
+                        <label class="col-sm-2 control-label">{{'WOO.WOO' | translate}}</label>
                         <div class="col-sm-6">
                             <select name="" ng-model="wooid" ng-change="loadcomands()" id="" class="form-control">
                                 <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.name }}</option>
@@ -112,12 +110,12 @@
                         <button type="button" class="btn btn-default" ng-click="delete()" ng-show="!!wooid"><i
                                 class="fa fa-trash"></i></button>
                         <button type="button" class="btn btn-default" ng-show="!!wooid" ng-click="updatesend(false)"><i
-                                class="fa fa-cloud-upload">&nbsp;Salvar</i></button>
+                                class="fa fa-cloud-upload">&nbsp;{{'COMMON.SAVE' | translate}}</i></button>
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddcs"
-                            ng-show="!!wooid"><i class="fa fa-plus">&nbsp;Comando</i></button>
+                            ng-show="!!wooid"><i class="fa fa-plus">&nbsp;{{'WOO.COMMAND' | translate}}</i></button>
                     </div>
                     <div class="form-group" ng-show="!!wooid">
-                        <label class="col-sm-2 control-label">Secuencia</label>
+                        <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-default"
                                 ng-repeat="item in tempwoo.order track by $index" disabled><i class="fa fa-action">{{
@@ -133,7 +131,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bgm-bluegray">
-                    <h2 ng-show="!!script">Datos de Scripts <small>
+                    <h2 ng-show="!!script"> {{'WOO.SCRIPT_DATA' | translate}}<small>
                             <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
                                 data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
                         </small>
@@ -146,11 +144,11 @@
                             <thead>
                                 <tr role="row">
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                        style="width: 25px;"> Tipo</th>
+                                        style="width: 25px;"> {{'WOO.TYPE' | translate}}</th>
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                        style="width: 875px;"> Descripci&oacute;n</th>
+                                        style="width: 875px;"> {{'WOO.DESCRIPTION' | translate}}</th>
                                     <th tabindex="0" aria-controls="example" rowspan="1" colspan="3"
-                                        style="width: 100px;">Opciones</th>
+                                        style="width: 100px;">{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,9 +166,9 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th rowspan="1" colspan="1">Tipo</th>
-                                    <th rowspan="1" colspan="1">Descripción</th>
-                                    <th rowspan="1" colspan="3">Opciones</th>
+                                    <th rowspan="1" colspan="1">{{'WOO.TYPE' | translate}}</th>
+                                    <th rowspan="1" colspan="1">{{'WOO.DESCRIPTION' | translate}}</th>
+                                    <th rowspan="1" colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -193,13 +191,13 @@
                 <div class="modal-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Nombre</label>
+                            <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" ng-model="name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Orden</label>
+                            <label class="col-sm-2 control-label">{{'WOO.ORDER' | translate}}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" ng-model="order"
                                     placeholder="Separados por coma">
@@ -208,10 +206,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
                     <button type="button" ng-show="!icon" ng-click="updatesend(true)"
-                        class="btn btn-primary">Actualizar</button>
+                        class="btn btn-primary">{{'COMMON.UPDATE' | translate}}</button>
                 </div>
             </div>
         </div>
@@ -230,33 +228,33 @@
                 <div class="modal-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Tipo</label>
+                            <label class="col-sm-2 control-label">{{'WOO.TYPE' | translate}}</label>
                             <div class="col-sm-10">
                                 <select name="" ng-model="tipo" id="" class="form-control">
-                                    <option value="speak" selected>Hablar</option>
-                                    <option value="sound">Sonido</option>
-                                    <option value="led">Led</option>
+                                    <option value="speak" selected>{{'WOO.SPEAK' | translate}}</option>
+                                    <option value="sound">{{'WOO.SOUND' | translate}}</option>
+                                    <option value="led">{{'WOO.LED' | translate}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group" ng-show="tipo == 'speak'">
-                            <label class="col-sm-2 control-label">Texto</label>
+                            <label class="col-sm-2 control-label">{{'WOO.TEXT' | translate}}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" ng-model="text">
                             </div>
                         </div>
                         <div class="form-group" ng-show="tipo == 'sound'">
-                            <label class="col-sm-2 control-label">Audio</label>
+                            <label class="col-sm-2 control-label">{{'WOO.AUDIO' | translate}}</label>
                             <div class="col-sm-10">
                                 <select name="" id="" ng-model="thesound" class="form-control">
-                                    <option value="" selected>Ninguno</option>
+                                    <option value="" selected>{{'WOO.NONE' | translate}}</option>
                                     <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group" ng-show="tipo == 'led'">
-                            <label class="col-sm-2 control-label">Leds</label>
+                            <label class="col-sm-2 control-label">{{'WOO.LED' | translate}}</label>
                             <div class="col-sm-10">
                                 <select name="leds" id="" ng-model="leds" class="form-control">
                                     <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
@@ -264,7 +262,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Orden</label>
+                            <label class="col-sm-2 control-label">{{'WOO.ORDER' | translate}}</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" ng-model="corder">
                             </div>
@@ -272,8 +270,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
+                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
                 </div>
             </div>
         </div>
