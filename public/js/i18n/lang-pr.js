@@ -1,0 +1,212 @@
+const pr = {
+    TOOLBAR: {
+        NAME: "Controle Eva",
+        INI: "Iniciar",
+        INTERACTION: "Interação",
+        SCRIPT: "Script",
+        SCRIPTS: "Scripts",
+        DATA: "Dados",
+        AUDIOS: "Áudios",
+        LANGUAGE: "Linguagens de robôs",
+        VOICE: "Voz",
+        LISTEN: "Ouça",
+        LED: "Led",
+        MOVEMENT: "Movimento",
+        WOO: "Mágico de Oz",
+        CONFIG: "Configurações",
+        SOCIAL_ROBOT: "Robô Social",
+        SERVICES: "Serviços"
+    },
+    LANG: {
+        MENU: "Idioma",
+        ES: "Espanhol",
+        EN: "Inglês",
+        PR: "Português"
+    },
+    DATATABLE: {
+        SHOW: "Mostar",
+        SEARCH: "Pesquisar",
+        SHOWING: "Mostrando",
+        TO: "a",
+        OF: "de",
+        ENTRIES: "registros",
+        PREVIOUS: "Anterior",
+        NEXT: "Próximo",
+    },
+    AUDIO: {
+        TITLE: "Lista de Áudios",
+        FORMAT: "Formato",
+        DURATION: "Duração",
+        ADD: "Adicionar Áudio",
+        UPLOAD: "Solte os arquivos aqui ou clique para enviar."
+    },
+    CLOUD: {
+        TITLE: "Serviços",
+        SERVICE: "Serviço",
+        VAR: "Variável",
+        VALUE: "Valor",
+        STATUS: "Doença",
+        EDIT: "Editar"
+    },
+    CONFIG: {
+        TITLE: "Configuração",
+        VOICE: "Voz",
+        VOICELED: "Animação de voz",
+        LISTEN: "Ouvir",
+        LISTENLED: "Ouvir animação"
+    },
+    CONTROL: {
+        WARNING: "Cuidado",
+        INTERACTIONS: "Interações",
+        EXPORT: "Exportar",
+        CONTROL_SCRIPT: "Script de controle",
+        SCRIPTS: "Scripts"
+    },
+    INTERACTION: {
+        TITLE: "Lista de interações",
+        NODES: "Nós",
+        ADD_INT: "Adicionar interação",
+        IMPORT: "Importar",
+        IMPORT_INT: "Importar interação",
+        NODE: "Nó",
+        TYPE: "Tipo",
+        DOWNLOAD: "Baixar",
+        SAVE: "Salvar",
+        UPDATE: "Atualizar",
+        UPDATE_FINISH: "Atualizar e Concluir",
+        REFRESH: "Atualizar",
+        VOICE: "Voz",
+        SPEAK: "Fale",
+        LISTEN: "Ouça",
+        EMOTION: "Emoção",
+        MOV: "Movimento",
+        LED: "Leds",
+        SOUND: "Áudio",
+        FOR: "Ciclo",
+        IF: "Condição",
+        WAIT: "Espera",
+        INT: "Interação",
+        SCRIPT: "Script",
+        COUNTER: "Contador",
+        COUNTER_OPTS: {
+            VALUE: "Valor",
+            OPERATION: "Operação",
+            SUM: "Soma",
+            SUBTRACTION: "Subtração",
+            MULTIPLICATION: "Multiplicação",
+            DIVISION: "Divisão",
+            ASSIGN: "Atribuir"
+        },
+        API_REST: "Api Rest",
+        DIALOGFLOW: "Dialogflow",
+        TRANSLATE: "Traduzir",
+        RANDOM: "Aleatório",
+        GROUP: "Grupo",
+        NONE: "Nenhum",
+        PREVIOUS: "Anterior",
+        SPEED: "Velocidade",
+        EMOTION_TYPE: {
+            NEUTRAL: "Neutro",
+            JOY: "Surpresa",
+            SURPRISE: "Surprise",
+            SAD: "Tristeza",
+            ANGER: "Raiva"
+        },
+        LEVEL: "Nível",
+        ONLY_EYES: "Somente olhos",
+        INCREMENTAL: "Incremental",
+        DIALOGUE: "Diálogo",
+        TEXT_TO_SPEAK: "Texto a dizer",
+        SERVICE: "Serviço",
+        LANGUAGE: "Idioma",
+        GET: "Get",
+        ALL: "Tudo",
+        TIME: "Time",
+        TIME_TO_WAIT: "Tempo de espera em ms",
+        ITERATIONS: "Iterações",
+        AMOUNT_ITERATIONS: "Quantidade de Iterações",
+        COMPARISON: {
+            LABEL: "Comparação",
+            EXACT: "Exato",
+            PHONETIC: "Fonética",
+            INCLUDE: "Inclui",
+            MATH: "Matemática"
+        },
+        DEFAULT: "Por padrão",
+        API_REST: {
+            VERSION: "Versão",
+            SERVER: "Servidor",
+            QUERY: "Query",
+            PORT: "Porta"
+        },
+        PROYECT: "Projeto",
+        PROYECT_NAME: "Nome do projeto",
+        SOURCE: "Idioma de origem"
+    },
+    LED: {
+        TITLE: "Lista de animações conduzidas",
+        BASE: "Animação de base",
+        MODAL: "Animação Led",
+        COLOR: "Cor",
+        LED: "Led",
+        NUM: "Num",
+        TIME: "Tempo",
+        MS: "Milissegundos"
+    },
+    LISTEN: {
+        TITLE: "Lista de vozes",
+        LANGUAGE: "Idioma",
+        CODE: "Código",
+    },
+    MOVEMENT: {
+        TITLE: "Lista de Movimentos",
+        MODAL: "Movimento",
+        CODE: "Código",
+        ACTIONS: "Ações"
+    },
+    SCRIPT: {
+        TITLE: "Lista de scripts",
+        MODAL: "Script",
+        QTY: "Quantidade"
+    },
+    SCRIPT_DATA: {
+        TITLE: "Dados de script",
+        SCRIPT: "Script",
+        FIELD: "Campo"
+    },
+    VOICE: {
+        TITLE: "Lista de vozes",
+        LANGUAGE: "Idioma",
+        CODE: "Código",
+        VOICE: "Voz"
+    },
+    WOO: {
+        PHRASE: "Frase",
+        VOICE: "Voz",
+        CUSTOM_PHRASE: "Frase personalizada",
+        SEND: "Enviar",
+        MOVEMENT: "Movimento",
+        WOO: "Mágico de Oz",
+        COMMAND: "Comando",
+        SEQUENCE: "Sequência",
+        SCRIPT_DATA: "Dados de script",
+        TYPE: "Tipo",
+        DESCRIPTION: "Descrição",
+        ORDER: "Pedido",
+        SPEAK: "Fale",
+        SOUND: "Som",
+        LED: "Led",
+        TEXT: "Texto",
+        AUDIO: "Áudio",
+        NONE: "Nenhum"
+    },
+    COMMON: {
+        NAME: "Nome",
+        OPTIONS: "Opções",
+        CLOSE: "Fechar",
+        SAVE: "Salvar",
+        UPDATE: "Atualizar",
+        ADD: "Adicionar",
+        EDIT: "Editar"
+    }
+}

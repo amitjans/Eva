@@ -3,10 +3,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.led = [];
   $scope.mov = [];
   $scope.stt = [];
-  $scope.accion = 'Agregar';
+  $scope.accion = locale().COMMON.ADD;
   $scope.icon = true;
   $scope.updateid;
-  var modalname = { emotion: 'Emoción', speak: 'Hablar', listen: 'Escuchar', wait: 'Tiempo', for: 'Ciclo', if: 'Condición', mov: 'Movimiento', int: 'Interacción', script: 'Script', sound: 'Audio', led: 'Animación Led', voice: 'Voz', counter: 'Contador', api: 'Api Rest', dialogflow: 'Dialogflow' };
+  var modalname = locale().INTERACTION;
   var color = { joy: "lightyellow", sad: "lightblue", surprised: "lightgreen", anger: "red", ini: "lightgray" };
 
   $scope.list = function () {
@@ -72,7 +72,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.update = function (l) {
-    Object.assign($scope, { nombre: l.nombre, updateid: l._id, icon: false, accion: 'Editar'} );
+    Object.assign($scope, { nombre: l.nombre, updateid: l._id, icon: false, accion: locale().COMMON.EDIT} );
     var data = l.data;
     node = data.node;
     link = data.link;
@@ -98,7 +98,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
     $http.put('/api/common/' + $scope.updateid + '?db=interaccion', json).then(function successCallback(response) {
       $scope.updateid = '';
-      $scope.accion = 'Agregar';
+      $scope.accion = locale().COMMON.ADD;
       $scope.icon = true;
       $scope.reset();
       $scope.list();
@@ -117,7 +117,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.add = function () {
-    Object.assign($scope, { updateid: '', icon: true, accion: 'Agregar'} );
+    Object.assign($scope, { updateid: '', icon: true, accion: locale().COMMON.ADD} );
     $scope.reset();
     $scope.list();
     id = 0;
@@ -161,17 +161,17 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     if (nuevo) {
       $scope.key = 0;
     }
-    $scope.ModalName = nuevo ? modalname[value] : $scope.name;
+    $scope.ModalName = nuevo ? modalname[value.toUpperCase()] : $scope.name;
     switch (value) {
       case 'voice':
-        $scope.ncommon = 'Traducir';
+        $scope.ncommon = modalname.TRANSLATE;
         break;
       case 'script':
-        $scope.ncommon = 'Aleatorio';
+        $scope.ncommon = modalname.RANDOM;
         break;
       case 'sound':
         $scope.leds = !!$scope.leds ? $scope.leds : '';
-        $scope.ncommon = 'Esperar';
+        $scope.ncommon = modalname.WAIT;
         break;
       case 'counter':
         $scope.cnname = '';
@@ -191,7 +191,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.setnode = function () {
-    let tempobj = { key: Date.now(), name: modalname[$scope.modal] + '_' + id, type: $scope.modal, group: $scope.group }
+    let tempobj = { key: Date.now(), name: modalname[$scope.modal.toUpperCase()] + '_' + id, type: $scope.modal, group: $scope.group }
     switch ($scope.modal) {
       case 'emotion':
         node.push(Object.assign(tempobj, { emotion: $scope.emocion, level: parseInt($scope.level), speed: $scope.velocidad, color: color[$scope.emocion] }));
@@ -278,7 +278,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.updatenode = function (l) {
-    Object.assign($scope, { key: l.key, name: l.name, type: l.type, color: l.color, isGroup: l.isGroup, group: ((l.group || '') + ''), accion: 'Editar' });
+    Object.assign($scope, { key: l.key, name: l.name, type: l.type, color: l.color, isGroup: l.isGroup, group: ((l.group || '') + ''), accion: locale().COMMON.EDIT });
     switch (l.type) {
       case 'emotion':
         Object.assign($scope, { emocion: l.emotion, velocidad: l.speed, level: l.level + ''});
@@ -355,7 +355,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     let tempdata = JSON.parse($('textarea').val());
     $scope.update(tempdata);
     $scope.updateid = 0;
-    $scope.accion = 'Agregar';
+    $scope.accion = locale().COMMON.ADD;
     $scope.icon = true;
     $('#modalimport').modal('hide');
   }

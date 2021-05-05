@@ -4,6 +4,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     $scope.listBaseAnims = [];
     $scope.temp = [];
     $scope.icon = true;
+    $scope.accion = locale().COMMON.ADD;
     $scope.updateid;
     Object.assign($scope, dataTableValues());
     $scope.params = { color: [], led: [], num: [], time: false };
@@ -47,7 +48,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         Object.assign($scope, { updateid: l._id, nombre: l.nombre, base: l.base });
         $scope.changeform(l.opts);
         $scope.icon = false;
-        $scope.accion = 'Editar';
+        $scope.accion = locale().COMMON.EDIT;
         $('#myModal').modal('show');
     }
 
@@ -109,7 +110,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.clear = function () {
-        Object.assign($scope, { nombre: '', icon: true, accion: 'Agregar' });
+        Object.assign($scope, { nombre: '', icon: true, accion: locale().COMMON.ADD });
         $('#myModal').modal('hide');
         $scope.list();
     }

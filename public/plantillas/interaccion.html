@@ -4,9 +4,9 @@
       <br>
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a id="inicio" href="#home" aria-controls="home" role="tab"
-            data-toggle="tab" target="_blank">Listado de Interacciones</a></li>
+            data-toggle="tab" target="_blank">{{'INTERACTION.TITLE' | translate}}</a></li>
         <li role="presentation" ng-show="node.length > 0"><a href="#profile" aria-controls="profile" role="tab"
-            data-toggle="tab" target="_blank">Nodos</a></li>
+            data-toggle="tab" target="_blank">{{'INTERACTION.NODES' | translate}}</a></li>
       </ul>
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
@@ -14,8 +14,8 @@
             <table class="table" id="data-table-basic">
               <thead>
                 <tr>
-                  <th>Nombre</th>
-                  <th>Opciones</th>
+                  <th>{{'COMMON.NAME' | translate}}</th>
+                  <th>{{'COMMON.OPTIONS' | translate}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,8 +33,8 @@
           </div>
           <br />
           <div class="form-group">
-            <button type="button" class="btn btn-primary" ng-click="add()">Agregar Interaccion</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimport">Importar Interaccion</button>
+            <button type="button" class="btn btn-primary" ng-click="add()">{{'INTERACTION.ADD_INT' | translate}}</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimport">{{'INTERACTION.IMPORT_INT' | translate}}</button>
           </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="profile">
@@ -42,9 +42,9 @@
             <table class="table" id="data-table-basic">
               <thead>
                 <tr>
-                  <th>Nodo</th>
-                  <th>Tipo</th>
-                  <th colspan="2">Opciones</th>
+                  <th>{{'INTERACTION.NODE' | translate}}</th>
+                  <th>{{'INTERACTION.TYPE' | translate}}</th>
+                  <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,7 +70,7 @@
           </div>
           <div class="card-body card-padding">
             <div class="form-group">
-              <label class="col-sm-2 control-label">Nombre</label>
+              <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
               </div>
@@ -82,37 +82,36 @@
             <br />
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button id="blobButton" class="btn btn-primary btn-sm">Descargar</button>
-                <button type="button" ng-show="icon" class="btn btn-primary btn-sm" ng-click="create()">Guardar</button>
+                <button id="blobButton" class="btn btn-primary btn-sm">{{'INTERACTION.DOWNLOAD' | translate}}</button>
+                <button type="button" ng-show="icon" class="btn btn-primary btn-sm" ng-click="create()">{{'INTERACTION.SAVE' | translate}}</button>
                 <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
-                  ng-click="updatesend()">Actualizar</button>
-                <button type="button" ng-show="!icon" class="btn btn-primary btn-sm" ng-click="updatesendx()">Actualizar
-                  y Terminar</button>
-                <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">Refrescar</button>
+                  ng-click="updatesend()">{{'INTERACTION.UPDATE' | translate}}</button>
+                <button type="button" ng-show="!icon" class="btn btn-primary btn-sm" ng-click="updatesendx()">{{'INTERACTION.UPDATE_FINISH' | translate}}</button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">{{'INTERACTION.REFRESH' | translate}}</button>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" ng-click="showmodal('voice')">Voz</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('speak')">Hablar</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('listen')">Escuchar</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('emotion')">Emoci&oacute;n</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('mov')">Movimiento</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('led')">Leds</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('sound')">Audio</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('voice')">{{'INTERACTION.VOICE' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('speak')">{{'INTERACTION.SPEAK' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('listen')">{{'INTERACTION.LISTEN' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('emotion')">{{'INTERACTION.EMOTION' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('mov')">{{'INTERACTION.MOV' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('led')">{{'INTERACTION.LED' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('sound')">{{'INTERACTION.SOUND' | translate}}</button>
                 <br>
                 <br>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('for')">Ciclo</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('if')">Condici&oacute;n</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('wait')">Esperar</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('int')">Interacci&oacute;n</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('script')">Script</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('counter')">Contador</button>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('api')">Api Rest</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('for')">{{'INTERACTION.FOR' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('if')">{{'INTERACTION.IF' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('wait')">{{'INTERACTION.WAIT' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('int')">{{'INTERACTION.INT' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('script')">{{'INTERACTION.SCRIPT' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('counter')">{{'INTERACTION.COUNTER' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('api')">{{'INTERACTION.API' | translate}}</button>
                 <br><br>
-                <button type="button" class="btn btn-primary" ng-click="showmodal('dialogflow')">Dialogflow</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('dialogflow')">{{'INTERACTION.DIALOGFLOW' | translate}}</button>
               </div>
             </div>
           </div>
@@ -131,63 +130,63 @@
           <div class="modal-body">
             <div class="form-horizontal" role="form">
               <div class="form-group" ng-show="node.length > 0">
-                <label class="col-sm-2 control-label">Grupo</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.GROUP' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="group" id="" ng-model="group" class="form-control">
-                    <option value="" selected>Ninguno</option>
+                    <option value="" selected>{{'INTERACTION.NONE' | translate}}</option>
                     <option ng-repeat="item in node" ng-show="item.isGroup" value="{{item.key}}">
                       {{ item.name }}</option>
                   </select>
                 </div>
               </div>
               <div class="form-group" ng-show="node.length > 0 && key == 0">
-                <label class="col-sm-2 control-label">Anterior</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.PREVIOUS' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="link" id="" ng-model="link" class="form-control">
-                    <option value="" selected>Ninguno</option>
+                    <option value="" selected>{{'INTERACTION.NONE' | translate}}</option>
                     <option ng-repeat="item in node" value="{{item.key}}">{{ item.name }}</option>
                   </select>
                 </div>
               </div>
               <!-- Modal Emocion -->
               <div class="form-group" ng-show="modal == 'emotion'">
-                <label class="col-sm-2 control-label">Emoci&oacute;n</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.EMOTION' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="emocion" id="" ng-model="emocion" class="form-control">
-                    <option value="ini">Neutral</option>
-                    <option value="joy">Alegr&iacute;a</option>
-                    <option value="surprised">Sorpresa</option>
-                    <option value="sad">Tristeza</option>
-                    <option value="anger">Ira</option>
+                    <option value="ini">{{'INTERACTION.EMOTION_TYPE.NEUTRAL' | translate}}</option>
+                    <option value="joy">{{'INTERACTION.EMOTION_TYPE.JOY' | translate}}</option>
+                    <option value="surprised">{{'INTERACTION.EMOTION_TYPE.SURPRISE' | translate}}</option>
+                    <option value="sad">{{'INTERACTION.EMOTION_TYPE.SAD' | translate}}</option>
+                    <option value="anger">{{'INTERACTION.EMOTION_TYPE.ANGER' | translate}}</option>
                   </select>
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'emotion'">
-                <label class="col-sm-2 control-label">Velocidad</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.SPEED' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="number" min="0" class="form-control input-sm" ng-model="velocidad"
-                    placeholder="Velocidad">
+                    placeholder="{{'INTERACTION.SPEED' | translate}}">
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'emotion' && emocion != 'ini' && !!emocion">
-                <label class="col-sm-2 control-label">Nivel</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.LEVEL' | translate}}</label>
                 <label class="radio-inline col-sm-offset-1">
-                  <input type="radio" name="level" id="inlineRadio1" ng-model="level" value="0"> Solo Ojos
+                  <input type="radio" name="level" id="inlineRadio1" ng-model="level" value="0"> {{'INTERACTION.ONLY_EYES' | translate}}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="level" id="inlineRadio3" ng-model="level" value="2"> Movimiento
+                  <input type="radio" name="level" id="inlineRadio3" ng-model="level" value="2"> {{'INTERACTION.MOV' | translate}}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="level" id="inlineRadio2" ng-model="level" value="-1"> Incremental
+                  <input type="radio" name="level" id="inlineRadio2" ng-model="level" value="-1"> {{'INTERACTION.INCREMENTAL' | translate}}
                 </label>
               </div>
               <!-- Modal Emocion -->
 
               <!-- Modal Hablar -->
               <div class="form-group" ng-show="modal == 'speak'">
-                <label class="col-sm-2 control-label">Di&aacute;logo</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.DIALOGUE' | translate}}</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-sm" ng-model="texto" placeholder="Texto a decir">
+                  <input type="text" class="form-control input-sm" ng-model="texto" placeholder="{{'INTERACTION.TEXT_TO_SPEAK' | translate}}">
                 </div>
                 <p class="col-sm-offset-3 help-block">Utiliza '$' para incluir la &uacute;ltima respuesta, '$1' para
                   incluir la primera y '$-1' para incluir la pen&uacute;ltima.
@@ -199,7 +198,7 @@
 
               <!-- Modal Escuchar -->
               <div class="form-group" ng-show="modal == 'listen'">
-                <label class="col-sm-2 control-label">Servicio(STT)</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.SERVICE' | translate}}(STT)</label>
                 <div class="col-sm-10">
                   <select name="service" id="" ng-model="service" class="form-control">
                     <option value="watson">Watson</option>
@@ -208,7 +207,7 @@
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'listen'">
-                <label class="col-sm-2 control-label">Idioma</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.LANGUAGE' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="langcode" id="" ng-model="langcode" class="form-control">
                     <option ng-repeat="item in stt" ng-show="!!item[service]" value="{{ item[service] }}">{{ item[service] }}</option>
@@ -216,10 +215,10 @@
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'listen'">
-                <label class="col-sm-2 control-label">Obtener</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.GET' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="listenopt" id="" ng-model="listenopt" class="form-control">
-                    <option value="">Todo</option>
+                    <option value="">{{'INTERACTION.ALL' | translate}}</option>
                     <option ng-repeat="item in filterslist" value="{{ item }}">{{ item }}</option>
                   </select>
                 </div>
@@ -228,19 +227,19 @@
 
               <!-- Modal Tiempo -->
               <div class="form-group" ng-show="modal == 'wait'">
-                <label class="col-sm-2 control-label">Tiempo (ms)</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.TIME' | translate}} (ms)</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="time"
-                    placeholder="Tiempo a esperar en ms">
+                    placeholder="{{'INTERACTION.TIME_TO_WAIT' | translate}}">
                 </div>
               </div>
               <!-- Modal Tiempo -->
 
               <!-- Modal Ciclo -->
               <div class="form-group" ng-show="modal == 'for'">
-                <label class="col-sm-2 control-label">Iteraciones</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.ITERATIONS' | translate}}</label>
                 <div class="col-sm-10">
-                  <input type="number" class="form-control input-sm" ng-model="it" placeholder="Cantidad de iteraciones"
+                  <input type="number" class="form-control input-sm" ng-model="it" placeholder="{{'INTERACTION.AMOUNT_ITERATIONS' | translate}}"
                     min="-1">
                 </div>
                 <p class="col-sm-offset-3 help-block">Utiliza el valor '-1' para que las iteraciones coincidan con los
@@ -250,20 +249,20 @@
 
               <!-- Modal Condicion -->
               <div class="form-group" ng-show="modal == 'if'">
-                <label class="col-sm-2 control-label">Condici&oacute;n</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.IF' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="texto" ng-change="autoif()" placeholder="Condición">
                 </div>
                 <p class="col-sm-offset-3 help-block">Utiliza #&NestedLessLess;contador&NestedGreaterGreater; para comparar contra este.</p>
               </div>
               <div class="form-group" ng-show="modal == 'if'">
-                <label class="col-sm-2 control-label">Comparaci&oacute;n</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.COMPARISON.LABEL' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="ifopt" id="" ng-model="ifopt" class="form-control">
-                    <option value="4">Exacta</option>
-                    <option value="3">Phon&eacute;tica</option>
-                    <option value="2">Incluye</option>
-                    <option value="5">Matemática</option>
+                    <option value="4">{{'INTERACTION.COMPARISON.EXACT' | translate}}</option>
+                    <option value="3">{{'INTERACTION.COMPARISON.PHONETIC' | translate}}</option>
+                    <option value="2">{{'INTERACTION.COMPARISON.INCLUDE' | translate}}</option>
+                    <option value="5">{{'INTERACTION.COMPARISON.MATH' | translate}}</option>
                   </select>
                 </div>
               </div>
@@ -271,7 +270,7 @@
 
               <!-- Modal Movimiento -->
               <div class="form-group" ng-show="modal == 'mov'">
-                <label class="col-sm-2 control-label">Movimiento</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.MOV' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="nivel" id="" ng-model="movement" class="form-control">
                     <option ng-repeat="m in mov" value="{{ m.codigo }}">{{ m.nombre }}</option>
@@ -282,7 +281,7 @@
 
               <!-- Modal Interaccion -->
               <div class="form-group" ng-show="modal == 'int'">
-                <label class="col-sm-2 control-label">Interacci&oacute;n</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.INT' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="int" id="" ng-model="int" class="form-control">
                     <option ng-repeat="i in listado" value="{{i._id}}">{{ i.nombre }}</option>
@@ -293,10 +292,10 @@
 
               <!-- Modal Script -->
               <div class="form-group" ng-show="modal == 'script'">
-                <label class="col-sm-2 control-label">Script</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.SCRIPT' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="emocion" id="" ng-model="thescript" class="form-control">
-                    <option value="" selected>Ninguno</option>
+                    <option value="" selected>{{'INTERACTION.NONE' | translate}}</option>
                     <option ng-repeat="item in slistado" value="{{item._id}}">{{ item.nombre }}</option>
                   </select>
                   <p class="col-sm-offset-3 help-block">Este nodo incluye la funci&oacute;n de hablar, leyendo el primer campo del elemento del escript que se est&eacute; ejecutando en ese momento</p>
@@ -306,10 +305,10 @@
 
               <!-- Modal Sonidos -->
               <div class="form-group" ng-show="modal == 'sound'">
-                <label class="col-sm-2 control-label">Audio</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.SOUND' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="emocion" id="" ng-model="thesound" class="form-control">
-                    <option value="" selected>Ninguno</option>
+                    <option value="" selected>{{'INTERACTION.NONE' | translate}}</option>
                     <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}</option>
                   </select>
                 </div>
@@ -318,10 +317,10 @@
 
               <!-- Modal Leds -->
               <div class="form-group" ng-show="modal == 'led' || modal == 'sound'">
-                <label class="col-sm-2 control-label">Leds</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.LED' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="leds" id="" ng-model="leds" class="form-control">
-                    <option value="" ng-show="modal == 'sound'">Por defecto</option>
+                    <option value="" ng-show="modal == 'sound'">{{'INTERACTION.DEFAULT' | translate}}</option>
                     <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
                   </select>
                 </div>
@@ -330,7 +329,7 @@
 
               <!-- Modal Voice -->
               <div class="form-group" ng-show="modal == 'voice'">
-                <label class="col-sm-2 control-label">Voz</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.VOICE' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="voice" id="" ng-model="voice" class="form-control">
                     <option ng-repeat="item in vlistado" value="{{item.codigo}}">{{ item.nombre + ' (' + item.idioma + ')' }}</option>
@@ -344,7 +343,7 @@
                 <label class="col-sm-2 control-label">Contador</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="cnname" ng-change="cname = ''; ops = 'assign'"
-                    placeholder="Nombre del Contador">
+                    placeholder="{{'COMMON.NAME' | translate}}">
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'counter'">
@@ -356,34 +355,34 @@
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'counter'">
-                <label class="col-sm-2 control-label">Contador</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.COUNTER_OPTS.VALUE' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="vcounter" min="0" placeholder="0">
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'counter'">
-                <label class="col-sm-2 control-label">Operaci&oacute;n</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.COUNTER_OPTS.OPERATION' | translate}}</label>
                 <label class="radio-inline col-sm-offset-1">
-                  <input type="radio" name="ops" id="inlineRadio4" ng-model="ops" value="sum"> Suma
+                  <input type="radio" name="ops" id="inlineRadio4" ng-model="ops" value="sum"> {{'INTERACTION.COUNTER_OPTS.SUM' | translate}}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="ops" id="inlineRadio5" ng-model="ops" value="rest"> Resta
+                  <input type="radio" name="ops" id="inlineRadio5" ng-model="ops" value="rest"> {{'INTERACTION.COUNTER_OPTS.SUBTRACTION' | translate}}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="ops" id="inlineRadio6" ng-model="ops" value="mult"> Multiplicaci&oacute;n
+                  <input type="radio" name="ops" id="inlineRadio6" ng-model="ops" value="mult"> {{'INTERACTION.COUNTER_OPTS.MULTIPLICATION' | translate}}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="ops" id="inlineRadio7" ng-model="ops" value="div"> Divisi&oacute;n
+                  <input type="radio" name="ops" id="inlineRadio7" ng-model="ops" value="div"> {{'INTERACTION.COUNTER_OPTS.DIVISION' | translate}}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="ops" id="inlineRadio7" ng-model="ops" value="assign"> Asignar
+                  <input type="radio" name="ops" id="inlineRadio7" ng-model="ops" value="assign"> {{'INTERACTION.COUNTER_OPTS.ASSIGN' | translate}}
                 </label>
               </div>
               <!-- Modal Counter -->
 
               <!-- Modal Api -->
               <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">Versi&oacute;n</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.VERSION' | translate}}</label>
                 <label class="radio-inline col-sm-offset-1">
                   <input type="radio" name="version" id="inlineRadio4" ng-model="version" value="http"> Http
                 </label>
@@ -392,19 +391,19 @@
                 </label>
               </div>
               <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">Servidor</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.SERVER' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="host" ng-change="autoversion()" placeholder="Host">
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">Consulta</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.QUERY' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="path" placeholder="?item=value&...">
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">Puerto</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.PORT' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="port" placeholder="Puerto">
                 </div>
@@ -413,13 +412,13 @@
 
               <!-- Modal Dialogflow -->
               <div class="form-group" ng-show="modal == 'dialogflow'">
-                <label class="col-sm-2 control-label">Proyecto</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.PROYECT' | translate}}</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-sm" ng-model="proyect" placeholder="Nombre del proyecto">
+                  <input type="text" class="form-control input-sm" ng-model="proyect" placeholder="{{'INTERACTION.PROYECT_NAME' | translate}}">
                 </div>
               </div>
               <div class="form-group" ng-show="modal == 'dialogflow'">
-                <label class="col-sm-2 control-label">Dialogo</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.DIALOGUE' | translate}}</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-sm" ng-model="dialogparam" placeholder="$">
                 </div>
@@ -437,7 +436,7 @@
 
               <!-- Modal Speak -->
               <div class="form-group" ng-show="modal == 'voice' && ccommon">
-                <label class="col-sm-2 control-label">Fuente</label>
+                <label class="col-sm-2 control-label">{{'INTERACTION.SOURCE' | translate}}</label>
                 <div class="col-sm-10">
                   <select name="cname" id="" ng-model="sourcelang" class="form-control" ng-change="cnname = ''">
                     <option ng-repeat="item in langcodelist" value="{{ item }}">{{ item.toUpperCase() }}</option>
@@ -449,8 +448,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" ng-click="setnode()" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
+            <button type="button" ng-click="setnode()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
           </div>
         </div>
       </div>
@@ -462,7 +461,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"> Importar Interacci&oacute;n</h4>
+            <h4 class="modal-title" id="myModalLabel"> {{'INTERACTION.IMPORT_INT' | translate}}</h4>
           </div>
           <div class="modal-body">
             <div class="form-horizontal" role="form">
@@ -474,8 +473,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" ng-click="import()" class="btn btn-primary">Importar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
+            <button type="button" ng-click="import()" class="btn btn-primary">{{'INTERACTION.IMPORT' | translate}}</button>
           </div>
         </div>
       </div>

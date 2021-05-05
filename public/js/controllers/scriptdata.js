@@ -2,7 +2,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     $scope.listado = [];
     $scope.sublist = [];
     $scope.temp = [];
-    $scope.accion = 'Agregar';
+    $scope.accion = locale().COMMON.ADD;
     $scope.icon = true;
     $scope.updateid;
     Object.assign($scope, dataTableValues());
@@ -25,12 +25,7 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     $scope.create = function () {
         var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
         $http.post('/api/common?db=scriptdata', json).then(function successCallback(response) {
-            $scope.c1 = '';
-            $scope.c2 = '';
-            $scope.c3 = '';
-            $scope.c4 = '';
-            $('#myModal').modal('hide');
-            $scope.list();
+            $scope.clear();
         }, function errorCallback(response) {
         });
     }
@@ -42,21 +37,14 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
         $scope.c3 = l.campo3;
         $scope.c4 = l.campo4;
         $scope.icon = false;
-        $scope.accion = 'Editar';
+        $scope.accion = locale().COMMON.EDIT;
         $('#myModal').modal('show');
     }
 
     $scope.updatesend = function () {
         var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
         $http.put('/api/common/' + $scope.updateid + '?db=scriptdata', json).then(function successCallback(response) {
-            $scope.c1 = '';
-            $scope.c2 = '';
-            $scope.c3 = '';
-            $scope.c4 = '';
-            $scope.icon = true;
-            $('#myModal').modal('hide');
-            $scope.list();
-            $scope.accion = 'Agregar';
+            $scope.clear();
         }, function errorCallback(response) {
         });
     }
@@ -77,6 +65,12 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     $scope.dataTable = function (way = 0) {
         let obj = dataTable($scope.listado, $scope, way, 'campo1', 'campo2');
         Object.assign($scope, obj);
+    }
+
+    $scope.clear = function () {
+        Object.assign($scope, { c1: '', c2: '', c3: '', c4: '', icon: true, accion: locale().COMMON.ADD });
+        $('#myModal').modal('hide');
+        $scope.list();
     }
 
     $scope.slist();

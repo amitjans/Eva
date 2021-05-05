@@ -29,53 +29,64 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/#!/controlAngular">Control de Eva</a>
+                <a class="navbar-brand" href="/#!/controlAngular">{{'TOOLBAR.NAME' | translate}}</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{'active': $route.current.activetab == 'controlAngular'}"><a href="/#!/controlAngular">Inicio</a></li>
-                    <li ng-class="{'active': $route.current.activetab == 'interaccion'}"><a href="/#!/interaccion">Interacción</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'controlAngular'}"><a href="/#!/controlAngular">{{'TOOLBAR.INI' | translate}}</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'interaccion'}"><a href="/#!/interaccion">{{'TOOLBAR.INTERACTION' | translate}}</a></li>
                     <li class="dropdown" ng-class="{'active': $route.current.activetab == 'script'}">
                         <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false" target="_blank">
-                            Script
+                            {{'TOOLBAR.SCRIPT' | translate}}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/#!/script">Scripts</a></li>
-                            <li><a href="/#!/scriptdata">Datos</a></li>
+                            <li><a href="/#!/script">{{'TOOLBAR.SCRIPTS' | translate}}</a></li>
+                            <li><a href="/#!/scriptdata">{{'TOOLBAR.DATA' | translate}}</a></li>
                             <!-- <li role="separator" class="divider"></li>
                                               <li><a href="#">Separated link</a></li> -->
                         </ul>
                     </li>
-                    <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/#!/audio">Audios</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/#!/audio">{{'TOOLBAR.AUDIOS' | translate}}</a></li>
                     <li class="dropdown" ng-class="{'active': $route.current.activetab == 'lang'}">
                         <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false" target="_blank">
-                            Idioma
+                            {{'TOOLBAR.LANGUAGE' | translate}}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/#!/voice">Voz (IBM Watson)</a></li>
+                            <li><a href="/#!/voice">{{'TOOLBAR.VOICE' | translate}} (IBM Watson)</a></li>
                             <li role="separator" class="divider"></li>
                             <!-- <li><a href="#">Separated link</a></li> -->
-                            <li><a href="/#!/listen">Escucha (Google y Watson)</a></li>
+                            <li><a href="/#!/listen">{{'TOOLBAR.LISTEN' | translate}} (Google y Watson)</a></li>
                             
                         </ul>
                     </li>
-                    <li ng-class="{'active': $route.current.activetab == 'led'}"><a href="/#!/led">Led</a></li>
-                    <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/#!/mov">Movimiento</a></li>
-                    <li ng-class="{'active': $route.current.activetab == 'woo'}"><a href="/#!/woo">Mago de Oz</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'led'}"><a href="/#!/led">{{'TOOLBAR.LED' | translate}}</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/#!/mov">{{'TOOLBAR.MOVEMENT' | translate}}</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'woo'}"><a href="/#!/woo">{{'TOOLBAR.WOO' | translate}}</a></li>
                     <li class="dropdown" ng-class="{'active': $route.current.activetab == 'config'}">
                         <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false" target="_blank">
-                            Configuraciones
+                            {{'TOOLBAR.CONFIG' | translate}}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/#!/config">Robot Social</a></li>
-                            <li><a href="/#!/cloud">Servicios</a></li>
-                            
+                            <li><a href="/#!/config">{{'TOOLBAR.SOCIAL_ROBOT' | translate}}</a></li>
+                            <li><a href="/#!/cloud">{{'TOOLBAR.SERVICES' | translate}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false" target="_blank">
+                            {{'LANG.MENU' | translate}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" ng-controller="lang" aria-labelledby="drop2">
+                            <li><i class="flag flag-spain"></i><a ng-click="changeLanguage('es')" onmouseover="this.style.cursor='pointer';">{{'LANG.ES' | translate}}</a></li>
+                            <li><i class="flag flag-united-states"></i><a ng-click="changeLanguage('en')" onmouseover="this.style.cursor='pointer';">{{'LANG.EN' | translate}}</a></li>
+                            <li><i class="flag flag-brazil"></i><a ng-click="changeLanguage('pr')" onmouseover="this.style.cursor='pointer';">{{'LANG.PR' | translate}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -97,6 +108,9 @@
 
     <script src="/js/angular.min.js"></script>
     <script src="/js/angular-route.min.js"></script>
+    <script src="/js/angular-sanitize.min.js"></script>
+    <script src="/js/angular-translate.min.js"></script>
+    <script src="/js/angular-translate-loader-static-files.min.js"></script>
     
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-notify.min.js"></script>
@@ -108,6 +122,9 @@
     <script type="text/javascript" src="/js/go.js"></script>
     <script type="text/javascript" src="/js/filesaver.min.js"></script>
 
+    <script type="text/javascript" src="/js/i18n/lang-es.js"></script>
+    <script type="text/javascript" src="/js/i18n/lang-en.js"></script>
+    <script type="text/javascript" src="/js/i18n/lang-pr.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/controlAngular.js"></script>
     <script type="text/javascript" src="/js/controllers/led.js"></script>

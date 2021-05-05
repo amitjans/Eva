@@ -3,7 +3,7 @@
     <div class="alert alert-danger alert-dismissible" role="alert" ng-repeat="error in errores">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
           aria-hidden="true">&times;</span></button>
-      <strong>Cuidado!</strong> {{error.error}} <strong>{{error.query}}</strong>.
+      <strong>{{'CONTROL.WARNING' | translate}}!</strong> {{error.error}} <strong>{{error.query}}</strong>.
     </div>
   </div>
   <div class="row">
@@ -22,7 +22,7 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Interacciones</h3>
+            <h3 class="panel-title">{{'CONTROL.INTERACTIONS' | translate}}</h3>
           </div>
           <div class="panel-body" id="containerLogs">
             <div class="{{interaccion.class}}" ng-repeat="(index, interaccion) in interacciones">
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="panel-footer">
-            <button class="btn btn-primary" ng-click="export()">Exportar</button>
+            <button class="btn btn-primary" ng-click="export()">{{'CONTROL.EXPORT' | translate}}</button>
           </div>
         </div>
       </div>
@@ -43,11 +43,11 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h2><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;Control Script</h2>
+      <h2><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;{{'CONTROL.CONTROL_SCRIPT' | translate}}</h2>
       <h3>{{textoScript}}</h3>
     </div>
     <div class="col-md-12">
-      <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;Scripts</h2>
+      <h2><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;{{'CONTROL.SCRIPTS' | translate}}</h2>
       <hr />
       <div class="row">
         <div class="col-md-3" ng-repeat="item in interactions">

@@ -4,6 +4,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.temp = [];
     $scope.icon = true;
     $scope.updateid;
+    $scope.accion = locale().COMMON.ADD;
     Object.assign($scope, dataTableValues());
     $scope.codes = [];
 
@@ -45,7 +46,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
         $scope.nombre = l.nombre;
         $scope.codigo = l.codigo;
         $scope.icon = false;
-        $scope.accion = 'Editar';
+        $scope.accion = locale().COMMON.EDIT;
         $('#myModal').modal('show');
     }
 
@@ -57,7 +58,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
             $scope.icon = true;
             $('#myModal').modal('hide');
             $scope.list();
-            $scope.accion = 'Agregar';
+            $scope.accion = locale().COMMON.ADD;
             notify('Movimiento actualizado correctamente');
         }, function errorCallback(response) {
         });
@@ -78,6 +79,12 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.dataTable = function (way = 0) {
         let obj = dataTable($scope.listado, $scope, way, 'nombre', 'codigo');
         Object.assign($scope, obj);
+    }
+
+    $scope.clear = function () {
+        Object.assign($scope, { nombre: '', codigo: '', icon: true, accion: locale().COMMON.ADD });
+        $('#myModal').modal('hide');
+        $scope.list();
     }
 
     $scope.list();

@@ -4019,7 +4019,7 @@
       "nombre": "knz1mbqu",
       "base": "joy",
       "opts": {
-        "color1": "#e01515",
+        "color1": "#25cf4b",
         "led1": 7,
         "time": 200
       }
