@@ -84,9 +84,11 @@ const pr = {
         SOUND: "Áudio",
         FOR: "Ciclo",
         IF: "Condição",
+        IF_DESC: "Use #nome_do_contador para comparar com este.",
         WAIT: "Espera",
         INT: "Interação",
         SCRIPT: "Script",
+        SCRIPT_DESC: "Este nodo inclui a função speak, lendo o primeiro campo do elemento do script que está rodando naquele momento.",
         COUNTER: "Contador",
         COUNTER_OPTS: {
             VALUE: "Valor",
@@ -116,6 +118,7 @@ const pr = {
         ONLY_EYES: "Somente olhos",
         INCREMENTAL: "Incremental",
         DIALOGUE: "Diálogo",
+        DIALOGUE_DESC: "Use '$' para incluir a última resposta, '$1' para incluir a primeira e '$-1' para incluir a penúltima. Use '%' se você tiver um tipo de nó 'Script' antes de incluir o segundo campo ou '%1' para especificar o campo 1. Use '/' para separar várias frases (o robô só dirá uma aleatoriamente). Se você usar um contador, pode usar #counter para incluir seu valor.",
         TEXT_TO_SPEAK: "Texto a dizer",
         SERVICE: "Serviço",
         LANGUAGE: "Idioma",
@@ -124,6 +127,7 @@ const pr = {
         TIME: "Time",
         TIME_TO_WAIT: "Tempo de espera em ms",
         ITERATIONS: "Iterações",
+        ITERATIONS_DESC: "Use o valor '-1' para que as iterações correspondam aos elementos do 'script'.",
         AMOUNT_ITERATIONS: "Quantidade de Iterações",
         COMPARISON: {
             LABEL: "Comparação",

@@ -84,9 +84,11 @@ const en = {
         SOUND: "Audio",
         FOR: "Cycle",
         IF: "Condition",
+        IF_DESC: "Use #counter_name to compare against this.",
         WAIT: "Wait",
         INT: "Interaction",
         SCRIPT: "Script",
+        SCRIPT_DESC: "This node includes the speak function, reading the first field of the element of the script that is running at that moment.",
         COUNTER: "Counter",
         COUNTER_OPTS: {
             VALUE: "Value",
@@ -116,6 +118,7 @@ const en = {
         ONLY_EYES: "Only Eyes",
         INCREMENTAL: "Incremental",
         DIALOGUE: "Dialogue",
+        DIALOGUE_DESC: "Use '$' to include the last answer, '$1' to include the first and '$-1' to include the penultimate. Use '%' if you have a node type 'Script' before to include the 2nd field or '%1' to specify field 1. Use '/' to separate several sentences (the robot will only say one randomly). If you use a counter you can use #counter to include its value.",
         TEXT_TO_SPEAK: "Text to Say",
         SERVICE: "Service",
         LANGUAGE: "Language",
@@ -124,6 +127,7 @@ const en = {
         TIME: "Time",
         TIME_TO_WAIT: "Time to wait in ms",
         ITERATIONS: "Iterations",
+        ITERATIONS_DESC: "Use the value '-1' so that the iterations match the elements of the 'script'.",
         AMOUNT_ITERATIONS: "Amount of Iterations",
         COMPARISON: {
             LABEL: "Comparison",
