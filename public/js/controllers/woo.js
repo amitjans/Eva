@@ -30,7 +30,9 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
         { type: 'emotion', emotion: 'anger', level: 2, img: '/images/ira2.png', name: `${emotion('ANGER')} 2`, speed: 2.0 },
         { type: 'emotion', emotion: 'joy', level: 0, img: '/images/feliz.png', name: emotion('JOY'), speed: 2.0 },
         { type: 'emotion', emotion: 'joy', level: 1, img: '/images/feliz1.png', name: `${emotion('JOY')} 1`, speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 2, img: '/images/feliz2.png', name: `${emotion('JOY')} 2`, speed: 2.0 }
+        { type: 'emotion', emotion: 'joy', level: 2, img: '/images/feliz2.png', name: `${emotion('JOY')} 2`, speed: 2.0 },
+        { type: 'emotion', emotion: 'surprise', level: 0, img: '/images/sorpresa.png', name: emotion('SURPRISE'), speed: 2.0 },
+        { type: 'emotion', emotion: 'surprise', level: 1, img: '/images/sorpresa.png', name: `${emotion('SURPRISE')} 1`, speed: 2.0 }
     ];
 
     $scope.list = function () {
