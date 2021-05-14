@@ -112,7 +112,8 @@ const pr = {
             JOY: "Surpresa",
             SURPRISE: "Surprise",
             SAD: "Tristeza",
-            ANGER: "Raiva"
+            ANGER: "Raiva",
+            SURPRISE: "Surpresa"
         },
         LEVEL: "Nível",
         ONLY_EYES: "Somente olhos",

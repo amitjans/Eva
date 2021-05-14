@@ -112,7 +112,8 @@ const en = {
             JOY: "Joy",
             SURPRISE: "Surprise",
             SAD: "Sadness",
-            ANGER: "Anger"
+            ANGER: "Anger",
+            SURPRISE: "Surprise"
         },
         LEVEL: "Level",
         ONLY_EYES: "Only Eyes",
