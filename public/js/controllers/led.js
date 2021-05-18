@@ -29,7 +29,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         var json = { nombre: $scope.nombre, base: $scope.base, opts: $scope.opts };
         $http.post('/api/common?db=led', json).then(function successCallback(response) {
             $scope.clear();
-            notify('Animación led creada correctamente');
+            notify(locale().LED.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
         });
     }
@@ -39,7 +39,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         obj.nombre = Date.now().toString(36);
         $http.post('/api/common?db=led', obj).then(function successCallback(response) {
             $scope.list();
-            notify('Animación led duplicada correctamente');
+            notify(locale().LED.NOTIFY.CLONE.SUCCESS);
         }, function errorCallback(response) {
         });
     }
@@ -57,7 +57,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
         var json = { nombre: $scope.nombre, base: $scope.base, opts: $scope.opts };
         $http.put('/api/common/' + $scope.updateid + '?db=led', json).then(function successCallback(response) {
             $scope.clear();
-            notify('Animación led actualizada correctamente');
+            notify(locale().LED.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
         });
     }
@@ -65,7 +65,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     $scope.delete = function (id) {
         $http.delete('/api/common/' + id + '?db=led').then(function successCallback(response) {
             $scope.list();
-            notify('Animación led eliminada correctamente');
+            notify(locale().LED.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
         });;
     }

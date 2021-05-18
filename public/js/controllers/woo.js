@@ -17,7 +17,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.tempid = -1;
 
     function emotion(value) {
-        return locale().INTERACTION.EMOTION_TYPE[value];
+        return locale().EMOTION_TYPE[value];
     }
 
     $scope.emotionsicon = [
@@ -115,9 +115,9 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
             Object.assign($scope, { name: '', order: '', icon: true, accion: locale().COMMON.ADD });
             $('#wooaddid').modal('hide');
             $scope.list();
-            notify('Interacción guardada correctamente');
+            notify(locale().WOO.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
-            notify('A ocurrido un error al guardar la interacción', 'danger');
+            notify(locale().WOO.NOTIFY.UPDATE.ERROR, 'danger');
         });
     }
     $scope.delete = function () {

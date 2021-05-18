@@ -7,46 +7,139 @@
                 </div>
                 <div>
                     <div class="form-horizontal" role="form">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{'CONFIG.SPEAK_LISTEN' | translate}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.VOICE' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="voice" id="" ng-model="voice" class="form-control">
+                                            <option ng-repeat="item in listado" value="{{item.codigo}}">{{ item.nombre + ' (' +
+                                                item.idioma + ')' }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.VOICELED' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="voiceled" class="form-control">
+                                            <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.LISTEN' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="listen" class="form-control">
+                                            <option ng-repeat="m in sttlist" ng-if="!!m.codigo && !!m.watson" value="{{ m._id }}">{{ m.idioma }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.LISTENLED' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="listenled" class="form-control">
+                                            <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.JOY' | translate}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionmov1" class="form-control">
+                                            <option ng-repeat="m in movlist" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.LED_ANIM' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionled1" class="form-control">
+                                            <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'CONFIG.VOICE' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="voice" id="" ng-model="voice" class="form-control">
-                                    <option ng-repeat="item in listado" value="{{item.codigo}}">{{ item.nombre + ' (' +
-                                        item.idioma + ')' }}</option>
-                                </select>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.SAD' | translate}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionmov2" class="form-control">
+                                            <option ng-repeat="m in movlist" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.LED_ANIM' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionled2" class="form-control">
+                                            <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'CONFIG.VOICELED' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="leds" id="" ng-model="voiceled" class="form-control">
-                                    <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
-                                </select>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.ANGER' | translate}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionmov3" class="form-control">
+                                            <option ng-repeat="m in movlist" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.LED_ANIM' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionled3" class="form-control">
+                                            <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'CONFIG.LISTEN' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="leds" id="" ng-model="listen" class="form-control">
-                                    <option ng-repeat="m in sttlist" ng-if="!!m.codigo && !!m.watson" value="{{ m._id }}">{{ m.idioma }}</option>
-                                </select>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.SURPRISE' | translate}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionmov4" class="form-control">
+                                            <option ng-repeat="m in movlist" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{'CONFIG.LED_ANIM' | translate}}</label>
+                                    <div class="col-sm-10">
+                                        <select name="leds" id="" ng-model="emotionled4" class="form-control">
+                                            <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'CONFIG.LISTENLED' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="leds" id="" ng-model="listenled" class="form-control">
-                                    <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <button type="button" ng-click="update()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
                         </div>
