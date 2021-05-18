@@ -53,7 +53,16 @@ const en = {
         VOICE: "Voice",
         VOICELED: "Voice Animation",
         LISTEN: "Listen",
-        LISTENLED: "Listen Animation"
+        LISTENLED: "Listen Animation",
+        SPEAK_LISTEN: "Speak and Listen",
+        LED_ANIM: "Led animation",
+        MOV: "Movement",
+        NOTIFY: {
+            UPDATE: {
+                SUCCESS: "The configuration has been applied successfully.",
+                ERROR: "An error occurred while trying to apply settings."
+            }
+        }
     },
     CONTROL: {
         WARNING: "Beware",
@@ -107,14 +116,6 @@ const en = {
         NONE: "None",
         PREVIOUS: "Previous",
         SPEED: "Speed",
-        EMOTION_TYPE: {
-            NEUTRAL: "Neutral",
-            JOY: "Joy",
-            SURPRISE: "Surprise",
-            SAD: "Sadness",
-            ANGER: "Anger",
-            SURPRISE: "Surprise"
-        },
         LEVEL: "Level",
         ONLY_EYES: "Only Eyes",
         INCREMENTAL: "Incremental",
@@ -156,7 +157,21 @@ const en = {
         LED: "Led",
         NUM: "Num",
         TIME: "Time",
-        MS: "Milliseconds"
+        MS: "Milliseconds",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Led animation created correctly."
+            },
+            CLONE: {
+                SUCCESS: "Led animation duplicated correctly."
+            },
+            UPDATE: {
+                SUCCESS: "Led animation updated correctly."
+            },
+            DELETE: {
+                SUCCESS: "Led animation removed successfully."
+            }
+        }
     },
     LISTEN: {
         TITLE: "Voice List",
@@ -167,7 +182,18 @@ const en = {
         TITLE: "List of Movements",
         MODAL: "Movement",
         CODE: "Code",
-        ACTIONS: "Actions"
+        ACTIONS: "Actions",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Movement created successfully."
+            },
+            UPDATE: {
+                SUCCESS: "Movement updated successfully."
+            },
+            DELETE: {
+                SUCCESS: "Movement removed successfully."
+            }
+        }
     },
     SCRIPT: {
         TITLE: "List of Scripts",
@@ -203,7 +229,13 @@ const en = {
         LED: "Led",
         TEXT: "Text",
         AUDIO: "Audio",
-        NONE: "None"
+        NONE: "None",
+        NOTIFY: {
+            UPDATE: {
+                SUCCESS: "Interaction successfully saved.",
+                ERROR: "An error occurred while saving the interaction."
+            }
+        }
     },
     COMMON: {
         NAME: "Name",
@@ -213,5 +245,12 @@ const en = {
         UPDATE: "Update",
         ADD: "Add",
         EDIT: "Edit"
+    },
+    EMOTION_TYPE: {
+        NEUTRAL: "Neutral",
+        JOY: "Joy",
+        SURPRISE: "Surprise",
+        SAD: "Sadness",
+        ANGER: "Anger"
     }
 }

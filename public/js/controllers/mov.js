@@ -32,11 +32,8 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.create = function () {
         var json = { nombre: $scope.nombre, codigo: $scope.codigo };
         $http.post('/api/common?db=mov', json).then(function successCallback(response) {
-            $scope.nombre = '';
-            $scope.codigo = '';
-            $('#myModal').modal('hide');
-            $scope.list();
-            notify('Movimiento creado correctamente');
+            $scope.clear();
+            notify(locale().MOVEMENT.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
         });
     }
@@ -53,13 +50,8 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.updatesend = function () {
         var json = { nombre: $scope.nombre, codigo: $scope.codigo };
         $http.put('/api/common/' + $scope.updateid + '?db=mov', json).then(function successCallback(response) {
-            $scope.nombre = '';
-            $scope.codigo = '';
-            $scope.icon = true;
-            $('#myModal').modal('hide');
-            $scope.list();
-            $scope.accion = locale().COMMON.ADD;
-            notify('Movimiento actualizado correctamente');
+            $scope.clear();
+            notify(locale().MOVEMENT.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
         });
     }
@@ -67,7 +59,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.delete = function (id) {
         $http.delete('/api/common/' + id + '?db=mov').then(function successCallback(response) {
             $scope.list();
-            notify('Movimiento eliminado correctamente');
+            notify(locale().MOVEMENT.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
         });;
     }

@@ -358,42 +358,14 @@ class SocialRobot {
         this.ledsanimstop();
         this.movement('c');
         break;
-      case 'sad':
-        if (leds || level >= 2) {
-          this.ledsanim('emocionv2', { color1: '#000050', led1: 13, time: 200 });
-        }
-        if (level >= 1) {
-          this.movement('D');
-        }
-        if (level >= 2) {
-          this.movement('S');
-        }
-        break;
-      case 'anger':
-        if (leds || level >= 2) {
-          this.ledsanim('emocionv2', { color1: '#ff0000', led1: 13, time: 200 });
-        }
-        if (level >= 1) {
-          this.movement('DRRLLRRLLR');
-        }
-        break;
-      case 'joy':
-        if (leds || level >= 2) {
-          this.ledsanim('emocionv2', { color1: '#64ff00', led1: 13, time: 200 });
-        }
-        if (level >= 1) {
-          this.movement('U');
-        }
-        break;
-      case 'surprise':
-        if (leds || level >= 2) {
-          this.ledsanim('emocionv2', { color1: '#646400', led1: 13, time: 200 });
-        }
-        if (level >= 1) {
-          this.movement('U');
-        }
-        break;
       default:
+        let value = this.configuration.emotion[emotion];
+        if (leds || level >= 2) {
+          this.ledsanim(value.led.base, value.led.opts);
+        }
+        if (level >= 1) {
+          this.movement(value.mov.codigo);
+        }
         break;
     }
   }
