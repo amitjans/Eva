@@ -19,7 +19,9 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
         var json = { idioma: $scope.idioma, codigo: $scope.codigo, nombre: $scope.nombre };
         $http.post('/api/common?db=voice', json).then(function successCallback(response) {
             $scope.clear();
+            notify(locale().VOICE.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().VOICE.NOTIFY.ERROR,  'danger');
         });
     }
 
@@ -37,14 +39,18 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
         var json = { idioma: $scope.idioma, codigo: $scope.codigo, nombre: $scope.nombre };
         $http.put('/api/common/' + $scope.updateid + '?db=voice', json).then(function successCallback(response) {
             $scope.clear();
+            notify(locale().VOICE.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().VOICE.NOTIFY.ERROR,  'danger');
         });
     }
 
     $scope.delete = function (id) {
         $http.delete('/api/common/' + id + '?db=voice').then(function successCallback(response) {
             $scope.list();
+            notify(locale().VOICE.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().VOICE.NOTIFY.ERROR,  'danger');
         });;
     }
 

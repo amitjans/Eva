@@ -75,7 +75,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ accion }} Voz</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ accion }} {{'LISTEN.MODAL' | translate}}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal" role="form">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
+                    <button type="button" class="btn btn-default" ng-click="clear()">{{'COMMON.CLOSE' | translate}}</button>
                     <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
                     <button type="button" ng-show="!icon" ng-click="updatesend()"
                         class="btn btn-primary">{{'COMMON.UPDATE' | translate}}</button>

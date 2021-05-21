@@ -70,7 +70,7 @@ eva.controller('config', ['$scope', '$http', function ($scope, $http) {
             $scope.list();
             notify(locale().CONFIG.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
-            notify(locale().CONFIG.NOTIFY.UPDATE.ERROR);
+            notify(locale().CONFIG.NOTIFY.UPDATE.ERROR, 'danger');
         });
     }
 

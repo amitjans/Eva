@@ -23,7 +23,9 @@ eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
     $scope.delete = function (id) {
         $http.delete('/api/audio/' + id).then(function successCallback(response) {
             $scope.list();
+            notify(locale().AUDIO.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().AUDIO.NOTIFY.ERROR,  'danger');
         });;
     }
 
@@ -32,6 +34,6 @@ eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
         Object.assign($scope, obj);
     }
 
-    $("div#drop").dropzone({ url: "/api/audio", acceptedFiles: '.wav', timeout: 100000 });
+    $("div#drop").dropzone({ url: "/api/audio", acceptedFiles: '.wav', timeout: 100000, maxFilesize: 100 });
     $scope.list();
 }]);

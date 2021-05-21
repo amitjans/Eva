@@ -38,7 +38,13 @@ const es = {
         FORMAT: "Formato",
         DURATION: "Duración",
         ADD: "Agregar Audio",
-        UPLOAD: "Suelta los archivos aquí o haz clic para subirlos."
+        UPLOAD: "Suelta los archivos aquí o haz clic para subirlos.",
+        NOTIFY: {
+            DELETE: {
+                SUCCESS: "Audio eliminado correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
+        }
     },
     CLOUD: {
         TITLE: "Servicios",
@@ -46,7 +52,15 @@ const es = {
         VAR: "Variable",
         VALUE: "Valor",
         STATUS: "Estado",
-        EDIT: "Editar"
+        EDIT: "Editar",
+        NOTIFY: {
+            UPDATE: {
+                SUCCESS: "Credencial del servicio actualizada correctamente."
+            },
+            DELETE: {
+                SUCCESS: "Credencial del servicio eliminada correctamente."
+            }
+        }
     },
     CONFIG: {
         TITLE: "Configuración",
@@ -170,13 +184,27 @@ const es = {
             },
             DELETE: {
                 SUCCESS: "Animación led eliminada correctamente."
-            }
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
         }
     },
     LISTEN: {
-        TITLE: "Listado de Voces",
+        TITLE: "Listado de modelos de voz",
+        MODAL: "Modelo de voz",
         LANGUAGE: "Idioma",
-        CODE: "Código"
+        CODE: "Código",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Modelo de voz creado correctamente."
+            },
+            UPDATE: {
+                SUCCESS: "Modelo de voz actualizado correctamente."
+            },
+            DELETE: {
+                SUCCESS: "Modelo de voz eliminado correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
+        }
     },
     MOVEMENT: {
         TITLE: "Listado de Movimientos",
@@ -192,24 +220,61 @@ const es = {
             },
             DELETE: {
                 SUCCESS: "Movimiento eliminado correctamente."
-            }
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
         }
     },
     SCRIPT: {
         TITLE: "Listado de Scripts",
         MODAL: "Script",
-        QTY: "Cantidad"
+        QTY: "Cantidad",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Script creado correctamente."
+            },
+            UPDATE: {
+                SUCCESS: "Script actualizado correctamente."
+            },
+            DELETE: {
+                SUCCESS: "Script eliminado correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
+        }
     },
     SCRIPT_DATA: {
         TITLE: "Datos de Scripts",
         SCRIPT: "Script",
-        FIELD: "Campo"
+        FIELD: "Campo",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Datos agregados correctamente."
+            },
+            UPDATE: {
+                SUCCESS: "Datos actualizados correctamente."
+            },
+            DELETE: {
+                SUCCESS: "Datos eliminados correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
+        }
     },
     VOICE: {
         TITLE: "Listado de Voces",
         LANGUAGE: "Idioma",
         CODE: "Código",
-        VOICE: "Voz"
+        VOICE: "Voz",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Voz agregada correctamente."
+            },
+            UPDATE: {
+                SUCCESS: "Voz actualizada correctamente."
+            },
+            DELETE: {
+                SUCCESS: "Voz eliminada correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
+        }
     },
     WOO: {
         PHRASE: "Frase",
@@ -234,7 +299,8 @@ const es = {
             UPDATE: {
                 SUCCESS: "Interacción guardada correctamente.",
                 ERROR: "A ocurrido un error al guardar la interacción."
-            }
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
         }
     },
     COMMON: {

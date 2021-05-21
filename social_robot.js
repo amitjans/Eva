@@ -15,6 +15,7 @@ const uuid = require('uuid');
 
 /* Hardware modules */
 var Sound = require('aplay');
+var player = new Sound();
 
 /*additional node modules */
 const fs = require('fs');
@@ -151,11 +152,15 @@ class SocialRobot {
    */
   async play(soundFile, obj = this.configuration.voiceled) {
     var self = this;
-    if (!self._isPlaying) {
+    if (self._isPlaying) {
+      self._isPlaying = false;
+      player.stop();
+      this.ledsanimstop();
+    }
+    if (soundFile != 'stop') {
       this.ledsanim(obj.base, obj.opts);
       self._isPlaying = true;
       let promise = new Promise(function (resolve, reject) {
-        var player = new Sound();
         player.on('complete', function () {
           console.info('> audio playback finished!!');
           self._isPlaying = false;
@@ -169,8 +174,6 @@ class SocialRobot {
       });
       await promise;
       this.ledsanimstop();
-    } else {
-      console.log("> Speaker in use, try playing audio later.");
     }
   }
 
