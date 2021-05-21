@@ -26,6 +26,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     $scope.execute = function (l) {
         $http.post('/nodes', { type: 'mov', mov: l.codigo }).then(function successCallback(response) {
         }, function errorCallback(response) {
+            notify(locale().MOVEMENT.NOTIFY.ERROR,  'danger');
         });;
     }
 
@@ -35,6 +36,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
             $scope.clear();
             notify(locale().MOVEMENT.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().MOVEMENT.NOTIFY.ERROR,  'danger');
         });
     }
 
@@ -53,6 +55,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
             $scope.clear();
             notify(locale().MOVEMENT.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().MOVEMENT.NOTIFY.ERROR,  'danger');
         });
     }
 
@@ -61,6 +64,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
             $scope.list();
             notify(locale().MOVEMENT.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().MOVEMENT.NOTIFY.ERROR,  'danger');
         });;
     }
 

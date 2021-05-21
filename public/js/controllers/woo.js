@@ -71,6 +71,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.execute = function (obj) {
         $http.post('/nodes', obj).then(function successCallback(response) {
         }, function errorCallback(response) {
+            notify(locale().WOO.NOTIFY.ERROR, 'danger');
         });
         $('#' + ($scope.tempwoo.order[$scope.z]) + ' span').css('color', 'black');
         $scope.z = $scope.z + 1;
@@ -80,6 +81,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.node = function (obj) {
         $http.post('/nodes', obj).then(function successCallback(response) {
         }, function errorCallback(response) {
+            notify(locale().WOO.NOTIFY.ERROR, 'danger');
         });
     }
 
@@ -99,6 +101,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
             $('#wooaddid').modal('hide');
             $scope.commands = [];
         }, function errorCallback(response) {
+            notify(locale().WOO.NOTIFY.ERROR, 'danger');
         });
     }
 
@@ -117,13 +120,14 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
             $scope.list();
             notify(locale().WOO.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
-            notify(locale().WOO.NOTIFY.UPDATE.ERROR, 'danger');
+            notify(locale().WOO.NOTIFY.ERROR, 'danger');
         });
     }
     $scope.delete = function () {
         $http.delete('/api/common/' + $scope.tempwoo._id + '?db=woo').then(function successCallback(response) {
             $scope.list();
         }, function errorCallback(response) {
+            notify(locale().WOO.NOTIFY.ERROR, 'danger');
         });
     }
     //endcrudwoo

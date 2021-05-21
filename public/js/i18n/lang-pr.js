@@ -38,7 +38,13 @@ const pr = {
         FORMAT: "Formato",
         DURATION: "Duração",
         ADD: "Adicionar Áudio",
-        UPLOAD: "Solte os arquivos aqui ou clique para enviar."
+        UPLOAD: "Solte os arquivos aqui ou clique para enviar.",
+        NOTIFY: {
+            DELETE: {
+                SUCCESS: "Áudio removido com sucesso."
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
+        }
     },
     CLOUD: {
         TITLE: "Serviços",
@@ -46,7 +52,15 @@ const pr = {
         VAR: "Variável",
         VALUE: "Valor",
         STATUS: "Doença",
-        EDIT: "Editar"
+        EDIT: "Editar",
+        NOTIFY: {
+            UPDATE: {
+                SUCCESS: "Credencial de serviço atualizada com sucesso."
+            },
+            DELETE: {
+                SUCCESS: "Credencial de serviço removida com sucesso."
+            }
+        } 
     },
     CONFIG: {
         TITLE: "Configuração",
@@ -170,13 +184,27 @@ const pr = {
             },
             DELETE: {
                 SUCCESS: "Animação LED removida com sucesso."
-            }
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
         }
     },
     LISTEN: {
-        TITLE: "Lista de vozes",
+        TITLE: "Lista de modelos de voz",
+        MODAL: "Modelo de voz",
         LANGUAGE: "Idioma",
         CODE: "Código",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Modelo de fala criado com sucesso."
+            },
+            UPDATE: {
+                SUCCESS: "Modelo de fala atualizado com sucesso."
+            },
+            DELETE: {
+                SUCCESS: "Padrão de fala removido com sucesso."
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
+        }
     },
     MOVEMENT: {
         TITLE: "Lista de Movimentos",
@@ -192,24 +220,61 @@ const pr = {
             },
             DELETE: {
                 SUCCESS: "Movimento removido com sucesso."
-            }
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
         }
     },
     SCRIPT: {
         TITLE: "Lista de scripts",
         MODAL: "Script",
-        QTY: "Quantidade"
+        QTY: "Quantidade",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Script criado com sucesso."
+            },
+            UPDATE: {
+                SUCCESS: "Script atualizado com sucesso."
+            },
+            DELETE: {
+                SUCCESS: "Script removido com sucesso."
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
+        }
     },
     SCRIPT_DATA: {
         TITLE: "Dados de script",
         SCRIPT: "Script",
-        FIELD: "Campo"
+        FIELD: "Campo",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Dados adicionados com sucesso."
+            },
+            UPDATE: {
+                SUCCESS: "Dados atualizados corretamente."
+            },
+            DELETE: {
+                SUCCESS: "Dados removidos com sucesso."
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
+        }
     },
     VOICE: {
         TITLE: "Lista de vozes",
         LANGUAGE: "Idioma",
         CODE: "Código",
-        VOICE: "Voz"
+        VOICE: "Voz",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Voz adicionada com sucesso."
+            },
+            UPDATE: {
+                SUCCESS: "Voz atualizada corretamente."
+            },
+            DELETE: {
+                SUCCESS: "Voz excluída com sucesso."
+            },
+            ERROR: "An error occurred while processing your request."
+        }
     },
     WOO: {
         PHRASE: "Frase",
@@ -234,7 +299,8 @@ const pr = {
             UPDATE: {
                 SUCCESS: "Interação salva com sucesso.",
                 ERROR: "Ocorreu um erro ao salvar a interação."
-            }
+            },
+            ERROR: "Ocorreu um erro ao processar o seu pedido."
         }
     },
     COMMON: {

@@ -38,7 +38,13 @@ const en = {
         FORMAT: "Format",
         DURATION: "Duration",
         ADD: "Add Audio",
-        UPLOAD: "Drop files here or click to upload."
+        UPLOAD: "Drop files here or click to upload.",
+        NOTIFY: {
+            DELETE: {
+                SUCCESS: "Audio removed successfully."
+            },
+            ERROR: "An error occurred while processing your request."
+        }
     },
     CLOUD: {
         TITLE: "Services",
@@ -46,7 +52,15 @@ const en = {
         VAR: "Variable",
         VALUE: "Value",
         STATUS: "Status",
-        EDIT: "Edit"
+        EDIT: "Edit",
+        NOTIFY: {
+            UPDATE: {
+                SUCCESS: "Service credential successfully updated."
+            },
+            DELETE: {
+                SUCCESS: "Service credential successfully removed."
+            }
+        }
     },
     CONFIG: {
         TITLE: "Configuration",
@@ -170,13 +184,27 @@ const en = {
             },
             DELETE: {
                 SUCCESS: "Led animation removed successfully."
-            }
+            },
+            ERROR: "An error occurred while processing your request."
         }
     },
     LISTEN: {
-        TITLE: "Voice List",
+        TITLE: "List of voice models ",
+        MODAL: "Voice model",
         LANGUAGE: "Language",
-        CODE: "Code"
+        CODE: "Code",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Speech model created successfully."
+            },
+            UPDATE: {
+                SUCCESS: "Speech model updated successfully."
+            },
+            DELETE: {
+                SUCCESS: "Speech model removed successfully."
+            },
+            ERROR: "An error occurred while processing your request."
+        }
     },
     MOVEMENT: {
         TITLE: "List of Movements",
@@ -192,24 +220,61 @@ const en = {
             },
             DELETE: {
                 SUCCESS: "Movement removed successfully."
-            }
+            },
+            ERROR: "An error occurred while processing your request."
         }
     },
     SCRIPT: {
         TITLE: "List of Scripts",
         MODAL: "Script",
-        QTY: "Quantity"
+        QTY: "Quantity",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Script created successfully."
+            },
+            UPDATE: {
+                SUCCESS: "Script updated successfully."
+            },
+            DELETE: {
+                SUCCESS: "Script successfully removed."
+            },
+            ERROR: "An error occurred while processing your request."
+        }
     },
     SCRIPT_DATA: {
         TITLE: "Script Data",
         SCRIPT: "Script",
-        FIELD: "Field"
+        FIELD: "Field",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Data added successfully."
+            },
+            UPDATE: {
+                SUCCESS: "Data updated correctly."
+            },
+            DELETE: {
+                SUCCESS: "Data removed successfully."
+            },
+            ERROR: "An error occurred while processing your request."
+        }
     },
     VOICE: {
         TITLE: "Voice List",
         LANGUAGE: "Language",
         CODE: "Code",
-        VOICE: "Voice"
+        VOICE: "Voice",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Voice added successfully."
+            },
+            UPDATE: {
+                SUCCESS: "Voice updated correctly."
+            },
+            DELETE: {
+                SUCCESS: "Voice deleted successfully."
+            },
+            ERROR: "An error occurred while processing your request."
+        }
     },
     WOO: {
         PHRASE: "Phrase",
@@ -234,7 +299,8 @@ const en = {
             UPDATE: {
                 SUCCESS: "Interaction successfully saved.",
                 ERROR: "An error occurred while saving the interaction."
-            }
+            },
+            ERROR: "An error occurred while processing your request."
         }
     },
     COMMON: {

@@ -33,7 +33,7 @@ eva.controller('cloud', ['$scope', '$http', function ($scope, $http) {
         $http.put('/api/cloud', json).then(function successCallback(response) {
             $('#myModal').modal('hide');
             $scope.index();
-            notify(response.data.message);
+            notify(locale().CLOUD.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
         });
     }
@@ -41,6 +41,7 @@ eva.controller('cloud', ['$scope', '$http', function ($scope, $http) {
     $scope.delete = function (id) {
         $http.put('/api/cloud', { key: id, value: '' }).then(function successCallback(response) {
             $scope.index();
+            notify(locale().CLOUD.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
         });
     }

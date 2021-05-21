@@ -26,7 +26,9 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
         var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
         $http.post('/api/common?db=scriptdata', json).then(function successCallback(response) {
             $scope.clear();
+            notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
         });
     }
 
@@ -45,20 +47,25 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
         var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
         $http.put('/api/common/' + $scope.updateid + '?db=scriptdata', json).then(function successCallback(response) {
             $scope.clear();
+            notify(locale().SCRIPT_DATA.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
         });
     }
 
     $scope.delete = function (id) {
         $http.delete('/api/common/' + id + '?db=scriptdata').then(function successCallback(response) {
             $scope.list();
+            notify(locale().SCRIPT_DATA.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
         });;
     }
 
     $scope.speak = function (value) {
         $http.get('/speak?speak=' + value).then(function successCallback(response) {
         }, function errorCallback(response) {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
         });
     }
 

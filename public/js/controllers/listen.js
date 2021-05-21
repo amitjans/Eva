@@ -4,6 +4,7 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
     $scope.temp = [];
     $scope.icon = true;
     $scope.updateid;
+    $scope.accion = locale().COMMON.ADD;
     Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
@@ -17,13 +18,10 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
     $scope.create = function () {
         var json = { idioma: $scope.idioma, codigo: $scope.codigo, watson: $scope.watson };
         $http.post('/api/common?db=googlestt', json).then(function successCallback(response) {
-            $scope.idioma = '';
-            $scope.codigo = '';
-            $scope.watson = '';
-            $scope.nombre = '';
-            $('#myModal').modal('hide');
-            $scope.list();
+            $scope.clear();
+            notify(locale().LISTEN.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
         });
     }
 
@@ -40,21 +38,25 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
     $scope.updatesend = function () {
         var json = { idioma: $scope.idioma, codigo: $scope.codigo, watson: $scope.watson };
         $http.put('/api/common/' + $scope.updateid + '?db=googlestt', json).then(function successCallback(response) {
-            $scope.idioma = '';
-            $scope.codigo = '';
-            $scope.watson = '';
-            $scope.icon = true;
-            $('#myModal').modal('hide');
-            $scope.list();
-            $scope.accion = locale().COMMON.ADD;
+            $scope.clear();
+            notify(locale().LISTEN.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
         });
+    }
+
+    $scope.clear = function () {
+        Object.assign($scope, { idioma: '', codigo: '', watson: '', icon: true, accion: locale().COMMON.ADD })
+        $('#myModal').modal('hide');
+        $scope.list();
     }
 
     $scope.delete = function (id) {
         $http.delete('/api/common/' + id + '?db=googlestt').then(function successCallback(response) {
             $scope.list();
+            notify(locale().LISTEN.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
+            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
         });;
     }
     
