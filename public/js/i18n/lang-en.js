@@ -21,7 +21,8 @@ const en = {
         MENU: "Idioma",
         ES: "Spanish",
         EN: "English",
-        PR: "Portuguese"
+        PR: "Portuguese",
+        FR: "French"
     },
     DATATABLE: {
         SHOW: "Show",
