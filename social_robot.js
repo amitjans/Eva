@@ -374,34 +374,14 @@ class SocialRobot {
   }
 
   resetlog() {
-    log = '';
-    time = Date.now();
+    time = Date.now().toString(36);
   }
 
-  templog(who, texto) {
-    log += who.autor + ': ' + texto + '\n';
-    enviarMensaje(who, texto);
-  }
-
-  savelogs(nombre, temp) {
-    logs.logs(nombre + time, (temp || log));
-    log = '';
+  savelog(who, temp) {
+    enviarMensaje(who, temp);
+    logs.logs(time, who.autor + ': ' + temp + '\n');
   }
 
 }
-
-/**
- * SocialRobot module version 
- */
-
-//SocialRobot.prototype.version = 'v1';
-SocialRobot.prototype.defaultConfiguration = {
-  'attentionWord': 'Eva',
-  'name': 'Eva',
-  'voice': 'es-LA_SofiaV3Voice',
-  'ttsReconnect': true,
-};
-
-SocialRobot.prototype.configurationParameters = Object.keys(SocialRobot.prototype.defaultConfiguration);
 
 module.exports = SocialRobot;

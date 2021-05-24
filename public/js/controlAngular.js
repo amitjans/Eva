@@ -27,34 +27,12 @@ eva.controller("ControlEvaController", function ($scope, $http, $sce) {
     });
   });
 
-  var iconoEmocion = [
-    "meh-o",
-    "lightbulb-o",
-    "frown-o",
-    "heart-o",
-    "eye",
-    "smile-o",
-    "",
-  ];
-
   $scope.renderHtml = function (htmlCode) {
     return $sce.trustAsHtml(htmlCode);
   };
 
-  $scope.enviarMensaje = function () {
-    $http.post("nodes", { type: "speak", text: $scope.mensaje }).then(
-      function (res) {
-        notify("Frase procesada correctamente");
-      },
-      function (error) {
-        notify("A ocurrido un error al procesar la petición", "danger");
-      }
-    );
-    $scope.mensaje = "";
-  };
-
   $scope.iniciarInteracciong = function (id) {
-    $http.get("interaccion/" + id).then(
+    $http.get("api/interaccion/" + id).then(
       function (res) {},
       function (error) {
         console.log(error);
