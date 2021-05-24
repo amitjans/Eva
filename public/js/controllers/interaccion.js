@@ -336,7 +336,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.download = function (l) {
-    let filename = l.nombre + ".txt";
+    let filename = l.nombre + ".json";
     $http.get('/api/interaccion/export/' + l._id).then(function successCallback(response) {
       let tempobj = { nombre: l.nombre, data: response.data };
       var blob = new Blob([JSON.stringify(tempobj, null, "\t")], { type: "text/plain;charset=utf-8" });
