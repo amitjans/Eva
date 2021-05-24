@@ -33,8 +33,8 @@
           </div>
           <br />
           <div class="form-group">
-            <button type="button" class="btn btn-primary" ng-click="add()">{{'INTERACTION.ADD_INT' | translate}}</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimport">{{'INTERACTION.IMPORT_INT' | translate}}</button>
+            <button type="button" class="btn btn-primary" ng-click="add()"><span class="fa fa-plus-circle"></span>&nbsp;&nbsp;{{'INTERACTION.ADD_INT' | translate}}</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimport"><span class="fa fa-upload"></span>&nbsp;&nbsp;{{'INTERACTION.IMPORT_INT' | translate}}</button>
           </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="profile">
@@ -86,7 +86,7 @@
                 <button type="button" ng-show="icon" class="btn btn-primary btn-sm" ng-click="create()">{{'INTERACTION.SAVE' | translate}}</button>
                 <button type="button" ng-show="!icon" class="btn btn-primary btn-sm"
                   ng-click="updatesend()">{{'INTERACTION.UPDATE' | translate}}</button>
-                <button type="button" ng-show="!icon" class="btn btn-primary btn-sm" ng-click="updatesendx()">{{'INTERACTION.UPDATE_FINISH' | translate}}</button>
+                <button type="button" ng-show="!icon" class="btn btn-primary btn-sm" ng-click="updatesend(true)">{{'INTERACTION.UPDATE_FINISH' | translate}}</button>
                 <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">{{'INTERACTION.REFRESH' | translate}}</button>
               </div>
             </div>
@@ -461,7 +461,7 @@
             <div class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-sm-12">
-                  <textarea name="imp" id="" cols="70" rows="20" style="resize: vertical;"></textarea>
+                  <textarea name="imp" id="" cols="70" rows="20" class="form-control" style="resize: vertical;"></textarea>
                 </div>
               </div>
             </div>

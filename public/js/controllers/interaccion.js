@@ -54,7 +54,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.iniciarInteracciong = function (id) {
-    $http.get('interaccion/' + id)
+    $http.get('api/interaccion/' + id)
       .then(function (res) {
       }, function (error) {
         console.log(error);
@@ -87,24 +87,16 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     reload();
   }
 
-  $scope.updatesend = function () {
+  $scope.updatesend = function (end = false) {
     var json = { nombre: $scope.nombre, data: { node: node, link: link } };
     $http.put('/api/common/' + $scope.updateid + '?db=interaccion', json).then(function successCallback(response) {
-    }, function errorCallback(response) {
-    });
-  }
-
-  $scope.updatesendx = function () {
-    var json = { nombre: $scope.nombre, data: { node: node, link: link } };
-    $http.put('/api/common/' + $scope.updateid + '?db=interaccion', json).then(function successCallback(response) {
-      $scope.updateid = '';
-      $scope.accion = locale().COMMON.ADD;
-      $scope.icon = true;
-      $scope.reset();
-      $scope.list();
-      $scope.node = [];
-      $('#inicio').click();
-      id = 0;
+      if (end) {
+        Object.assign($scope, { updateid: '', accion: locale().COMMON.ADD, icon: true, node: [] });
+        $scope.reset();
+        $scope.list();
+        $('#inicio').click();
+        id = 0;
+      }
     }, function errorCallback(response) {
     });
   }
@@ -127,7 +119,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.unified = function (id) {
-    $http.get('/interaccion/unified/' + id).then(function successCallback(response) {
+    $http.get('/api/interaccion/unified/' + id).then(function successCallback(response) {
       $scope.list();
     }, function errorCallback(response) {
     });
@@ -345,10 +337,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.download = function (l) {
     let filename = l.nombre + ".txt";
-    let tempobj = JSON.parse(JSON.stringify(l));
-    delete tempobj._id
-    var blob = new Blob([JSON.stringify(tempobj)], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, filename);
+    $http.get('/api/interaccion/export/' + l._id).then(function successCallback(response) {
+      let tempobj = { nombre: l.nombre, data: response.data };
+      var blob = new Blob([JSON.stringify(tempobj, null, "\t")], { type: "text/plain;charset=utf-8" });
+      saveAs(blob, filename);
+    }, function errorCallback(response) {
+    });
   }
 
   $scope.import = function () {

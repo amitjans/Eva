@@ -6,8 +6,6 @@ var random = require('../utils/Random');
 var lf = require('./ListeningFilters');
 const api = require('./Api_Node');
 var { setRespuesta, getRespuesta, getSactual, addlemotion, getlemotion, setCounter, getCounter, setApi, getApi } = require('./VPL_ProcessVars');
-const { get } = require('../server/routes');
-const { JSONCookie } = require('cookie-parser');
 
 module.exports = {
     ProcessNode: async function (element) {
@@ -109,7 +107,7 @@ async function ProcessSpeakNode(element) {
     if (!!social.getConf().translate && !fs.existsSync('./temp/' + (social.getConf().voice + '_' + hash) + '.wav')) {
         fulltext = await social.translate(fulltext, social.getConf().voice.substring(0, 5), social.getConf().sourcelang.substring(0, 2));
     }
-    social.templog(evaId, fulltext);
+    social.savelog(evaId, fulltext);
     if (rec) {
         await RecAndSpeak({ key: hash, type: "speak", text: fulltext });
     } else {
@@ -135,7 +133,7 @@ async function ProcessListenNode(element) {
     if (!!element.opt) {
         r = lf[element.opt](r)[0];
     }
-    social.templog(usuarioId, r);
+    social.savelog(usuarioId, r);
     setRespuesta(r);
 }
 
