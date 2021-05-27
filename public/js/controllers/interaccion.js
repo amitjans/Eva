@@ -216,7 +216,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push(Object.assign(tempobj, { src: $scope.thesound, wait: $scope.ccommon, anim: $scope.leds }));
         break;
       case "led":
-        let base = $scope.led.filter(x => x._id == $scope.leds)[0].base;
+        let base = $scope.led.find(x => x._id == $scope.leds).base;
         node.push(Object.assign(tempobj, { name: "Leds_" + id, anim: $scope.leds, base: base }));
         break;
       case "voice":
@@ -224,7 +224,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
           tempobj.translate = true;
           tempobj.sourcelang = $scope.sourcelang;
         }
-        node.push(Object.assign(tempobj, { voice: $scope.voice, robotname: $scope.vlistado.filter(x => x.codigo == $scope.voice)[0].nombre }));
+        node.push(Object.assign(tempobj, { voice: $scope.voice, robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre }));
         break;
       case "counter":
         node.push(Object.assign(tempobj, { count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter }));
@@ -306,7 +306,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.leds = l.anim;
         break;
       case 'voice':
-        Object.assign($scope, { voice: l.voice, ccommon: l.translate, sourcelang: l.sourcelang, robotname: $scope.vlistado.filter(x => x.codigo == $scope.voice)[0].nombre });
+        Object.assign($scope, { voice: l.voice, ccommon: l.translate, sourcelang: l.sourcelang, robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre });
         break;
       case 'counter':
         Object.assign($scope, { ops: l.ops, vcounter: l.value, cname: l.count });

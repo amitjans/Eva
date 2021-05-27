@@ -89,9 +89,9 @@ const es = {
     INTERACTION: {
         TITLE: "Listado de Interacciones",
         NODES: "Nodes",
-        ADD_INT: "Agregar Interación",
+        ADD_INT: "Nueva interacción",
         IMPORT: "Importar",
-        IMPORT_INT: "Importar Interación",
+        IMPORT_INT: "Importar interacción",
         NODE: "Node",
         TYPE: "Tipo",
         DOWNLOAD: "Descarga",

@@ -1,25 +1,25 @@
 const crypto = require('crypto');
 const { ProcessNode } = require('./VPL_Node');
 const { ConditionNode } = require('./If_Node');
-const { FirstsOfGroup, NextNode } = require('./NodeUtils');
+const { NextNode } = require('./NodeUtils');
 const LoadScriptData = require('./Script_Node');
 
 var iscript = {};
 global.sactual;
 
 async function ProcessFlow(nodes, links, fnodes, ini) {
-    let aux = [fnodes[ini]];
+    let aux = [ini];
     do {
         if (aux.length == 1 || aux[0].type !== 'if') {
             if (aux[0].type === 'for') {
                 if (aux[0].iteraciones <= -1) {
-                    let ss = nodes.filter(i => i.group === aux[0].key && i.type === 'script')[0];
+                    let ss = nodes.find(i => i.group === aux[0].key && i.type === 'script');
                     let { key, data } = await LoadScriptData(ss);
                     iscript[key] = data;
                     aux[0].iteraciones = iscript[ss.key.toString()].length;
                 }
                 for (let f = 0; f < aux[0].iteraciones; f++) {
-                    await ProcessFlow(nodes, links, fnodes, FirstsOfGroup(fnodes, aux[0].key));
+                    await ProcessFlow(nodes, links, fnodes, fnodes.find(x => x.group == aux[0].key));
                 }
             } else if (aux[0].type === 'script') {
                 await LoadScriptData(aux[0]);

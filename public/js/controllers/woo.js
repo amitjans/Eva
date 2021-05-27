@@ -143,7 +143,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
                 $scope.commands.push({ type: 'sound', src: $scope.thesound, desc: $scope.thesound, order: $scope.corder });
             }
             else if ($scope.tipo == 'led') {
-                let temp = $scope.led.filter(x => x._id == $scope.leds)[0];
+                let temp = $scope.led.find(x => x._id == $scope.leds);
                 $scope.commands.push({ type: 'led', base: temp.base, anim: $scope.leds, desc: temp.nombre, order: $scope.corder });
             }
         } else {
@@ -155,7 +155,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
                 $scope.commands[$scope.tempid] = { type: 'sound', src: $scope.thesound, desc: $scope.thesound, order: $scope.corder };
             }
             else if ($scope.tipo == 'led') {
-                let temp = $scope.led.filter(x => x._id == $scope.leds)[0];
+                let temp = $scope.led.find(x => x._id == $scope.leds);
                 $scope.commands[$scope.tempid] = { type: 'led', base: temp.base, anim: $scope.leds, desc: temp.nombre, order: $scope.corder };
             }
         }

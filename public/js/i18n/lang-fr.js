@@ -89,7 +89,7 @@ const fr = {
 	INTERACTION: {
 		TITLE: "Liste des Interactions",
 		NODES: "Nodes",
-		ADD_INT: "Ajouter une Interaction",
+		ADD_INT: "Nouvelle interaction",
 		IMPORT: "Importer",
 		IMPORT_INT: "Importer l'interaction",
 		NODE: "Noeud",

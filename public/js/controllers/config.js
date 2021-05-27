@@ -44,25 +44,25 @@ eva.controller('config', ['$scope', '$http', function ($scope, $http) {
 
     $scope.update = function () {
         var json = { name: $scope.nombre, voice: $scope.voice, 
-            voiceled: $scope.led.filter(x => x._id == $scope.voiceled)[0], 
-            listen: $scope.sttlist.filter(x => x._id == $scope.listen)[0],
-            listenled: $scope.led.filter(x => x._id == $scope.listenled)[0],
+            voiceled: $scope.led.find(x => x._id == $scope.voiceled), 
+            listen: $scope.sttlist.find(x => x._id == $scope.listen),
+            listenled: $scope.led.find(x => x._id == $scope.listenled),
             emotion: {
                 joy: {
-                    mov: $scope.movlist.filter(x => x._id == $scope.emotionmov1)[0],
-                    led: $scope.led.filter(x => x._id == $scope.emotionled1)[0]
+                    mov: $scope.movlist.find(x => x._id == $scope.emotionmov1),
+                    led: $scope.led.find(x => x._id == $scope.emotionled1)
                 },
                 sad: {
-                    mov: $scope.movlist.filter(x => x._id == $scope.emotionmov2)[0],
-                    led: $scope.led.filter(x => x._id == $scope.emotionled2)[0]
+                    mov: $scope.movlist.find(x => x._id == $scope.emotionmov2),
+                    led: $scope.led.find(x => x._id == $scope.emotionled2)
                 },
                 anger: {
-                    mov: $scope.movlist.filter(x => x._id == $scope.emotionmov3)[0],
-                    led: $scope.led.filter(x => x._id == $scope.emotionled3)[0]
+                    mov: $scope.movlist.find(x => x._id == $scope.emotionmov3),
+                    led: $scope.led.find(x => x._id == $scope.emotionled3)
                 },
                 surprise: {
-                    mov: $scope.movlist.filter(x => x._id == $scope.emotionmov4)[0],
-                    led: $scope.led.filter(x => x._id == $scope.emotionled4)[0]
+                    mov: $scope.movlist.find(x => x._id == $scope.emotionmov4),
+                    led: $scope.led.find(x => x._id == $scope.emotionled4)
                 }
             }
         };
