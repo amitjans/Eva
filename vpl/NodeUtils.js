@@ -3,13 +3,11 @@ module.exports = {
         let result = { ini: [], end: [] };
         for (let i = 0; i < nodes.length; i++) {
             if (!nodes[i].group) {
-                let from = FromSomeone(nodes[i], links);
-                let to = ToSomeone(nodes[i], links);
-                if (from && to) {
-                    continue;
-                } else if (from) {
+                let from = !!links.find(x => x.to == nodes[i].key);
+                let to = !!links.find(x => x.from == nodes[i].key);
+                if (from && !to) {
                     result.end.push(nodes[i]);
-                } else {
+                } else if (!from && to) {
                     result.ini.push(nodes[i]);
                 }
             }
@@ -20,11 +18,7 @@ module.exports = {
         let n = [];
         for (let i = 0; i < links.length; i++) {
             if (links[i].from == node.key) {
-                for (let j = 0; j < nodes.length; j++) {
-                    if (links[i].to == nodes[j].key) {
-                        n.push(nodes[j]);
-                    }
-                }
+                n.push(nodes.find(x => x.key == links[i].to));
             }
         }
         return n;
@@ -40,30 +34,5 @@ module.exports = {
             }
         }
         return fnodes.sort(function(a, b){return !!a.group ? 1 : -1 });
-    },
-    FirstsOfGroup: function (fnodes, key) {
-        for (let i = 0; i < fnodes.length; i++) {
-            if (fnodes[i].group == key) {
-                return i;
-            }
-        }
     }
 };
-
-function FromSomeone(node, links) {
-    for (const iterator of links) {
-        if (node.key == iterator.to) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function ToSomeone(node, links) {
-    for (const iterator of links) {
-        if (node.key == iterator.from) {
-            return true;
-        }
-    }
-    return false;
-}

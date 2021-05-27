@@ -158,6 +158,7 @@ class SocialRobot {
       this.ledsanimstop();
     }
     if (soundFile != 'stop') {
+      player = new Sound();
       this.ledsanim(obj.base, obj.opts);
       self._isPlaying = true;
       let promise = new Promise(function (resolve, reject) {

@@ -2831,6 +2831,74 @@
           }
         ]
       }
+    },
+    {
+      "_id": "ca9731f3-dd42-4c8e-a7be-94403ed3cbe4",
+      "nombre": "Chistes",
+      "data": {
+        "node": [
+          {
+            "key": 1622087548283,
+            "name": "Ciclo_0",
+            "type": "for",
+            "iteraciones": -1,
+            "isGroup": true,
+            "__gohashid": 558
+          },
+          {
+            "key": 1622087556945,
+            "name": "Script_1",
+            "type": "script",
+            "group": 1622087548283,
+            "sc": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+            "random": true,
+            "__gohashid": 637
+          },
+          {
+            "key": 1622087576391,
+            "name": "Esperar_2",
+            "type": "wait",
+            "group": 1622087548283,
+            "time": 1000,
+            "__gohashid": 1448
+          },
+          {
+            "key": 1622087619404,
+            "name": "Hablar_3",
+            "type": "speak",
+            "group": 1622087548283,
+            "text": "%2",
+            "__gohashid": 1606
+          },
+          {
+            "key": 1622087643235,
+            "name": "Audio_4",
+            "type": "sound",
+            "group": 1622087548283,
+            "src": "laugh-03",
+            "wait": true,
+            "anim": "489809bb-ec23-4016-80a2-04ae46e2f989",
+            "__gohashid": 1813
+          }
+        ],
+        "link": [
+          {
+            "from": 1622087556945,
+            "to": 1622087576391,
+            "__gohashid": 1450
+          },
+          {
+            "from": 1622087576391,
+            "to": 1622087619404,
+            "__gohashid": 1608
+          },
+          {
+            "from": 1622087619404,
+            "to": 1622087643235,
+            "__gohashid": 1815
+          }
+        ]
+      }
     }
   ],
   "voice": [

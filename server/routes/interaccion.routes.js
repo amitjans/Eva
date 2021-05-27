@@ -29,7 +29,7 @@ router.get('/:id', async function (req, res) {
 	var fnodes = FirstsNodes(obj.link, obj.node.slice());
 
 	social.resetlog();
-	await ProcessFlow(obj.node, obj.link, fnodes, 0);
+	await ProcessFlow(obj.node, obj.link, fnodes, fnodes[0]);
 	["respuesta", "sactual", "lemotion", "counter", "apidata", "iscript"].forEach(item => { delete global[item] });
 	social.setConf(JSON.parse(fs.readFileSync('./config.json')));
 	social.resetlog();

@@ -89,7 +89,7 @@ const pr = {
     INTERACTION: {
         TITLE: "Lista de interações",
         NODES: "Nós",
-        ADD_INT: "Adicionar interação",
+        ADD_INT: "Nova interação",
         IMPORT: "Importar",
         IMPORT_INT: "Importar interação",
         NODE: "Nó",
