@@ -5,13 +5,10 @@ eva.controller("ControlEvaController", function ($scope, $http, $sce) {
   $scope.errores = [];
   $scope.textoScript = "textoScript";
 
-  var socket = io.connect(window.location.host, { forceNew: true });
+  var socket = io.connect(window.location.host + (/[:]{1}[\d]+/.test(window.location.host) ? '' : ':3000'), { forceNew: true });
   socket.on("messages", function (data) {
     $scope.$apply(function () {
       if (data.fecha) {
-        console.log(data);
-        //data.fecha = Date.now();
-        console.log(data);
         $scope.interacciones.push(data);
         $scope.textoScript = data.mensaje;
         if (data.media) {

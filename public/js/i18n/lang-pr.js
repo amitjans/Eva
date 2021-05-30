@@ -123,7 +123,7 @@ const pr = {
             DIVISION: "Divisão",
             ASSIGN: "Atribuir"
         },
-        API_REST: "Api Rest",
+        API: "Api Rest",
         DIALOGFLOW: "Dialogflow",
         TRANSLATE: "Traduzir",
         RANDOM: "Aleatório",
