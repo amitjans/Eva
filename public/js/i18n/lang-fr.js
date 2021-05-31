@@ -21,8 +21,9 @@ const fr = {
 		MENU: "Langue",
 		ES: "Espagnol",
 		EN: "Anglais",
-		PR: "Portugues",
-		FR: "Français"
+		PT: "Portugues",
+		FR: "Français",
+		IT: "Italien"
 	},
 	DATATABLE: {
 		SHOW: "Affiche",
@@ -89,7 +90,7 @@ const fr = {
 	INTERACTION: {
 		TITLE: "Liste des Interactions",
 		NODES: "Nodes",
-		ADD_INT: "Nouvelle interaction",
+		ADD_INT: "Ajouter une Interaction",
 		IMPORT: "Importer",
 		IMPORT_INT: "Importer l'interaction",
 		NODE: "Noeud",

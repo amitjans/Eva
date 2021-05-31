@@ -89,6 +89,10 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
         $scope.node({ type: 'mov', mov: dir });
     }
 
+    $scope.emotion = function (emotion, level) {
+        $scope.node({ type: 'emotion', emotion: emotion, level: level, speed: 2.0 });
+    }
+
     $scope.setvoice = function (value) {
         $scope.node(Object.assign($scope.config, { voice: $scope.voice, type: 'voice', robotname: $scope.config.name }));
     }

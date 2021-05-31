@@ -77,15 +77,63 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="col-md-3" ng-repeat="item in emotionsicon">
+            <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{{ item.name }}</h3>
+                        <h3 class="panel-title">{{'EMOTION_TYPE.NEUTRAL' | translate}}</h3>
                     </div>
                     <div class="panel-body">
-                        <img src="{{ item.img }}"
-                            style="display: block; margin-left: auto; margin-right: auto; cursor: pointer; width: 50%;"
-                            ng-click="node(item)">
+                        <span class="emojin" ng-click="emotion('neutral', 0)">&#128528;</span>
+                        <span class="emojin" ng-click="emotion('blink', 0)">&#128528;</span>
+                        <span class="emojin" ng-click="emotion('wink', 0)">&#128521;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{'EMOTION_TYPE.JOY' | translate}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="emojin" ng-click="emotion('joy', 0)">&#128578;</span>
+                        <span class="emojin" ng-click="emotion('joy', 1)">&#128512;</span>
+                        <span class="emojin" ng-click="emotion('joy', 2)">&#128514;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{'EMOTION_TYPE.SAD' | translate}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="emojin" ng-click="emotion('sad', 0)">&#128551;</span>
+                        <span class="emojin" ng-click="emotion('sad', 1)">&#128546;</span>
+                        <span class="emojin" ng-click="emotion('sad', 2)">&#128557;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{'EMOTION_TYPE.ANGER' | translate}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="emojin" ng-click="emotion('anger', 0)">&#128544;</span>
+                        <span class="emojin" ng-click="emotion('anger', 1)">&#128545;</span>
+                        <span class="emojin" ng-click="emotion('anger', 2)">&#129324;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{'EMOTION_TYPE.SURPRISE' | translate}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="emojin" ng-click="emotion('surprise', 0)">&#128558;</span>
+                        <span class="emojin" ng-click="emotion('surprise', 1)">&#128559;</span>
+                        <span class="emojin" ng-click="emotion('surprise', 2)">&#128562;</span>
                     </div>
                 </div>
             </div>
