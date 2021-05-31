@@ -357,9 +357,9 @@ class SocialRobot {
       return;
     }
     eyes({ anim: emotion, bcolor: '', speed: (speed || 2.0) });
+    this.ledsanimstop();
     switch (emotion) {
       case 'ini':
-        this.ledsanimstop();
         this.movement('c');
         break;
       default:

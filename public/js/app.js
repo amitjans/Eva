@@ -5,21 +5,17 @@ var eva = angular.module("evaApp", [
   "ngSanitize"
 ]);
 
-var lang = { es: es, en: en, pr: pr, fr: fr };
+var lang = { es: es, en: en, pt: pt, fr: fr, it: it };
 function locale() {
   return lang[localStorage.getItem("lang") || "es"];
 }
 
 eva.config(function ($translateProvider) {
-  $translateProvider.translations('es', lang.es);
-  $translateProvider.translations('en', lang.en);
-  $translateProvider.translations('pr', lang.pr);
-  $translateProvider.translations('fr', lang.fr);
+  let array = Object.keys(lang);
+  for (let i = 0; i < array.length; i++) {
+    $translateProvider.translations(array[i], lang[array[i]]);
+  }
   $translateProvider.useSanitizeValueStrategy('escape');
-  // $translateProvider.useStaticFilesLoader({
-  //   prefix: 'js/i18n/lang-',
-  //   suffix: '.json'
-  // });
   $translateProvider.preferredLanguage(localStorage.getItem("lang") || "es");
 });
 

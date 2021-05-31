@@ -5,17 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/dropzone.min.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
-    
-    <style>
-        .dropzone { border: 2px dashed #0087F7; }
-        .ui-loader { display: none; }
-        .right { right: 40%; }
-        .rotate-45-left { display: inline-block; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
-        .rotate-45-right { display: inline-block; -webkit-transform: rotate(45deg); transform: rotate(45deg); }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body ng-app="evaApp">
@@ -84,10 +76,11 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" ng-controller="lang" aria-labelledby="drop2">
-                            <li><i class="flag flag-spain"></i><a ng-click="changeLanguage('es')" onmouseover="this.style.cursor='pointer';">{{'LANG.ES' | translate}}</a></li>
-                            <li><i class="flag flag-united-states"></i><a ng-click="changeLanguage('en')" onmouseover="this.style.cursor='pointer';">{{'LANG.EN' | translate}}</a></li>
-                            <li><i class="flag flag-brazil"></i><a ng-click="changeLanguage('pr')" onmouseover="this.style.cursor='pointer';">{{'LANG.PR' | translate}}</a></li>
-                            <li><i class="flag flag-france"></i><a ng-click="changeLanguage('fr')" onmouseover="this.style.cursor='pointer';">{{'LANG.FR' | translate}}</a></li>
+                            <li><a ng-click="changeLanguage('es')" onmouseover="this.style.cursor='pointer';">&#127466&#127480 {{'LANG.ES' | translate}}</a></li>
+                            <li><a ng-click="changeLanguage('en')" onmouseover="this.style.cursor='pointer';">&#127482&#127480 {{'LANG.EN' | translate}}</a></li>
+                            <li><a ng-click="changeLanguage('pt')" onmouseover="this.style.cursor='pointer';">&#127463&#127479 {{'LANG.PT' | translate}}</a></li>
+                            <li><a ng-click="changeLanguage('fr')" onmouseover="this.style.cursor='pointer';">&#127467&#127479 {{'LANG.FR' | translate}}</a></li>
+                            <li><a ng-click="changeLanguage('it')" onmouseover="this.style.cursor='pointer';">&#127470&#127481 {{'LANG.IT' | translate}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -125,9 +118,11 @@
 
     <script type="text/javascript" src="/js/i18n/lang-es.js"></script>
     <script type="text/javascript" src="/js/i18n/lang-en.js"></script>
-    <script type="text/javascript" src="/js/i18n/lang-pr.js"></script>
+    <script type="text/javascript" src="/js/i18n/lang-pt.js"></script>
     <script type="text/javascript" src="/js/i18n/lang-fr.js"></script>
+    <script type="text/javascript" src="/js/i18n/lang-it.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/dev.js"></script>
     <script type="text/javascript" src="/js/controlAngular.js"></script>
     <script type="text/javascript" src="/js/controllers/led.js"></script>
     <script type="text/javascript" src="/js/controllers/mov.js"></script>
