@@ -16,38 +16,10 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     $scope.tempwoo = {};
     $scope.tempid = -1;
 
-    function emotion(value) {
-        return locale().EMOTION_TYPE[value];
-    }
-
-    $scope.emotionsicon = [
-        { type: 'emotion', emotion: 'ini', level: 0, img: '/images/normal.png', name: emotion('NEUTRAL'), speed: 2.0 },
-        { type: 'emotion', emotion: 'sad', level: 0, img: '/images/triste.png', name: emotion('SAD'), speed: 2.0 },
-        { type: 'emotion', emotion: 'sad', level: 1, img: '/images/triste1.png', name: `${emotion('SAD')} 1` , speed: 2.0 },
-        { type: 'emotion', emotion: 'sad', level: 2, img: '/images/triste2.png', name: `${emotion('SAD')} 2`, speed: 2.0 },
-        { type: 'emotion', emotion: 'anger', level: 0, img: '/images/ira.png', name: emotion('ANGER'), speed: 2.0 },
-        { type: 'emotion', emotion: 'anger', level: 1, img: '/images/ira1.png', name: `${emotion('ANGER')} 1`, speed: 2.0 },
-        { type: 'emotion', emotion: 'anger', level: 2, img: '/images/ira2.png', name: `${emotion('ANGER')} 2`, speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 0, img: '/images/feliz.png', name: emotion('JOY'), speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 1, img: '/images/feliz1.png', name: `${emotion('JOY')} 1`, speed: 2.0 },
-        { type: 'emotion', emotion: 'joy', level: 2, img: '/images/feliz2.png', name: `${emotion('JOY')} 2`, speed: 2.0 },
-        { type: 'emotion', emotion: 'surprise', level: 0, img: '/images/sorpresa.png', name: emotion('SURPRISE'), speed: 2.0 },
-        { type: 'emotion', emotion: 'surprise', level: 1, img: '/images/sorpresa.png', name: `${emotion('SURPRISE')} 1`, speed: 2.0 }
-    ];
-
     $scope.list = function () {
-        $http.get('/api/common?db=woo').then(function successCallback(response) {
-            $scope.listado = response.data;
-        }, function errorCallback(response) {
-        });
-        $http.get('/api/audio').then(function successCallback(response) {
-            $scope.soundlistado = response.data;
-        }, function errorCallback(response) {
-        });
-        $http.get('api/common?db=led').then(function successCallback(response) {
-            $scope.led = response.data;
-        }, function errorCallback(response) {
-        });
+        getData('/api/common?db=woo', 'listado');
+        getData('/api/audio', 'soundlistado');
+        getData('api/common?db=led', 'led');
         $http.get('/api/common?db=voice').then(function successCallback(response) {
             $scope.vlistado = response.data;
             $http.get('/config').then(function successCallback(response) {
@@ -55,6 +27,13 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
                 $scope.voice = $scope.config.voice;
             }, function errorCallback(response) {
             });
+        }, function errorCallback(response) {
+        });
+    }
+
+    function getData(url, property){
+        $http.get(url).then(function successCallback(response) {
+            $scope[property] = response.data;
         }, function errorCallback(response) {
         });
     }
@@ -169,12 +148,8 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.ucommand = function (id) {
-        $scope.tempid = id;
-        $scope.tipo = $scope.commands[id].type;
-        $scope.text = $scope.commands[id].text || '';
-        $scope.thesound = $scope.commands[id].src || '';
-        $scope.corder = $scope.commands[id].order;
-        $scope.leds = $scope.commands[id].anim || '';
+        let { type, text, src, order, anim } = $scope.commands[id];
+        Objets.assign($scope, { tempid: id, tipo: type, text: (text || ''), thesound: (src || ''), corder: (order || ''), leds: (anim || '') });
         $('#wooaddcs').modal('show');
     }
 
@@ -183,18 +158,8 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
     }
     //endcrudcommandswoo
 
-    $scope.fa_icon = function (value) {
-        switch (value) {
-            case 'speak':
-                return 'fa-comments-o';
-            case 'led':
-                return 'fa-lightbulb-o';
-            case 'sound':
-                return 'fa-volume-up';
-            default:
-                break;
-        }
-    }
+    $scope.fa_icon = value => ({ speak: 'fa-comments-o', led: 'fa-lightbulb-o', sound: 'fa-volume-up' }[value] || '');
+    
 
     $scope.list();
 }]);

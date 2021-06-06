@@ -1,7 +1,7 @@
  function datafilter (obj, query, properties) {
-    for (let i = 0; i < properties.length; i++) {
-        if (!!obj[properties[i]]) {
-            if (obj[properties[i]].toLowerCase().includes(query.toLowerCase())) {
+    for (let prop of properties) {
+        if (!!obj[prop]) {
+            if (obj[prop].toLowerCase().includes(query.toLowerCase())) {
                 return true;
             }
         }
@@ -13,29 +13,22 @@ function dataTableValues() {
     return { limit: '10', page: 0, maxpage: 0, from: 1, to: 10, q: '' };
 }
 
-function dataTable (listado, obj, way, ...properties) {
+function dataTable (listado, { page, maxpage, from, to, limit, q, temp }, way, ...properties) {
     if (way == 0) {
-        obj.temp = [];
-        for (let i = 0; i < listado.length; i++) {
-            if (datafilter(listado[i], obj.q, properties)) {
-                obj.temp.push(listado[i]);
-            }
-        }
-        obj.maxpage = (obj.temp.length % obj.limit == 0 ? obj.temp.length / obj.limit : Math.ceil(obj.temp.length / obj.limit));
+        temp = listado.filter(item => datafilter(item, q, properties));
+        maxpage = (temp.length % limit == 0 ? temp.length / limit : Math.ceil(temp.length / limit));
     } else {
-        if (obj.page + way < 0 || obj.page + way >= obj.maxpage) {
-            return { page: obj.page, maxpage: obj.maxpage, from: obj.from, to: obj.to, limit: obj.limit, temp: obj.temp };
+        if (page + way < 0 || page + way >= maxpage) {
+            return { page: page, maxpage: maxpage, from: from, to: to, limit: limit, temp: temp };
         } else {
-            obj.page += way;
-            obj.from = obj.page == 0 ? 1 : ((obj.page * obj.limit) + 1);
-            obj.to = obj.from + parseInt(obj.limit) - 1;
+            page += way;
+            from = page == 0 ? 1 : ((page * limit) + 1);
+            to = from + parseInt(limit) - 1;
         }
     }
     
-    obj.to = (obj.temp.length < obj.to) ? obj.temp.length : obj.limit * (obj.page + 1);
-    obj.from = obj.from < obj.to ? obj.from : obj.to < obj.limit ? 1 : ((obj.to / obj.limit) * obj.limit) + 1;
+    to = (temp.length < to) ? temp.length : limit * (page + 1);
+    from = from < to ? from : to < limit ? 1 : ((to / limit) * limit) + 1;
 
-    let sublist = obj.temp.slice(obj.from - 1, obj.to);
-
-    return { page: obj.page, maxpage: obj.maxpage, from: obj.from, to: obj.to, limit: obj.limit, temp: obj.temp, sublist: sublist };
+    return { page: page, maxpage: maxpage, from: from, to: to, limit: limit, temp: temp, sublist: temp.slice(from - 1, to) };
 }
