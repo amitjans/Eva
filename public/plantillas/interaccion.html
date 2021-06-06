@@ -152,7 +152,7 @@
               <div class="form-group" ng-show="modal == 'emotion'">
                 <label class="col-sm-2 control-label">{{'INTERACTION.EMOTION' | translate}}</label>
                 <div class="col-sm-10">
-                  <select name="emocion" id="" ng-model="emocion" class="form-control">
+                  <select name="emotion" id="" ng-model="emotion" class="form-control">
                     <option value="ini">{{'EMOTION_TYPE.NEUTRAL' | translate}}</option>
                     <option value="joy">{{'EMOTION_TYPE.JOY' | translate}}</option>
                     <option value="surprise">{{'EMOTION_TYPE.SURPRISE' | translate}}</option>
@@ -164,11 +164,11 @@
               <div class="form-group" ng-show="modal == 'emotion'">
                 <label class="col-sm-2 control-label">{{'INTERACTION.SPEED' | translate}}</label>
                 <div class="col-sm-10">
-                  <input type="number" min="0" class="form-control input-sm" ng-model="velocidad"
+                  <input type="number" min="0" class="form-control input-sm" ng-model="speed"
                     placeholder="{{'INTERACTION.SPEED' | translate}}">
                 </div>
               </div>
-              <div class="form-group" ng-show="modal == 'emotion' && emocion != 'ini' && !!emocion">
+              <div class="form-group" ng-show="modal == 'emotion' && emotion != 'ini' && !!emotion">
                 <label class="col-sm-2 control-label">{{'INTERACTION.LEVEL' | translate}}</label>
                 <label class="radio-inline col-sm-offset-1">
                   <input type="radio" name="level" id="inlineRadio1" ng-model="level" value="0"> {{'INTERACTION.ONLY_EYES' | translate}}
@@ -288,7 +288,7 @@
               <div class="form-group" ng-show="modal == 'script'">
                 <label class="col-sm-2 control-label">{{'INTERACTION.SCRIPT' | translate}}</label>
                 <div class="col-sm-10">
-                  <select name="emocion" id="" ng-model="thescript" class="form-control">
+                  <select id="" ng-model="thescript" class="form-control">
                     <option value="" selected>{{'INTERACTION.NONE' | translate}}</option>
                     <option ng-repeat="item in slistado" value="{{item._id}}">{{ item.nombre }}</option>
                   </select>
@@ -301,7 +301,7 @@
               <div class="form-group" ng-show="modal == 'sound'">
                 <label class="col-sm-2 control-label">{{'INTERACTION.SOUND' | translate}}</label>
                 <div class="col-sm-10">
-                  <select name="emocion" id="" ng-model="thesound" class="form-control">
+                  <select id="" ng-model="thesound" class="form-control">
                     <option value="" selected>{{'INTERACTION.NONE' | translate}}</option>
                     <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}</option>
                   </select>

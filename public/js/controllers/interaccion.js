@@ -10,17 +10,16 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   var color = { joy: "lightyellow", sad: "lightblue", surprised: "lightgreen", anger: "red", ini: "lightgray" };
 
   $scope.list = function () {
-    $http.get('/api/common?db=interaccion').then(function successCallback(response) {
-      $scope.listado = response.data;
-    }, function errorCallback(response) {
-    });
+    getData('/api/common?db=interaccion', 'listado');
   }
 
   $scope.slist = function () {
-    $http.get('/api/common?db=script').then(function successCallback(response) {
-      $scope.slistado = response.data;
-    }, function errorCallback(response) {
-    });
+    getData('/api/common?db=script', 'slistado');
+    getData('api/common?db=led', 'led');
+    getData('/api/common?db=mov', 'mov');
+    getData('/api/common?db=googlestt', 'stt');
+    getData('/api/audio', 'soundlistado');
+    getData('/api/filters', 'filterslist');
     $http.get('/api/common?db=voice').then(function successCallback(response) {
       $scope.vlistado = response.data;
       $scope.langcodelist = [];
@@ -31,31 +30,17 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       }
     }, function errorCallback(response) {
     });
-    $http.get('api/common?db=led').then(function successCallback(response) {
-      $scope.led = response.data;
-    }, function errorCallback(response) {
-    });
-    $http.get('/api/common?db=mov').then(function successCallback(response) {
-      $scope.mov = response.data;
-    }, function errorCallback(response) {
-    });
-    $http.get('/api/common?db=googlestt').then(function successCallback(response) {
-      $scope.stt = response.data;
-    }, function errorCallback(response) {
-    });
-    $http.get('/api/audio').then(function successCallback(response) {
-      $scope.soundlistado = response.data;
-    }, function errorCallback(response) {
-    });
-    $http.get('/api/filters').then(function successCallback(response) {
-      $scope.filterslist = response.data;
+  }
+
+  function getData(url, property){
+    $http.get(url).then(function successCallback(response) {
+      $scope[property] = response.data;
     }, function errorCallback(response) {
     });
   }
 
   $scope.iniciarInteracciong = function (id) {
-    $http.get('api/interaccion/' + id)
-      .then(function (res) {
+    $http.get('api/interaccion/' + id).then(function (res) {
       }, function (error) {
         console.log(error);
       });
@@ -73,17 +58,11 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.update = function (l) {
     Object.assign($scope, { nombre: l.nombre, updateid: l._id, icon: false, accion: locale().COMMON.EDIT} );
-    var data = l.data;
-    node = data.node;
-    link = data.link;
+    node = l.data.node;
+    link = l.data.link;
     $scope.node = node;
-    id = 0;
-    node.forEach(element => {
-      if (id < parseInt(element.name.split('_')[1])) {
-        id = parseInt(element.name.split('_')[1]);
-      }
-    });
-    id++;
+    $scope.node.sort((a, b) => parseInt(a.name.split('_')[1]) - parseInt(b.name.split('_')[1]));
+    id = parseInt($scope.node[node.length - 1].name.split('_')[1]) + 1;
     reload();
   }
 
@@ -138,10 +117,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.common = function (identifier) {
-    $scope.node = node;
-    $scope.texto = '';
-    $scope.listenopt = '';
-    $scope.ifopt = '4';
+    Object.assign($scope, {node: node, texto: '', listenopt: '', ifopt: '4'});
     if (!!$scope.link) {
       link.push({ from: parseInt($scope.link), to: identifier });
     }
@@ -175,8 +151,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
           }
         });
         break;
-      default:
-        break;
     }
     $scope.modal = value;
     $("#myModal").modal('show');
@@ -186,70 +160,66 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     let tempobj = { key: Date.now(), name: modalname[$scope.modal.toUpperCase()] + '_' + id, type: $scope.modal, group: $scope.group }
     switch ($scope.modal) {
       case 'emotion':
-        node.push(Object.assign(tempobj, { emotion: $scope.emocion, level: parseInt($scope.level), speed: $scope.velocidad, color: color[$scope.emocion] }));
+        node.push({ ...tempobj, emotion: $scope.emotion, level: parseInt($scope.level), speed: $scope.speed, color: color[$scope.emotion] });
         break;
       case "speak":
-        node.push(Object.assign(tempobj, { text: $scope.texto }));
+        node.push({ ...tempobj, text: $scope.texto });
         break;
       case "listen":
-        node.push(Object.assign(tempobj, { opt: $scope.listenopt, langcode: $scope.langcode, service: $scope.service }));
+        node.push({ ...tempobj, opt: $scope.listenopt, langcode: $scope.langcode, service: $scope.service });
         break;
       case "wait":
-        node.push(Object.assign(tempobj, { time: $scope.time }));
+        node.push({ ...tempobj, time: $scope.time });
         break;
       case "for":
-        node.push(Object.assign(tempobj, { iteraciones: $scope.it, isGroup: true }));
+        node.push({ ...tempobj, iteraciones: $scope.it, isGroup: true });
         break;
       case "if":
-        node.push(Object.assign(tempobj, { text: $scope.texto, opt: parseInt($scope.ifopt) }));
+        node.push({ ...tempobj, text: $scope.texto, opt: parseInt($scope.ifopt) });
         break;
       case "mov":
-        node.push(Object.assign(tempobj, { mov: $scope.movement }));
+        node.push({ ...tempobj, mov: $scope.movement });
         break;
       case 'int':
-        node.push(Object.assign(tempobj, setint()));
+        node.push({ ...tempobj, name: $scope.listado.find( x => x._id === $scope.int).nombre, int: $scope.int });
         break;
       case "script":
-        node.push(Object.assign(tempobj, { sc: $scope.thescript, random: $scope.ccommon }));
+        node.push({ ...tempobj, sc: $scope.thescript, random: $scope.ccommon });
         break;
       case "sound":
-        node.push(Object.assign(tempobj, { src: $scope.thesound, wait: $scope.ccommon, anim: $scope.leds }));
+        node.push({ ...tempobj, src: $scope.thesound, wait: $scope.ccommon, anim: $scope.leds });
         break;
       case "led":
         let base = $scope.led.find(x => x._id == $scope.leds).base;
-        node.push(Object.assign(tempobj, { name: "Leds_" + id, anim: $scope.leds, base: base }));
+        node.push({ ...tempobj, name: "Leds_" + id, anim: $scope.leds, base: base });
         break;
       case "voice":
         if ($scope.ccommon) {
-          tempobj.translate = true;
-          tempobj.sourcelang = $scope.sourcelang;
+          Object.assign(tempobj, { translate: true, sourcelang: $scope.sourcelang });
         }
-        node.push(Object.assign(tempobj, { voice: $scope.voice, robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre }));
+        node.push({ ...tempobj, voice: $scope.voice, robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre });
         break;
       case "counter":
-        node.push(Object.assign(tempobj, { count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter }));
+        node.push({ ...tempobj, count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter });
         break;
       case "api":
-        node.push(Object.assign(tempobj, { version: $scope.version, host: $scope.host, path: $scope.path, port: ($scope.port == 0 || !!!$scope.port ? '' : $scope.port) }));
+        node.push({ ...tempobj, version: $scope.version, host: $scope.host, path: $scope.path, port: ($scope.port == 0 || !!!$scope.port ? '' : $scope.port) });
         break;
       case "dialogflow":
-        node.push(Object.assign(tempobj, { text: $scope.dialogparam, project: $scope.project }));
+        node.push({ ...tempobj, text: $scope.dialogparam, project: $scope.project });
         break;
       default:
+        node.push(tempobj);
         break;
     }
     if ($scope.key == 0) {
       $scope.common(node[node.length - 1].key);
     } else {
-      for (let i = 0; i < node.length; i++) {
-        if (node[i].key === $scope.key) {
-          node[node.length - 1].key = node[i].key;
-          node[node.length - 1].name = node[i].type == 'int' ? node[node.length - 1].name : node[i].name;
-          node.splice(i, 1);
-          $scope.key = 0;
-          break;
-        }
-      }
+      let i = node.findIndex(x => x.key === $scope.key);
+      node[node.length - 1].key = node[i].key;
+      node[node.length - 1].name = node[i].type == 'int' ? node[node.length - 1].name : node[i].name;
+      node.splice(i, 1);
+      $scope.key = 0;
       if (node[node.length - 1].type == 'speak') {
         $http.delete('/api/interaccion/rec/' + node[node.length - 1].key).then(function successCallback(response) {
         }, function errorCallback(response) {
@@ -261,63 +231,21 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     $("#myModal").modal('hide');
   }
 
-  function setint () {
-    for (let i = 0; i < $scope.listado.length; i++) {
-      if ($scope.listado[i]._id === $scope.int) {
-        return { name: $scope.listado[i].nombre, int: $scope.int };
-      }
-    }
-  }
-
   $scope.updatenode = function (l) {
-    Object.assign($scope, { key: l.key, name: l.name, type: l.type, color: l.color, isGroup: l.isGroup, group: ((l.group || '') + ''), accion: locale().COMMON.EDIT });
-    switch (l.type) {
-      case 'emotion':
-        Object.assign($scope, { emocion: l.emotion, velocidad: l.speed, level: l.level + ''});
-        break;
-      case 'speak':
-        Object.assign($scope, { texto: l.text });
-        break;
-      case 'listen':
-        Object.assign($scope, { listenopt: l.opt, langcode: l.langcode, service: l.service });
-        break;
-      case 'wait':
-        $scope.time = l.time;
-        break;
-      case 'for':
-        $scope.it = l.iteraciones;
-        break;
-      case 'if':
-        Object.assign($scope, { texto: l.text, ifopt: '' + l.opt});
-        break;
-      case 'mov':
-        $scope.movement = l.mov;
-        break;
-      case 'int':
-        $scope.int = l.int;
-        break;
-      case 'script':
-        Object.assign($scope, { thescript: l.sc, ccommon: l.random });
-        break;
-      case 'sound':
-        Object.assign($scope, { thesound: l.src, ccommon: l.wait, leds: l.anim });
-        break;
-      case 'led':
-        $scope.leds = l.anim;
-        break;
+    let diff = { text: (l.type === 'dialogflow' ? 'dialogparam' : 'texto'), opt: (l.type === 'listen' ? 'listenopt' : 'ifopt'), iteraciones: 'it',
+    mov: 'movement', sc: 'thescript', random: 'ccommon', src: 'thesound', wait: 'ccommon', anim: 'leds', translate: 'ccommon', value: 'vcounter',
+    count: 'cname'};
+    
+    for (const item in l) {
+      $scope[(diff[item] || item)] = (/(level|opt)/.test(item) ? l[item].toString() : l[item]);
+    }
+    Object.assign($scope, { group: ((l.group || '') + ''), accion: locale().COMMON.EDIT });
+    switch(l.type){
       case 'voice':
-        Object.assign($scope, { voice: l.voice, ccommon: l.translate, sourcelang: l.sourcelang, robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre });
-        break;
-      case 'counter':
-        Object.assign($scope, { ops: l.ops, vcounter: l.value, cname: l.count });
+        Object.assign($scope, { robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre });
         break;
       case 'api':
-        Object.assign($scope, { version: l.version, host: l.host, path: l.path, port: (l.port || 0) });
-        break;
-      case 'dialogflow':
-        Object.assign($scope, { dialogparam: l.text, project: l.project });
-        break;
-      default:
+        Object.assign($scope, { port: (l.port || 0) });
         break;
     }
     $scope.showmodal(l.type, false);
@@ -346,8 +274,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.import = function () {
-    let tempdata = JSON.parse($('textarea').val());
-    $scope.update(tempdata);
+    $scope.update(JSON.parse($('textarea').val()));
     $scope.updateid = 0;
     $scope.accion = locale().COMMON.ADD;
     $scope.icon = true;
@@ -356,13 +283,6 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.list();
   $scope.slist();
-  $scope.ccommon = false;
-  $scope.voice = 'es-LA_SofiaV3Voice';
-  $scope.key = 0;
-  $scope.ifopt = '4';
-  $scope.ops = "sum";
-  $scope.level = '' + 0;
-  $scope.version = 'https';
-  $scope.node = [];
+  Object.assign($scope, { ccommon: false, voice: 'es-LA_SofiaV3Voice', key: 0, ifopt: '4', ops: "sum", level: '0', version: 'https', node: []});
   init();
 }]);

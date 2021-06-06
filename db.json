@@ -2806,13 +2806,6 @@
       "data": {
         "node": [
           {
-            "key": 1618875277314,
-            "name": "Movimiento_1",
-            "type": "mov",
-            "mov": "URDLUc",
-            "__gohashid": 1123
-          },
-          {
             "key": 1618443458452,
             "name": "Audio_0",
             "type": "sound",
@@ -2821,6 +2814,14 @@
             "wait": true,
             "anim": "6f95e2c0-af11-407d-9f20-1f6f33f44515",
             "__gohashid": 2385
+          },
+          {
+            "key": 1618875277314,
+            "name": "Movimiento_1",
+            "type": "mov",
+            "group": "",
+            "mov": "DS",
+            "__gohashid": 646
           }
         ],
         "link": [

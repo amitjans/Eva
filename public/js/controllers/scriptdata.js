@@ -1,4 +1,4 @@
-eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
+eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
     $scope.listado = [];
     $scope.sublist = [];
     $scope.temp = [];
@@ -18,6 +18,10 @@ eva.controller('scriptdata', ['$scope', '$http', function ($scope, $http) {
     $scope.slist = function () {
         $http.get('/api/common?db=script').then(function successCallback(response) {
             $scope.slistado = response.data;
+            if (!!$routeParams.id) {
+                $scope.script = $routeParams.id;
+                $scope.list();
+            }
         }, function errorCallback(response) {
         });
     }

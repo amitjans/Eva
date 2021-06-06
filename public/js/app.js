@@ -53,6 +53,10 @@ eva
           templateUrl: "/plantillas/scriptdata.html",
           activetab: "script",
         })
+        .when("/scriptdata/:id", {
+          templateUrl: "/plantillas/scriptdata.html",
+          activetab: "script",
+        })
         .when("/voice", {
           templateUrl: "/plantillas/voice.html",
           activetab: "lang",
