@@ -26,6 +26,7 @@
     "serialport": "^9.1.0",
     "serve-favicon": "^2.5.0",
     "socket.io": "^4.1.2",
+    "telegram": "^1.6.11",
     "temp": "^0.9.4",
     "uuid": "^8.3.2",
     "wav": "^1.0.2"

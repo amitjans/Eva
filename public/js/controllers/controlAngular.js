@@ -1,11 +1,9 @@
 eva.controller("ControlEvaController", function ($scope, $http, $sce) {
-  //var controlList = this;
   $scope.listen = true;
   $scope.interacciones = [];
   $scope.errores = [];
   $scope.textoScript = "textoScript";
 
-  var socket = io.connect(window.location.host + (/[:]{1}[\d]+/.test(window.location.host) ? '' : ':3000'), { forceNew: true });
   socket.on("messages", function (data) {
     $scope.$apply(function () {
       if (data.fecha) {
@@ -29,8 +27,7 @@ eva.controller("ControlEvaController", function ($scope, $http, $sce) {
   };
 
   $scope.iniciarInteracciong = function (id) {
-    $http.get("api/interaccion/" + id).then(
-      function (res) {},
+    $http.get("api/interaccion/" + id).then(function (res) {},
       function (error) {
         console.log(error);
       }
@@ -38,8 +35,7 @@ eva.controller("ControlEvaController", function ($scope, $http, $sce) {
   };
 
   $scope.listinteracciones = function () {
-    $http.get("/api/common?db=interaccion").then(
-      function (res) {
+    $http.get("/api/common?db=interaccion").then(function (res) {
         $scope.interactions = res.data;
       },
       function (error) {
@@ -49,16 +45,12 @@ eva.controller("ControlEvaController", function ($scope, $http, $sce) {
   };
 
   $scope.export = function () {
-    let filename = "Log.txt";
-	let text = document.querySelector('#containerLogs')
-	.textContent
-	.replaceAll(/(^[ \n]+|[ \n]+$)/ig, '')
-	.replaceAll(/[ ]+/ig, ' ')
-	.replaceAll(/[\n]+/ig, '\n')
-	.replaceAll(/:[ \n]+/ig, ': ')
-	.replaceAll(/(\n | \n)/gi, '\n');
+    let text = document.querySelector('#containerLogs').textContent
+    .replaceAll(/(^[ \n]+|[ \n]+$)/ig, '').replaceAll(/[ ]+/ig, ' ')
+    .replaceAll(/[\n]+/ig, '\n').replaceAll(/:[ \n]+/ig, ': ')
+    .replaceAll(/(\n | \n)/gi, '\n');
     var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, filename);
+    saveAs(blob, "Log.txt");
   };
 
   $scope.listinteracciones();

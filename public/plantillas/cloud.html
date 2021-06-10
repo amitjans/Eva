@@ -7,22 +7,21 @@
                 </div>
                 <div>
                     <div id="example_wrapper" class="dataTables_wrapper">
-                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                            aria-describedby="example_info">
+                        <table id="example" class="display dataTable" role="grid" aria-describedby="example_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width: 350px;"> {{'CLOUD.SERVICE' | translate}}</th>
-                                    <th style="width: 250px;"> {{'CLOUD.VAR' | translate}}</th>
-                                    <th style="width: 400px;"> {{'CLOUD.VALUE' | translate}}</th>
-                                    <th style="width: 100px;"> {{'CLOUD.STATUS' | translate}}</th>
-                                    <th colspan="2" style="width: 100px;">{{'COMMON.OPTIONS' | translate}}</th>
+                                    <th> {{'CLOUD.SERVICE' | translate}}</th>
+                                    <th> {{'CLOUD.VAR' | translate}}</th>
+                                    <th> {{'CLOUD.VALUE' | translate}}</th>
+                                    <th> {{'CLOUD.STATUS' | translate}}</th>
+                                    <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="l in listado">
                                     <td ng-if="!l.before" rowspan="{{ l.rowspan }}">{{ l.service }}</td>
                                     <td>{{ l.key }}</td>
-                                    <td>{{ l.value }}</td>
+                                    <td style="word-break: break-all;">{{ l.value }}</td>
                                     <td ng-if="!l.before" rowspan="{{ l.rowspan }}"
                                     style="text-align: center; vertical-align: middle; color: {{ l.color }} ">
                                     <span class="fa fa-{{ l.icon }}-circle fa-2x"></span></td>
@@ -46,7 +45,7 @@
         </div>
     </div>
 
-    <!-- Modal Voice -->
+    <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -78,5 +77,40 @@
             </div>
         </div>
     </div>
-    <!-- Modal Voice -->
+    <!-- Modal -->
+
+    <!-- Modal Telegram -->
+    <div class="modal fade" id="telegram" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Telegram</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group" ng-show="!tel">
+                            <label class="col-sm-2 control-label">{{'CLOUD.TELEPHONE' | translate}}</label>
+                            <div class="col-sm-10">
+                                <input type="tel" class="form-control input-sm" ng-model="telephone" >
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="!!tel">
+                            <label class="col-sm-2 control-label">{{'CLOUD.CODE' | translate}}</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control input-sm" ng-model="code" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
+                    <button type="button" ng-show="!tel" ng-click="sendNumber(telephone)" class="btn btn-primary">{{'CLOUD.NEXT' | translate}}</button>
+                    <button type="button" ng-show="!!tel" ng-click="sendCode(code)" class="btn btn-primary">{{'CLOUD.SEND' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Telegram -->
 </div>

@@ -4,6 +4,7 @@ eva.controller('cloud', ['$scope', '$http', function ($scope, $http) {
     $scope.sublist = [];
     $scope.temp = [];
     $scope.icon = true;
+    $scope.tel = false;
 
     $scope.index = function () {
         $http.get('/api/cloud').then(function successCallback(response) {
@@ -23,9 +24,13 @@ eva.controller('cloud', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.modal = function (key, value) {
-        $scope.key = key;
-        $scope.value = value;
-        $('#myModal').modal('show');
+        if (key === 'TELEGRAM_SESSION') {
+            $('#telegram').modal('show');    
+        } else {
+            $scope.key = key;
+            $scope.value = value;
+            $('#myModal').modal('show');
+        }
     }
 
     $scope.update = function () {
@@ -44,6 +49,17 @@ eva.controller('cloud', ['$scope', '$http', function ($scope, $http) {
             notify(locale().CLOUD.NOTIFY.DELETE.SUCCESS);
         }, function errorCallback(response) {
         });
+    }
+
+    $scope.sendNumber = function (value) {
+        $scope.tel = true;
+        $http.post('/nodes', { type: 'telegram', phone: value }).then(function successCallback(response) {
+        }, function errorCallback(response) {
+        });
+    }
+
+    $scope.sendCode = function (value) {
+        socket.emit('code', value);
     }
 
     $scope.index();

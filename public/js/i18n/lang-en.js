@@ -62,7 +62,11 @@ const en = {
 			DELETE: {
 				SUCCESS: "Service credential successfully removed."
 			}
-		}
+		},
+		TELEPHONE: "Telephone Number",
+		CODE: "Code",
+		NEXT: "Next",
+		SEND: "Send"
 	},
 	CONFIG: {
 		TITLE: "Configuration",

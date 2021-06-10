@@ -70,6 +70,9 @@ SPEECH_TO_TEXT_URL=https://stream.watsonplatform.net/speech-to-text/api
 TRANSLATOR_APIKEY=translator-api-key
 TRANSLATOR_URL=https://api.us-south.language-translator.watson.cloud.ibm.com/
 GOOGLE_APPLICATION_CREDENTIALS=credencial.json
+TELEGRAM_API_ID=1234567 		
+TELEGRAM_API_HASH=123456789abcdef123456789abcdf123
+TELEGRAM_SESSION=abc648hyf04ns8knmaos8dhq93inlsokdaopsidnzx89infd/akjshd*jkhsqwppnmx195asdzzods/=lklaskmcxo
 ```
 
 File required to use Google services:
@@ -129,10 +132,21 @@ The configurations inside this file should look like this:
 
 ```bash
 server {
-	listen 80;
-	location / {
-		proxy_pass http://127.0.0.1:3000/;
-	}
+    listen 80;
+    listen [::]:80;
+    server_name server_IP_address;
+    location / {
+      proxy_set_header        Host $host;
+      proxy_set_header        X-Real-IP $remote_addr;
+      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header        X-Forwarded-Proto $scheme;
+      proxy_pass          http://localhost:3000;
+      proxy_read_timeout  90;
+      # WebSocket support
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
 }
 ```
 If you choose to edit the default file, simply check if everything is ok using:

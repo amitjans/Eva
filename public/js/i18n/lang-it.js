@@ -62,7 +62,11 @@ const it = {
 			DELETE: {
 				SUCCESS: "Credenziale di servizio rimossa correttamente."
 			}
-		}
+		},
+		TELEPHONE: "Numero di telefono",
+		CODE: "Codice",
+		NEXT: "Successivo",
+		SEND: "Invia"
 	},
 	CONFIG: {
 		TITLE: "Configurazione",

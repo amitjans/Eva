@@ -55,6 +55,10 @@ const es = {
         VALUE: "Valor",
         STATUS: "Estado",
         EDIT: "Editar",
+        TELEPHONE: "Número de Teléfono",
+        CODE: "Código",
+        NEXT: "Siguiente",
+        SEND: "Enviar",
         NOTIFY: {
             UPDATE: {
                 SUCCESS: "Credencial del servicio actualizada correctamente."

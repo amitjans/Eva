@@ -1,7 +1,8 @@
 const fs = require('fs');
 const cloudcontroller = {};
 const envars = ['TEXT_TO_SPEECH_URL', 'TEXT_TO_SPEECH_APIKEY', 'SPEECH_TO_TEXT_URL', 'SPEECH_TO_TEXT_APIKEY',
-    'TRANSLATOR_URL', 'TRANSLATOR_APIKEY', 'GOOGLE_APPLICATION_CREDENTIALS', 'DIALOGFLOW_PROJECT_ID']
+    'TRANSLATOR_URL', 'TRANSLATOR_APIKEY', 'GOOGLE_APPLICATION_CREDENTIALS', 'DIALOGFLOW_PROJECT_ID',
+    'TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION']
 
 cloudcontroller.getInfo = async (req, res) => {
     let clouds = [];
@@ -10,6 +11,7 @@ cloudcontroller.getInfo = async (req, res) => {
     clouds.push(cloudIsConfig('IBM Translator', envars[4], envars[5]));
     clouds.push(cloudIsConfig('Google', envars[6]));
     clouds.push(cloudIsConfig('DialogFlow', envars[6], envars[7]));
+    clouds.push(cloudIsConfig('Telegram', envars[8], envars[9], envars[10]));
 
     return res.status(200).json(clouds);
 }
@@ -33,22 +35,27 @@ cloudInfo = (label, level, codes, status = true) => {
 };
 
 cloudcontroller.update = async (req, res) => {
-
     let { key, value } = req.body;
     process.env[key] = value;
+    writeFile();
+    return res.status(200).json({ message: 'Credencial del servicio guardada correctamente.' });
+}
 
-    let result = ''
+cloudcontroller.setKey = async (key, value) => {
+    process.env[key] = value;
+    writeFile();    
+}
 
-    for (let i = 0; i < envars.length; i++) {
-        if (!!process.env[envars[i]]){
-            result += `${envars[i]}=${process.env[envars[i]]}\n`;
+function writeFile() {
+    let result = '';
+    for (const item of envars) {
+        if (!!process.env[item]){
+            result += `${item}=${process.env[item]}\n`;
         }
     }
-
     fs.writeFile('./.env', result, function (err) {
         if (err) return console.log(err);
-      });
-    return res.status(200).json({ message: 'Credencial del servicio guardada correctamente.' });
+    });
 }
 
 module.exports = cloudcontroller;
