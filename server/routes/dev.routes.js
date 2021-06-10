@@ -15,12 +15,11 @@ router.put('/locale', async function (req, res) {
 });
 
 async function translateLocale(obj, source, target) {
-	let arr = Object.keys(obj);
-	for (let i = 0; i < arr.length; i++) {
-		if (typeof obj[arr[i]] === 'object') {
-			obj[arr[i]] = await translateLocale(obj[arr[i]], source, target);
+	for (let key in obj) {
+		if (typeof obj[key] === 'object') {
+			obj[key] = await translateLocale(obj[key], source, target);
 		} else {
-			obj[arr[i]] = await social.translate(obj[arr[i]], target, source);
+			obj[key] = await social.translate(obj[key], target, source);
 		}
 		console.log('...Creando');
 	}
@@ -28,25 +27,23 @@ async function translateLocale(obj, source, target) {
 }
 
 async function updateLocale(obj, source, target) {
-	let arr = Object.keys(obj[source]);
-	for (let i = 0; i < arr.length; i++) {
-		if (typeof obj[source][arr[i]] === 'object') {
+	for (const key in obj[source]) {
+		if (typeof obj[source][key] === 'object') {
 			let temp = {};
-			temp[source] = obj[source][arr[i]];
-			temp[target] = obj[target][arr[i]] || {};
-			obj[target][arr[i]] = await updateLocale(temp, source, target);
-		} else {
-			console.log(obj[target][arr[i]]);
-			obj[target][arr[i]] = obj[target][arr[i]] || await social.translate(obj[source][arr[i]], target, source);
-			console.log(obj[target][arr[i]]);
-			console.log('*------------*');
+			temp[source] = obj[source][key];
+			temp[target] = obj[target][key] || {};
+			obj[target][key] = await updateLocale(temp, source, target);
+		} else if (!obj[target][key]) {
+			console.log(obj[source][key] + ' <---> ' + obj[target][key]);
+			obj[target][key] = await social.translate(obj[source][key], target, source);
 		}
-		console.log('...Actualizando');
 	}
+	console.log(obj[target]);
 	return obj[target];
 }
 
 function writeLocale(target, obj) {
+	console.log('./public/js/i18n/lang-' + target + '.js');
 	writeFile('./public/js/i18n/lang-' + target + '.js',
 	`const ${target} = ${JSON.stringify(obj, null, "\t").replace(/\t\"/gi, '\t').replace(/\":/gi, ':')}`, function (err) {
 		if (err) throw err;

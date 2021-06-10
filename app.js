@@ -57,7 +57,10 @@ app.use(function (err, req, res, next) {
 app.set('port', process.env.PORT || 3000);
 const server = app.listen(app.get('port'));
 const io = require('socket.io')(server);
-io.on('connection', () => { console.log('Client connected') });
+io.on('connection', (socket) => {
+	global.socket = socket;
+	console.log('Client connected');
+});
 
 module.exports = app;
 

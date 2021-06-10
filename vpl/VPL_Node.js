@@ -3,16 +3,17 @@ const crypto = require('crypto');
 
 var led = require('../server/controllers/leds.controller');
 var random = require('../utils/Random');
-var lf = require('./ListeningFilters/Numero');
+
 const api = require('./Api_Node');
-var { setRespuesta, getRespuesta, getSactual, addlemotion, getlemotion, setCounter, getCounter, setApi, getApi } = require('./VPL_ProcessVars');
+var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode } = require('./Node');
+var { getRespuesta, getSactual, getlemotion, getCounter, setApi, getApi } = require('./VPL_ProcessVars');
 
 module.exports = {
     ProcessNode: async function (element) {
         if (element.type === 'voice') {
             social.setConf({ name: element.robotname, voice: element.voice, translate: element.translate, sourcelang: element.sourcelang, ttsReconnect: true });
         } else if (element.type === 'emotion') {
-            ProcessEmotionNode(element)
+            ProcessEmotionNode(element, getlemotion());
         } else if (element.type === 'speak') {
             social.ledsanimstop();
             await ProcessSpeakNode(element);
@@ -54,22 +55,17 @@ module.exports = {
             let aux = await social.dialogflow(element.text.includes('$') ? replaceWhatWasHeard(element.text) : element.text, element.project || '');
             social.ledsanimstop();
             await ProcessSpeakNode({type: 'speak', text: aux});
+        } else if (element.type === 'telegram') {
+            if (!!element.phone) {
+                Login(element);
+            } else if (!!element.media) {
+                SendMedia(element);
+            } else {
+                SendMessage(element);
+            }
         }
     }
 };
-
-function ProcessEmotionNode(element) {
-    if (element.level == -1 && element.emotion !== 'ini') {
-        if (getlemotion().length == 0) {
-            element.level = 0;
-        } else if (element.key == getlemotion().slice(-1)[0].key) {
-            let { level } = getlemotion().slice(-1)[0];
-            element.level = (level + 1 > 2 ? 2 : level + 1);
-        }
-        addlemotion(element);
-    }
-    social.emotions(element.emotion, element.level, false, (element.speed || 2.0));
-}
 
 async function ProcessSpeakNode(element) {
     let t = element.text;
@@ -125,32 +121,6 @@ async function RecAndSpeak(element) {
 	} catch (err) {
 		console.error(err)
 	}
-}
-
-async function ProcessListenNode(element) {
-    var r = await social.listen(element.service, element.langcode);
-    social.stopListening();
-    if (!!element.opt) {
-        r = lf[element.opt](r)[0];
-    }
-    social.savelog(usuarioId, r);
-    setRespuesta(r);
-}
-
-function ProcessCounterNode(element) {
-    let temp = getCounter();
-    if (element.ops === 'sum') {
-        temp[element.count] = (temp[element.count] || 0) + parseInt(element.value);                
-    } else if (element.ops === 'rest') {
-        temp[element.count] = (temp[element.count] || 0) - parseInt(element.value);
-    } else if (element.ops === 'mult') {
-        temp[element.count] = (temp[element.count] || 0) * parseInt(element.value);
-    } else if (element.ops === 'div') {
-        temp[element.count] = (temp[element.count] || 0) / parseInt(element.value);
-    } else if (element.ops === 'assign'){
-        temp[element.count] = parseInt(element.value);
-    }
-    setCounter(temp);
 }
 
 function replaceWhatWasHeard(value) {

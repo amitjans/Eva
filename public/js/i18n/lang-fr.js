@@ -62,7 +62,11 @@ const fr = {
 			DELETE: {
 				SUCCESS: "L'identification du service a été supprimée avec succès."
 			}
-		}
+		},
+		TELEPHONE: "Numéro de téléphone",
+		CODE: "Code",
+		NEXT: "Suivant",
+		SEND: "Envoyer"
 	},
 	CONFIG: {
 		TITLE: "Configuration",
