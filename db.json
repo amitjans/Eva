@@ -3833,6 +3833,149 @@
         "1",
         "2"
       ]
+    },
+    {
+      "_id": "276dd26a-170f-4f9d-8b9b-b81b391c924a",
+      "name": "Repetir frases",
+      "command": [
+        {
+          "type": "speak",
+          "text": "Repite las siguientes oraciones",
+          "desc": "Repite las siguientes oraciones",
+          "order": 0
+        },
+        {
+          "type": "speak",
+          "text": "Ese señor además de amable es agradable",
+          "desc": "Ese señor además de amable es agradable",
+          "order": 1
+        },
+        {
+          "type": "led",
+          "base": "escuchaT",
+          "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+          "desc": "Escucha a Todos",
+          "order": 3
+        },
+        {
+          "type": "speak",
+          "text": "Blas tiene una blusa blanca de lino",
+          "desc": "Blas tiene una blusa blanca de lino",
+          "order": 4
+        },
+        {
+          "type": "speak",
+          "text": "Me importa un bledo que Blanca hable",
+          "desc": "Me importa un bledo que Blanca hable",
+          "order": 5
+        },
+        {
+          "type": "speak",
+          "text": "Tengo que pagar el doble por hablar de esa Biblia",
+          "desc": "Tengo que pagar el doble por hablar de esa Biblia",
+          "order": 6
+        },
+        {
+          "type": "speak",
+          "text": "Mi obligación es ir al pueblo y traer el mueble",
+          "desc": "Mi obligación es ir al pueblo y traer el mueble",
+          "order": 7
+        },
+        {
+          "type": "speak",
+          "text": "No hacen el redoble porque sacan el sable",
+          "desc": "No hacen el redoble porque sacan el sable",
+          "order": 8
+        },
+        {
+          "type": "speak",
+          "text": "No se quién habla porque es invisible",
+          "desc": "No se quién habla porque es invisible",
+          "order": 10
+        },
+        {
+          "type": "speak",
+          "text": "En la biblioteca hay libros del diablo",
+          "desc": "En la biblioteca hay libros del diablo",
+          "order": 11
+        },
+        {
+          "type": "speak",
+          "text": "El tablero de ajedrez tiene piezas blancas",
+          "desc": "El tablero de ajedrez tiene piezas blancas",
+          "order": 12
+        },
+        {
+          "type": "speak",
+          "text": "El coche blanco es blindado",
+          "desc": "El coche blanco es blindado",
+          "order": 13
+        },
+        {
+          "type": "speak",
+          "text": "Dentro del roble encontraron las tablillas",
+          "desc": "Dentro del roble encontraron las tablillas",
+          "order": 14
+        },
+        {
+          "type": "speak",
+          "text": "El tablado donde bailan es blando y de roble",
+          "desc": "El tablado donde bailan es blando y de roble",
+          "order": 15
+        },
+        {
+          "type": "speak",
+          "text": "El pueblo de Pablete tiene una gran biblioteca",
+          "desc": "El pueblo de Pablete tiene una gran biblioteca",
+          "order": 16
+        },
+        {
+          "type": "speak",
+          "text": "Blanca habla con Blas en la biblioteca del pueblo",
+          "desc": "Blanca habla con Blas en la biblioteca del pueblo",
+          "order": 17
+        },
+        {
+          "type": "speak",
+          "text": "Saca el cable por detrás del mueble blanco",
+          "desc": "Saca el cable por detrás del mueble blanco",
+          "order": 18
+        }
+      ],
+      "order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "3",
+        "5",
+        "3",
+        "6",
+        "3",
+        "7",
+        "3",
+        "8",
+        "3",
+        "9",
+        "3",
+        "10",
+        "3",
+        "11",
+        "3",
+        "12",
+        "3",
+        "13",
+        "3",
+        "14",
+        "3",
+        "15",
+        "3",
+        "16",
+        "3",
+        "17",
+        "3",
+        "18"
+      ]
     }
   ],
   "googlestt": [
