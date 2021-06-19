@@ -149,7 +149,7 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
 
     $scope.ucommand = function (id) {
         let { type, text, src, order, anim } = $scope.commands[id];
-        Objets.assign($scope, { tempid: id, tipo: type, text: (text || ''), thesound: (src || ''), corder: (order || ''), leds: (anim || '') });
+        Object.assign($scope, { tempid: id, tipo: type, text: (text || ''), thesound: (src || ''), corder: (order || ''), leds: (anim || '') });
         $('#wooaddcs').modal('show');
     }
 
