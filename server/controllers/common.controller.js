@@ -11,7 +11,7 @@ commoncontroller.details = (req, res) => {
 }
 
 commoncontroller.create = async (req, res) => {
-    let obj = Object.assign({ _id: v4() }, req.body);
+    let obj = { ...req.body, _id: v4() };
     getConnection().get(req.query.db).push(obj).write();
     res.status(200).json({ status: 'Ok' , obj: obj});
 }
