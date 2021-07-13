@@ -96,7 +96,7 @@ class SocialRobot {
     }
 
     var utterance = {
-      text: message,
+      text: "<break time=\"1s\"/>" + message,
       voice: this.configuration.voice,
       accept: 'audio/wav'
     };
