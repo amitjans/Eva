@@ -11,6 +11,10 @@
     {
       "_id": "36e5aecd-7f29-4f33-bd0d-3959074d6a1a",
       "nombre": "Autonomo"
+    },
+    {
+      "nombre": "Repetir",
+      "_id": "b9e67386-9999-49d3-a231-9c5f9317f721"
     }
   ],
   "scriptdata": [
@@ -1185,6 +1189,123 @@
       "campo4": "",
       "script": "fc1526ec-5088-4ef9-a3a9-fd319284d2a8",
       "_id": "67a41102-654f-4999-89e1-7b711a89ef9a"
+    },
+    {
+      "campo1": "Ese señor además de amable es agradable",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "f9a1a6fe-743d-4b95-bdcf-167dbdfefef9"
+    },
+    {
+      "campo1": "Blas tiene una blusa blanca de lino",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "deddc5f0-6a47-457e-85a1-dd5e25f08a17"
+    },
+    {
+      "campo1": "Me importa un bledo que Blanca hable",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "3f47c7af-d97b-445c-b9ec-f897f0808005"
+    },
+    {
+      "campo1": "Tengo que pagar el doble por hablar de esa Biblia",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "4114feae-4c2a-4e19-bc70-999973e71e0d"
+    },
+    {
+      "campo1": "Mi obligación es ir al pueblo y traer el mueble",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "cb4d65e3-9c4f-45de-862a-691abe591c28"
+    },
+    {
+      "campo1": "No hacen el redoble porque sacan el sable",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "f1116227-3f01-4106-97bf-0b21806aab46"
+    },
+    {
+      "campo1": "No se quién habla porque es invisible",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "674d8524-11d3-4e0f-82fb-493f003ec734"
+    },
+    {
+      "campo1": "En la biblioteca hay libros del diablo",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "1c4edc94-0e7f-4251-8154-38c227b91787"
+    },
+    {
+      "campo1": "El tablero de ajedrez tiene piezas blancas",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "2b82f745-5057-4abf-b93a-b4220ee07b1e"
+    },
+    {
+      "campo1": "El coche blanco es blindado",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "71c172bb-2af4-4b6e-a496-7a26f81c5b45"
+    },
+    {
+      "campo1": "Dentro del roble encontraron las tablillas",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "e14e8eb6-5cc8-466a-8f2a-37edd0539870"
+    },
+    {
+      "campo1": "El tablado donde bailan es blando y de roble",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "cb34ac72-5450-4d59-8bdf-3fa20e2a76ec"
+    },
+    {
+      "campo1": "El pueblo de Pablete tiene una gran biblioteca",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "da86ca69-6d74-4d84-a5f7-0dabe1b3bc33"
+    },
+    {
+      "campo1": "Blanca habla con Blas en la biblioteca del pueblo",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "095ccafd-42e7-4474-a77f-71ab4e061622"
+    },
+    {
+      "campo1": "Saca el cable por detrás del mueble blanco",
+      "campo2": "",
+      "campo3": "",
+      "campo4": "",
+      "script": "b9e67386-9999-49d3-a231-9c5f9317f721",
+      "_id": "6bd7b49a-6965-4b8a-bff7-22bcf49f2445"
     }
   ],
   "interaccion": [
@@ -2900,6 +3021,98 @@
           }
         ]
       }
+    },
+    {
+      "nombre": "Repetir",
+      "data": {
+        "node": [
+          {
+            "key": 1624997098588,
+            "name": "Hablar_0",
+            "type": "speak",
+            "text": "Repite las siguientes oraciones",
+            "__gohashid": 550
+          },
+          {
+            "key": 1624997111852,
+            "name": "Ciclo_1",
+            "type": "for",
+            "iteraciones": -1,
+            "isGroup": true,
+            "__gohashid": 628
+          },
+          {
+            "key": 1624997122708,
+            "name": "Script_2",
+            "type": "script",
+            "group": 1624997111852,
+            "sc": "b9e67386-9999-49d3-a231-9c5f9317f721",
+            "random": false,
+            "__gohashid": 736
+          },
+          {
+            "key": 1624997149932,
+            "name": "Leds_3",
+            "type": "led",
+            "group": 1624997111852,
+            "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+            "base": "escuchaT",
+            "__gohashid": 2418
+          },
+          {
+            "key": 1624997192652,
+            "name": "Esperar_4",
+            "type": "wait",
+            "group": 1624997111852,
+            "time": 6000,
+            "__gohashid": 3184
+          },
+          {
+            "key": 1624997204524,
+            "name": "Leds_5",
+            "type": "led",
+            "group": 1624997111852,
+            "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+            "base": "stop",
+            "__gohashid": 2756
+          },
+          {
+            "key": 1624998372699,
+            "name": "Esperar_6",
+            "type": "wait",
+            "time": 2000,
+            "__gohashid": 807
+          }
+        ],
+        "link": [
+          {
+            "from": 1624997122708,
+            "to": 1624997149932,
+            "__gohashid": 2420
+          },
+          {
+            "from": 1624997149932,
+            "to": 1624997192652,
+            "__gohashid": 2574
+          },
+          {
+            "from": 1624997192652,
+            "to": 1624997204524,
+            "__gohashid": 2758
+          },
+          {
+            "from": 1624997098588,
+            "to": 1624998372699,
+            "__gohashid": 809
+          },
+          {
+            "__gohashid": 3038,
+            "from": 1624998372699,
+            "to": 1624997111852
+          }
+        ]
+      },
+      "_id": "e04286db-a458-43d7-b912-f6a8ceafd6f0"
     }
   ],
   "voice": [

@@ -26,7 +26,7 @@ const upload = multer({
         }
         cb("El archivo debe ser un audio");
     }
-}).single('file');
+}).array('file');
 
 router.get('/', audio.getList);
 router.post('/', upload, (req, res) => {
