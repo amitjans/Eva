@@ -316,7 +316,8 @@ const pt = {
 		SAVE: "Salvar",
 		UPDATE: "Atualizar",
 		ADD: "Adicionar",
-		EDIT: "Editar"
+		EDIT: "Editar",
+		DELETE: "Tem certeza de que deseja remover permanentemente este item?"
 	},
 	EMOTION_TYPE: {
 		NEUTRAL: "Neutro",

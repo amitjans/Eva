@@ -66,12 +66,14 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/common/' + id + '?db=led').then(function successCallback(response) {
-            $scope.list();
-            notify(locale().LED.NOTIFY.DELETE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
-        });;
+        if (confirm(locale().COMMON.DELETE)) {
+            $http.delete('/api/common/' + id + '?db=led').then(function successCallback(response) {
+                $scope.list();
+                notify(locale().LED.NOTIFY.DELETE.SUCCESS);
+            }, function errorCallback(response) {
+                notify(locale().LED.NOTIFY.ERROR, 'danger');
+            });
+        }
     }
 
     $scope.execute = function (l) {

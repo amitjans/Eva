@@ -58,12 +58,14 @@ eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scop
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/common/' + id + '?db=scriptdata').then(function successCallback(response) {
-            $scope.list();
-            notify(locale().SCRIPT_DATA.NOTIFY.DELETE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
-        });;
+        if (confirm(locale().COMMON.DELETE)) {
+            $http.delete('/api/common/' + id + '?db=scriptdata').then(function successCallback(response) {
+                $scope.list();
+                notify(locale().SCRIPT_DATA.NOTIFY.DELETE.SUCCESS);
+            }, function errorCallback(response) {
+                notify(locale().SCRIPT_DATA.NOTIFY.ERROR, 'danger');
+            });
+        }
     }
 
     $scope.speak = function (value) {

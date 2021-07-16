@@ -60,12 +60,14 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/common/' + id + '?db=mov').then(function successCallback(response) {
-            $scope.list();
-            notify(locale().MOVEMENT.NOTIFY.DELETE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().MOVEMENT.NOTIFY.ERROR,  'danger');
-        });;
+        if (confirm(locale().COMMON.DELETE)) {
+            $http.delete('/api/common/' + id + '?db=mov').then(function successCallback(response) {
+                $scope.list();
+                notify(locale().MOVEMENT.NOTIFY.DELETE.SUCCESS);
+            }, function errorCallback(response) {
+                notify(locale().MOVEMENT.NOTIFY.ERROR, 'danger');
+            });
+        }
     }
 
     $scope.addCode = function (value) {

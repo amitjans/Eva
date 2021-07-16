@@ -46,13 +46,14 @@ eva.controller("script", ["$scope", "$http", function ($scope, $http) {
   };
 
   $scope.delete = function (id) {
-    $http.delete("/api/common/" + id + "?db=script").then(function successCallback(response) {
-      $scope.list();
-      notify(locale().SCRIPT.NOTIFY.DELETE.SUCCESS);
-    }, function errorCallback(response) {
-      notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
+    if (confirm(locale().COMMON.DELETE)) {
+      $http.delete("/api/common/" + id + "?db=script").then(function successCallback(response) {
+        $scope.list();
+        notify(locale().SCRIPT.NOTIFY.DELETE.SUCCESS);
+      }, function errorCallback(response) {
+        notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
+      });
     }
-    );
   };
 
   $scope.clear = function () {

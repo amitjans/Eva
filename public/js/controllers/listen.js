@@ -52,12 +52,14 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/common/' + id + '?db=googlestt').then(function successCallback(response) {
-            $scope.list();
-            notify(locale().LISTEN.NOTIFY.DELETE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
-        });;
+        if (confirm(locale().COMMON.DELETE)) {
+            $http.delete('/api/common/' + id + '?db=googlestt').then(function successCallback(response) {
+                $scope.list();
+                notify(locale().LISTEN.NOTIFY.DELETE.SUCCESS);
+            }, function errorCallback(response) {
+                notify(locale().LISTEN.NOTIFY.ERROR, 'danger');
+            });
+        }
     }
     
     $scope.dataTable = function (way = 0) {

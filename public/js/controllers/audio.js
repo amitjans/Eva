@@ -21,14 +21,16 @@ eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.delete = function (id) {
-        $http.delete('/api/audio/' + id).then(function successCallback(response) {
-            $scope.list();
-            notify(locale().AUDIO.NOTIFY.DELETE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().AUDIO.NOTIFY.ERROR,  'danger');
-        });;
+        if (confirm(locale().COMMON.DELETE)) {
+            $http.delete('/api/audio/' + id).then(function successCallback(response) {
+                $scope.list();
+                notify(locale().AUDIO.NOTIFY.DELETE.SUCCESS);
+            }, function errorCallback(response) {
+                notify(locale().AUDIO.NOTIFY.ERROR,  'danger');
+            });
+        }
     }
-
+        
     $scope.dataTable = function (way = 0) {
         let obj = dataTable($scope.listado, $scope, way, 'nombre');
         Object.assign($scope, obj);
