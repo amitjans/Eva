@@ -81,10 +81,12 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.delete = function (id) {
-    $http.delete('/api/common/' + id + '?db=interaccion').then(function successCallback(response) {
-      $scope.list();
-    }, function errorCallback(response) {
-    });
+    if (confirm(locale().COMMON.DELETE)) {
+      $http.delete('/api/common/' + id + '?db=interaccion').then(function successCallback(response) {
+        $scope.list();
+      }, function errorCallback(response) {
+      });
+    }
   }
 
   $scope.add = function () {
