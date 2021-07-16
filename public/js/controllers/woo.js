@@ -107,11 +107,13 @@ eva.controller('woo', ['$scope', '$http', function ($scope, $http) {
         });
     }
     $scope.delete = function () {
-        $http.delete('/api/common/' + $scope.tempwoo._id + '?db=woo').then(function successCallback(response) {
-            $scope.list();
-        }, function errorCallback(response) {
-            notify(locale().WOO.NOTIFY.ERROR, 'danger');
-        });
+        if (confirm(locale().COMMON.DELETE)) {
+            $http.delete('/api/common/' + $scope.tempwoo._id + '?db=woo').then(function successCallback(response) {
+                $scope.list();
+            }, function errorCallback(response) {
+                notify(locale().WOO.NOTIFY.ERROR, 'danger');
+            });
+        }
     }
     //endcrudwoo
 
