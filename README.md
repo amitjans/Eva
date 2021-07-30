@@ -39,6 +39,10 @@ sudo apt install matrixio-kernel-modules
 ```
 
 ```bash
+sudo apt-get install matrixio-creator-init libmatrixio-creator-hal libmatrixio-creator-hal-dev
+```
+
+```bash
 sudo reboot
 ```
 
