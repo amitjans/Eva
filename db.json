@@ -3113,6 +3113,22 @@
         ]
       },
       "_id": "e04286db-a458-43d7-b912-f6a8ceafd6f0"
+    },
+    {
+      "nombre": "Record",
+      "data": {
+        "node": [
+          {
+            "key": 1627678534429,
+            "name": "Record_2",
+            "type": "record",
+            "time": 5000,
+            "__gohashid": 622
+          }
+        ],
+        "link": []
+      },
+      "_id": "2736c11b-4e38-496e-85a1-25b2567be885"
     }
   ],
   "voice": [

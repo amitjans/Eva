@@ -112,6 +112,7 @@
                 <button type="button" class="btn btn-primary" ng-click="showmodal('api')">{{'INTERACTION.API' | translate}}</button>
                 <br><br>
                 <button type="button" class="btn btn-primary" ng-click="showmodal('dialogflow')">{{'INTERACTION.DIALOGFLOW' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="showmodal('record')">{{'INTERACTION.RECORD' | translate}}</button>
               </div>
             </div>
           </div>
@@ -222,7 +223,7 @@
               <!-- Modal Escuchar -->
 
               <!-- Modal Tiempo -->
-              <div class="form-group" ng-show="modal == 'wait'">
+              <div class="form-group" ng-show="modal == 'wait' || modal == 'record'">
                 <label class="col-sm-2 control-label">{{'INTERACTION.TIME' | translate}} (ms)</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-sm" ng-model="time"

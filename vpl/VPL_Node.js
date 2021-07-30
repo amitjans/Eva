@@ -5,7 +5,7 @@ var led = require('../server/controllers/leds.controller');
 var random = require('../utils/Random');
 
 const api = require('./Api_Node');
-var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode } = require('./Node');
+var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode, RecordNode } = require('./Node');
 var { getRespuesta, getSactual, getlemotion, getCounter, setApi, getApi } = require('./VPL_ProcessVars');
 
 module.exports = {
@@ -63,6 +63,8 @@ module.exports = {
             } else {
                 SendMessage(element);
             }
+        } else if (element.type === 'record') {
+            await RecordNode(element);
         }
     }
 };
