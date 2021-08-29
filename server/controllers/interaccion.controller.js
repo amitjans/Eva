@@ -3,8 +3,6 @@ const { v4 } = require('uuid');
 const fs = require('fs');
 const interaccioncontroller = {};
 
-interaccioncontroller.getThis = async (value) => getConnection().get('interaccion').find({ _id: value }).value();
-
 interaccioncontroller.createThis = async (nombre, data) => {
     getConnection().get('interaccion').push({ _id: v4(), nombre: nombre, data: data }).write();
 }

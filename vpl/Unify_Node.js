@@ -1,8 +1,8 @@
-var nodeutils = require('./NodeUtils');
-const interaccion = require('../server/controllers/interaccion.controller');
+var { FirstAndLast } = require('./NodeUtils');
+const { getThis } = require('../server/controllers/common.controller');
 
 async function unifyById(value) {
-    const temp = await interaccion.getThis(value);
+    const temp = await getThis(value, 'interaccion');
     let clone = JSON.parse(JSON.stringify(temp.data));
     return await unify(clone.node, clone.link);
 }
@@ -15,7 +15,7 @@ async function unifyByInt(value) {
 async function unify(nodes, links) {
     for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].type === 'int') {
-            let sub = await interaccion.getThis(nodes[i].int);
+            let sub = await getThis(nodes[i].int, 'interaccion');
             let jn = sub.data.node;
             let jl = sub.data.link;
             if (!!nodes[i].group) {
@@ -23,7 +23,7 @@ async function unify(nodes, links) {
                     jn[k].group = nodes[i].group;
                 }
             }
-            let aux = nodeutils.FirstAndLast(jn.slice(), jl.slice());
+            let aux = FirstAndLast(jn.slice(), jl.slice());
             for (let j = 0; j < links.length; j++) {
                 if (links[j].to === nodes[i].key) {
                     links[j].to = aux.ini[0].key;

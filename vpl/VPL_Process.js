@@ -1,8 +1,7 @@
 const crypto = require('crypto');
 const { ProcessNode } = require('./VPL_Node');
-const { ConditionNode } = require('./If_Node');
 const { NextNode } = require('./NodeUtils');
-const LoadScriptData = require('./Script_Node');
+var { ConditionNode, LoadScriptData } = require('./Node');
 
 var iscript = {};
 global.sactual;

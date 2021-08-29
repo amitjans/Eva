@@ -253,16 +253,10 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     $scope.showmodal(l.type, false);
   }
 
-  $scope.autoif = function () {
-    $scope.ifopt = (/[=<>!]+/.test($scope.texto) ? '5' : $scope.ifopt);
-  }
+  $scope.autoif = () => $scope.ifopt = (/[=<>!]+/.test($scope.texto) ? '5' : $scope.ifopt);
 
-  $scope.autoversion = function () {
-    if ($scope.host.startsWith('https://')) {
-      $scope.version = 'https';
-    } else if ($scope.host.startsWith('http://')) {
-      $scope.version = 'http';
-    }
+  $scope.autoversion = () => {
+    $scope.version = $scope.host.startsWith('https') ? 'https' : 'http';
   }
 
   $scope.download = function (l) {

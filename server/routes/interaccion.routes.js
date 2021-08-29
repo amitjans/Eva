@@ -1,22 +1,34 @@
 const express = require('express');
 const fs = require('fs');
 const router = express.Router();
-const interaccion = require('../controllers/interaccion.controller');
-const unify = require('../../vpl/Unify_Node');
+const { deleterec, createThis } = require('../controllers/interaccion.controller');
+const { getData } = require('../controllers/script.controller');
+const { getThis } = require('../controllers/common.controller');
+const { unifyById, unifyByInt } = require('../../vpl/Unify_Node');
 const { ProcessFlow } = require('../../vpl/VPL_Process');
 var { FirstsNodes } = require('../../vpl/NodeUtils');
 
-router.delete('/rec/:id', interaccion.deleterec);
+router.delete('/rec/:id', deleterec);
 
 router.get('/unified/:id', async function (req, res) {
-    const temp = await interaccion.getThis(req.params.id);
-	let obj = await unify.unifyByInt(temp);
-	await interaccion.createThis(temp.nombre + '_expandida', obj);
+	const temp = await getThis(req.params.id, 'interaccion');
+	let obj = await unifyByInt(temp);
+	await createThis(temp.nombre + '_expandida', obj);
 	res.status(200).jsonp();
 });
 
 router.get('/export/:id', async function (req, res) {
-	res.status(200).json(await unify.unifyById(req.params.id));
+	let interaction = await unifyById(req.params.id);
+	for (let element of interaction.node) {
+		console.log(element);
+		if (element.type === 'script') {
+			element.data = (await getData(element.sc)).map(x => { delete x._id; delete x.script; return x });
+		} else if (element.type === 'led' || element.type === 'sound') {
+			element.anim = await getThis(element.anim, 'led');
+			delete element.anim._id;
+		}
+	};
+	res.status(200).json(interaction);
 });
 
 router.get('/:id', async function (req, res) {
@@ -25,7 +37,7 @@ router.get('/:id', async function (req, res) {
 	respuesta = [];
 	counter = {};
 
-	let obj = await unify.unifyById(req.params.id);
+	let obj = await unifyById(req.params.id);
 	var fnodes = FirstsNodes(obj.link, obj.node.slice());
 
 	social.resetlog();

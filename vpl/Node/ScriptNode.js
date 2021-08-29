@@ -1,5 +1,5 @@
-var script = require('../server/controllers/script.controller');
-var random = require('../utils/Random');
+var script = require('../../server/controllers/script.controller');
+var random = require('../../utils/Random');
 
 module.exports = async function (item) {
     try {

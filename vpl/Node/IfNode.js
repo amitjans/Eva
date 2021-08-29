@@ -1,6 +1,6 @@
-var { NextNode } = require('./NodeUtils');
-var { getCounter, getSactual, getRespuesta } = require('./VPL_ProcessVars');
-var Compare = require('../utils/Compare');
+var { NextNode } = require('../NodeUtils');
+var { getCounter, getSactual, getRespuesta } = require('../VPL_ProcessVars');
+var Compare = require('../../utils/Compare');
 
 module.exports = {
     ConditionNode: function (ifnodes, links, nodes) {
