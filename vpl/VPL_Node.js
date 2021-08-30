@@ -57,6 +57,8 @@ module.exports = {
             } else {
                 SendMessage(element);
             }
+        } else if (element.type === 'record') {
+            await RecordNode(element);
         }
     }
 };

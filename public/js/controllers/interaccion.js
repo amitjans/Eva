@@ -170,6 +170,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       case "listen":
         node.push({ ...tempobj, opt: $scope.listenopt, langcode: $scope.langcode, service: $scope.service });
         break;
+      case "record":
       case "wait":
         node.push({ ...tempobj, time: $scope.time });
         break;

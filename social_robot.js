@@ -226,13 +226,6 @@ class SocialRobot {
     })
   }
 
-  sleepanim(ms) {
-    var animation = spawn('./leds/countdown');
-    return new Promise(resolve => {
-      setTimeout(resolve, ms)
-    })
-  }
-
   async listen(service, langcode, callback) {
     this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
     let result = '';
@@ -283,19 +276,7 @@ class SocialRobot {
   }
 
   async listenWatson(langcode, callback) {
-    const file = fs.createWriteStream('./test.wav', { encoding: 'binary' });
-
-    this.recording = record
-      .record({
-        sampleRateHertz: 16000,
-        threshold: 0,
-        recordProgram: 'rec',
-        silence: '1.0'
-      });
-    this.recording.stream().on('error', console.error).pipe(file);
-    await this.sleep(3000);
-    this.recording.stop();
-    file.end();
+    await this.recordSound(3000);
     const params = {
       audio: fs.createReadStream('./test.wav'),
       contentType: 'audio/wav',
@@ -308,6 +289,30 @@ class SocialRobot {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  async recordSound(time, dir = './test.wav'){
+    let localeanim = false;
+    if (!this.leds) {
+      this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
+      localeanim = true;     
+    }
+    const file = fs.createWriteStream(dir, { encoding: 'binary' });
+
+    this.recording = record
+      .record({
+        sampleRateHertz: 16000,
+        threshold: 0,
+        recordProgram: 'rec',
+        silence: '1.0'
+      });
+    this.recording.stream().on('error', console.error).pipe(file);
+    await this.sleep(time);
+    this.recording.stop();
+    file.end();
+    if (localeanim) {
+      this.ledsanimstop();
+    }
   }
 
   stopListening() {

@@ -167,7 +167,8 @@ const es = {
         },
         PROYECT: "Proyecto",
         PROYECT_NAME: "Nombre del proyecto",
-        SOURCE: "Idioma de origen"
+        SOURCE: "Idioma de origen",
+        RECORD: "Grabar"
     },
     LED: {
         TITLE: "Listado de Animaciones led",
