@@ -1,14 +1,16 @@
 var script = require('../../server/controllers/script.controller');
-var random = require('../../utils/Random');
+var { randomize } = require('../../utils/Random');
 
-module.exports = async function (item) {
-    try {
-        let data = await script.getData(item.sc.toString());
-        if (item.random) {
-            data = random.randomize(data);
+module.exports = {
+    LoadScriptData: async function (item) {
+        try {
+            let data = Array.isArray(item.data) ? item.data : await script.getData(item.sc.toString());
+            if (item.random) {
+                data = randomize(data);
+            }
+            return { key: item.key.toString(), data: data };
+        } catch (error) {
+            console.error();
         }
-        return { key: item.key.toString(), data: data };
-    } catch (error) {
-        console.error();
     }
 }

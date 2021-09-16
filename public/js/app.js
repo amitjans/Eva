@@ -5,7 +5,7 @@ var eva = angular.module("evaApp", [
   "ngSanitize"
 ]);
 
-var lang = { es: es, en: en, pt: pt, fr: fr, it: it };
+var lang = { es: es, en: en, pt: pt, fr: fr, it: it, ja: ja };
 function locale() {
   return lang[localStorage.getItem("lang") || "es"];
 }

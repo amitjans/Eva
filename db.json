@@ -42,49 +42,37 @@
       "campo1": "¿Cuál es la fruta más divertida?",
       "campo2": "La naranja ja ja ja ja",
       "campo3": "",
-      "campo4": "",
-      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
-      "_id": "66eb3ceb-7636-464c-bd9a-47b028850924"
+      "campo4": ""
     },
     {
       "campo1": "¿Qué coche usa Papá Noel?",
       "campo2": "Un renol",
       "campo3": "",
-      "campo4": "",
-      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
-      "_id": "314d0347-81ea-4599-9a72-2a9ccb9b0efc"
+      "campo4": ""
     },
     {
       "campo1": "¿Qué le dice una iguana a su hermana gemela?",
       "campo2": "Somos iguanitas",
       "campo3": "",
-      "campo4": "",
-      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
-      "_id": "6c61b3a1-79e7-4b99-95ff-a5f0947d155b"
+      "campo4": ""
     },
     {
       "campo1": "¿Dónde cuelga Superman su supercapa?",
       "campo2": "En superchero",
       "campo3": "",
-      "campo4": "",
-      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
-      "_id": "156b3a3e-4822-48c9-9943-c08568240664"
+      "campo4": ""
     },
     {
       "campo1": "Mamá, en el colegio me llaman peludo",
       "campo2": "¡Ricardo, el perro habla!",
       "campo3": "",
-      "campo4": "",
-      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
-      "_id": "08580578-82a1-491f-acd9-8eb509f09d72"
+      "campo4": ""
     },
     {
       "campo1": "¿Cómo se dice espejo en chino?",
       "campo2": "Aitoiyo",
       "campo3": "",
-      "campo4": "",
-      "script": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
-      "_id": "9a0f33f5-c0f5-4a34-b15d-7c9d67bb9dfc"
+      "campo4": ""
     },
     {
       "campo1": "Opción uno, el coche autónomo continúa hacia adelante, como consecuencia, lastima a un hombre. Opción dos, el coche autónomo gira, como consecuencia, lastima a una mujer.",
@@ -2593,68 +2581,61 @@
         "node": [
           {
             "key": 1616186799377,
-            "name": "Contador_0",
+            "name": "Contador: a",
             "type": "counter",
-            "color": "lightblue",
-            "isGroup": false,
+            "group": "",
             "count": "a",
             "ops": "sum",
             "value": 0,
-            "__gohashid": 530
+            "__gohashid": 891
           },
           {
             "key": 1616186841281,
-            "name": "Contador_2",
+            "name": "Contador: a",
             "type": "counter",
-            "color": "lightblue",
-            "isGroup": false,
+            "group": "",
             "count": "a",
             "ops": "sum",
             "value": 11,
-            "__gohashid": 811
+            "__gohashid": 1205
+          },
+          {
+            "key": 1616186818649,
+            "name": "Contador: b",
+            "type": "counter",
+            "group": "",
+            "count": "b",
+            "ops": "assign",
+            "value": 1,
+            "__gohashid": 1519
           },
           {
             "key": 1616186859185,
-            "name": "Contador_3",
+            "name": "Contador: b",
             "type": "counter",
-            "color": "lightblue",
-            "isGroup": false,
+            "group": "",
             "count": "b",
             "ops": "mult",
             "value": 6,
-            "__gohashid": 978
+            "__gohashid": 1833
           },
           {
             "key": 1616186866746,
-            "name": "Contador_4",
+            "name": "Contador: b",
             "type": "counter",
-            "color": "lightblue",
-            "isGroup": false,
+            "group": "",
             "count": "b",
             "ops": "mult",
             "value": 2,
-            "__gohashid": 1194
+            "__gohashid": 2147
           },
           {
             "key": 1616186920954,
             "name": "Hablar_5",
             "type": "speak",
-            "color": "lightblue",
-            "isGroup": false,
-            "text": "El contador A vale #a y el B #b",
-            "__gohashid": 1459
-          },
-          {
-            "key": 1616186818649,
-            "name": "Contador_1",
-            "type": "counter",
-            "color": "lightblue",
-            "isGroup": false,
             "group": "",
-            "count": "b",
-            "ops": "assign",
-            "value": 1,
-            "__gohashid": 992
+            "text": "El contador A vale #a y el B #b",
+            "__gohashid": 2461
           }
         ],
         "link": [
@@ -2994,13 +2975,13 @@
           },
           {
             "key": 1622087643235,
-            "name": "Audio_4",
+            "name": "Audio: laugh-03",
             "type": "sound",
             "group": 1622087548283,
             "src": "laugh-03",
             "wait": true,
             "anim": "489809bb-ec23-4016-80a2-04ae46e2f989",
-            "__gohashid": 1813
+            "__gohashid": 1213
           }
         ],
         "link": [
@@ -3042,24 +3023,6 @@
             "__gohashid": 628
           },
           {
-            "key": 1624997122708,
-            "name": "Script_2",
-            "type": "script",
-            "group": 1624997111852,
-            "sc": "b9e67386-9999-49d3-a231-9c5f9317f721",
-            "random": false,
-            "__gohashid": 736
-          },
-          {
-            "key": 1624997149932,
-            "name": "Leds_3",
-            "type": "led",
-            "group": 1624997111852,
-            "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
-            "base": "escuchaT",
-            "__gohashid": 2418
-          },
-          {
             "key": 1624997192652,
             "name": "Esperar_4",
             "type": "wait",
@@ -3068,20 +3031,38 @@
             "__gohashid": 3184
           },
           {
-            "key": 1624997204524,
-            "name": "Leds_5",
-            "type": "led",
-            "group": 1624997111852,
-            "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
-            "base": "stop",
-            "__gohashid": 2756
-          },
-          {
             "key": 1624998372699,
             "name": "Esperar_6",
             "type": "wait",
             "time": 2000,
             "__gohashid": 807
+          },
+          {
+            "key": 1624997122708,
+            "name": "Repetir",
+            "type": "script",
+            "group": 1624997111852,
+            "sc": "b9e67386-9999-49d3-a231-9c5f9317f721",
+            "random": false,
+            "__gohashid": 959
+          },
+          {
+            "key": 1624997204524,
+            "name": "Led: Parar",
+            "type": "led",
+            "group": 1624997111852,
+            "anim": "9d95eddd-882d-4361-8a49-5c79a8a675ee",
+            "base": "stop",
+            "__gohashid": 1040
+          },
+          {
+            "key": 1624997149932,
+            "name": "Led: Escucha a Todos",
+            "type": "led",
+            "group": 1624997111852,
+            "anim": "c085e3aa-171e-4fb4-b5ff-edcc5d5093b9",
+            "base": "escuchaT",
+            "__gohashid": 1439
           }
         ],
         "link": [
@@ -3129,6 +3110,124 @@
         "link": []
       },
       "_id": "2736c11b-4e38-496e-85a1-25b2567be885"
+    },
+    {
+      "nombre": "Prueba",
+      "data": {
+        "node": [
+          {
+            "key": 1631819148722,
+            "name": "Cycle_0",
+            "type": "for",
+            "iteraciones": -1,
+            "isGroup": true,
+            "__gohashid": 1015
+          },
+          {
+            "key": 1631819162921,
+            "name": "Chistes",
+            "type": "script",
+            "group": 1631819148722,
+            "sc": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+            "random": true,
+            "__gohashid": 1088
+          },
+          {
+            "key": 1631819220727,
+            "name": "Wait_2",
+            "type": "wait",
+            "group": 1631819148722,
+            "time": 2000,
+            "__gohashid": 1332
+          }
+        ],
+        "link": [
+          {
+            "from": 1631819162921,
+            "to": 1631819220727,
+            "__gohashid": 1334
+          }
+        ]
+      },
+      "_id": "84cdf7ec-3f28-4d4f-a775-b43c9a449112"
+    },
+    {
+      "nombre": "Prueba1",
+      "data": {
+        "node": [
+          {
+            "key": 1631819148722,
+            "name": "Cycle_0",
+            "type": "for",
+            "iteraciones": -1,
+            "isGroup": true,
+            "__gohashid": 1015
+          },
+          {
+            "key": 1631819162921,
+            "name": "Chistes",
+            "type": "script",
+            "group": 1631819148722,
+            "sc": "e1d6d2d1-28ec-4c51-bd59-4e8fb09f2a6b",
+            "random": true,
+            "__gohashid": 1088,
+            "data": [
+              {
+                "campo1": "Prueba 1",
+                "campo2": "",
+                "campo3": "",
+                "campo4": ""
+              },
+              {
+                "campo1": "Prueba 2",
+                "campo2": "",
+                "campo3": "",
+                "campo4": ""
+              },
+              {
+                "campo1": "Prueba 3",
+                "campo2": "",
+                "campo3": "",
+                "campo4": ""
+              },
+              {
+                "campo1": "Prueba 4",
+                "campo2": "",
+                "campo3": "",
+                "campo4": ""
+              },
+              {
+                "campo1": "Prueba 5",
+                "campo2": "",
+                "campo3": "",
+                "campo4": ""
+              },
+              {
+                "campo1": "Prueba 6",
+                "campo2": "",
+                "campo3": "",
+                "campo4": ""
+              }
+            ]
+          },
+          {
+            "key": 1631819220727,
+            "name": "Wait_2",
+            "type": "wait",
+            "group": 1631819148722,
+            "time": 2000,
+            "__gohashid": 1332
+          }
+        ],
+        "link": [
+          {
+            "from": 1631819162921,
+            "to": 1631819220727,
+            "__gohashid": 1334
+          }
+        ]
+      },
+      "_id": "f5ce9e58-1e19-497a-8a54-70827ec53d7b"
     }
   ],
   "voice": [

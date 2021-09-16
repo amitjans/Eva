@@ -1,6 +1,7 @@
 const express = require('express');
 var router = express.Router();
 var { writeFile } = require('fs');
+var { Translate } = require('../services/translate');
 
 router.post('/locale', async function (req, res) {
 	res.status(200).jsonp();
@@ -19,7 +20,7 @@ async function translateLocale(obj, source, target) {
 		if (typeof obj[key] === 'object') {
 			obj[key] = await translateLocale(obj[key], source, target);
 		} else {
-			obj[key] = await social.translate(obj[key], target, source);
+			obj[key] = await Translate(obj[key], target, source);
 		}
 		console.log('...Creando');
 	}
@@ -35,7 +36,7 @@ async function updateLocale(obj, source, target) {
 			obj[target][key] = await updateLocale(temp, source, target);
 		} else if (!obj[target][key]) {
 			console.log(obj[source][key] + ' <---> ' + obj[target][key]);
-			obj[target][key] = await social.translate(obj[source][key], target, source);
+			obj[target][key] = await Translate(obj[source][key], target, source);
 		}
 	}
 	console.log(obj[target]);

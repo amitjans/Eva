@@ -23,7 +23,8 @@ const it = {
 		EN: "Inglese",
 		PT: "Portoghese",
 		FR: "Francese",
-		IT: "Italiano"
+		IT: "Italiano",
+		JA: "Giapponese"
 	},
 	DATATABLE: {
 		SHOW: "Mostra",
@@ -167,7 +168,8 @@ const it = {
 		},
 		PROYECT: "Progetto",
 		PROYECT_NAME: "Nome del progetto",
-		SOURCE: "Lingua di origine"
+		SOURCE: "Lingua di origine",
+		RECORD: "Record"
 	},
 	LED: {
 		TITLE: "Elenco delle Animazioni Led",

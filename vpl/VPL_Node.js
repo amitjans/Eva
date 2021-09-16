@@ -1,5 +1,4 @@
-var led = require('../server/controllers/leds.controller');
-var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode, Api, Getdata, ProcessSpeakNode } = require('./Node');
+var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode, Api, Getdata, ProcessSpeakNode, GetAnim, ProcessLedNode } = require('./Node');
 var { getlemotion, setApi, getApi } = require('./VPL_ProcessVars');
 
 module.exports = {
@@ -20,17 +19,12 @@ module.exports = {
         } else if (element.type === 'sound') {
             social.ledsanimstop();
             if (element.wait) {
-                await social.play('./sonidos/' + element.src + '.wav', !!element.anim ? await led.getData(element.anim) : undefined);
+                await social.play('./sonidos/' + element.src + '.wav', !!element.anim ? await GetAnim(element) : undefined);
             } else {
-                social.play('./sonidos/' + element.src + '.wav', !!element.anim ? await led.getData(element.anim) : undefined);
+                social.play('./sonidos/' + element.src + '.wav', !!element.anim ? await GetAnim(element) : undefined);
             }
         } else if (element.type === 'led') {
-            if (element.base === 'stop') {
-                social.ledsanimstop();
-            } else {
-                let anim = await led.getData(element.anim);
-                social.ledsanim(element.base, anim.opts);
-            }
+            await ProcessLedNode(element);
         } else if (element.type === 'counter') {
             ProcessCounterNode(element);
         } else if (element.type === 'api') {

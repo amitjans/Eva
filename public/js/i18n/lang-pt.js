@@ -23,7 +23,8 @@ const pt = {
 		EN: "Inglês",
 		PT: "Português",
 		FR: "Francês",
-		IT: "Italiano"
+		IT: "Italiano",
+		JA: "Japonês"
 	},
 	DATATABLE: {
 		SHOW: "Mostar",

@@ -159,7 +159,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.setnode = function () {
-    let tempobj = { key: Date.now(), name: modalname[$scope.modal.toUpperCase()] + '_' + id, type: $scope.modal, group: $scope.group }
+    let _modalname = modalname[$scope.modal.toUpperCase()];
+    let tempobj = { key: Date.now(), name: _modalname + '_' + id, type: $scope.modal, group: $scope.group }
     switch ($scope.modal) {
       case 'emotion':
         node.push({ ...tempobj, emotion: $scope.emotion, level: parseInt($scope.level), speed: $scope.speed, color: color[$scope.emotion] });
@@ -187,14 +188,14 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push({ ...tempobj, name: $scope.listado.find( x => x._id === $scope.int).nombre, int: $scope.int });
         break;
       case "script":
-        node.push({ ...tempobj, sc: $scope.thescript, random: $scope.ccommon });
+        node.push({ ...tempobj, sc: $scope.thescript, random: $scope.ccommon, name: $scope.slistado.find(x => x._id == $scope.thescript).nombre });
         break;
       case "sound":
-        node.push({ ...tempobj, src: $scope.thesound, wait: $scope.ccommon, anim: $scope.leds });
+        node.push({ ...tempobj, src: $scope.thesound, wait: $scope.ccommon, anim: $scope.leds, name: `${_modalname}: ${$scope.thesound}` });
         break;
       case "led":
-        let base = $scope.led.find(x => x._id == $scope.leds).base;
-        node.push({ ...tempobj, name: "Leds_" + id, anim: $scope.leds, base: base });
+        let led = $scope.led.find(x => x._id == $scope.leds);
+        node.push({ ...tempobj, name: `Led: ${led.nombre}`, anim: $scope.leds, base: led.base });
         break;
       case "voice":
         if ($scope.ccommon) {
@@ -203,7 +204,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         node.push({ ...tempobj, voice: $scope.voice, robotname: $scope.vlistado.find(x => x.codigo == $scope.voice).nombre });
         break;
       case "counter":
-        node.push({ ...tempobj, count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter });
+        node.push({ ...tempobj, count: ($scope.cnname === '' ? $scope.cname : $scope.cnname), ops: $scope.ops, value: $scope.vcounter, 
+        name: `${_modalname}: ${($scope.cnname === '' ? $scope.cname : $scope.cnname)}` });
         break;
       case "api":
         node.push({ ...tempobj, version: $scope.version, host: $scope.host, path: $scope.path, port: ($scope.port == 0 || !!!$scope.port ? '' : $scope.port) });
@@ -220,7 +222,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     } else {
       let i = node.findIndex(x => x.key === $scope.key);
       node[node.length - 1].key = node[i].key;
-      node[node.length - 1].name = node[i].type == 'int' ? node[node.length - 1].name : node[i].name;
+      node[node.length - 1].name = /(int|script|led|sound|counter)/.test(node[i].type) ? node[node.length - 1].name : node[i].name;
       node.splice(i, 1);
       $scope.key = 0;
       if (node[node.length - 1].type == 'speak') {

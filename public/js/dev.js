@@ -1,4 +1,4 @@
-function newlocale(target, source) {
+function newlocale(target, source = 'es') {
     $.ajax({
         method: "POST",
         url: `dev/locale/?target=${target}&source=${source}`,
@@ -11,7 +11,7 @@ function newlocale(target, source) {
     });
 }
 
-function updatelocale(target, source) {
+function updatelocale(target, source = 'es') {
     let temp = {};
     temp[target] = lang[target];
     temp[source] = lang[source];

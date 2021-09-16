@@ -15,7 +15,7 @@ async function ProcessFlow(nodes, links, fnodes, ini) {
                     let ss = nodes.find(i => i.group === aux[0].key && i.type === 'script');
                     let { key, data } = await LoadScriptData(ss);
                     iscript[key] = data;
-                    aux[0].iteraciones = iscript[ss.key.toString()].length;
+                    aux[0].iteraciones = iscript[key].length;
                 }
                 for (let f = 0; f < aux[0].iteraciones; f++) {
                     await ProcessFlow(nodes, links, fnodes, fnodes.find(x => x.group == aux[0].key));

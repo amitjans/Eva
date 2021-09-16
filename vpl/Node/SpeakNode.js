@@ -2,12 +2,14 @@ var { existsSync } = require('fs');
 const { createHash } = require('crypto');
 var { getRespuesta, getSactual, getCounter, getApi } = require('../VPL_ProcessVars');
 var { getOne } = require('../../utils/Random');
+var { Translate } = require('../../server/services/translate');
+var { Getdata } = require('./ApiNode');
 
 module.exports = {
     ProcessSpeakNode: async function (element) {
-        let { fulltext, hash } = ProcessSpeakText(element);
+        let { fulltext, hash, rec } = await ProcessSpeakText(element);
         if (!!social.getConf().translate && !existsSync('./temp/' + (social.getConf().voice + '_' + hash) + '.wav')) {
-            fulltext = await social.translate(fulltext, social.getConf().voice.substring(0, 5), social.getConf().sourcelang.substring(0, 2));
+            fulltext = await Translate(fulltext, social.getConf().voice.substring(0, 5), social.getConf().sourcelang.substring(0, 2));
         }
         social.savelog(evaId, fulltext);
         if (rec) {
@@ -19,37 +21,33 @@ module.exports = {
 };
 
 async function ProcessSpeakText(element) {
-    let t = element.text;
-    if (t.includes('/')) {
-        t = getOne(t.split('/'));
-        element.key = createHash('md5').update(t).digest("hex");
-        element.text = t;
-    }
-    let rec = true;
-    let temp = element.text.split(' ');
-    for (let i = 0; i < temp.length; i++) {
-        if (temp[i].includes('*')) {
-            if (temp[i] == '*name') {
-                temp[i] = social.getConf().name;
+    let text = element.text.includes('/') ? getOne(element.text.split('/')) : element.text;
+    console.log("Mensaje: " + text);
+    let rec = !(/[@$]+/.test(text));
+    console.log("Grabar: " + rec);
+    let fulltext = text.split(' ').map(item => {
+        if (item.includes('*')) {
+            if (item == '*name') {
+                item = social.getConf().name;
             }
         }
-        else if (temp[i].includes('@')) {
-            let pos = temp[i].indexOf('.');
-            temp[i] = Getdata(getApi(temp[i].substring(1, pos).toLowerCase()), temp[i].substring(pos + 1));
-        } else if (temp[i].includes('$')) {
-            rec = false;
-            temp[i] = replaceWhatWasHeard(temp[i]);
-        } else if (temp[i].includes('%')) {
-            temp[i] = getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))];
-        } else if (temp[i].includes('#')) {
-            if (/^#[\w\d]+$/.test(temp[i])) {
-                temp[i] = getCounter()[temp[i].substring(1)];
+        else if (item.includes('@')) {
+            let pos = item.indexOf('.');
+            item = Getdata(getApi(item.substring(1, pos).toLowerCase()), item.substring(pos + 1));
+        } else if (item.includes('$')) {
+            item = replaceWhatWasHeard(item);
+        } else if (item.includes('%')) {
+            item = getSactual()['campo' + (item.length == 1 ? '2' : item.substring(1))];
+        } else if (item.includes('#')) {
+            if (/^#[\w\d]+$/.test(item)) {
+                item = getCounter()[item.substring(1)];
             }
         }
-    }
-
-    let fulltext = temp.join(' ');
-    return { fulltext, hash: crypto.createHash('md5').update(fulltext).digest("hex") }
+        console.log("Item: " + item);
+        return item;
+    }).join(' ');
+    console.log("Como quedo: " + fulltext);
+    return { fulltext: fulltext, hash: createHash('md5').update(fulltext).digest("hex"), rec: rec };
 }
 
 async function RecAndSpeak(element) {
