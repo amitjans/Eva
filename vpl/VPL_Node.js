@@ -1,4 +1,4 @@
-var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode, Api, Getdata, ProcessSpeakNode, GetAnim, ProcessLedNode } = require('./Node');
+var { ProcessListenNode, ProcessCounterNode, SendMessage, SendMedia, Login, ProcessEmotionNode, Api, Getdata, ProcessSpeakNode, GetAnim, ProcessLedNode, RecordNode } = require('./Node');
 var { getlemotion, setApi, getApi } = require('./VPL_ProcessVars');
 
 module.exports = {
