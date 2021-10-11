@@ -118,7 +118,12 @@ const es = {
         WAIT: "Esperar",
         INT: "Interacción",
         SCRIPT: "Script",
-        SCRIPT_DESC: "Este nodo incluye la función de hablar, leyendo el primer campo del elemento del script que se esté ejecutando en ese momento.",
+        SCRIPT_OPTS: {
+            ORDERBY: "Ordenar por:",
+            UNIQUE: "Único",
+            DELETEONUSE: "Eliminar al usar",
+            DESC: "Este nodo incluye la función de hablar, leyendo el primer campo del elemento del script que se esté ejecutando en ese momento.",
+        },
         COUNTER: "Contador",
         COUNTER_OPTS: {
             VALUE: "Valor",

@@ -44,6 +44,7 @@ class SocialRobot {
   constructor() {
     // { attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true };
     this.configuration = JSON.parse(fs.readFileSync('config.json'));
+    this.mic = { sampleRateHertz: 16000, threshold: 0, recordProgram: 'rec', silence: '1.0' };
     this._isPlaying = false;
     if (!!process.env.TEXT_TO_SPEECH_APIKEY) {
       this._createServiceAPI('tts');
@@ -195,6 +196,7 @@ class SocialRobot {
 
   async ledsanimstop() {
     clearInterval(this.leds);
+    this.leds = null;
     ledsanimation.stop();
   }
 
@@ -271,23 +273,20 @@ class SocialRobot {
 
   async recordSound(time, dir = './test.wav'){
     let localeanim = false;
+    console.log(localeanim);
+    console.log(!this.leds);
     if (!this.leds) {
       this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
-      localeanim = true;     
+      localeanim = true;
     }
     const file = fs.createWriteStream(dir, { encoding: 'binary' });
 
-    this.recording = record
-      .record({
-        sampleRateHertz: 16000,
-        threshold: 0,
-        recordProgram: 'rec',
-        silence: '1.0'
-      });
+    this.recording = record.record(this.mic);
     this.recording.stream().on('error', console.error).pipe(file);
     await this.sleep(time);
     this.recording.stop();
     file.end();
+    console.log(localeanim);
     if (localeanim) {
       this.ledsanimstop();
     }

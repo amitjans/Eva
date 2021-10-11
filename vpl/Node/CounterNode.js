@@ -1,19 +1,27 @@
 var { setCounter, getCounter } = require('../VPL_ProcessVars');
 
-module.exports = {
-    ProcessCounterNode: function ({ ops, count, value }) {
-        let temp = getCounter();
-        if (ops === 'sum') {
-            temp[count] = (temp[count] || 0) + parseInt(value);                
-        } else if (ops === 'rest') {
-            temp[count] = (temp[count] || 0) - parseInt(value);
-        } else if (ops === 'mult') {
-            temp[count] = (temp[count] || 0) * parseInt(value);
-        } else if (ops === 'div') {
-            temp[count] = (temp[count] || 0) / parseInt(value);
-        } else if (ops === 'assign'){
-            temp[count] = parseInt(value);
-        }
-        setCounter(temp);
+const ProcessCounterNode = function ({ ops, count, value, first, second }) {
+    let temp = getCounter();
+    if (ops === 'ADD') {
+        temp[count] = getValue(first, temp) + getValue(second, temp);
+    } else if (ops === 'MINUS') {
+        temp[count] = getValue(first, temp) - getValue(second, temp);
+    } else if (ops === 'MULTIPLY') {
+        temp[count] = getValue(first, temp) * getValue(second, temp);
+    } else if (ops === 'DIVIDE') {
+        temp[count] = getValue(first, temp) / getValue(second, temp);
+    } else if (ops === 'POWER') {
+        temp[count] = Math.pow(getValue(first, temp), getValue(second, temp));
+    } else if (ops === 'assign'){
+        temp[count] =  value;
     }
+    setCounter(temp);
+}
+
+const getValue = function (value, variables) {
+    return /^[\d]+$/.test(value) ? parseInt(value) : parseInt(variables[value] || 0);
+}
+
+module.exports = {
+    ProcessCounterNode
 }

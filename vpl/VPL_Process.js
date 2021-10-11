@@ -6,41 +6,44 @@ var { ConditionNode, LoadScriptData } = require('./Node');
 var iscript = {};
 global.sactual;
 
-async function ProcessFlow(nodes, links, fnodes, ini) {
-    let aux = [ini];
+async function ProcessFlow(node, nodes) {
     do {
-        if (aux.length == 1 || aux[0].type !== 'if') {
-            if (aux[0].type === 'for') {
-                if (aux[0].iteraciones <= -1) {
-                    let ss = nodes.find(i => i.group === aux[0].key && i.type === 'script');
-                    let { key, data } = await LoadScriptData(ss);
-                    iscript[key] = data;
-                    aux[0].iteraciones = iscript[key].length;
+        if (node.type !== 'if') {
+            if (node.type === 'for') {
+                if (node.iteraciones <= -1) {
+                    let ss = nodes.find(i => i.type === 'script');
+                    iscript[ss.key] = ss.data;
+                    node.iteraciones = iscript[ss.key].length;
                 }
-                for (let f = 0; f < aux[0].iteraciones; f++) {
-                    await ProcessFlow(nodes, links, fnodes, fnodes.find(x => x.group == aux[0].key));
+                for (let f = 0; f < node.iteraciones; f++) {
+                    await ProcessFlow(await nodes.find(x => x.key == node.first), nodes);
                 }
-            } else if (aux[0].type === 'script') {
-                await LoadScriptData(aux[0]);
-                sactual = iscript[aux[0].key + ''].shift();
+            } else if (node.type === 'script') {
+                if (!iscript[node.key]) {
+                    iscript[node.key] = node.data;
+                }
+                sactual = iscript[node.key + ''].shift();
+                if (!node.remove) {
+                    iscript[node.key + ''].push(sactual);
+                }
                 await ProcessNode({ key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
-            } else if (aux[0].type === 'led' && aux[0].anim !== 'stop') {
-                let aux_t = NextNode(links, aux[0], nodes);
-                if (!!aux_t[0]) {
-                    if (aux_t[0].type === 'speak' || aux_t[0].type === 'sound') {
-                        aux_t[0].anim = aux[0].anim;
-                        aux[0] = aux_t[0];
+            } else if (node.type === 'led' && node.anim !== 'stop') {
+                let node_t = NextNode(node, nodes);
+                if (!!node_t[0]) {
+                    if (node_t[0].type === 'speak' || node_t[0].type === 'sound') {
+                        node_t[0].anim = node.anim;
+                        node = node_t[0];
                     }
                 }
-                await ProcessNode(aux[0]);
+                await ProcessNode(node);
             } else {
-                await ProcessNode(Object.assign({}, aux[0]));
+                await ProcessNode(Object.assign({}, node));
             }
-            aux = NextNode(links, aux[0], nodes);
-        } else if (aux.length > 1 && aux[0].type === 'if') {
-            aux = ConditionNode(aux, links, nodes);
+            node = NextNode(node, nodes);
+        } else if (node.type === 'if') {
+            node = ConditionNode(node, links, nodes);
         }
-    } while (aux.length > 0);
+    } while (!!node);
 }
 
 module.exports.ProcessFlow = ProcessFlow;

@@ -22,9 +22,7 @@ module.exports = {
 
 async function ProcessSpeakText(element) {
     let text = element.text.includes('/') ? getOne(element.text.split('/')) : element.text;
-    console.log("Mensaje: " + text);
     let rec = !(/[@$]+/.test(text));
-    console.log("Grabar: " + rec);
     let fulltext = text.split(' ').map(item => {
         if (item.includes('*')) {
             if (item == '*name') {
@@ -43,10 +41,8 @@ async function ProcessSpeakText(element) {
                 item = getCounter()[item.substring(1)];
             }
         }
-        console.log("Item: " + item);
         return item;
     }).join(' ');
-    console.log("Como quedo: " + fulltext);
     return { fulltext: fulltext, hash: createHash('md5').update(fulltext).digest("hex"), rec: rec };
 }
 

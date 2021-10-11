@@ -14,14 +14,8 @@ module.exports = {
         }
         return result;
     },
-    NextNode: function (links, node, nodes) {
-        let n = [];
-        for (let i = 0; i < links.length; i++) {
-            if (links[i].from == node.key) {
-                n.push(nodes.find(x => x.key == links[i].to));
-            }
-        }
-        return n;
+    NextNode: function (node, nodes) {
+        return nodes.find(x => x.key == node.next);
     },
     FirstsNodes: function (link, fnodes) {
         for (let i = 0; i < fnodes.length; i++) {

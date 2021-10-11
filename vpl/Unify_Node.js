@@ -1,10 +1,21 @@
 var { FirstAndLast } = require('./NodeUtils');
 const { getThis } = require('../server/controllers/common.controller');
+const { xmlToJson } = require('../utils/xml2json');
+const { LoadScriptData } = require('./Node')
+const Blockly = require('blockly');
 
 async function unifyById(value) {
+    return await unify(await findById(value));
+}
+
+async function findById(value) {
     const temp = await getThis(value, 'interaccion');
-    let clone = JSON.parse(JSON.stringify(temp.data));
-    return await unify(clone.node, clone.link);
+    return xmlToJson(Blockly.Xml.textToDom(temp.xml));
+}
+
+async function findByContent(value) {
+    const temp = await getByContent(value, 'interaccion');
+    return xmlToJson(Blockly.Xml.textToDom(temp.xml));
 }
 
 async function unifyByInt(value) {
@@ -12,38 +23,94 @@ async function unifyByInt(value) {
     return await unify(clone.node, clone.link);
 }
 
-async function unify(nodes, links) {
-    for (let i = 0; i < nodes.length; i++) {
-        if (nodes[i].type === 'int') {
-            let sub = await getThis(nodes[i].int, 'interaccion');
-            let jn = sub.data.node;
-            let jl = sub.data.link;
-            if (!!nodes[i].group) {
-                for (let k = 0; k < jn.length; k++) {
-                    jn[k].group = nodes[i].group;
+async function unify(obj) {
+    let nodes = [];
+    if(!!obj.block) {
+        let temp = obj.block;
+        let node = { key: temp["@attributes"].id, type: temp["@attributes"].type }
+        switch (temp["@attributes"].type) {
+            case "controls_repeat_ext":
+                node.type = 'for';
+                node['iteraciones'] = parseInt(temp.value.shadow.field['#text']);
+                node['first'] = temp.statement.block["@attributes"].id;
+                break;
+            case "led":
+                node['anim'] = temp.field['#text'];
+                break;
+            case "mov":
+                node['mov'] = parseInt(temp.field['#text']);
+                break;
+            case "record":
+            case "wait":
+                node['time'] = parseInt(temp.field['#text']);
+                break;
+            case "sound":
+                node['src'] = temp.field[0]['#text'];
+                node['wait'] = temp.field[1]['#text'] == 'TRUE';
+                if (!!temp.statement) {
+                    node['anim'] = temp.statement.block.field['#text'];
                 }
-            }
-            let aux = FirstAndLast(jn.slice(), jl.slice());
-            for (let j = 0; j < links.length; j++) {
-                if (links[j].to === nodes[i].key) {
-                    links[j].to = aux.ini[0].key;
-                    for (let k = 1; k < aux.ini.length; k++) {
-                        links.push({ from: links[j].from, to: aux.ini[k].key });
+                break;
+            case "script":
+                node['sc'] = temp.field[0]['#text'];
+                node['random'] = temp.field[1]['#text'] == 'TRUE';
+                node['order'] = temp.field[2]['#text'];
+                node['unique'] = temp.field[3]['#text'];
+                node['remove'] = temp.field[4]['#text'] == 'TRUE';
+                node['data'] = await LoadScriptData(node);
+                break;
+            case "speak":
+                node['text'] = temp.field['#text'];
+                break;
+            case "speak_combine":
+                node = { ...node, type: 'speak', text: '' };
+                let subText = temp.value;
+                while (!!subText.block) {
+                    if (subText.block['@attributes'].type == 'speak_text') {
+                        node.text += ` ${ subText.block.field['#text'] }`;
+                    } else if (subText.block['@attributes'].type == 'speak_var') {
+                        node.text += ` #${subText.block.field['#text']}`;
+                    } else if (subText.block['@attributes'].type == 'speak_script') {
+                        node.text += ` %${subText.block.field['#text']}`;
                     }
-                } else if (links[j].from === nodes[i].key) {
-                    links[j].from = aux.end[0].key;
-                    for (let l = 1; l < aux.end.length; l++) {
-                        links.push({ from: aux.end[l].key, to: links[j].to });
-                    }
+                    subText = subText.block.value || {};
                 }
+                node.text = node.text.trim();
+                break;
+            case "variables_set":
+                node = { ...node, type: 'counter', count: temp.field['#text'] };
+                if (temp.value.block['@attributes'].type == 'math_arithmetic') {
+                    node['ops'] = temp.value.block.field['#text'];
+                    let valueBlock = temp.value.block.value;
+                    node['first'] = (!!valueBlock[0].block ? valueBlock[0].block.field['#text'] : valueBlock[0].shadow.field['#text']);
+                    node['second'] = (!!valueBlock[1].block ? valueBlock[1].block.field['#text'] : valueBlock[1].shadow.field['#text']);
+                } else {
+                    node = { ...node, ops: 'assign', value: temp.value.block.field['#text'] };
+                }
+                console.log(node);
+                break;
+            case "voice":
+                node['voice'] = temp.field[0]['#text'];
+                node['translate'] = temp.field[1]['#text'] == 'TRUE';
+                node['sourcelang'] = temp.field[2]['#text'];
+            default:
+                break;
+        }
+        if(!!temp.next) {
+            if (temp.next.block['@attributes'].type == 'int') {
+                temp.next = await findById(temp.next.block.field['#text']);
             }
-            nodes.splice(i, 1);
-            i = -1;
-            Array.prototype.push.apply(nodes, jn);
-            Array.prototype.push.apply(links, jl);
+            node['next'] = temp.next.block['@attributes'].id;
+        }
+        nodes.push(node);
+        if(!!node.first && node.type == 'for') {
+            nodes.push(...(await unify(temp.statement)));
+        }
+        if(!!node.next) {
+            nodes.push(...(await unify(temp.next)));
         }
     }
-    return { node: nodes, link: links };
+    return nodes;
 }
 
 module.exports = {
