@@ -35,7 +35,6 @@ const port = new SerialPort('/dev/ttyUSB0', {
 
 var { eyes, enviarMensaje } = require('./app');
 var logs = require('./log');
-var log = '';
 var time = 0;
 var emotional = true;
 
@@ -52,7 +51,6 @@ class SocialRobot {
     if (!!process.env.SPEECH_TO_TEXT_APIKEY) {
       this._createServiceAPI('stt');
     }
-    log = '';
     time = Date.now();
     emotional = true;
     this.leds = null;
@@ -264,7 +262,11 @@ class SocialRobot {
     };
     return this._stt.recognize(params)
       .then(response => {
-        return response.result.results[0].alternatives[0].transcript;
+        try {
+          return response.result.results[0].alternatives[0].transcript;
+        } catch (error) {
+          return '';
+        }
       })
       .catch(err => {
         console.log(err);
@@ -273,8 +275,6 @@ class SocialRobot {
 
   async recordSound(time, dir = './test.wav'){
     let localeanim = false;
-    console.log(localeanim);
-    console.log(!this.leds);
     if (!this.leds) {
       this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
       localeanim = true;
@@ -286,7 +286,6 @@ class SocialRobot {
     await this.sleep(time);
     this.recording.stop();
     file.end();
-    console.log(localeanim);
     if (localeanim) {
       this.ledsanimstop();
     }
@@ -319,9 +318,9 @@ class SocialRobot {
     console.log('Detected intent');
     result = responses[0].queryResult;
     if (result.intent) {
-      console.log(`  Intent: ${result.intent.displayName}`);
+      console.log(`Intent: ${result.intent.displayName}`);
     } else {
-      console.log(`  No intent matched.`);
+      console.log(`No intent matched.`);
     }
     return result.fulfillmentText || result.queryText;
   }

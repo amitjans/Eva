@@ -25,6 +25,7 @@ async function unify(obj) {
         switch (temp["@attributes"].type) {
             case "controls_if":
                 node.type = 'if';
+                node['condition'] = [];
                 let values = [].concat(temp.value);
                 for (let i = 0; i < values.length; i++) {
                     const element = values[i];
@@ -40,9 +41,13 @@ async function unify(obj) {
                         }
                         let thenDo = temp.statement
                         .find(x => x['@attributes'].name == `DO${element['@attributes'].name.substring(2)}`);
-                        condition['next'] = thenDo.block['@attributes'].id;
+                        if (!!thenDo || !!temp.next){
+                            condition['next'] = !!thenDo ? thenDo.block['@attributes'].id : temp.next.block['@attributes'].id;
+                        }
                         node['condition'].push(condition);
-                        nodes.push(...(await unify(thenDo)));
+                        if (!!thenDo){
+                            nodes.push(...(await unify(thenDo)));
+                        }
                     }
                 }
                 let elseDo = temp.statement.find(x => x['@attributes'].name == 'ELSE');
