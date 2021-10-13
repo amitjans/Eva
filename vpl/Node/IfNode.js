@@ -1,92 +1,74 @@
-var { NextNode } = require('../NodeUtils');
 var { getCounter, getSactual, getRespuesta } = require('../VPL_ProcessVars');
-var Compare = require('../../utils/Compare');
+var PhoneticSpanish = require('../../utils/PhoneticSpanish');
 
 module.exports = {
-    ConditionNode: function (ifnodes, links, nodes) {
-        for (let c = 0; c < ifnodes.length; c++) {
-            if (ifnodes[c].opt == '5') {
-                let param = ifnodes[c].text.split(' ');
-                let token = [];
-                for (let i = 0; i < param.length; i++) {
-                    token.push(CreateToken(param[i]));
+    ConditionNode: function (node) {
+        for (let i = 0; i < node.condition.length; i++) {
+            const element = node.condition[i];
+            if (!element.A && !element.B) {
+                return element.next;
+            } else if (/^[\d]+$/.test(element.A) && /^[\d]+$/.test(element.A)) {
+                if (NumericComparison(element)) {
+                    return element.next;
                 }
-                let result = false;
-                for (let i = 0; i < token.length; i++) {
-                    if (token[i].type === 'opr' && i > 0 && (i + 1 < token.length)) {
-                        if (/^[\d]+$/.test(token[i - 1].value) && /^[\d]+$/.test(token[i + 1].value)) {
-                            result = MathComparison(token, i);
-                        }
-                    }
+            } else {
+                element.A = CreateToken(element.A);
+                element.B = CreateToken(element.B);
+                if (StringComparison(element)) {
+                    return element.next;
                 }
-                if (result) {
-                    return NextNode(links, ifnodes[c], nodes);
-                }	
-            } else if ((ifnodes[c].text || '') === '') {
-                return NextNode(links, ifnodes[c], nodes);
-            } else if (ifnodes[c].text.includes('%')) {
-                if (Compare(getSactual()['campo' + (temp[i].length == 1 ? '2' : temp[i].substring(1))], getRespuesta(true)) >= ifnodes[c].opt) {
-                    return NextNode(links, ifnodes[c], nodes);
-                }
-            } else if (ifnodes[c].text.includes('/')) {
-                let sub = ifnodes[c].text.split('/');
-                for (let i = 0; i < sub.length; i++) {
-                    if (Compare(sub[i], getRespuesta(true)) >= ifnodes[c].opt) {
-                        return NextNode(links, ifnodes[c], nodes);
-                    }                    
-                }
-            } else if (Compare((ifnodes[c].text || ''), getRespuesta(true)) >= ifnodes[c].opt) {
-                return NextNode(links, ifnodes[c], nodes);
             }
         }
-        return [];
     }
 };
 
 function CreateToken(param) {
     if (param.includes('#')) {
-        return { type: 'num', value: parseInt(getCounter()[param.substring(1)])};
-    } else if (param.includes('$')) {
-        let resp = getRespuesta();
-        for (let i = resp.length - 1; 0 <= i; i--) {
-            if (/^[\d]+$/.test(resp[i])) {
-                return { type: 'num', value: parseInt(resp[i])};
-            } 
-        }
-    } else if (/^[\d]+$/.test(param)) {
-        return { type: 'num', value: parseInt(param)};
-    } else if (/^[=<>]+$/.test(param)) {
-        let auxopr = { type: 'opr', value: param};
-        if (/^[=]+$/.test(auxopr.value)) {
-            auxopr.value = 'equal';
-        } else if (/^[>]+$/.test(auxopr.value)) {
-            auxopr.value = 'greater';
-        } else if (/^[<]+$/.test(auxopr.value)) {
-            auxopr.value = 'less';
-        } else if (/^[>=]+$/.test(auxopr.value)) {
-            auxopr.value = 'greateror';
-        } else if (/^[<=]+$/.test(auxopr.value)) {
-            auxopr.value = 'lessor';
-        }
-        return auxopr;
+        return getCounter()[param.substring(1)];
+    } else if (param == '$'){
+        return getRespuesta(true);
+    } else if (/\$[\d]+/.test(param)) {
+        return getRespuesta()[parseInt(param.substring(1))];
+    } else if (/\$-[\d]+/.test(param)) {
+        return getRespuesta()[(getRespuesta().length - 1) - parseInt(param.substring(2))];
+    } else if (param.includes('%')) {
+        return getSactual()['campo' + param.substring(1)];
+    }
+    return param;
+}
+
+function NumericComparison({ A, B, OP }) {
+    let value1 = parseInt(A);
+    let value2 = parseInt(B);
+    if (OP === 'EQ') {
+        return value1 == value2;
+    } else if (OP === 'NEQ') {
+        return value1 != value2;
+    } else if (OP === 'LT') {
+        return value1 < value2;
+    } else if (OP === 'LTE') {
+        return value1 <= value2;
+    } else if (OP === 'GT') {
+        return value1 > value2;
+    } else if (OP === 'GTE') {
+        return value1 >= value2;
     }
 }
 
-function MathComparison(token, pos) {
-    let value1 = parseInt(token[pos - 1].value);
-    let value2 = parseInt(token[pos + 1].value);
-    if (token[pos].value === 'equal') {
-        return value1 == value2;
-    } else if (token[pos].value === 'greater') {
-        return value1 > value2;
-    } else if (token[pos].value === 'less') {
-        return value1 < value2;
-    } else if (token[pos].value === 'greateror') {
-        return value1 >= value2;
-    } else if (token[pos].value === 'lessor') {
-        return value1 <= value2;
-    } else if (token[pos].value === 'notequal') {
-        return value1 != value2;
+function StringComparison({ A, B, OP }) {
+    let value = A.localeCompare(B, undefined, { sensitivity: 'base' });
+    if (OP === 'EQ') {
+        return value == 0 || PhoneticSpanish(A) === PhoneticSpanish(B);
+    } else if (OP === 'NEQ') {
+        return value != 0;
+    } else if (OP === 'LT') {
+        return value < 0;
+    } else if (OP === 'LTE') {
+        return value <= 0;
+    } else if (OP === 'GT') {
+        return value > 0;
+    } else if (OP === 'GTE') {
+        return value >= 0;
     }
 }
 

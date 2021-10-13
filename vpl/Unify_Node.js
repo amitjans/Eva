@@ -1,4 +1,3 @@
-var { FirstAndLast } = require('./NodeUtils');
 const { getThis } = require('../server/controllers/common.controller');
 const { xmlToJson } = require('../utils/xml2json');
 const { LoadScriptData } = require('./Node')
@@ -13,11 +12,6 @@ async function findById(value) {
     return xmlToJson(Blockly.Xml.textToDom(temp.xml));
 }
 
-async function findByContent(value) {
-    const temp = await getByContent(value, 'interaccion');
-    return xmlToJson(Blockly.Xml.textToDom(temp.xml));
-}
-
 async function unifyByInt(value) {
     let clone = JSON.parse(JSON.stringify(value.data));
     return await unify(clone.node, clone.link);
@@ -29,6 +23,32 @@ async function unify(obj) {
         let temp = obj.block;
         let node = { key: temp["@attributes"].id, type: temp["@attributes"].type }
         switch (temp["@attributes"].type) {
+            case "controls_if":
+                node.type = 'if';
+                let values = [].concat(temp.value);
+                for (let i = 0; i < values.length; i++) {
+                    const element = values[i];
+                    if (!!element.block && element.block['@attributes']['type'] == "logic_compare") {
+                        let condition = { OP: element.block.field['#text'] };
+                        for (let j = 0; j < element.block.value.length; j++) {
+                            const attr = element.block.value[j];
+                            if (attr.block['@attributes'].type == 'speak_script') {
+                                condition[attr['@attributes'].name] = `%${attr.block.field['#text']}`;
+                            } else {
+                                condition[attr['@attributes'].name] = attr.block.field['#text'];
+                            }
+                        }
+                        let thenDo = temp.statement
+                        .find(x => x['@attributes'].name == `DO${element['@attributes'].name.substring(2)}`);
+                        condition['next'] = thenDo.block['@attributes'].id;
+                        node['condition'].push(condition);
+                        nodes.push(...(await unify(thenDo)));
+                    }
+                }
+                let elseDo = temp.statement.find(x => x['@attributes'].name == 'ELSE');
+                node['condition'].push({ next: elseDo.block['@attributes'].id });
+                nodes.push(...(await unify(elseDo)));
+                break;
             case "controls_repeat_ext":
                 node.type = 'for';
                 node['iteraciones'] = parseInt(temp.value.shadow.field['#text']);
@@ -36,6 +56,11 @@ async function unify(obj) {
                 break;
             case "led":
                 node['anim'] = temp.field['#text'];
+                break;
+            case "listen":
+                node['service'] = temp.field[0]['#text'].includes('BroadbandModel') ? 'watson' : 'google';
+                node['langcode'] = temp.field[0]['#text'];
+                node['opt'] = temp.field[1]['#text'] || "";
                 break;
             case "mov":
                 node['mov'] = parseInt(temp.field['#text']);

@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const { ProcessNode } = require('./VPL_Node');
 const { NextNode } = require('./NodeUtils');
-var { ConditionNode, LoadScriptData } = require('./Node');
+var { ConditionNode } = require('./Node');
 
 var iscript = {};
 global.sactual;
@@ -41,7 +41,7 @@ async function ProcessFlow(node, nodes) {
             }
             node = NextNode(node, nodes);
         } else if (node.type === 'if') {
-            node = ConditionNode(node, links, nodes);
+            node = NextNode({ next: ConditionNode(node) }, nodes)
         }
     } while (!!node);
 }
