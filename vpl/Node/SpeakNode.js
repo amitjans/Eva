@@ -1,5 +1,5 @@
 var { existsSync } = require('fs');
-const { createHash } = require('crypto');
+const crypto = require('../../utils/MD5');
 var { getRespuesta, getSactual, getCounter, getApi } = require('../VPL_ProcessVars');
 var { getOne } = require('../../utils/Random');
 var { Translate } = require('../../server/services/translate');
@@ -43,7 +43,7 @@ async function ProcessSpeakText(element) {
         }
         return item;
     }).join(' ');
-    return { fulltext: fulltext, hash: createHash('md5').update(fulltext).digest("hex"), rec: rec };
+    return { fulltext: fulltext, hash: crypto(fulltext), rec: rec };
 }
 
 async function RecAndSpeak(element) {

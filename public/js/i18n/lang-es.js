@@ -123,6 +123,8 @@ const es = {
             UNIQUE: "Único",
             DELETEONUSE: "Eliminar al usar",
             DESC: "Este nodo incluye la función de hablar, leyendo el primer campo del elemento del script que se esté ejecutando en ese momento.",
+            DSCI: "Eliminar el elemento actual del script",
+            DSCI_DESC: "Se utiliza cuando la opción 'Eliminar al usar' no está seleccionada."
         },
         COUNTER: "Contador",
         COUNTER_OPTS: {

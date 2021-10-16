@@ -1,48 +1,54 @@
-const crypto = require('crypto');
+const crypto = require('../utils/MD5');
 const { ProcessNode } = require('./VPL_Node');
 const { NextNode } = require('./NodeUtils');
 var { ConditionNode } = require('./Node');
 
 var iscript = {};
+var currentKey = "";
 global.sactual;
 
 async function ProcessFlow(node, nodes) {
     do {
-        if (node.type !== 'if') {
-            if (node.type === 'for') {
-                if (node.iteraciones <= -1) {
-                    let ss = nodes.find(i => i.type === 'script');
-                    iscript[ss.key] = ss.data;
-                    node.iteraciones = iscript[ss.key].length;
+        if (node.type === 'for') {
+            if (node.iteraciones <= -1) {
+                let ss = nodes.find(i => i.type === 'script');
+                currentKey = ss.key;
+                iscript[currentKey] = ss.data;
+                if (!ss.remove) {
+                    node.infinity = true;
+                } else {
+                    node.iteraciones = iscript[currentKey].length;
                 }
-                for (let f = 0; f < node.iteraciones; f++) {
-                    await ProcessFlow(await nodes.find(x => x.key == node.first), nodes);
-                }
-            } else if (node.type === 'script') {
-                if (!iscript[node.key]) {
-                    iscript[node.key] = node.data;
-                }
-                sactual = iscript[node.key + ''].shift();
-                if (!node.remove) {
-                    iscript[node.key + ''].push(sactual);
-                }
-                await ProcessNode({ key: crypto.createHash('md5').update(sactual.campo1).digest("hex"), type: "speak", text: sactual.campo1 });
-            } else if (node.type === 'led' && node.anim !== 'stop') {
-                let node_t = NextNode(node, nodes);
-                if (!!node_t[0]) {
-                    if (node_t[0].type === 'speak' || node_t[0].type === 'sound') {
-                        node_t[0].anim = node.anim;
-                        node = node_t[0];
-                    }
-                }
-                await ProcessNode(node);
-            } else {
-                await ProcessNode(Object.assign({}, node));
             }
-            node = NextNode(node, nodes);
+            for (let f = 0; (!!node.infinity ? iscript[currentKey].length > 0 : f < node.iteraciones); f++) {
+                await ProcessFlow(await nodes.find(x => x.key == node.first), nodes);
+            }
+        } else if (node.type === 'script') {
+            if (!iscript[node.key]) {
+                iscript[node.key] = node.data;
+            }
+            sactual = iscript[node.key].shift();
+            if (!node.remove) {
+                iscript[node.key].push(sactual);
+            }
+            await ProcessNode({ key: crypto(sactual.campo1), type: "speak", text: sactual.campo1 });
+        } else if (node.type === 'dsci') {
+            iscript[currentKey].pop();
+        } else if (node.type === 'led' && node.anim !== 'stop') {
+            let node_t = NextNode(node, nodes);
+            if (!!node_t[0]) {
+                if (node_t[0].type === 'speak' || node_t[0].type === 'sound') {
+                    node_t[0].anim = node.anim;
+                    node = node_t[0];
+                }
+            }
+            await ProcessNode(node);
         } else if (node.type === 'if') {
-            node = NextNode({ next: ConditionNode(node) }, nodes)
+            await ProcessFlow(NextNode({ next: ConditionNode(node) }, nodes), nodes);
+        } else {
+            await ProcessNode(Object.assign({}, node));
         }
+        node = NextNode(node, nodes);
     } while (!!node);
 }
 

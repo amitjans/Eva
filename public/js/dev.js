@@ -27,6 +27,19 @@ function updatelocale(target, source = 'es') {
     });
 }
 
+function updateAllLocale(source = 'es') {
+    $.ajax({
+        method: "PUT",
+        url: `dev/locale/?source=${source}`,
+        dataType: "json",
+        contentType: 'application/json',
+        data: JSON.stringify(lang)
+    })
+    .done(function (msg) { 
+        notify('Ok');
+    });
+}
+
 function rosco(data) {
     let abecedario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'];
     for (let i = 0; i < data.length; i++) {

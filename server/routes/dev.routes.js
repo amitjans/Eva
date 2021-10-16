@@ -11,8 +11,16 @@ router.post('/locale', async function (req, res) {
 
 router.put('/locale', async function (req, res) {
 	res.status(200).jsonp();
-	let obj = await updateLocale(req.body, req.query.source, req.query.target);
-	writeLocale(req.query.target, obj);
+	if (!!req.query.target) {
+		let obj = await updateLocale(req.body, req.query.source, req.query.target);
+		writeLocale(req.query.target, obj);
+	} else {
+		let targets = Object.keys(req.body).filter(item => item != req.query.source);
+		for (const key of targets) {
+			let obj = await updateLocale(req.body, req.query.source, key);
+			writeLocale(req.query.target, obj);
+		}
+	}
 });
 
 async function translateLocale(obj, source, target) {
@@ -35,7 +43,6 @@ async function updateLocale(obj, source, target) {
 			temp[target] = obj[target][key] || {};
 			obj[target][key] = await updateLocale(temp, source, target);
 		} else if (!obj[target][key]) {
-			console.log(obj[source][key] + ' <---> ' + obj[target][key]);
 			obj[target][key] = await Translate(obj[source][key], target, source);
 		}
 	}
