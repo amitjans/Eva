@@ -52,3 +52,15 @@ Blockly.Blocks['script'] = {
     this.setHelpUrl("");
   }
 };
+
+Blockly.Blocks['dsci'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(locale().INTERACTION.SCRIPT_OPTS.DSCI);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip(locale().INTERACTION.SCRIPT_OPTS.DSCI_DESC);
+    this.setHelpUrl("");
+  }
+};
