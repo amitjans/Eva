@@ -12,8 +12,11 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.slist = function () {
     Promise.all([led, sound, mov, voice, listen]).then(values => {
       var toolbox = document.getElementById("toolbox");
+
       var options = { toolbox: toolbox, collapse: false, comments: false, disable: false, maxBlocks: 0, trashcan: true, horizontalLayout: true, toolboxPosition: 'end', 
-      css: true, media: 'https://blockly-demo.appspot.com/static/media/', rtl: false, scrollbars: false, sounds: true, oneBasedIndex: true };
+      css: true, media: 'https://blockly-demo.appspot.com/static/media/', rtl: false, scrollbars: true, sounds: true, oneBasedIndex: true, 
+      zoom : { controls : true, wheel : true, startScale : 1, maxScale : 3, minScale : 0.5, scaleSpeed : 1.01 } };
+
       workspace = Blockly.inject("myDiagramDiv", options);
       var workspaceBlocks = document.getElementById("workspaceBlocks");
       Blockly.Xml.domToWorkspace(workspaceBlocks, workspace);

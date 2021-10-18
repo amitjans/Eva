@@ -36,6 +36,7 @@ async function ProcessSpeakText(element) {
             item = replaceWhatWasHeard(item);
         } else if (item.includes('%')) {
             item = getSactual()['campo' + (item.length == 1 ? '2' : item.substring(1))];
+            item = item.includes('/') ? getOne(item.split('/')) : item;
         } else if (item.includes('#')) {
             if (/^#[\w\d]+$/.test(item)) {
                 item = getCounter()[item.substring(1)];

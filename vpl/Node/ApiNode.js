@@ -6,7 +6,6 @@ module.exports = {
         var version = host.includes('https') ? https : http;
         return new Promise(function (resolve, reject) {
             let url = host + ((!!port || port == 0) ? '' : ':' + port) + '/' + path;
-            console.log(url);
             version.get(url, function (res) {
                 var data = '';
                 res.on('data', function(chunk) {

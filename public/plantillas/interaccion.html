@@ -1,13 +1,11 @@
 <div class="container" ng-controller="interaccion">
   <div class="row">
     <div class="col-md-4">
-      <br>
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a id="inicio" href="#home" aria-controls="home" role="tab"
-            data-toggle="tab" target="_blank">{{'INTERACTION.TITLE' | translate}}</a></li>
-      </ul>
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">
+      <div class="card z-depth-1">
+        <div class="form-horizontal" role="form">
+          <div class="card-header bgm-bluegray">
+            <h2>{{'INTERACTION.TITLE' | translate}}<small></small></h2>
+          </div>
           <div class="card-body table-responsive" style="height: 575px">
             <table class="table" id="data-table-basic">
               <thead>
@@ -39,7 +37,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="col-md-8">
       <div class="card z-depth-1">
@@ -55,7 +52,7 @@
               </div>
             </div>
             <div class="col-sm-offset-2">
-              <div id="myDiagramDiv" style="border: solid 1px gray; border-radius: 1%; width:625px; height:500px">
+              <div id="myDiagramDiv" style="border: solid 1px gray; border-radius: 1%; width:625px; height:525px">
                 <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
                 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
                   <category name="Math" colour="#5b67a5">
@@ -170,79 +167,6 @@
                   translate}}</button>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade right" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel"> {{ accion }} {{ ModalName }}</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-horizontal" role="form">
-              <!-- Modal Condicion -->
-              <div class="form-group" ng-show="modal == 'if'">
-                <label class="col-sm-2 control-label">{{'INTERACTION.IF' | translate}}</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control input-sm" ng-model="texto" ng-change="autoif()"
-                    placeholder="Condición">
-                  <small id="emailHelp" class="form-text text-muted">{{'INTERACTION.IF_DESC' | translate}}</small>
-                </div>
-              </div>
-              <div class="form-group" ng-show="modal == 'if'">
-                <label class="col-sm-2 control-label">{{'INTERACTION.COMPARISON.LABEL' | translate}}</label>
-                <div class="col-sm-10">
-                  <select name="ifopt" id="" ng-model="ifopt" class="form-control">
-                    <option value="4">{{'INTERACTION.COMPARISON.EXACT' | translate}}</option>
-                    <option value="3">{{'INTERACTION.COMPARISON.PHONETIC' | translate}}</option>
-                    <option value="2">{{'INTERACTION.COMPARISON.INCLUDE' | translate}}</option>
-                    <option value="5">{{'INTERACTION.COMPARISON.MATH' | translate}}</option>
-                  </select>
-                </div>
-              </div>
-              <!-- Modal Condicion -->
-
-              <!-- Modal Api -->
-              <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.VERSION' | translate}}</label>
-                <label class="radio-inline col-sm-offset-1">
-                  <input type="radio" name="version" id="inlineRadio4" ng-model="version" value="http"> Http
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="version" id="inlineRadio5" ng-model="version" value="https"> Https
-                </label>
-              </div>
-              <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.SERVER' | translate}}</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control input-sm" ng-model="host" ng-change="autoversion()"
-                    placeholder="Host">
-                </div>
-              </div>
-              <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.QUERY' | translate}}</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control input-sm" ng-model="path" placeholder="?item=value&...">
-                </div>
-              </div>
-              <div class="form-group" ng-show="modal == 'api'">
-                <label class="col-sm-2 control-label">{{'INTERACTION.API_REST.PORT' | translate}}</label>
-                <div class="col-sm-10">
-                  <input type="number" class="form-control input-sm" ng-model="port" placeholder="Puerto">
-                </div>
-              </div>
-              <!-- Modal Api -->
-
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
-            <button type="button" ng-click="setnode()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
           </div>
         </div>
       </div>

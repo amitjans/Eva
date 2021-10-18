@@ -44,7 +44,10 @@ async function ProcessFlow(node, nodes) {
             }
             await ProcessNode(node);
         } else if (node.type === 'if') {
-            await ProcessFlow(NextNode({ next: ConditionNode(node) }, nodes), nodes);
+            let tempId = ConditionNode(JSON.parse(JSON.stringify(node)));
+            if (!!tempId) {
+                await ProcessFlow(NextNode({ next: tempId }, nodes), nodes);
+            }
         } else {
             await ProcessNode(Object.assign({}, node));
         }

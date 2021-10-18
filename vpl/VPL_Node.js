@@ -34,11 +34,9 @@ module.exports = {
             }
             if (element.path.includes('$')) {
                 element.path = replaceWhatWasHeard(element.path);
-                console.log(element.path);
             }
             let data = await Api(element.version + '://' + element.host, element.path, element.port);
             setApi(element.name.toLowerCase(), data);
-		    console.log('respuesta: ' + Getdata(getApi(element.name.toLowerCase()), 'gender'));
         } else if (element.type === 'dialogflow'){
             let aux = await social.dialogflow(element.text.includes('$') ? replaceWhatWasHeard(element.text) : element.text, element.project || '');
             social.ledsanimstop();

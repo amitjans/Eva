@@ -7,15 +7,21 @@ module.exports = {
             const element = node.condition[i];
             if (!element.A && !element.B) {
                 return element.next;
-            } else if (/^[\d]+$/.test(element.A) && /^[\d]+$/.test(element.A)) {
+            } else if (/^[\d]+$/.test(element.A) && /^[\d]+$/.test(element.B)) {
                 if (NumericComparison(element)) {
                     return element.next;
                 }
             } else {
-                element.A = CreateToken(element.A);
-                element.B = CreateToken(element.B);
-                if (StringComparison(element)) {
-                    return element.next;
+                let tempA = element.A.split('/');
+                let tempB = element.B.split('/');
+                for (let A of tempA) {
+                    for (let B of tempB) {
+                        element.A = CreateToken(A).trim();
+                        element.B = CreateToken(B).trim();
+                        if (StringComparison(element)) {
+                            return element.next || '';
+                        }
+                    }
                 }
             }
         }
@@ -58,7 +64,7 @@ function NumericComparison({ A, B, OP }) {
 function StringComparison({ A, B, OP }) {
     let value = A.localeCompare(B, undefined, { sensitivity: 'base' });
     if (OP === 'EQ') {
-        return value == 0 || PhoneticSpanish(A) === PhoneticSpanish(B);
+        return value == 0 || PhoneticSpanish(A) == PhoneticSpanish(B);
     } else if (OP === 'NEQ') {
         return value != 0;
     } else if (OP === 'LT') {

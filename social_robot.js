@@ -255,6 +255,7 @@ class SocialRobot {
 
   async listenWatson(langcode, callback) {
     await this.recordSound(3000);
+    this.ledsanimstop();
     const params = {
       audio: fs.createReadStream('./test.wav'),
       contentType: 'audio/wav',

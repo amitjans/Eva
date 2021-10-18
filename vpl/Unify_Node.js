@@ -117,7 +117,6 @@ async function unify(obj) {
                 } else {
                     node = { ...node, ops: 'assign', value: temp.value.block.field['#text'] };
                 }
-                console.log(node);
                 break;
             case "voice":
                 node['voice'] = temp.field[0]['#text'];
