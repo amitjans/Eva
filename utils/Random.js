@@ -1,12 +1,9 @@
 module.exports = {
     randomize: function (value) {
-        var idx = value.length;
-        while (idx > 1) {
-            idx = idx - 1;
-            var sel = generarNumeroRandom(0, idx);
-            var temp = value[sel];
-            value[sel] = value[idx];
-            value[idx] = temp;
+        value.sort(() => Math.random() - 0.5);
+        for(let i = value.length - 1; i > 0; i--) {
+            var j = generarNumeroRandom(0, i);
+            [value[i], value[j]] = [value[j], value[i]];
         }
         return value;
     },

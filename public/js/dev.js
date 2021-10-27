@@ -52,7 +52,7 @@ function rosco(data) {
             data: JSON.stringify({
                 campo1: equalsIgnoringCase(element.respuesta[0], abecedario[i]) ? abecedario[i].toUpperCase() : `Contiene la ${abecedario[i].toUpperCase()}`,
                 campo2: element.pregunta,
-                campo3: capitalize(element.respuesta),
+                campo3: capitalize(element.respuesta).split(',').map(x => x.trim()).join('/'),
                 campo4: abecedario[i].toUpperCase(),
                 script: '7b711eab-20cb-4ebc-bc46-51752003b8b8'
             })

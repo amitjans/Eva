@@ -27,7 +27,7 @@ eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scop
     }
 
     $scope.create = function () {
-        var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
+        var json = { campo1: $scope.c1.trim(), campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
         $http.post('/api/common?db=scriptdata', json).then(function successCallback(response) {
             $scope.clear();
             notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
@@ -48,7 +48,7 @@ eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scop
     }
 
     $scope.updatesend = function () {
-        var json = { campo1: $scope.c1, campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
+        var json = { campo1: $scope.c1.trim(), campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
         $http.put('/api/common/' + $scope.updateid + '?db=scriptdata', json).then(function successCallback(response) {
             $scope.clear();
             notify(locale().SCRIPT_DATA.NOTIFY.UPDATE.SUCCESS);

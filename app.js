@@ -32,6 +32,7 @@ app.use('/api/leds', require('./server/routes/leds.routes.js'));
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/cloud', require('./server/routes/cloud.routes.js'));
 app.use('/api/config', require('./server/routes/config.routes.js'));
+app.use('/api/img', require('./server/routes/img.routes.js'));
 app.use('/api/common', require('./server/routes/common.routes.js'));
 app.use('/dev', require('./server/routes/dev.routes.js'));
 

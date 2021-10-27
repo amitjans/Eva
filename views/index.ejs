@@ -30,6 +30,7 @@
                         </ul>
                     </li>
                     <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/#!/audio">{{'TOOLBAR.AUDIOS' | translate}}</a></li>
+                    <li ng-class="{'active': $route.current.activetab == 'img'}"><a href="/#!/img">{{'TOOLBAR.IMGS' | translate}}</a></li>
                     <li class="dropdown" ng-class="{'active': $route.current.activetab == 'lang'}">
                         <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false" target="_blank">
@@ -115,17 +116,18 @@
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/dev.js"></script>
     <script type="text/javascript" src="/js/controllers/controlAngular.js"></script>
-    <script type="text/javascript" src="/js/controllers/led.js"></script>
-    <script type="text/javascript" src="/js/controllers/mov.js"></script>
     <script type="text/javascript" src="/js/controllers/audio.js"></script>
-    <script type="text/javascript" src="/js/controllers/voice.js"></script>
-    <script type="text/javascript" src="/js/controllers/listen.js"></script>
-    <script type="text/javascript" src="/js/controllers/script.js"></script>
-    <script type="text/javascript" src="/js/controllers/scriptdata.js"></script>
-    <script type="text/javascript" src="/js/controllers/interaccion.js"></script>
-    <script type="text/javascript" src="/js/controllers/woo.js"></script>
     <script type="text/javascript" src="/js/controllers/cloud.js"></script>
     <script type="text/javascript" src="/js/controllers/config.js"></script>
+    <script type="text/javascript" src="/js/controllers/img.js"></script>
+    <script type="text/javascript" src="/js/controllers/interaccion.js"></script>
+    <script type="text/javascript" src="/js/controllers/led.js"></script>
+    <script type="text/javascript" src="/js/controllers/listen.js"></script>
+    <script type="text/javascript" src="/js/controllers/mov.js"></script>
+    <script type="text/javascript" src="/js/controllers/script.js"></script>
+    <script type="text/javascript" src="/js/controllers/scriptdata.js"></script>
+    <script type="text/javascript" src="/js/controllers/voice.js"></script>
+    <script type="text/javascript" src="/js/controllers/woo.js"></script>
     <script type="text/javascript" src="/js/blockly/blockly.min.js"></script>
     <script type="text/javascript" src="/js/blockly/dialogflow.js"></script>
     <script type="text/javascript" src="/js/blockly/emotions.js"></script>

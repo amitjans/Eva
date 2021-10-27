@@ -35,55 +35,59 @@ eva
       $routeProvider
         .when("/controlAngular", {
           templateUrl: "/plantillas/controlAngular.html",
-          activetab: "controlAngular",
+          activetab: "controlAngular"
         })
         .when("/interaccion", {
           templateUrl: "/plantillas/interaccion.html",
-          activetab: "interaccion",
+          activetab: "interaccion"
         })
         .when("/audio", {
           templateUrl: "/plantillas/audio.html",
-          activetab: "audio",
+          activetab: "audio"
         })
         .when("/script", {
           templateUrl: "/plantillas/script.html",
-          activetab: "script",
+          activetab: "script"
         })
         .when("/scriptdata", {
           templateUrl: "/plantillas/scriptdata.html",
-          activetab: "script",
+          activetab: "script"
         })
         .when("/scriptdata/:id", {
           templateUrl: "/plantillas/scriptdata.html",
-          activetab: "script",
+          activetab: "script"
         })
         .when("/voice", {
           templateUrl: "/plantillas/voice.html",
-          activetab: "lang",
+          activetab: "lang"
         })
         .when("/listen", {
           templateUrl: "/plantillas/listen.html",
-          activetab: "lang",
+          activetab: "lang"
         })
         .when("/led", {
           templateUrl: "/plantillas/led.html",
-          activetab: "led",
+          activetab: "led"
         })
         .when("/mov", {
           templateUrl: "/plantillas/mov.html",
-          activetab: "mov",
+          activetab: "mov"
         })
         .when("/woo", {
           templateUrl: "/plantillas/woo.html",
-          activetab: "woo",
+          activetab: "woo"
         })
         .when("/cloud", {
           templateUrl: "/plantillas/cloud.html",
-          activetab: "config",
+          activetab: "config"
         })
         .when("/config", {
           templateUrl: "/plantillas/config.html",
-          activetab: "config",
+          activetab: "config"
+        })
+        .when("/img", {
+          templateUrl: "/plantillas/img.html",
+          activetab: "img"
         })
         .otherwise("/controlAngular");
     },

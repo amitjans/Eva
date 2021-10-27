@@ -1,0 +1,95 @@
+<div class="container" ng-controller="img">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bgm-bluegray">
+                    <h2> {{'IMG.TITLE' | translate}}<small>
+                            <div style="float: right; font-size: 2em; color: black; margin-left: 2px;"
+                                    onmouseover="this.style.cursor='pointer';" ng-click="details('stop')">
+                                    <span class="fa fa-stop-circle-o"></span></div>
+                            <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
+                                data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
+                        </small></h2>
+                </div>
+                <div>
+                    <div id="example_wrapper" class="dataTables_wrapper">
+                        <div class="dataTables_length" id="example_length">
+                            <label>{{'DATATABLE.SHOW' | translate}}
+                                <select name="example_length" aria-controls="example" class="" ng-model="limit"
+                                    ng-change="dataTable()">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> {{'DATATABLE.ENTRIES' | translate}}</label></div>
+                        <div id="example_filter" class="dataTables_filter">
+                            <label>{{'DATATABLE.SEARCH' | translate}}:<input type="search" class="" placeholder="" aria-controls="example"
+                                    ng-model="q" ng-change="dataTable()"></label>
+                        </div>
+                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                            aria-describedby="example_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width: 600px;">{{'COMMON.NAME' | translate}}</th>
+                                    <th style="width: 50px;">{{'IMG.FORMAT' | translate}}</th>
+                                    <th style="width: 200px;">{{'COMMON.OPTIONS' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
+                                    <td>{{ l.nombre }}</td>
+                                    <td>{{ l.ext }}</td>
+                                    <td><span class="btn btn-default" ng-click="delete(l.nombre)"><i class="fa fa-trash fa-sm"></i></span></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>{{'COMMON.NAME' | translate}}</th>
+                                    <th>{{'IMG.FORMAT' | translate}}</th>
+                                    <th>{{'COMMON.OPTIONS' | translate}}</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">{{'DATATABLE.SHOWING' | translate}}
+                            {{ from }} {{'DATATABLE.TO' | translate}}
+                            {{ to > temp.length ? temp.length : to }} {{'DATATABLE.OF' | translate}}
+                            {{ temp.length }} {{'DATATABLE.ENTRIES' | translate}}</div>
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <a class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}"
+                                aria-controls="example" data-dt-idx="0" tabindex="-1" id="example_previous"
+                                ng-click="dataTable(-1)">{{'DATATABLE.PREVIOUS' | translate}}</a>
+                            <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}" aria-controls="example" data-dt-idx="7" tabindex="0"
+                                id="example_next" ng-click="dataTable(1)">{{'DATATABLE.NEXT' | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Audio -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{'IMG.ADD' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="drop" class="dropzone">
+                            <div class="dz-message needsclick">
+                                <button type="button" class="dz-button">{{'IMG.UPLOAD' | translate}}</button><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="list()">{{'COMMON.CLOSE' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Audio -->
+</div>

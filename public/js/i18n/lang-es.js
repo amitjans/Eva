@@ -15,7 +15,8 @@ const es = {
         WOO: "Mago de Oz",
         CONFIG: "Configuraciones",
         SOCIAL_ROBOT: "Robot Social",
-        SERVICES: "Servicios"
+        SERVICES: "Servicios",
+        IMGS: "Imagenes"
     },
     LANG: {
         MENU: "Idioma",
@@ -45,6 +46,18 @@ const es = {
         NOTIFY: {
             DELETE: {
                 SUCCESS: "Audio eliminado correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud."
+        }
+    },
+    IMG: {
+        TITLE: "Listado de Imagenes",
+        FORMAT: "Formato",
+        ADD: "Agregar Imagen",
+        UPLOAD: "Suelta los archivos aquí o haz clic para subirlos.",
+        NOTIFY: {
+            DELETE: {
+                SUCCESS: "Imagen eliminada correctamente."
             },
             ERROR: "A ocurrido un error al procesar su solicitud."
         }
