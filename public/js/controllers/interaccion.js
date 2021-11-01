@@ -10,7 +10,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.slist = function () {
-    Promise.all([led, sound, mov, voice, listen]).then(values => {
+    Promise.all([led, sound, mov, voice, listen, image]).then(values => {
       var toolbox = document.getElementById("toolbox");
 
       var options = { toolbox: toolbox, collapse: false, comments: false, disable: false, maxBlocks: 0, trashcan: true, horizontalLayout: true, toolboxPosition: 'end', 

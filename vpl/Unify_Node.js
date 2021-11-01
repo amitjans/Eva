@@ -59,6 +59,12 @@ async function unify(obj) {
                 node['iteraciones'] = parseInt(temp.value.shadow.field['#text']);
                 node['first'] = temp.statement.block["@attributes"].id;
                 break;
+            case "emotion":
+                node['emotion'] = temp.field[0]['#text'];
+                node['level'] = parseInt(temp.field[1]['#text']);
+            case "image":
+                node['url'] = temp.field['#text'];
+                break;
             case "led":
                 node['anim'] = temp.field['#text'];
                 break;

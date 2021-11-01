@@ -30,14 +30,16 @@
                             aria-describedby="example_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width: 600px;">{{'COMMON.NAME' | translate}}</th>
+                                    <th style="width: 575px;">{{'COMMON.NAME' | translate}}</th>
+                                    <th style="width: 25px;"></th>
                                     <th style="width: 50px;">{{'IMG.FORMAT' | translate}}</th>
                                     <th style="width: 200px;">{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                    <td>{{ l.nombre }}</td>
+                                    <td>{{ l.nombre }}</span></td>
+                                    <td><img src="/images/{{ l.nombre }}" width="25" /></td>
                                     <td>{{ l.ext }}</td>
                                     <td><span class="btn btn-default" ng-click="delete(l.nombre)"><i class="fa fa-trash fa-sm"></i></span></td>
                                 </tr>
@@ -45,6 +47,7 @@
                             <tfoot>
                                 <tr>
                                     <th>{{'COMMON.NAME' | translate}}</th>
+                                    <th></th>
                                     <th>{{'IMG.FORMAT' | translate}}</th>
                                     <th>{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>

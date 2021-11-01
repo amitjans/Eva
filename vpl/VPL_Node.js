@@ -51,6 +51,9 @@ module.exports = {
             }
         } else if (element.type === 'record') {
             await RecordNode(element);
+        } else if (element.type === 'image') {
+            console.log(element);
+            await social.sendData('img', element);
         }
     }
 };

@@ -1,29 +1,37 @@
 const sdk = require("microsoft-cognitiveservices-speech-sdk");
 const fs = require('fs');
+const temp = require('temp').track();
 
-const synthesizeSpeech = (text, file = "example") => {
-    const speechConfig = sdk.SpeechConfig.fromSubscription("c77079e007624291b7cfd20b1e7d3cbd", "southcentralus");
-    speechConfig.speechSynthesisLanguage = "es-CO";
-    speechConfig.speechSynthesisVoiceName = "es-CO-SalomeNeural";
+const synthesizeSpeech = (text, rec, file = "example") => {
+    const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.TEXT_TO_SPEECH_AZURE, process.env.REGION_AZURE);
+    speechConfig.speechSynthesisLanguage = social.getConf().voice.substring(0, 5);
+    speechConfig.speechSynthesisVoiceName = social.getConf().voice;
     const synthesizer = new sdk.SpeechSynthesizer(speechConfig);
-    console.log(text);
-    // await synthesizer.speakSsmlAsync(
-    synthesizer.speakTextAsync(
-        text,
-        result => {
-            synthesizer.close();
-            if (result) {
-                fs.appendFileSync(`./temp/${file}.wav`, new Buffer(result.audioData));
-                // return fs.createReadStream('./temp/' + file + '.wav');
+    return new Promise(function (resolve, reject) {
+        temp.open('socialrobot', function (err, info) {
+            if (err) {
+                reject('error: could not open temporary file for writing at path: ' + info.path);
             }
-        },
-        error => {
-            console.log(error);
-            synthesizer.close();
+            // await synthesizer.speakSsmlAsync(
+            synthesizer.speakTextAsync(
+                text,
+                result => {
+                    synthesizer.close();
+                    if (result) {
+                        let path = rec ? file : info.path;
+                        fs.appendFileSync(path, new Buffer(result.audioData));
+                        resolve(social.play(path));
+                    }
+                },
+                error => {
+                    console.log(error);
+                    synthesizer.close();
+                });
         });
+    });
 }
 
-function ssml(text, style = "cheerful" ){
+function ssml(text, style = "cheerful") {
     // <mstts:express-as style="${style}"></mstts:express-as>
     return `<speak version=\"1.0\" xmlns=\"https://www.w3.org/2001/10/synthesis\" xml:lang=\"en-US\">
     <voice name=\"${social.configuration.voice}\">

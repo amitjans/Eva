@@ -32,9 +32,10 @@ const Readline = require('@serialport/parser-readline');
 const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 9600
 })
-const azure = require('./server/services/azure_tts');
+const azuretts = require('./server/services/azure_tts');
+const ibmtts = require('./server/services/ibm_tts');
 
-var { eyes, enviarMensaje } = require('./app');
+var { socketio, enviarMensaje } = require('./app');
 var logs = require('./log');
 var time = 0;
 var emotional = true;
@@ -85,47 +86,24 @@ class SocialRobot {
    * 
    * @param {String} message to speak 
    */
-  speak(message, rec = false, file = 'example') {
-    this.configuration.voice = "es-CO-SalomeNeural";
-    console.log('texto: ' + message);
-    azure.synthesizeSpeech(message, file);
-    console.log(file);
-    this.play(`./temp/${file}.wav`);
+  async speak(message, rec = false, file = 'example') {
+    if (rec) {
+      let temp = file.substring(0, file.length - 36);
+      if (!fs.existsSync(temp)) {
+        await fs.mkdirSync(temp, { recursive: true });
+      }
+    }
+    if (this.configuration.voice.includes('Voice')) {
+      await ibmtts.synthesizeSpeech(message, rec, file);
+    } else if (this.configuration.voice.includes('Neural')) {
+      await azuretts.synthesizeSpeech(message, rec, file);
+    }
     // if (!this._tts) {
     //   throw new Error('SocialRobot is not configured to speak.');
     // }
     // if (message == undefined) {
     //   throw new Error('SocialRobot tried to speak a null message.');
     // }
-
-    // var utterance = {
-    //   text: "<break time=\"1s\"/>" + message,
-    //   voice: this.configuration.voice,
-    //   accept: 'audio/wav'
-    // };
-
-    // var self = this;
-    // return new Promise(function (resolve, reject) {
-    //   temp.open('socialrobot', function (err, info) {
-    //     if (err) {
-    //       reject('error: could not open temporary file for writing at path: ' + info.path);
-    //     }
-    //     self._tts
-    //       .synthesize(utterance)
-    //       .then(response => {
-    //         const audio = response.result;
-    //         return self._tts.repairWavHeaderStream(audio);
-    //       })
-    //       .then(repairedFile => {
-    //         let path = rec ? './temp/' + file + '.wav' : info.path;
-    //         fs.writeFileSync(path, repairedFile);
-    //         resolve(self.play(path));
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   });
-    // });
   }
 
   /**
@@ -343,7 +321,7 @@ class SocialRobot {
     if (!emotional) {
       return;
     }
-    eyes({ anim: emotion, bcolor: '', speed: (speed || 2.0) });
+    socketio({ anim: emotion, bcolor: '', speed: (speed || 2.0) });
     this.ledsanimstop();
     switch (emotion) {
       case 'ini':
@@ -368,6 +346,10 @@ class SocialRobot {
   savelog(who, temp) {
     enviarMensaje(who, temp);
     logs.logs(time, who.autor + ': ' + temp + '\n');
+  }
+
+  sendData(id, data) {
+    socketio(data, id);
   }
 
 }

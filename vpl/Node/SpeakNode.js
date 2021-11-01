@@ -49,10 +49,11 @@ async function ProcessSpeakText(element) {
 
 async function RecAndSpeak(element) {
     try {
-        if (!existsSync('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav')) {
-            await social.speak(element.text, true, (social.getConf().voice + '_' + element.key));
+        let path = `./temp/${social.getConf().voice}/${element.key}.wav`;
+        if (!existsSync(path)) {
+            await social.speak(element.text, true, path);
         } else {
-            await social.play('./temp/' + (social.getConf().voice + '_' + element.key) + '.wav');
+            await social.play(path);
         }
     } catch (err) {
         console.error(err)

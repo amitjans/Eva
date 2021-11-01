@@ -8,10 +8,9 @@ const cookieParser = require('cookie-parser');
 var app = express();
 
 // view engine setup
+app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -72,15 +71,15 @@ var enviarMensaje = function (autor, msg, media) {
 	data.fecha = Date.now();
 	if (media)
 		data.media = media;
-	io.sockets.emit('messages', data);
+	socketio(data);
 };
 
-var eyes = function (params) {
-	io.sockets.emit('messages', params);
+var socketio = function (params, id = 'messages') {
+	io.sockets.emit(id, params);
 }
 
 module.exports.enviarMensaje = enviarMensaje;
-module.exports.eyes = eyes;
+module.exports.socketio = socketio;
 
 var enviarError = function (error, query) {
 	var data = {error: error, query: query};

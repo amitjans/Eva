@@ -16,7 +16,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.create = function () {
-        var json = { idioma: $scope.idioma, codigo: $scope.codigo, nombre: $scope.nombre };
+        var json = { idioma: $scope.idioma, servicio: $scope.servicio, codigo: $scope.codigo, nombre: $scope.nombre };
         $http.post('/api/common?db=voice', json).then(function successCallback(response) {
             $scope.clear();
             notify(locale().VOICE.NOTIFY.POST.SUCCESS);
@@ -28,6 +28,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     $scope.update = function (l) {
         $scope.updateid = l._id;
         $scope.idioma = l.idioma;
+        $scope.servicio = l.servicio;
         $scope.codigo = l.codigo;
         $scope.nombre = l.nombre;
         $scope.icon = false;
@@ -36,7 +37,7 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.updatesend = function () {
-        var json = { idioma: $scope.idioma, codigo: $scope.codigo, nombre: $scope.nombre };
+        var json = { idioma: $scope.idioma, servicio: $scope.servicio, codigo: $scope.codigo, nombre: $scope.nombre };
         $http.put('/api/common/' + $scope.updateid + '?db=voice', json).then(function successCallback(response) {
             $scope.clear();
             notify(locale().VOICE.NOTIFY.UPDATE.SUCCESS);
@@ -57,12 +58,12 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.dataTable = function (way = 0) {
-        let obj = dataTable($scope.listado, $scope, way, 'nombre', 'codigo', 'idioma');
+        let obj = dataTable($scope.listado, $scope, way, 'nombre', 'codigo', 'idioma', 'servicio');
         Object.assign($scope, obj);
     }
 
     $scope.clear = function () {
-        Object.assign($scope, { idioma: '', codigo: '', nombre: '', icon: true, accion: locale().COMMON.ADD });
+        Object.assign($scope, { idioma: '', servicio: '', codigo: '', nombre: '', icon: true, accion: locale().COMMON.ADD });
         $('#myModal').modal('hide');
         $scope.list();
     }
