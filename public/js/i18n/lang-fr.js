@@ -15,7 +15,8 @@ const fr = {
 		WOO: "Magicien d'Oz",
 		CONFIG: "Configurations",
 		SOCIAL_ROBOT: "Robot social",
-		SERVICES: "Services"
+		SERVICES: "Services",
+		IMGS: "Imaginons"
 	},
 	LANG: {
 		MENU: "Langue",
@@ -169,7 +170,16 @@ const fr = {
 		PROYECT: "Projet",
 		PROYECT_NAME: "Nom du projet",
 		SOURCE: "Langue source",
-		RECORD: "Écrire"
+		RECORD: "Écrire",
+		SCRIPT_OPTS: {
+			ORDERBY: "Trier par:",
+			UNIQUE: "Unique",
+			DELETEONUSE: "Supprimer à l'aide",
+			DESC: "Ce noeud inclut la fonction de discussion, en lisant la première zone de l'élément de script en cours d'exécution.",
+			DSCI: "Supprimer l'élément en cours du script",
+			DSCI_DESC: "Utilisé lorsque l'option 'Supprimer à l'utilisation' n'est pas sélectionnée."
+		},
+		IMAGE: "Image"
 	},
 	LED: {
 		TITLE: "Liste des Animations led",
@@ -282,7 +292,8 @@ const fr = {
 				SUCCESS: "Voix effacée avec succès."
 			},
 			ERROR: "Une erreur s'est produite lors du traitement de votre demande."
-		}
+		},
+		SERVICE: "Service"
 	},
 	WOO: {
 		PHRASE: "Phrase",
@@ -327,5 +338,17 @@ const fr = {
 		SURPRISE: "Surprise",
 		SAD: "Tristesse",
 		ANGER: "Ira"
+	},
+	IMG: {
+		TITLE: "Liste des Imagées",
+		FORMAT: "Forme",
+		ADD: "Ajouter une image",
+		UPLOAD: "Lâchez les fichiers ici ou cliquez pour les télécharger.",
+		NOTIFY: {
+			DELETE: {
+				SUCCESS: "Image supprimée avec succès."
+			},
+			ERROR: "Une erreur s'est produite lors du traitement de votre demande."
+		}
 	}
 }

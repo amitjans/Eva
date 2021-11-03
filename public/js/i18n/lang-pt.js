@@ -15,7 +15,8 @@ const pt = {
 		WOO: "Mágico de Oz",
 		CONFIG: "Configurações",
 		SOCIAL_ROBOT: "Robô Social",
-		SERVICES: "Serviços"
+		SERVICES: "Serviços",
+		IMGS: "Imagens"
 	},
 	LANG: {
 		MENU: "Idioma",
@@ -169,7 +170,16 @@ const pt = {
 		PROYECT: "Projeto",
 		PROYECT_NAME: "Nome do projeto",
 		SOURCE: "Idioma de origem",
-		RECORD: "Registro"
+		RECORD: "Registro",
+		SCRIPT_OPTS: {
+			ORDERBY: "Ordenar por:",
+			UNIQUE: "Único",
+			DELETEONUSE: "Remover ao usar",
+			DESC: "Este nó inclui a função de fala, lendo o primeiro campo do elemento de script que está em execução atualmente.",
+			DSCI: "Remover o elemento atual do script",
+			DSCI_DESC: "Usado quando a opção 'Remover Quando Usar' não é selecionada."
+		},
+		IMAGE: "Imagem"
 	},
 	LED: {
 		TITLE: "Lista de animações conduzidas",
@@ -282,7 +292,8 @@ const pt = {
 				SUCCESS: "Voz excluída com sucesso."
 			},
 			ERROR: "An error occurred while processing your request."
-		}
+		},
+		SERVICE: "Serviço"
 	},
 	WOO: {
 		PHRASE: "Frase",
@@ -327,5 +338,17 @@ const pt = {
 		SURPRISE: "Surprise",
 		SAD: "Tristeza",
 		ANGER: "Raiva"
+	},
+	IMG: {
+		TITLE: "Cotação de imagem",
+		FORMAT: "Formato",
+		ADD: "Adicionar Imagem",
+		UPLOAD: "Solte os arquivos aqui ou clique para fazer o upload deles.",
+		NOTIFY: {
+			DELETE: {
+				SUCCESS: "Imagem removida corretamente."
+			},
+			ERROR: "Ocorreu um erro ao processar o seu pedido."
+		}
 	}
 }

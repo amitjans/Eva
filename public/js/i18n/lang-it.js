@@ -15,7 +15,8 @@ const it = {
 		WOO: "Procedura guidata di Oz",
 		CONFIG: "Configurazioni",
 		SOCIAL_ROBOT: "Robot sociale",
-		SERVICES: "Servizi"
+		SERVICES: "Servizi",
+		IMGS: "Immagini"
 	},
 	LANG: {
 		MENU: "Lingua",
@@ -169,7 +170,16 @@ const it = {
 		PROYECT: "Progetto",
 		PROYECT_NAME: "Nome del progetto",
 		SOURCE: "Lingua di origine",
-		RECORD: "Record"
+		RECORD: "Record",
+		SCRIPT_OPTS: {
+			ORDERBY: "Ordina per:",
+			UNIQUE: "Singolo",
+			DELETEONUSE: "Rimuovere quando si utilizza",
+			DESC: "Questo nodo include la funzione parlante, leggendo il primo campo dell'elemento script attualmente in esecuzione.",
+			DSCI: "Rimuovere l'elemento corrente dallo script",
+			DSCI_DESC: "Utilizzato quando l'opzione 'Rimuovi quando l'utilizzo' non viene selezionata."
+		},
+		IMAGE: "Immagine"
 	},
 	LED: {
 		TITLE: "Elenco delle Animazioni Led",
@@ -282,7 +292,8 @@ const it = {
 				SUCCESS: "Voce rimossa correttamente."
 			},
 			ERROR: "Si è verificato un errore durante l'elaborazione della richiesta."
-		}
+		},
+		SERVICE: "Servizio"
 	},
 	WOO: {
 		PHRASE: "Frase",
@@ -327,5 +338,17 @@ const it = {
 		SURPRISE: "Sorpresa",
 		SAD: "Tristezza",
 		ANGER: "Rabbia"
+	},
+	IMG: {
+		TITLE: "Elenco immagini",
+		FORMAT: "Formato",
+		ADD: "Aggiungi immagine",
+		UPLOAD: "Rilasciare i file qui o clicca per caricarli.",
+		NOTIFY: {
+			DELETE: {
+				SUCCESS: "Immagine rimossa correttamente."
+			},
+			ERROR: "Si è verificato un errore durante l'elaborazione della richiesta."
+		}
 	}
 }

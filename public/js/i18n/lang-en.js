@@ -15,7 +15,8 @@ const en = {
 		WOO: "Wizard of Oz",
 		CONFIG: "Configurations",
 		SOCIAL_ROBOT: "Social Robot",
-		SERVICES: "Services"
+		SERVICES: "Services",
+		IMGS: "Images"
 	},
 	LANG: {
 		MENU: "Idioma",
@@ -169,7 +170,16 @@ const en = {
 		PROYECT: "Proyect",
 		PROYECT_NAME: "Proyect name",
 		SOURCE: "Source language",
-		RECORD: "Record"
+		RECORD: "Record",
+		SCRIPT_OPTS: {
+			ORDERBY: "Sort by:",
+			UNIQUE: "Single",
+			DELETEONUSE: "Remove when using",
+			DESC: "This node includes the speaking function, reading the first field of the script element that is currently running.",
+			DSCI: "Remove the current element from the script",
+			DSCI_DESC: "Used when the 'Remove When Using' option is not selected."
+		},
+		IMAGE: "Picture"
 	},
 	LED: {
 		TITLE: "List of led animations",
@@ -282,7 +292,8 @@ const en = {
 				SUCCESS: "Voice deleted successfully."
 			},
 			ERROR: "An error occurred while processing your request."
-		}
+		},
+		SERVICE: "Service"
 	},
 	WOO: {
 		PHRASE: "Phrase",
@@ -327,5 +338,17 @@ const en = {
 		SURPRISE: "Surprise",
 		SAD: "Sadness",
 		ANGER: "Anger"
+	},
+	IMG: {
+		TITLE: "Image listing",
+		FORMAT: "Format",
+		ADD: "Add Image",
+		UPLOAD: "Release the files here or click to upload them.",
+		NOTIFY: {
+			DELETE: {
+				SUCCESS: "Image removed correctly."
+			},
+			ERROR: "An error occurred while processing your request."
+		}
 	}
 }

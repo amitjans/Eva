@@ -17,8 +17,10 @@ router.put('/locale', async function (req, res) {
 	} else {
 		let targets = Object.keys(req.body).filter(item => item != req.query.source);
 		for (const key of targets) {
+			let time = new Date().getTime();
 			let obj = await updateLocale(req.body, req.query.source, key);
-			writeLocale(req.query.target, obj);
+			console.log(`Locale ${key} update in: ${(((new Date().getTime()) - time) /1000)} segs`);
+			writeLocale(key, obj);
 		}
 	}
 });
@@ -30,7 +32,6 @@ async function translateLocale(obj, source, target) {
 		} else {
 			obj[key] = await Translate(obj[key], target, source);
 		}
-		console.log('...Creando');
 	}
 	return obj;
 }
@@ -46,7 +47,6 @@ async function updateLocale(obj, source, target) {
 			obj[target][key] = await Translate(obj[source][key], target, source);
 		}
 	}
-	console.log(obj[target]);
 	return obj[target];
 }
 

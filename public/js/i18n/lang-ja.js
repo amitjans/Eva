@@ -15,7 +15,8 @@ const ja = {
 		WOO: "オズの魔法使い",
 		CONFIG: "構成",
 		SOCIAL_ROBOT: "社会ロボット",
-		SERVICES: "運行"
+		SERVICES: "運行",
+		IMGS: "像像"
 	},
 	LANG: {
 		MENU: "言語",
@@ -169,7 +170,16 @@ const ja = {
 		PROYECT: "プロジェクト",
 		PROYECT_NAME: "プロジェクトの名前",
 		SOURCE: "語源の言語",
-		RECORD: "レコード"
+		RECORD: "レコード",
+		SCRIPT_OPTS: {
+			ORDERBY: "ソート順:",
+			UNIQUE: "シングル",
+			DELETEONUSE: "使用時に除去",
+			DESC: "このノードには、現在実行中のスクリプト・エレメントの最初のフィールドを読み取る、発言機能が含まれています。",
+			DSCI: "現在の要素をスクリプトから削除します",
+			DSCI_DESC: "「使用時に除去」オプションが選択されていない場合に使用します。"
+		},
+		IMAGE: "ピクチャー"
 	},
 	LED: {
 		TITLE: "リード・アニメーションの一覧",
@@ -282,7 +292,8 @@ const ja = {
 				SUCCESS: "音声が正しく除去された"
 			},
 			ERROR: "要求の処理中にエラーが発生しました。"
-		}
+		},
+		SERVICE: "サービス"
 	},
 	WOO: {
 		PHRASE: "プラーゼ",
@@ -327,5 +338,17 @@ const ja = {
 		SURPRISE: "サプライズ",
 		SAD: "サドネス",
 		ANGER: "アンガー"
+	},
+	IMG: {
+		TITLE: "イメージ・リスト",
+		FORMAT: "形式",
+		ADD: "イメージの追加",
+		UPLOAD: "ここでファイルをリリースするか、ファイルをアップロードしてアップロードします",
+		NOTIFY: {
+			DELETE: {
+				SUCCESS: "イメージが正しく除去された"
+			},
+			ERROR: "要求の処理中にエラーが発生しました。"
+		}
 	}
 }
