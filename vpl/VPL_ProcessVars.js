@@ -1,12 +1,17 @@
 module.exports = {
     setRespuesta: function (value) { 
         if (!!global.respuesta) {
-            global.respuesta.push(value)
+            global.respuesta.push(value);
         } else {
-            global.respuesta = [value]
+            global.respuesta = [value];
         };
     },
-    getRespuesta: (last = false) => last ? global.respuesta[respuesta.length - 1] : global.respuesta,
+    getRespuesta: (value) => {
+        if (!!value) {
+            return (value < 0 ? global.respuesta[(respuesta.length - 1) + value] : global.respuesta[value - 1]);
+        }
+        return global.respuesta[respuesta.length - 1];
+    },
     setSactual: (value) => { global.sactual = value; },
     getSactual: () => global.sactual,
     addlemotion: function (value) {
@@ -14,7 +19,7 @@ module.exports = {
             global.lemotion.push(value);
         } else {
             global.lemotion = [value];
-        };
+        }
     },
     getlemotion: () => global.lemotion || [],
     setCounter: (value) => { global.counter = value; },

@@ -137,7 +137,8 @@ const es = {
             DELETEONUSE: "Eliminar al usar",
             DESC: "Este nodo incluye la función de hablar, leyendo el primer campo del elemento del script que se esté ejecutando en ese momento.",
             DSCI: "Eliminar el elemento actual del script",
-            DSCI_DESC: "Se utiliza cuando la opción 'Eliminar al usar' no está seleccionada."
+            DSCI_DESC: "Se utiliza cuando la opción 'Eliminar al usar' no está seleccionada.",
+            READ: "Leer"
         },
         COUNTER: "Contador",
         COUNTER_OPTS: {
@@ -190,7 +191,8 @@ const es = {
         PROYECT_NAME: "Nombre del proyecto",
         SOURCE: "Idioma de origen",
         RECORD: "Grabar",
-        IMAGE: "Imagen"
+        IMAGE: "Imagen",
+        SCREEN_RESET: "Pantalla de inicio"
     },
     LED: {
         TITLE: "Listado de Animaciones led",

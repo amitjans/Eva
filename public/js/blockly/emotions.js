@@ -8,14 +8,13 @@ Blockly.Blocks['emotion'] = {
                 [locale().EMOTION_TYPE.SURPRISE, "surprise"], 
                 [locale().EMOTION_TYPE.SAD, "sad"], 
                 [locale().EMOTION_TYPE.ANGER, "anger"]
-            ]), "emotion");
-        this.appendDummyInput()
+            ]), "emotion")
             .appendField(locale().INTERACTION.LEVEL)
             .appendField(new Blockly.FieldDropdown([
                 [locale().INTERACTION.ONLY_EYES, "0"], 
                 [locale().INTERACTION.MOV, "2"], 
                 [locale().INTERACTION.INCREMENTAL, "-1"]
-            ]), "level");
+            ]), "level");            
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

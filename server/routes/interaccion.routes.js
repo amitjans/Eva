@@ -20,7 +20,6 @@ router.get('/unified/:id', async function (req, res) {
 router.get('/export/:id', async function (req, res) {
 	let interaction = await unifyById(req.params.id);
 	for (let element of interaction.node) {
-		console.log(element);
 		if (element.type === 'script') {
 			element.data = (await getData(element.sc)).map(x => { delete x._id; delete x.script; return x });
 		} else if (element.type === 'led' || element.type === 'sound') {

@@ -31,7 +31,7 @@
                                     <th style="width: 125px;">{{'VOICE.SERVICE' | translate}}</th>
                                     <th style="width: 250px;">{{'VOICE.CODE' | translate}}</th>
                                     <th style="width: 250px;">{{'COMMON.NAME' | translate}}</th>
-                                    <th colspan="2" style="width: 250px;">{{'COMMON.OPTIONS' | translate}}</th>
+                                    <th colspan="3" style="width: 250px;">{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,6 +40,10 @@
                                     <td>{{ l.servicio }}</td>
                                     <td>{{ l.codigo }}</td>
                                     <td>{{ l.nombre }}</td>
+                                    <td>
+                                        <span class="btn btn-default" ng-click="enable(l)" ng-show="!!l.enabled"><i class="fa fa-eye fa-sm"></i></span>
+                                        <span class="btn btn-default" ng-click="enable(l)" ng-show="!l.enabled"><i class="fa fa-eye-slash fa-sm"></i></span>
+                                    </td>
                                     <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
                                     <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span></td>
                                 </tr>
@@ -50,7 +54,7 @@
                                     <th>{{'VOICE.SERVICE' | translate}}</th>
                                     <th>{{'VOICE.CODE' | translate}}</th>
                                     <th>{{'COMMON.NAME' | translate}}</th>
-                                    <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
+                                    <th colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
                                 </tr>
                             </tfoot>
                         </table>

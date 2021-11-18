@@ -46,6 +46,16 @@ eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
         });
     }
 
+    $scope.enable = function (obj) {
+        obj.enabled = !(!!obj.enabled);
+        $http.put('/api/common/' + obj._id + '?db=voice', obj).then(function successCallback(response) {
+            $scope.clear();
+            notify(locale().LISTEN.NOTIFY.UPDATE.SUCCESS);
+        }, function errorCallback(response) {
+            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
+        });
+    }
+
     $scope.delete = function (id) {
         if (confirm(locale().COMMON.DELETE)) {
             $http.delete('/api/common/' + id + '?db=voice').then(function successCallback(response) {

@@ -1,6 +1,6 @@
 var dataImage = [["option", "OPTIONNAME"]];
 var image = new Promise((resolve, reject) => {
-  fetch('/api/img')
+  fetch('/api/images')
     .then(response => response.json())
     .then(data => {
       dataImage = [];
@@ -21,6 +21,19 @@ Blockly.Blocks['image'] = {
     this.setNextStatement(true, null);
     this.setColour(230);
     this.setTooltip(locale().INTERACTION.IMAGE);
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['reset'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(locale().INTERACTION.SCREEN_RESET);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip(locale().INTERACTION.SCREEN_RESET);
     this.setHelpUrl("");
   }
 };

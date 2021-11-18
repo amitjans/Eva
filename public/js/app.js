@@ -85,9 +85,9 @@ eva
           templateUrl: "/plantillas/config.html",
           activetab: "config"
         })
-        .when("/img", {
-          templateUrl: "/plantillas/img.html",
-          activetab: "img"
+        .when("/images", {
+          templateUrl: "/plantillas/images.html",
+          activetab: "images"
         })
         .otherwise("/controlAngular");
     },

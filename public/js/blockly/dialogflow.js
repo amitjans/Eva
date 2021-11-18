@@ -2,8 +2,7 @@ Blockly.Blocks['dialogflow'] = {
     init: function () {
       this.appendDummyInput()
         .appendField(locale().INTERACTION.PROYECT)
-        .appendField(new Blockly.FieldTextInput(""), "proyect");
-      this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput(""), "proyect")
         .appendField(locale().INTERACTION.DIALOGUE)
         .appendField(new Blockly.FieldTextInput(""), "dialogparam");
       this.setPreviousStatement(true, null);

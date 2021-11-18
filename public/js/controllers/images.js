@@ -1,11 +1,11 @@
-eva.controller('img', ['$scope', '$http', function ($scope, $http) {
+eva.controller('images', ['$scope', '$http', function ($scope, $http) {
     $scope.listado = [];
     $scope.sublist = [];
     $scope.temp = [];
     Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
-        $http.get('/api/img').then(function successCallback(response) {
+        $http.get('/api/images').then(function successCallback(response) {
             $scope.listado = response.data;
             $scope.dataTable();
         }, function errorCallback(response) {
@@ -14,7 +14,7 @@ eva.controller('img', ['$scope', '$http', function ($scope, $http) {
 
     $scope.delete = function (id) {
         if (confirm(locale().COMMON.DELETE)) {
-            $http.delete('/api/img/' + id).then(function successCallback(response) {
+            $http.delete('/api/images/' + id).then(function successCallback(response) {
                 $scope.list();
                 notify(locale().AUDIO.NOTIFY.DELETE.SUCCESS);
             }, function errorCallback(response) {
@@ -28,6 +28,6 @@ eva.controller('img', ['$scope', '$http', function ($scope, $http) {
         Object.assign($scope, obj);
     }
 
-    $("div#drop").dropzone({ url: "/api/img", acceptedFiles: '.png', timeout: 100000, maxFilesize: 100 });
+    $("div#drop").dropzone({ url: "/api/images", acceptedFiles: 'image/*', timeout: 100000, maxFilesize: 100 });
     $scope.list();
 }]);

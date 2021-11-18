@@ -45,6 +45,16 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
         });
     }
 
+    $scope.enable = function (obj) {
+        obj.enabled = !(!!obj.enabled);
+        $http.put('/api/common/' + obj._id + '?db=googlestt', obj).then(function successCallback(response) {
+            $scope.clear();
+            notify(locale().LISTEN.NOTIFY.UPDATE.SUCCESS);
+        }, function errorCallback(response) {
+            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
+        });
+    }
+
     $scope.clear = function () {
         Object.assign($scope, { idioma: '', codigo: '', watson: '', icon: true, accion: locale().COMMON.ADD })
         $('#myModal').modal('hide');

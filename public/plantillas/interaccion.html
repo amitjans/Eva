@@ -100,8 +100,8 @@
                       <field name="level">0</field>
                     </block>
                     <block type="dialogflow">
-                      <field name="proyect">default</field>
-                      <field name="dialogparam">default</field>
+                      <field name="proyect"></field>
+                      <field name="dialogparam"></field>
                     </block>
                     <block type="int">
                       <field name="int">OPTIONNAME</field>
@@ -118,9 +118,10 @@
                     <block type="script">
                       <field name="script">OPTIONNAME</field>
                       <field name="random">FALSE</field>
+                      <field name="read">TRUE</field>
                       <field name="order">none</field>
                       <field name="unique">none</field>
-                      <field name="remove">FALSE</field>
+                      <field name="remove">TRUE</field>
                     </block>
                     <block type="dsci"></block>
                     <block type="sound">
@@ -129,6 +130,7 @@
                     <block type="image">
                       <field name="image">OPTIONNAME</field>
                     </block>
+                    <block type="reset"></block>
                     <block type="voice">
                       <field name="voice">OPTIONNAME</field>
                       <field name="translate">FALSE</field>
@@ -163,15 +165,12 @@
             <br />
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button id="blobButton" class="btn btn-primary btn-sm">{{'INTERACTION.DOWNLOAD' | translate}}</button>
                 <button type="button" ng-show="!updateid" class="btn btn-primary btn-sm"
                   ng-click="create()">{{'INTERACTION.SAVE' | translate}}</button>
                 <button type="button" ng-show="!!updateid" class="btn btn-primary btn-sm"
                   ng-click="updatesend()">{{'INTERACTION.UPDATE' | translate}}</button>
                 <button type="button" ng-show="!!updateid" class="btn btn-primary btn-sm"
                   ng-click="updatesend(true)">{{'INTERACTION.UPDATE_FINISH' | translate}}</button>
-                <button type="button" class="btn btn-primary btn-sm" ng-click="actualizar()">{{'INTERACTION.REFRESH' |
-                  translate}}</button>
               </div>
             </div>
           </div>

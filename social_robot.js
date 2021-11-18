@@ -119,7 +119,7 @@ class SocialRobot {
     }
     if (soundFile != 'stop') {
       player = new Sound();
-      this.ledsanim(obj.base, obj.opts);
+      this.ledsanim(obj);
       self._isPlaying = true;
       let promise = new Promise(function (resolve, reject) {
         player.on('complete', function () {
@@ -170,9 +170,9 @@ class SocialRobot {
     }
   }
 
-  async ledsanim(value, properties) {
+  async ledsanim({ base, opts }) {
     if (!!this.leds) this.ledsanimstop();
-    this.leds = ledsanimation[value](properties);
+    this.leds = ledsanimation[base](opts);
   }
 
   async ledsanimstop() {
@@ -188,10 +188,10 @@ class SocialRobot {
   }
 
   async listen(service, langcode, callback) {
-    this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
+    this.ledsanim(this.configuration.listenled);
     let result = '';
     if (service == 'watson') {
-      result = await this.listenWatson(langcode, callback);
+      result = await (require('./server/services/ibm_stt').listenWatson(langcode, callback));
     } else {
       result = await this.listenGoogle(langcode, callback);
     }
@@ -236,31 +236,31 @@ class SocialRobot {
     });
   }
 
-  async listenWatson(langcode, callback) {
-    await this.recordSound(3000);
-    this.ledsanimstop();
-    const params = {
-      audio: fs.createReadStream('./test.wav'),
-      contentType: 'audio/wav',
-      model: langcode || this.configuration.listen.watson
-    };
-    return this._stt.recognize(params)
-      .then(response => {
-        try {
-          return response.result.results[0].alternatives[0].transcript;
-        } catch (error) {
-          return '';
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+  // async listenWatson(langcode, callback) {
+  //   await this.recordSound(3000);
+  //   this.ledsanimstop();
+  //   const params = {
+  //     audio: fs.createReadStream('./test.wav'),
+  //     contentType: 'audio/wav',
+  //     model: langcode || this.configuration.listen.watson
+  //   };
+  //   return this._stt.recognize(params)
+  //     .then(response => {
+  //       try {
+  //         return response.result.results[0].alternatives[0].transcript;
+  //       } catch (error) {
+  //         return '';
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
   async recordSound(time, dir = './test.wav'){
     let localeanim = false;
     if (!this.leds) {
-      this.ledsanim(this.configuration.listenled.base, this.configuration.listenled.opts);
+      this.ledsanim(this.configuration.listenled);
       localeanim = true;
     }
     const file = fs.createWriteStream(dir, { encoding: 'binary' });
@@ -330,7 +330,7 @@ class SocialRobot {
       default:
         let value = this.configuration.emotion[emotion];
         if (leds || level >= 2) {
-          this.ledsanim(value.led.base, value.led.opts);
+          this.ledsanim(value.led);
         }
         if (level >= 1) {
           this.movement(value.mov.codigo);

@@ -86,7 +86,6 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     $scope.changeform = function (opts = {}) {
         $scope.params = { color: [], led: [], num: [], time: false };
         let params = $scope.listBaseAnims.find(x => x.name == $scope.base).params;
-        console.log(params);
         for (let i = 1; i <= params.color; i++) {
             $scope.params.color.push({ id: i, model: opts['color' + i] || '' });
         }

@@ -17,7 +17,6 @@ const upload = multer({
     dest: path.join(__dirname, 'sonidos'),
     limits: {fileSize: 100000000},
     fileFilter: (req, file, cb) => {
-        console.log(file);
         const filetypes = /wav/;
         const mimetype = filetypes.test(file.mimetype);
         const extname = filetypes.test(path.extname(file.originalname));
@@ -30,7 +29,6 @@ const upload = multer({
 
 router.get('/', audio.getList);
 router.post('/', upload, (req, res) => {
-    console.log(req.file);
 	res.status(200).send('subido');
 })
 router.delete('/:id', audio.delete);

@@ -6,10 +6,13 @@ var listen = new Promise((resolve, reject) => {
         .then(data => {
             dataListen = [];
             for (let i = 0; i < data.length; i++) {
-                if (!!data[i]['watson']) {
-                    dataListen.push([`Watson (${data[i]['watson'].split('_')[0]})`, data[i]['watson']]);
-                } else if (!!data[i]['codigo']) {
-                    dataListen.push([`Google (${data[i]['codigo'].split('_')[0]})`, data[i]['codigo']]);
+                if (!!data[i]['enabled']) {
+                    if (!!data[i]['watson']) {
+                        dataListen.push([`Watson (${data[i]['watson'].split('_')[0]})`, data[i]['watson']]);
+                    }
+                    if (!!data[i]['codigo']) {
+                        dataListen.push([`Google (${data[i]['codigo'].split('_')[0]})`, data[i]['codigo']]);
+                    }
                 }
             }
         });

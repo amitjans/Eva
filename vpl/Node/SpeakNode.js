@@ -61,13 +61,8 @@ async function RecAndSpeak(element) {
 }
 
 function replaceWhatWasHeard(value) {
-    let respuesta = getRespuesta();
-    if (/\$-[\d]+/.test(value)) {
-        value = respuesta[(respuesta.length - 1) - parseInt(value.substring(2))];
-    } else if (/\$[\d]+/.test(value)) {
-        value = respuesta[parseInt(value.substring(1)) - 1];
-    } else {
-        value = value.replace('$', respuesta[respuesta.length - 1]);
-    }
-    return value;
+    if (/\$-[\d]+/.test(value) || /\$[\d]+/.test(value)) {
+        return getRespuesta(parseInt(value.substring(1)));
+    } 
+    return getRespuesta();
 }

@@ -32,11 +32,9 @@ function CreateToken(param) {
     if (param.includes('#')) {
         return getCounter()[param.substring(1)];
     } else if (param == '$'){
-        return getRespuesta(true);
-    } else if (/\$[\d]+/.test(param)) {
-        return getRespuesta()[parseInt(param.substring(1))];
-    } else if (/\$-[\d]+/.test(param)) {
-        return getRespuesta()[(getRespuesta().length - 1) - parseInt(param.substring(2))];
+        return getRespuesta();
+    } else if (/\$[\d]+/.test(param) || /\$-[\d]+/.test(param)) {
+        return getRespuesta(parseInt(param.substring(1)));
     } else if (param.includes('%')) {
         return getSactual()['campo' + param.substring(1)];
     }

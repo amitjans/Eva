@@ -20,8 +20,9 @@
                                     <label class="col-sm-2 control-label">{{'CONFIG.VOICE' | translate}}</label>
                                     <div class="col-sm-10">
                                         <select name="voice" id="" ng-model="voice" class="form-control">
-                                            <option ng-repeat="item in listado" value="{{item.codigo}}">{{ item.nombre + ' (' +
-                                                item.idioma + ' - ' + item.servicio + ')' }}</option>
+                                            <option ng-repeat="item in listado" value="{{item.codigo}}" ng-if="!!item.enabled">
+                                                {{ item.nombre + ' (' + item.idioma + ' - ' + item.servicio + ')' }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -37,7 +38,9 @@
                                     <label class="col-sm-2 control-label">{{'CONFIG.LISTEN' | translate}}</label>
                                     <div class="col-sm-10">
                                         <select name="leds" id="" ng-model="listen" class="form-control">
-                                            <option ng-repeat="m in sttlist" ng-if="!!m.codigo && !!m.watson" value="{{ m._id }}">{{ m.idioma }}</option>
+                                            <option ng-repeat="m in sttlist" ng-if="!!m.codigo && !!m.watson && !!m.enabled" value="{{ m._id }}">
+                                                {{ m.idioma }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>

@@ -17,7 +17,9 @@ Blockly.Blocks['script'] = {
       .appendField(locale().INTERACTION.SCRIPT)
       .appendField(new Blockly.FieldDropdown(dataScript), "script")
       .appendField(locale().INTERACTION.RANDOM)
-      .appendField(new Blockly.FieldCheckbox("FALSE"), "random");
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "random")
+      .appendField(locale().INTERACTION.SCRIPT_OPTS.READ)
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "read");
     this.appendDummyInput()
       .appendField(locale().INTERACTION.SCRIPT_OPTS.ORDERBY)
       .appendField(new Blockly.FieldDropdown([["No", "none"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"]]), "order")

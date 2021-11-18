@@ -5,7 +5,7 @@ var ProcessLedNode = async function (element) {
         social.ledsanimstop();
     } else {
         let anim = await GetAnim(element);
-        social.ledsanim(anim.base, anim.opts);
+        social.ledsanim(anim);
     }
 }
 

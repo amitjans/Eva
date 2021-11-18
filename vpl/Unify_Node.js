@@ -90,9 +90,10 @@ async function unify(obj) {
             case "script":
                 node['sc'] = temp.field[0]['#text'];
                 node['random'] = temp.field[1]['#text'] == 'TRUE';
-                node['order'] = temp.field[2]['#text'];
-                node['unique'] = temp.field[3]['#text'];
-                node['remove'] = temp.field[4]['#text'] == 'TRUE';
+                node['read'] = temp.field[2]['#text'] == 'TRUE';
+                node['order'] = temp.field[3]['#text'];
+                node['unique'] = temp.field[4]['#text'];
+                node['remove'] = temp.field[5]['#text'] == 'TRUE';
                 node['data'] = await LoadScriptData(node);
                 break;
             case "speak":

@@ -31,7 +31,9 @@ async function ProcessFlow(node, nodes) {
             if (!node.remove) {
                 iscript[node.key].push(sactual);
             }
-            await ProcessNode({ key: crypto(sactual.campo1), type: "speak", text: sactual.campo1 });
+            if(node.read) {
+                await ProcessNode({ key: crypto(sactual.campo1), type: "speak", text: sactual.campo1 });
+            }
         } else if (node.type === 'dsci') {
             iscript[currentKey].pop();
         } else if (node.type === 'led' && node.anim !== 'stop') {
