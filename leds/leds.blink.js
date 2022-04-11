@@ -1,11 +1,6 @@
 const matrix = require("@matrix-io/matrix-lite");
 const { gradient } = require('./leds.utils');
 
-const noanim = (obj) => {
-    let everloop = new Array(matrix.led.length).fill(obj.color1);
-    matrix.led.set(everloop);
-}
-
 const blink = (obj) => {
     let everloop = new Array(matrix.led.length).fill('#000000');
     let i = 0;
@@ -21,10 +16,8 @@ const blink = (obj) => {
     }, obj.time);
 }
 
-noanim['params'] = { color: 1 };
 blink['params'] = { color: 2, time: 1 };
 
 module.exports = {
-    noanim,
     blink
 }
