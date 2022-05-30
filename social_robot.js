@@ -34,6 +34,7 @@ const port = new SerialPort('/dev/ttyUSB0', {
 })
 const azuretts = require('./server/services/azure_tts');
 const ibmtts = require('./server/services/ibm_tts');
+const ibmstt = require('./server/services/ibm_stt');
 
 var { socketio, enviarMensaje } = require('./app');
 var logs = require('./log');
@@ -191,7 +192,7 @@ class SocialRobot {
     this.ledsanim(this.configuration.listenled);
     let result = '';
     if (service == 'watson') {
-      result = await (require('./server/services/ibm_stt').listenWatson(langcode, callback));
+      result = await ibmstt.listenWatson(langcode, callback);
     } else {
       result = await this.listenGoogle(langcode, callback);
     }
