@@ -1,7 +1,7 @@
 var { existsSync } = require('fs');
 const crypto = require('../../utils/MD5');
 var { getRespuesta, getSactual, getCounter, getApi } = require('../VPL_ProcessVars');
-var { getOne } = require('../../utils/Random');
+var { getOne, generarNumeroRandom } = require('../../utils/Random');
 var { Translate } = require('../../server/services/translate');
 var { Getdata } = require('./ApiNode');
 
@@ -41,6 +41,8 @@ async function ProcessSpeakText(element) {
             if (/^#[\w\d]+$/.test(item)) {
                 item = getCounter()[item.substring(1)];
             }
+        } else if(/r[\d]+t[\d]+/.test(item)) {
+            item = generarNumeroRandom(parseInt(item.split('t')[0].substring(1)), parseInt(item.split('t')[1]));
         }
         return item;
     }).join(' ');

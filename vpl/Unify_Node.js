@@ -1,6 +1,7 @@
 const { getThis } = require('../server/controllers/common.controller');
 const { xmlToJson } = require('../utils/xml2json');
 const { LoadScriptData } = require('./Node')
+var { generarNumeroRandom } = require('../utils/Random');
 const Blockly = require('blockly');
 
 async function unifyById(value) {
@@ -56,7 +57,13 @@ async function unify(obj) {
                 break;
             case "controls_repeat_ext":
                 node.type = 'for';
-                node['iteraciones'] = parseInt(temp.value.shadow.field['#text']);
+                if (temp.value.block['@attributes'].type == 'math_random_int') {
+                let valueBlock = temp.value.block.value;
+                    node['min'] = (!!valueBlock[0].block ? valueBlock[0].block.field['#text'] : valueBlock[0].shadow.field['#text']);
+                    node['max'] = (!!valueBlock[1].block ? valueBlock[1].block.field['#text'] : valueBlock[1].shadow.field['#text']);
+                } else {
+                    node['iteraciones'] = parseInt(temp.value.shadow.field['#text']);
+                }
                 node['first'] = temp.statement.block["@attributes"].id;
                 break;
             case "emotion":
@@ -109,7 +116,14 @@ async function unify(obj) {
                         node.text += ` #${subText.block.field['#text']}`;
                     } else if (subText.block['@attributes'].type == 'speak_script') {
                         node.text += ` %${subText.block.field['#text']}`;
-                    }
+                    } else if (subText.block['@attributes'].type == 'math_random_int') {
+                        node.text += 'r' + (!!subText.block.value[0].block 
+                          ? subText.block.value[0].block.field['#text'] 
+                          : subText.block.value[0].shadow.field['#text']) 
+                        + 't' + (!!subText.block.value[1].block 
+                          ? subText.block.value[1].block.field['#text']
+                          : subText.block.value[1].shadow.field['#text']);
+                      }
                     subText = subText.block.value || {};
                 }
                 node.text = node.text.trim();
@@ -118,6 +132,11 @@ async function unify(obj) {
                 node = { ...node, type: 'counter', count: temp.field['#text'] };
                 if (temp.value.block['@attributes'].type == 'math_arithmetic') {
                     node['ops'] = temp.value.block.field['#text'];
+                    let valueBlock = temp.value.block.value;
+                    node['first'] = (!!valueBlock[0].block ? valueBlock[0].block.field['#text'] : valueBlock[0].shadow.field['#text']);
+                    node['second'] = (!!valueBlock[1].block ? valueBlock[1].block.field['#text'] : valueBlock[1].shadow.field['#text']);
+                } else if (temp.value.block['@attributes'].type == 'math_random_int') {
+                    node['ops'] = 'random';
                     let valueBlock = temp.value.block.value;
                     node['first'] = (!!valueBlock[0].block ? valueBlock[0].block.field['#text'] : valueBlock[0].shadow.field['#text']);
                     node['second'] = (!!valueBlock[1].block ? valueBlock[1].block.field['#text'] : valueBlock[1].shadow.field['#text']);

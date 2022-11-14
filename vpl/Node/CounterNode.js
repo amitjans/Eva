@@ -1,4 +1,5 @@
 var { setCounter, getCounter } = require('../VPL_ProcessVars');
+var { generarNumeroRandom } = require('../../utils/Random');
 
 const ProcessCounterNode = function ({ ops, count, value, first, second }) {
     let temp = getCounter();
@@ -14,6 +15,8 @@ const ProcessCounterNode = function ({ ops, count, value, first, second }) {
         temp[count] = Math.pow(getValue(first, temp), getValue(second, temp));
     } else if (ops === 'assign'){
         temp[count] =  value;
+    } else if (ops === 'random'){
+        temp[count] =  generarNumeroRandom(parseInt(first), parseInt(second));
     }
     setCounter(temp);
 }
