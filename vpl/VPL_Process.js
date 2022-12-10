@@ -2,6 +2,7 @@ const crypto = require('../utils/MD5');
 const { ProcessNode } = require('./VPL_Node');
 const { NextNode } = require('./NodeUtils');
 var { ConditionNode } = require('./Node');
+var { generarNumeroRandom } = require('../utils/Random');
 
 var iscript = {};
 var currentKey = "";
@@ -10,7 +11,9 @@ global.sactual;
 async function ProcessFlow(node, nodes) {
     do {
         if (node.type === 'for') {
-            if (node.iteraciones <= -1) {
+            if (!!node.min && !!node.max) {
+                node.iteraciones = generarNumeroRandom(parseInt(node.min), parseInt(node.max));
+            } else if (node.iteraciones <= -1) {
                 let ss = nodes.find(i => i.type === 'script');
                 currentKey = ss.key;
                 iscript[currentKey] = ss.data;
