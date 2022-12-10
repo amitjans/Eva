@@ -30,6 +30,15 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
         });;
     }
 
+    $scope.uploadcloud = function () {
+        $http.post('https://eva-repository.herokuapp.com/api/mov/import', $scope.listado).then(function successCallback(response) {
+            $scope.clear();
+            notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
+        }, function errorCallback(response) {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
+        });
+    }
+
     $scope.create = function () {
         var json = { nombre: $scope.nombre, codigo: $scope.codigo };
         $http.post('/api/common?db=mov', json).then(function successCallback(response) {

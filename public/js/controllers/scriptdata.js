@@ -36,6 +36,16 @@ eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scop
         });
     }
 
+    $scope.uploadcloud = function () {
+        var json = { name: $scope.slistado.filter(i => i._id == $scope.script)[0].nombre, scriptData: $scope.listado };
+        $http.post('https://eva-repository.herokuapp.com/script', json).then(function successCallback(response) {
+            $scope.clear();
+            notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
+        }, function errorCallback(response) {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
+        });
+    }
+
     $scope.update = function (l) {
         $scope.updateid = l._id;
         $scope.c1 = l.campo1;

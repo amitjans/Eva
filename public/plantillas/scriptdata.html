@@ -7,11 +7,12 @@
                 <div class="form-horizontal" role="form">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">{{'SCRIPT_DATA.SCRIPT' | translate}}</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-9">
                             <select name="" ng-model="script" ng-change="list()" id="" class="form-control">
                                 <option ng-repeat="item in slistado" value="{{ item._id }}">{{ item.nombre }}</option>
                             </select>
                         </div>
+                        <span style="font-size: 2em; color: black; cursor: pointer;" ng-click="uploadcloud()"><i class="fa fa-cloud-upload"></i></span>
                     </div>
                 </div>
             </div>
