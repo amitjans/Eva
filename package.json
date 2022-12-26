@@ -31,7 +31,7 @@
     "node-record-lpcm16": "^1.0.1",
     "serialport": "^9.1.0",
     "serve-favicon": "^2.5.0",
-    "socket.io": "^4.1.2",
+    "socket.io": "^4.5.4",
     "telegram": "^1.6.11",
     "temp": "^0.9.4",
     "uuid": "^9.0.0",
