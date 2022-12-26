@@ -2,7 +2,8 @@ const fs = require('fs');
 const cloudcontroller = {};
 const envars = ['TEXT_TO_SPEECH_URL', 'TEXT_TO_SPEECH_APIKEY', 'SPEECH_TO_TEXT_URL', 'SPEECH_TO_TEXT_APIKEY',
     'TRANSLATOR_URL', 'TRANSLATOR_APIKEY', 'GOOGLE_APPLICATION_CREDENTIALS', 'DIALOGFLOW_PROJECT_ID',
-    'TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION', 'TEXT_TO_SPEECH_AZURE', 'REGION_AZURE']
+    'TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION', 'TEXT_TO_SPEECH_AZURE', 'REGION_AZURE',
+    'MQTT_SERVER', 'MQTT_ID']
 
 cloudcontroller.getInfo = async (req, res) => {
     let clouds = [];
@@ -13,6 +14,7 @@ cloudcontroller.getInfo = async (req, res) => {
     clouds.push(cloudIsConfig('DialogFlow', envars[6], envars[7]));
     clouds.push(cloudIsConfig('Telegram', envars[8], envars[9], envars[10]));
     clouds.push(cloudIsConfig('Azure TTS', envars[11], envars[12]));
+    clouds.push(cloudIsConfig('MQTT', envars[13], envars[14]));
 
     return res.status(200).json(clouds);
 }
@@ -45,6 +47,10 @@ cloudcontroller.update = async (req, res) => {
 cloudcontroller.setKey = async (key, value) => {
     process.env[key] = value;
     writeFile();    
+}
+
+cloudcontroller.write = () => {
+    writeFile();  
 }
 
 function writeFile() {

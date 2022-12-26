@@ -102,14 +102,15 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     Blockly.Events.enable();
   }
 
-  $scope.download = function (l) {
-    let filename = l.nombre + ".json";
-    // $http.get('/api/interaccion/export/' + l._id).then(function successCallback(response) {
-      // let tempobj = { nombre: l.nombre, data: response.data };
-      var blob = new Blob([JSON.stringify(l, null, "\t")], { type: "text/plain;charset=utf-8" });
-      saveAs(blob, filename);
-    // }, function errorCallback(response) {
-    // });
+  $scope.download = function (id) {
+    $http.get('api/interaccion/export/' + id).then(function (res) {
+
+    }, function (error) {
+      console.log(error);
+    });
+    // let filename = l.nombre + ".json";
+    //   var blob = new Blob([JSON.stringify(l, null, "\t")], { type: "text/plain;charset=utf-8" });
+    //   saveAs(blob, filename);
   }
 
   $scope.import = function () {

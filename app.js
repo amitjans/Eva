@@ -4,6 +4,12 @@ const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const mqtt = require('mqtt');
+const { write } = require('./server/controllers/cloud.controller.js');
+const dotenv = require('dotenv').config();
+const client  = mqtt.connect('mqtt://' + (process.env.MQTT_SERVER || 'broker.hivemq.com'));
+const { v4 } = require('uuid');
+const id  = process.env.MQTT_ID || v4();
 
 var app = express();
 
@@ -93,3 +99,30 @@ var social = new SocialRobot();
 global.social = social;
 global.usuarioId = { autor: 'Usuario', class: 'text-muted' };
 global.evaId = { autor: 'Robot Eva', class: 'text-danger' };
+
+console.log('Identificador utilizado: ' + id);
+
+client.on('connect', function () {
+	client.subscribe(`eva/${id}`, function (err) {
+	  if (!err) {
+		client.publish('eva/server', JSON.stringify({ status: "Up", id: id }));
+		console.log('Mensaje publicado');
+	  } else {
+		console.log(err);
+	  }
+	})
+})
+  
+client.on('message', function (topic, message) {
+	// message is Buffer
+	let json = JSON.parse(message.toString());
+	//client.end()
+})
+
+client.publish('eva/' + id, JSON.stringify({ type: "status" }));
+
+if (!process.env.MQTT_SERVER || !process.env.MQTT_ID) {
+	process.env.MQTT_SERVER = process.env.MQTT_SERVER || 'broker.hivemq.com';
+	process.env.MQTT_ID = process.env.MQTT_ID || id;
+	write();
+}

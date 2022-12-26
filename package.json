@@ -10,6 +10,7 @@
   "dependencies": {
     "@google-cloud/speech": "^4.5.1",
     "@matrix-io/matrix-lite": "^0.4.6",
+    "adm-zip": "^0.5.10",
     "aplay": "^1.2.0",
     "blockly": "^8.0.2",
     "cookie-parser": "^1.4.5",
@@ -23,6 +24,7 @@
     "mic6": "^2.1.2",
     "microsoft-cognitiveservices-speech-sdk": "^1.18.1",
     "morgan": "^1.10.0",
+    "mqtt": "^4.3.7",
     "multer": "^1.4.2",
     "music-metadata": "^7.8.5",
     "node-cmd": "^5.0.0",
@@ -32,7 +34,7 @@
     "socket.io": "^4.1.2",
     "telegram": "^1.6.11",
     "temp": "^0.9.4",
-    "uuid": "^8.3.2",
+    "uuid": "^9.0.0",
     "wav": "^1.0.2"
   },
   "devDependencies": {

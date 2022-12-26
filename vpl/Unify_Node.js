@@ -8,6 +8,10 @@ async function unifyById(value) {
     return await unify(await findById(value));
 }
 
+async function find(value) {
+    return await getThis(value, 'interaccion');
+}
+
 async function findById(value) {
     const temp = await getThis(value, 'interaccion');
     return xmlToJson(Blockly.Xml.textToDom(temp.xml));
@@ -57,7 +61,7 @@ async function unify(obj) {
                 break;
             case "controls_repeat_ext":
                 node.type = 'for';
-                if (temp.value.block['@attributes'].type == 'math_random_int') {
+                if (!!temp.value.block && temp.value.block['@attributes'].type == 'math_random_int') {
                 let valueBlock = temp.value.block.value;
                     node['min'] = (!!valueBlock[0].block ? valueBlock[0].block.field['#text'] : valueBlock[0].shadow.field['#text']);
                     node['max'] = (!!valueBlock[1].block ? valueBlock[1].block.field['#text'] : valueBlock[1].shadow.field['#text']);
@@ -169,6 +173,7 @@ async function unify(obj) {
 }
 
 module.exports = {
+    find,
     unifyById,
     unifyByInt,
     unify
