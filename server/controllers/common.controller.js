@@ -28,4 +28,8 @@ commoncontroller.delete = async (req, res) => {
     res.status(200).json({ mensaje: 'Ok' });
 }
 
+commoncontroller.deleteLocal = async (db, filter) => {
+    getConnection().get(db).remove(filter).write();
+}
+
 module.exports = commoncontroller;

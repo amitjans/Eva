@@ -85,7 +85,7 @@ async function unify(obj) {
                 node['opt'] = temp.field[1]['#text'] || "";
                 break;
             case "mov":
-                node['mov'] = parseInt(temp.field['#text']);
+                node['mov'] = temp.field['#text'];
                 break;
             case "record":
             case "wait":
