@@ -17,7 +17,7 @@ node_modules/
 credencial.json
 git.sh
 temp/*
-public/js/go.js
+public/app/**
 test.wav
 sonidos
 db.json
