@@ -1,11 +1,8 @@
-const { getConnection } = require('../database');
-const movcontroller = {};
+import { getConnection } from '../database.js';
 
-movcontroller.getCodes = async (req, res) => {
+export const getCodes = async (req, res) => {
     let temp = await social.movement('h');
     res.status(200).json(JSON.parse(temp));
 }
 
-movcontroller.getByCode = async (value) => await getConnection().get('mov').find({ codigo: value }).value();
-
-module.exports = movcontroller;
+export const getByCode = async (value) => await getConnection().get('mov').find({ codigo: value }).value();

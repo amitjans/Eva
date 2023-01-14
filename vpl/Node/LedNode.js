@@ -1,6 +1,6 @@
-var led = require('../../server/controllers/leds.controller');
+import * as led from '../../server/controllers/leds.controller.js';
 
-var ProcessLedNode = async function (element) {
+export const ProcessLedNode = async function (element) {
     if (element.base === 'stop') {
         social.ledsanimstop();
     } else {
@@ -9,9 +9,4 @@ var ProcessLedNode = async function (element) {
     }
 }
 
-var GetAnim = async (element) => (typeof element.anim === 'object') ? element.anim : await led.getData(element.anim);
-
-module.exports = {
-    ProcessLedNode,
-    GetAnim
-}
+export const GetAnim = async (element) => (typeof element.anim === 'object') ? element.anim : await led.getData(element.anim);

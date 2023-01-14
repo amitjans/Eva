@@ -1,30 +1,30 @@
-const { getThis } = require('../server/controllers/common.controller');
-const { xmlToJson } = require('../utils/xml2json');
-const { LoadScriptData } = require('./Node')
-var { generarNumeroRandom } = require('../utils/Random');
-const Blockly = require('blockly');
+import { getThis } from '../server/controllers/common.controller.js';
+import { xmlToJson } from '../utils/xml2json.js';
+import * as nodes from './Node/index.js';
+import { generarNumeroRandom } from '../utils/Random.js';
+import Blockly from 'blockly';
 
-async function unifyById(value) {
+export const unifyById = async function (value) {
     return await unify(await findById(value));
 }
 
-async function find(value) {
+export const find = async function (value) {
     return await getThis(value, 'interaccion');
 }
 
-async function findById(value) {
+export const findById = async function (value) {
     const temp = await getThis(value, 'interaccion');
     return xmlToJson(Blockly.Xml.textToDom(temp.xml));
 }
 
-async function unifyByInt(value) {
+export const unifyByInt = async function (value) {
     let clone = JSON.parse(JSON.stringify(value.data));
     return await unify(clone.node, clone.link);
 }
 
-async function unify(obj) {
+export const unify = async function (obj) {
     let nodes = [];
-    if(!!obj.block) {
+    if (!!obj.block) {
         let temp = obj.block;
         let node = { key: temp["@attributes"].id, type: temp["@attributes"].type }
         switch (temp["@attributes"].type) {
@@ -45,12 +45,12 @@ async function unify(obj) {
                             }
                         }
                         let thenDo = temp.statement
-                        .find(x => x['@attributes'].name == `DO${element['@attributes'].name.substring(2)}`);
-                        if (!!thenDo || !!temp.next){
+                            .find(x => x['@attributes'].name == `DO${element['@attributes'].name.substring(2)}`);
+                        if (!!thenDo || !!temp.next) {
                             condition['next'] = !!thenDo ? thenDo.block['@attributes'].id : temp.next.block['@attributes'].id;
                         }
                         node['condition'].push(condition);
-                        if (!!thenDo){
+                        if (!!thenDo) {
                             nodes.push(...(await unify(thenDo)));
                         }
                     }
@@ -62,7 +62,7 @@ async function unify(obj) {
             case "controls_repeat_ext":
                 node.type = 'for';
                 if (!!temp.value.block && temp.value.block['@attributes'].type == 'math_random_int') {
-                let valueBlock = temp.value.block.value;
+                    let valueBlock = temp.value.block.value;
                     node['min'] = (!!valueBlock[0].block ? valueBlock[0].block.field['#text'] : valueBlock[0].shadow.field['#text']);
                     node['max'] = (!!valueBlock[1].block ? valueBlock[1].block.field['#text'] : valueBlock[1].shadow.field['#text']);
                 } else {
@@ -105,7 +105,7 @@ async function unify(obj) {
                 node['order'] = temp.field[3]['#text'];
                 node['unique'] = temp.field[4]['#text'];
                 node['remove'] = temp.field[5]['#text'] == 'TRUE';
-                node['data'] = await LoadScriptData(node);
+                node['data'] = await nodes.LoadScriptData(node);
                 break;
             case "speak":
                 node['text'] = temp.field['#text'];
@@ -115,19 +115,19 @@ async function unify(obj) {
                 let subText = temp.value;
                 while (!!subText.block) {
                     if (subText.block['@attributes'].type == 'speak_text') {
-                        node.text += ` ${ subText.block.field['#text'] }`;
+                        node.text += ` ${subText.block.field['#text']}`;
                     } else if (subText.block['@attributes'].type == 'speak_var') {
                         node.text += ` #${subText.block.field['#text']}`;
                     } else if (subText.block['@attributes'].type == 'speak_script') {
                         node.text += ` %${subText.block.field['#text']}`;
                     } else if (subText.block['@attributes'].type == 'math_random_int') {
-                        node.text += 'r' + (!!subText.block.value[0].block 
-                          ? subText.block.value[0].block.field['#text'] 
-                          : subText.block.value[0].shadow.field['#text']) 
-                        + 't' + (!!subText.block.value[1].block 
-                          ? subText.block.value[1].block.field['#text']
-                          : subText.block.value[1].shadow.field['#text']);
-                      }
+                        node.text += 'r' + (!!subText.block.value[0].block
+                            ? subText.block.value[0].block.field['#text']
+                            : subText.block.value[0].shadow.field['#text'])
+                            + 't' + (!!subText.block.value[1].block
+                                ? subText.block.value[1].block.field['#text']
+                                : subText.block.value[1].shadow.field['#text']);
+                    }
                     subText = subText.block.value || {};
                 }
                 node.text = node.text.trim();
@@ -155,26 +155,19 @@ async function unify(obj) {
             default:
                 break;
         }
-        if(!!temp.next) {
+        if (!!temp.next) {
             if (temp.next.block['@attributes'].type == 'int') {
                 temp.next = await findById(temp.next.block.field['#text']);
             }
             node['next'] = temp.next.block['@attributes'].id;
         }
         nodes.push(node);
-        if(!!node.first && node.type == 'for') {
+        if (!!node.first && node.type == 'for') {
             nodes.push(...(await unify(temp.statement)));
         }
-        if(!!node.next) {
+        if (!!node.next) {
             nodes.push(...(await unify(temp.next)));
         }
     }
     return nodes;
 }
-
-module.exports = {
-    find,
-    unifyById,
-    unifyByInt,
-    unify
-};

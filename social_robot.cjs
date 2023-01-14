@@ -26,7 +26,7 @@ const spawn = require('child_process').spawn;
 
 const record = require('node-record-lpcm16');
 
-const ledsanimation = require('./leds/');
+const ledsanimation = require('./leds/index.js');
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
 const port = new SerialPort('/dev/ttyUSB0', {

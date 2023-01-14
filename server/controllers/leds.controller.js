@@ -1,8 +1,7 @@
-const { getConnection } = require('../database');
-const anims = require('../../leds/');
-const ledscontroller = {};
+import { getConnection } from '../database.js';
+import * as anims from '../../leds/index.js';
 
-ledscontroller.index = async (req, res) => {
+export const baseLeds = async (req, res) => {
     let baseanims = [];
     for (var property in anims) {
         if (typeof anims[property] == 'function') {
@@ -12,6 +11,4 @@ ledscontroller.index = async (req, res) => {
     res.status(200).json(baseanims);
 }
 
-ledscontroller.getData = async (value) => await getConnection().get('led').find({ _id: value }).value();
-
-module.exports = ledscontroller;
+export const getData = async (value) => await getConnection().get('led').find({ _id: value }).value();

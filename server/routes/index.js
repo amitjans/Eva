@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 var router = express.Router();
-const nodes = require('../../vpl/VPL_Node');
+import { ProcessNode } from '../../vpl/VPL_Node.js';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,7 +13,7 @@ router.get('/speak', async function (req, res) {
 });
 
 router.post('/nodes', async function (req, res) {
-	await nodes.ProcessNode(req.body);
+	await ProcessNode(req.body);
 	res.status(200).jsonp();
 });
 
@@ -26,4 +26,4 @@ router.get('/test', async function (req, res) {
 	res.status(200).jsonp();
 });
 
-module.exports = router;
+export default router;

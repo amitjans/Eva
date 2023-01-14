@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 module.exports = {
     RecordNode: async function ({ time }) {

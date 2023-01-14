@@ -1,8 +1,7 @@
-const fs = require('fs');
-const mm = require('music-metadata');
-const audiocontroller = {};
+import fs from 'fs';
+import mm from 'music-metadata';
 
-audiocontroller.getList = async (req, res) => {
+export const getList = async (req, res) => {
     let audios = [];
     let info = {};
     let files = await fs.promises.readdir('./sonidos/');
@@ -18,12 +17,10 @@ audiocontroller.getList = async (req, res) => {
     res.status(200).json(audios);
 }
 
-audiocontroller.delete = async (req, res) => {
+export const deleteSound = async (req, res) => {
     const { id } = req.params;
     fs.unlink('./sonidos/' + id + '.wav', (err) => {
         if (err) throw err;
         res.status(200).json({ mensaje: 'Audio eliminado' });
     });
 }
-
-module.exports = audiocontroller;

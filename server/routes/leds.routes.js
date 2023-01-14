@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const leds = require('../controllers/leds.controller');
+import { baseLeds } from '../controllers/leds.controller.js';
 
-router.get('/', leds.index);
+router.get('/', baseLeds);
 
-module.exports = router;
+export default router;

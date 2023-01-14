@@ -1,37 +1,35 @@
-var { getCounter, getSactual, getRespuesta } = require('../VPL_ProcessVars');
-var PhoneticSpanish = require('../../utils/PhoneticSpanish');
+import { getCounter, getSactual, getRespuesta } from '../VPL_ProcessVars.js';
+import PhoneticSpanish from '../../utils/PhoneticSpanish.js';
 
-module.exports = {
-    ConditionNode: function (node) {
-        for (let i = 0; i < node.condition.length; i++) {
-            const element = node.condition[i];
-            if (!element.A && !element.B) {
+export const ConditionNode = function (node) {
+    for (let i = 0; i < node.condition.length; i++) {
+        const element = node.condition[i];
+        if (!element.A && !element.B) {
+            return element.next;
+        } else if (/^[\d]+$/.test(element.A) && /^[\d]+$/.test(element.B)) {
+            if (NumericComparison(element)) {
                 return element.next;
-            } else if (/^[\d]+$/.test(element.A) && /^[\d]+$/.test(element.B)) {
-                if (NumericComparison(element)) {
-                    return element.next;
-                }
-            } else {
-                let tempA = element.A.split('/');
-                let tempB = element.B.split('/');
-                for (let A of tempA) {
-                    for (let B of tempB) {
-                        element.A = CreateToken(A).trim();
-                        element.B = CreateToken(B).trim();
-                        if (StringComparison(element)) {
-                            return element.next || '';
-                        }
+            }
+        } else {
+            let tempA = element.A.split('/');
+            let tempB = element.B.split('/');
+            for (let A of tempA) {
+                for (let B of tempB) {
+                    element.A = CreateToken(A).trim();
+                    element.B = CreateToken(B).trim();
+                    if (StringComparison(element)) {
+                        return element.next || '';
                     }
                 }
             }
         }
     }
-};
+}
 
 function CreateToken(param) {
     if (param.includes('#')) {
         return getCounter()[param.substring(1)];
-    } else if (param == '$'){
+    } else if (param == '$') {
         return getRespuesta();
     } else if (/\$[\d]+/.test(param) || /\$-[\d]+/.test(param)) {
         return getRespuesta(parseInt(param.substring(1)));

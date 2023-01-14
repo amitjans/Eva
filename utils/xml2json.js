@@ -1,4 +1,4 @@
-var xmlToJson = function (xml) {
+export const xmlToJson = function (xml) {
 	var obj = {};
 
 	if (xml.nodeType == 1) { // element
@@ -33,5 +33,3 @@ var xmlToJson = function (xml) {
 	}
 	return obj;
 }
-
-module.exports.xmlToJson = xmlToJson;

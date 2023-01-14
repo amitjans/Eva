@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const filters = require('../controllers/listeningfilters.controller');
+import { getList } from '../controllers/listeningfilters.controller.js';
 
-router.get('/', filters.getList);
+router.get('/', getList);
 
-module.exports = router;
+export default router;

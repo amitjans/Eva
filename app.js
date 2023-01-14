@@ -1,45 +1,68 @@
-const express = require('express');
-const cors = require('cors');
-const logger = require('morgan');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const mqtt = require('mqtt');
-const { write } = require('./server/controllers/cloud.controller.js');
-const dotenv = require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import logger from 'morgan';
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import mqtt from 'mqtt';
+import { write } from './server/controllers/cloud.controller.js';
+import * as dotenv from 'dotenv'
+import { v4 } from 'uuid'
+import { Server } from "socket.io";
+
+dotenv.config()
 const client  = mqtt.connect('mqtt://' + (process.env.MQTT_SERVER || 'broker.hivemq.com'));
-const { v4 } = require('uuid');
+
 const id  = process.env.MQTT_ID || v4();
 
 var app = express();
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 // view engine setup
 app.use(cors());
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(join(__dirname, 'public')));
 
 // Para usar lowdb
-const { createConnection } = require('./server/database');
+import { createConnection } from './server/database.js';
 createConnection();
 
 // routes
-app.use('/', require('./server/routes/index'));
-app.use('/api/script', require('./server/routes/script.routes.js'));
-app.use('/api/audio', require('./server/routes/audio.routes.js'));
-app.use('/api/mov', require('./server/routes/mov.routes.js'));
-app.use('/api/filters', require('./server/routes/listeningfilters.routes.js'));
-app.use('/api/leds', require('./server/routes/leds.routes.js'));
-app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
-app.use('/api/cloud', require('./server/routes/cloud.routes.js'));
-app.use('/api/config', require('./server/routes/config.routes.js'));
-app.use('/api/images', require('./server/routes/images.routes.js'));
-app.use('/api/common', require('./server/routes/common.routes.js'));
-app.use('/dev', require('./server/routes/dev.routes.js'));
+import indexRouter from './server/routes/index.js';
+import scriptRouter from './server/routes/script.routes.js';
+import audioRouter from './server/routes/audio.routes.js';
+import movRouter from './server/routes/mov.routes.js';
+import filtersRouter from './server/routes/listeningfilters.routes.js';
+import ledsRouter from './server/routes/leds.routes.js';
+import interaccionRouter from './server/routes/interaccion.routes.js';
+import cloudRouter from './server/routes/cloud.routes.js';
+import configRouter from './server/routes/config.routes.js';
+import imagesRouter from './server/routes/images.routes.js';
+import commonRouter from './server/routes/common.routes.js';
+import devRouter from './server/routes/dev.routes.js';
+
+import SocialRobot from './social_robot.cjs';
+
+app.use('/', indexRouter);
+app.use('/api/script', scriptRouter);
+app.use('/api/audio', audioRouter);
+app.use('/api/mov', movRouter);
+app.use('/api/filters', filtersRouter);
+app.use('/api/leds', ledsRouter);
+app.use('/api/interaccion', interaccionRouter);
+app.use('/api/cloud', cloudRouter);
+app.use('/api/config', configRouter);
+app.use('/api/images', imagesRouter);
+app.use('/api/common', commonRouter);
+app.use('/dev', devRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -61,7 +84,8 @@ app.use(function (err, req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 const server = app.listen(app.get('port'));
-const io = require('socket.io')(server);
+
+const io = new Server(server);
 io.on('connection', (socket) => {
 	global.socket = socket;
 	console.log('Client connected');
@@ -93,7 +117,6 @@ var enviarError = function (error, query) {
 	io.sockets.emit('messages', data);
 }
 
-var SocialRobot = require('./social_robot');
 var social = new SocialRobot();
 
 global.social = social;

@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
 var router = express.Router();
-var { writeFile } = require('fs');
-var { Translate } = require('../services/translate');
+import { writeFile } from 'fs';
+import pkg from '../services/translate.cjs';
+const { Translate } = pkg;
 
 router.post('/locale', async function (req, res) {
 	res.status(200).jsonp();
@@ -59,4 +60,4 @@ function writeLocale(target, obj) {
 	});
 }
 
-module.exports = router;
+export default router;

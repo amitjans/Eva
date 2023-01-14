@@ -1,7 +1,6 @@
-const f = require('../../vpl/ListeningFilters');
-const filtercontroller = {};
+import * as f from '../../vpl/ListeningFilters/index.js';
 
-filtercontroller.getList = async (req, res) => {
+export const getList = async (req, res) => {
     let filters = [];
     for (var property in f) {
         if (typeof f[property] == 'function') {
@@ -10,5 +9,3 @@ filtercontroller.getList = async (req, res) => {
     }
     res.status(200).json(filters);
 }
-
-module.exports = filtercontroller;

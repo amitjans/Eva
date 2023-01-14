@@ -1,12 +1,18 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-var multer  = require('multer');
+import express from 'express';
+import * as fs from 'fs';
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import multer from 'multer';
 
-const img = require('../controllers/images.controller');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const router = express.Router();
+
+
+import { getList, deleteImagen } from '../controllers/images.controller.js';
 
 const storage = multer.diskStorage({
-	destination: path.join(__dirname, '../../public/images'),
+	destination: join(__dirname, '../../public/images'),
 	filename: (req, file, cb) => {
 		cb(null, file.originalname.replace(/ /gi, '_'));
 	}
@@ -14,7 +20,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
     storage, 
-    dest: path.join(__dirname, 'public', 'images'),
+    dest: join(__dirname, 'public', 'images'),
     limits: {fileSize: 100000000},
     fileFilter: (req, file, cb) => {
         const filetypes = /(png|jpg|jpeg)/;
@@ -27,10 +33,10 @@ const upload = multer({
     }
 }).array('file');
 
-router.get('/', img.getList);
+router.get('/', getList);
 router.post('/', upload, (req, res) => {
 	res.status(200).send('subido');
 })
-router.delete('/:id', img.delete);
+router.delete('/:id', deleteImagen);
 
-module.exports = router;
+export default router;

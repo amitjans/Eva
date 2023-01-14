@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 const temp = require('temp').track();
 
 const synthesizeSpeech = (message, rec, file = "example") => {

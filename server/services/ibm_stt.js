@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 const record = require('node-record-lpcm16');
 var mic = require('mic6');
 var cmd = require('node-cmd');

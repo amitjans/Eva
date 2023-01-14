@@ -1,12 +1,16 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-var multer  = require('multer');
+import express from 'express';
+import * as fs from 'fs';
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import multer from 'multer';
 
-const audio = require('../controllers/audio.controller');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const router = express.Router();
+
+import { getList, deleteSound } from '../controllers/audio.controller.js';
 
 const storage = multer.diskStorage({
-	destination: path.join(__dirname, '../../sonidos'),
+	destination: join(__dirname, '../../sonidos'),
 	filename: (req, file, cb) => {
 		cb(null, file.originalname.replace(/ /gi, '_'));
 	}
@@ -14,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
     storage, 
-    dest: path.join(__dirname, 'sonidos'),
+    dest: join(__dirname, 'sonidos'),
     limits: {fileSize: 100000000},
     fileFilter: (req, file, cb) => {
         const filetypes = /wav/;
@@ -27,10 +31,10 @@ const upload = multer({
     }
 }).array('file');
 
-router.get('/', audio.getList);
+router.get('/', getList);
 router.post('/', upload, (req, res) => {
 	res.status(200).send('subido');
 })
-router.delete('/:id', audio.delete);
+router.delete('/:id', deleteSound);
 
-module.exports = router;
+export default router;

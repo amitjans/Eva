@@ -1,7 +1,7 @@
-var script = require('../../server/controllers/script.controller');
-var { randomize } = require('../../utils/Random');
+import script from '../../server/controllers/script.controller.js';
+import { randomize } from '../../utils/Random.js';
 
-const LoadScriptData = async function (item) {
+export const LoadScriptData = async function (item) {
     try {
         let data = Array.isArray(item.data) ? item.data : await script.getData(item.sc.toString());
         if (item.random) {
@@ -29,8 +29,4 @@ function uniqueBy(array, prop) {
         }
     }
     return result;
-}
-
-module.exports = {
-    LoadScriptData
 }

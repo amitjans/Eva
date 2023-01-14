@@ -1,5 +1,5 @@
 const sdk = require("microsoft-cognitiveservices-speech-sdk");
-const fs = require('fs');
+import fs from 'fs';
 const temp = require('temp').track();
 
 const synthesizeSpeech = (text, rec, file = "example") => {

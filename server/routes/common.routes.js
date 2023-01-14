@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const common = require('../controllers/common.controller');
+import { create, deleteObj, details, edit, getList } from '../controllers/common.controller.js';
 
-router.get('/', common.getList);
-router.get('/:id', common.details);
-router.post('/', common.create);
-router.put('/:id', common.edit);
-router.delete('/:id', common.delete);
+router.get('/', getList);
+router.get('/:id', details);
+router.post('/', create);
+router.put('/:id', edit);
+router.delete('/:id', deleteObj);
 
-module.exports = router;
+export default router;

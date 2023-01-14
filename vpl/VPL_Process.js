@@ -1,14 +1,18 @@
-const crypto = require('../utils/MD5');
-const { ProcessNode } = require('./VPL_Node');
-const { NextNode } = require('./NodeUtils');
-var { ConditionNode } = require('./Node');
-var { generarNumeroRandom } = require('../utils/Random');
+import crypto from '../utils/MD5.js';
+import { ProcessNode } from './VPL_Node.js';
+import { NextNode } from './NodeUtils.js';
+import * as nodes from './Node/index.js';
+import { generarNumeroRandom } from '../utils/Random.js';
 
 var iscript = {};
 var currentKey = "";
 global.sactual;
 
-async function ProcessFlow(node, nodes) {
+export const ProcessFlow = async function (node, nodes) {
+    await Process(node, nodes);
+}
+
+async function Process(node, nodes) {
     do {
         if (node.type === 'for') {
             if (!!node.min && !!node.max) {
@@ -24,7 +28,7 @@ async function ProcessFlow(node, nodes) {
                 }
             }
             for (let f = 0; (!!node.infinity ? iscript[currentKey].length > 0 : f < node.iteraciones); f++) {
-                await ProcessFlow(await nodes.find(x => x.key == node.first), nodes);
+                await Process(await nodes.find(x => x.key == node.first), nodes);
             }
         } else if (node.type === 'script') {
             if (!iscript[node.key]) {
@@ -49,7 +53,7 @@ async function ProcessFlow(node, nodes) {
             }
             await ProcessNode(node);
         } else if (node.type === 'if') {
-            let tempId = ConditionNode(JSON.parse(JSON.stringify(node)));
+            let tempId = nodes.ConditionNode(JSON.parse(JSON.stringify(node)));
             if (!!tempId) {
                 await ProcessFlow(NextNode({ next: tempId }, nodes), nodes);
             }
@@ -59,5 +63,3 @@ async function ProcessFlow(node, nodes) {
         node = NextNode(node, nodes);
     } while (!!node);
 }
-
-module.exports.ProcessFlow = ProcessFlow;

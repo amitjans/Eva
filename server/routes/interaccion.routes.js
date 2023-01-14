@@ -1,16 +1,16 @@
-const express = require('express');
-const fs = require('fs');
-const crypto = require('crypto');
+import express from 'express';
+import fs from 'fs';
+import crypto from 'crypto';
 const router = express.Router();
-const { deleterec, createThis } = require('../controllers/interaccion.controller');
-const { getData, get } = require('../controllers/script.controller');
-const leds = require('../controllers/leds.controller');
-const mov = require('../controllers/mov.controller');
-const { getThis, deleteLocal } = require('../controllers/common.controller');
-const { find, unifyById, unifyByInt } = require('../../vpl/Unify_Node');
-const { ProcessFlow } = require('../../vpl/VPL_Process');
-var { FirstsNodes } = require('../../vpl/NodeUtils');
-const AdmZip = require("adm-zip");
+import { deleterec, createThis } from '../controllers/interaccion.controller.js';
+import { getData, get } from '../controllers/script.controller.js';
+import * as leds from '../controllers/leds.controller.js';
+import * as mov from '../controllers/mov.controller.js';
+import { getThis, deleteLocal } from '../controllers/common.controller.js';
+import { find, unifyById, unifyByInt } from '../../vpl/Unify_Node.js';
+import { ProcessFlow } from '../../vpl/VPL_Process.js';
+import { FirstsNodes } from '../../vpl/NodeUtils.js';
+import AdmZip from "adm-zip";
 
 router.delete('/rec/:id', deleterec);
 
@@ -146,4 +146,4 @@ router.get('/:id', async function (req, res) {
 	social.resetlog();
 });
 
-module.exports = router;
+export default router;

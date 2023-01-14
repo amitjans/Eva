@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const cloud = require('../controllers/cloud.controller');
+import { getInfo, update } from '../controllers/cloud.controller.js';
 
-router.get('/', cloud.getInfo);
-router.put('/', cloud.update);
+router.get('/', getInfo);
+router.put('/', update);
 
-module.exports = router;
+export default router;

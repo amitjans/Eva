@@ -1,7 +1,7 @@
-var { setCounter, getCounter } = require('../VPL_ProcessVars');
-var { generarNumeroRandom } = require('../../utils/Random');
+import { setCounter, getCounter } from '../VPL_ProcessVars.js';
+import { generarNumeroRandom } from '../../utils/Random.js';
 
-const ProcessCounterNode = function ({ ops, count, value, first, second }) {
+export const ProcessCounterNode = function ({ ops, count, value, first, second }) {
     let temp = getCounter();
     if (ops === 'ADD') {
         temp[count] = getValue(first, temp) + getValue(second, temp);
@@ -23,8 +23,4 @@ const ProcessCounterNode = function ({ ops, count, value, first, second }) {
 
 const getValue = function (value, variables) {
     return /^[\d]+$/.test(value) ? parseInt(value) : parseInt(variables[value] || 0);
-}
-
-module.exports = {
-    ProcessCounterNode
 }

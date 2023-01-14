@@ -1,11 +1,10 @@
-const fs = require('fs');
-const cloudcontroller = {};
+import fs from 'fs';
 const envars = ['TEXT_TO_SPEECH_URL', 'TEXT_TO_SPEECH_APIKEY', 'SPEECH_TO_TEXT_URL', 'SPEECH_TO_TEXT_APIKEY',
     'TRANSLATOR_URL', 'TRANSLATOR_APIKEY', 'GOOGLE_APPLICATION_CREDENTIALS', 'DIALOGFLOW_PROJECT_ID',
     'TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION', 'TEXT_TO_SPEECH_AZURE', 'REGION_AZURE',
     'MQTT_SERVER', 'MQTT_ID']
 
-cloudcontroller.getInfo = async (req, res) => {
+export const getInfo = async (req, res) => {
     let clouds = [];
     clouds.push(cloudIsConfig('IBM Text to Speech', envars[0], envars[1]));
     clouds.push(cloudIsConfig('IBM Speech to Text', envars[2], envars[3]));
@@ -19,7 +18,7 @@ cloudcontroller.getInfo = async (req, res) => {
     return res.status(200).json(clouds);
 }
 
-cloudIsConfig = (label, ...codes) => {
+const cloudIsConfig = (label, ...codes) => {
     let counter = 0;
     for (let i = 0; i < codes.length; i++) {
         if (!!process.env[codes[i]]) {
@@ -29,7 +28,7 @@ cloudIsConfig = (label, ...codes) => {
     return cloudInfo(label, ((counter * 100) / codes.length), codes, counter == codes.length)
 }
 
-cloudInfo = (label, level, codes, status = true) => { 
+const cloudInfo = (label, level, codes, status = true) => { 
     let data = { service: label, level: level, status: status, keys: [] };
     for (let i = 0; i < codes.length; i++) {
         data.keys.push({ key: codes[i], value: process.env[codes[i]] });
@@ -37,19 +36,19 @@ cloudInfo = (label, level, codes, status = true) => {
     return  data;
 };
 
-cloudcontroller.update = async (req, res) => {
+export const update = async (req, res) => {
     let { key, value } = req.body;
     process.env[key] = value;
     writeFile();
     return res.status(200).json({ message: 'Credencial del servicio guardada correctamente.' });
 }
 
-cloudcontroller.setKey = async (key, value) => {
+export const setKey = async (key, value) => {
     process.env[key] = value;
     writeFile();    
 }
 
-cloudcontroller.write = () => {
+export const write = () => {
     writeFile();  
 }
 
@@ -64,5 +63,3 @@ function writeFile() {
         if (err) return console.log(err);
     });
 }
-
-module.exports = cloudcontroller;

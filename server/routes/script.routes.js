@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const script = require('../controllers/script.controller');
+import { scriptdata } from '../controllers/script.controller.js';
 
-router.get('/data/:id', script.scriptdata);
+router.get('/data/:id', scriptdata);
 
-module.exports = router;
+export default router;

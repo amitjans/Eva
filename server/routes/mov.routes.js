@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const mov = require('../controllers/mov.controller');
+import { getCodes } from '../controllers/mov.controller.js';
 
-router.get('/', mov.getCodes);
+router.get('/', getCodes);
 
-module.exports = router;
+export default router;
