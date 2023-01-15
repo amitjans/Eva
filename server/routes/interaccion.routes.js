@@ -11,6 +11,7 @@ const { find, unifyById, unifyByInt } = require('../../vpl/Unify_Node');
 const { ProcessFlow } = require('../../vpl/VPL_Process');
 var { FirstsNodes } = require('../../vpl/NodeUtils');
 const AdmZip = require("adm-zip");
+const clone = require('../../utils/clone');
 
 router.delete('/rec/:id', deleterec);
 
@@ -22,12 +23,25 @@ router.get('/unified/:id', async function (req, res) {
 });
 
 router.get('/export/:id', async function (req, res) {
-	let obj = await find(req.params.id);
+	let obj = clone(await find(req.params.id));
 	let dir = `./public/app/${obj.nombre}`;
+	delete obj._id;
+	console.log(JSON.stringify(obj));
 
 	fs.mkdirSync(`${dir}/`, { recursive: true });
 	fs.writeFileSync(`${dir}/${obj.nombre}.json`, JSON.stringify(obj));
 	fs.writeFileSync(`${dir}/${obj.nombre}.json.sha256`, fileSha256(`${dir}/${obj.nombre}.json`));
+
+	let interacciones = /<field name=\"int\">[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}<\/field>/;
+	let sub = interacciones.exec(obj.xml);
+	for(let i of sub) {
+		let j = clone(await find(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.exec(i)[0]));		
+
+		fs.mkdirSync(`${dir}/`, { recursive: true });
+		fs.writeFileSync(`${dir}/${j.nombre}.json`, JSON.stringify(j));
+		fs.writeFileSync(`${dir}/${j.nombre}.json.sha256`, fileSha256(`${dir}/${j.nombre}.json`));
+	}
+
 
 	let int = await unifyById(req.params.id);
 
@@ -41,7 +55,7 @@ router.get('/export/:id', async function (req, res) {
 		fs.writeFileSync(`${dir}/sonidos/${item.src}.wav.sha256`, fileSha256(`${dir}/sonidos/${item.src}.wav`));
 	}
 
-	let scriptsNode = int.filter(i => i.type === 'script');
+	let scriptsNode = clone(int.filter(i => i.type === 'script'));
 	if (scriptsNode.length > 0)
 		fs.mkdirSync(`${dir}/script/`, { recursive: true });
 	for (const item of scriptsNode) {
@@ -60,7 +74,7 @@ router.get('/export/:id', async function (req, res) {
 		fs.mkdirSync(`${dir}/leds/`, { recursive: true });
 	}
 	for (const item of ledNode) {
-		let s = await leds.getData(item.anim);
+		let s = clone(await leds.getData(item.anim));
 		delete s._id;
 		fs.writeFileSync(`${dir}/anims/${s.nombre}.json`, JSON.stringify(s));
 		fs.writeFileSync(`${dir}/anims/${s.nombre}.json.sha256`, fileSha256(`${dir}/anims/${s.nombre}.json`));
@@ -79,7 +93,7 @@ router.get('/export/:id', async function (req, res) {
 		fs.mkdirSync(`${dir}/mov/`, { recursive: true });
 	}
 	for (const item of movNode) {
-		let s = await mov.getByCode(item.mov);
+		let s = clone(await mov.getByCode(item.mov));
 		delete s._id;
 		fs.writeFileSync(`${dir}/mov/${s.nombre}.json`, JSON.stringify(s));
 		fs.writeFileSync(`${dir}/mov/${s.nombre}.json.sha256`, fileSha256(`${dir}/mov/${s.nombre}.json`));
