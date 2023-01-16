@@ -108,9 +108,17 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     }, function (error) {
       console.log(error);
     });
-    // let filename = l.nombre + ".json";
-    //   var blob = new Blob([JSON.stringify(l, null, "\t")], { type: "text/plain;charset=utf-8" });
-    //   saveAs(blob, filename);
+  }
+
+  $scope.uninstall = function (id) {
+    if (confirm(locale().INTERACTION.UNINSTALL_DESC)) {
+      $http.get('api/interaccion/uninstall/' + id).then(function (res) {
+        $scope.list();
+        $scope.slist();
+      }, function (error) {
+        console.log(error);
+      });  
+    }    
   }
 
   $scope.import = function () {

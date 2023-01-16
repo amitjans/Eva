@@ -192,7 +192,9 @@ const es = {
         SOURCE: "Idioma de origen",
         RECORD: "Grabar",
         IMAGE: "Imagen",
-        SCREEN_RESET: "Pantalla de inicio"
+        SCREEN_RESET: "Pantalla de inicio",
+        UNINSTALL: "Desinstalar",
+        UNINSTALL_DESC: "Desinstalar eliminará la interacción y los elementos relacionados con la misma."
     },
     LED: {
         TITLE: "Listado de Animaciones led",

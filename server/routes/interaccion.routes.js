@@ -34,14 +34,13 @@ router.get('/export/:id', async function (req, res) {
 
 	let interacciones = /<field name=\"int\">[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}<\/field>/;
 	let sub = interacciones.exec(obj.xml);
-	for(let i of sub) {
+	for(let i of (sub ?? [])) {
 		let j = clone(await find(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.exec(i)[0]));		
 
 		fs.mkdirSync(`${dir}/`, { recursive: true });
 		fs.writeFileSync(`${dir}/${j.nombre}.json`, JSON.stringify(j));
 		fs.writeFileSync(`${dir}/${j.nombre}.json.sha256`, fileSha256(`${dir}/${j.nombre}.json`));
 	}
-
 
 	let int = await unifyById(req.params.id);
 
@@ -75,7 +74,6 @@ router.get('/export/:id', async function (req, res) {
 	}
 	for (const item of ledNode) {
 		let s = clone(await leds.getData(item.anim));
-		delete s._id;
 		fs.writeFileSync(`${dir}/anims/${s.nombre}.json`, JSON.stringify(s));
 		fs.writeFileSync(`${dir}/anims/${s.nombre}.json.sha256`, fileSha256(`${dir}/anims/${s.nombre}.json`));
 
@@ -112,8 +110,6 @@ router.get('/export/:id', async function (req, res) {
 router.get('/uninstall/:id', async function (req, res) {
 	int = await unifyById(req.params.id);
 
-	console.log(int);
-
 	let soundsNode = int.filter(i => i.type === 'sound');
 	for (const item of soundsNode) {
 		fs.rmSync(`./sonidos/${item.src}.wav`, { recursive: false, force: true });
@@ -134,6 +130,8 @@ router.get('/uninstall/:id', async function (req, res) {
 	for (const item of movNode) {
 		await deleteLocal('mov', { codigo: item.mov });
 	}
+
+	await deleteLocal('interaccion', { _id: req.params.id});
 
 	res.status(200).jsonp();
 });
