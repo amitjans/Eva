@@ -13,7 +13,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'WOO.VOICE' | translate}}</label>
                                     <div class="col-sm-10">
-                                        <select name="voice" id="" ng-model="voice" ng-change="setvoice(voice)" class="form-control">
+                                        <select name="voice" id="" ng-model="voice" ng-change="setvoice(voice)"
+                                            class="form-control">
                                             <option ng-repeat="item in vlistado" value="{{item.codigo}}">
                                                 {{ item.nombre + '(' + item.idioma + ')' }}
                                             </option>
@@ -24,12 +25,14 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="{{'WOO.CUSTOM_PHRASE' | translate}}!"
-                                                ng-model="mensaje" ng-keydown="enviarMensaje2($event)">
+                                            <input type="text" class="form-control"
+                                                placeholder="{{'WOO.CUSTOM_PHRASE' | translate}}!" ng-model="mensaje"
+                                                ng-keydown="enviarMensaje2($event)">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button"
-                                                    ng-click="node({ type: 'speak', text: mensaje })">{{'WOO.SEND' | translate}}&nbsp;<i
-                                                        class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
+                                                    ng-click="node({ type: 'speak', text: mensaje })">{{'WOO.SEND' |
+                                                    translate}}&nbsp;<i class="fa fa-volume-up fa-lg"
+                                                        aria-hidden="true"></i></button>
                                             </span>
                                         </div>
                                     </div>
@@ -48,12 +51,12 @@
                     <div class="row">
                         <table style="margin-left: auto; margin-right: auto;">
                             <tr>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('q')" ><i
-                                    class="fa fa-arrow-up fa-2x rotate-45-left"></i></button></td>
+                                <td><button type="button" class="btn btn-default" ng-click="mov('q')"><i
+                                            class="fa fa-arrow-up fa-2x rotate-45-left"></i></button></td>
                                 <td><button type="button" class="btn btn-default" ng-click="mov('u')"><i
-                                    class="fa fa-arrow-up fa-2x"></i></button></td>
+                                            class="fa fa-arrow-up fa-2x"></i></button></td>
                                 <td><button type="button" class="btn btn-default" ng-click="mov('e')"><i
-                                    class="fa fa-arrow-up fa-2x rotate-45-right"></i></button></td>
+                                            class="fa fa-arrow-up fa-2x rotate-45-right"></i></button></td>
                             </tr>
                             <tr>
                                 <td><button type="button" class="btn btn-default" ng-click="mov('l')"><i
@@ -65,11 +68,11 @@
                             </tr>
                             <tr>
                                 <td><button type="button" class="btn btn-default" ng-click="mov('z')"><i
-                                    class="fa fa-arrow-down fa-2x rotate-45-right"></button></td>
+                                            class="fa fa-arrow-down fa-2x rotate-45-right"></button></td>
                                 <td><button type="button" class="btn btn-default" ng-click="mov('d')"><i
                                             class="fa fa-arrow-down fa-2x"></i></button></td>
                                 <td><button type="button" class="btn btn-default" ng-click="mov('x')"><i
-                                    class="fa fa-arrow-down fa-2x rotate-45-left"></button></td>
+                                            class="fa fa-arrow-down fa-2x rotate-45-left"></button></td>
                             </tr>
                         </table>
                     </div>
@@ -77,97 +80,57 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{'EMOTION_TYPE.NEUTRAL' | translate}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <span class="emojin" ng-click="emotion('ini', 0)">&#128528;</span>
-                        <span class="emojin" ng-click="emotion('blink', 0)">&#128528;</span>
-                        <span class="emojin" ng-click="emotion('wink', 0)">&#128521;</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{'EMOTION_TYPE.JOY' | translate}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <span class="emojin" ng-click="emotion('joy', 0)">&#128578;</span>
-                        <span class="emojin" ng-click="emotion('joy', 1)">&#128512;</span>
-                        <span class="emojin" ng-click="emotion('joy', 2)">&#128514;</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{'EMOTION_TYPE.SAD' | translate}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <span class="emojin" ng-click="emotion('sad', 0)">&#128551;</span>
-                        <span class="emojin" ng-click="emotion('sad', 1)">&#128546;</span>
-                        <span class="emojin" ng-click="emotion('sad', 2)">&#128557;</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{'EMOTION_TYPE.ANGER' | translate}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <span class="emojin" ng-click="emotion('anger', 0)">&#128544;</span>
-                        <span class="emojin" ng-click="emotion('anger', 1)">&#128545;</span>
-                        <span class="emojin" ng-click="emotion('anger', 2)">&#129324;</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{'EMOTION_TYPE.SURPRISE' | translate}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <span class="emojin" ng-click="emotion('surprise', 0)">&#128558;</span>
-                        <span class="emojin" ng-click="emotion('surprise', 1)">&#128559;</span>
-                        <span class="emojin" ng-click="emotion('surprise', 2)">&#128562;</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">{{'WOO.WOO' | translate}}</label>
-                        <div class="col-sm-6">
-                            <select name="" ng-model="wooid" ng-change="loadcomands()" id="" class="form-control">
-                                <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.name }}</option>
-                            </select>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{'EMOTION_TYPE.NEUTRAL' | translate}}</div>
+                        <div class="card-body">
+                            <span class="emojin" ng-click="emotion('ini', 0)">&#128528;</span>
+                            <span class="emojin" ng-click="emotion('blink', 0)">&#128528;</span>
+                            <span class="emojin" ng-click="emotion('wink', 0)">&#128521;</span>
                         </div>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"><i
-                                class="fa fa-plus"></i></button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"
-                            ng-click="update()" ng-show="!!wooid"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-default" ng-click="delete()" ng-show="!!wooid"><i
-                                class="fa fa-trash"></i></button>
-                        <button type="button" class="btn btn-default" ng-show="!!wooid" ng-click="updatesend(false)"><i
-                                class="fa fa-cloud-upload">&nbsp;{{'COMMON.SAVE' | translate}}</i></button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddcs"
-                            ng-show="!!wooid"><i class="fa fa-plus">&nbsp;{{'WOO.COMMAND' | translate}}</i></button>
                     </div>
-                    <div class="form-group" ng-show="!!wooid">
-                        <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
-                        <div class="col-sm-10">
-                            <button type="button" class="btn btn-default"
-                                ng-repeat="item in tempwoo.order track by $index" disabled><i class="fa fa-action">{{
-                                    item }}</i></button>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{'EMOTION_TYPE.JOY' | translate}}</div>
+                        <div class="card-body">
+                            <span class="emojin" ng-click="emotion('joy', 0)">&#128578;</span>
+                            <span class="emojin" ng-click="emotion('joy', 1)">&#128512;</span>
+                            <span class="emojin" ng-click="emotion('joy', 2)">&#128514;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{'EMOTION_TYPE.SAD' | translate}}</div>
+                        <div class="card-body">
+                            <span class="emojin" ng-click="emotion('sad', 0)">&#128551;</span>
+                            <span class="emojin" ng-click="emotion('sad', 1)">&#128546;</span>
+                            <span class="emojin" ng-click="emotion('sad', 2)">&#128557;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{'EMOTION_TYPE.ANGER' | translate}}</div>
+                        <div class="card-body">
+                            <span class="emojin" ng-click="emotion('anger', 0)">&#128544;</span>
+                            <span class="emojin" ng-click="emotion('anger', 1)">&#128545;</span>
+                            <span class="emojin" ng-click="emotion('anger', 2)">&#129324;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">{{'EMOTION_TYPE.SURPRISE' | translate}}</div>
+                        <div class="card-body">
+                            <span class="emojin" ng-click="emotion('surprise', 0)">&#128558;</span>
+                            <span class="emojin" ng-click="emotion('surprise', 1)">&#128559;</span>
+                            <span class="emojin" ng-click="emotion('surprise', 2)">&#128562;</span>
                         </div>
                     </div>
                 </div>
@@ -177,50 +140,81 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bgm-bluegray">
-                    <h2 ng-show="!!script"> {{'WOO.SCRIPT_DATA' | translate}}<small>
-                            <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
-                                data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
-                        </small>
-                    </h2>
-                </div>
-                <div>
-                    <div id="example_wrapper" class="dataTables_wrapper">
-                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                            aria-describedby="example_info">
-                            <thead>
-                                <tr role="row">
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                        style="width: 25px;"> {{'WOO.TYPE' | translate}}</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                        style="width: 875px;"> {{'WOO.DESCRIPTION' | translate}}</th>
-                                    <th tabindex="0" aria-controls="example" rowspan="1" colspan="3"
-                                        style="width: 100px;">{{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="l in commands" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                    <td id="{{ l.order }}" style="text-align: center;"><span style="color: black;"
-                                            class="fa fa-2x {{ fa_icon(l.type) }}"></span></td>
-                                    <td>{{ l.desc }}</td>
-                                    <td><span class="btn btn-default" ng-click="ucommand($index)"><i
-                                                class="fa fa-edit fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="cdelete($index)"><i
-                                                class="fa fa-trash fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="execute(l)"><i
-                                                class="fa fa-play fa-sm"></i></span></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">{{'WOO.TYPE' | translate}}</th>
-                                    <th rowspan="1" colspan="1">{{'WOO.DESCRIPTION' | translate}}</th>
-                                    <th rowspan="1" colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+            <div class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{'WOO.WOO' | translate}}</label>
+                    <div class="col-sm-6">
+                        <select name="" ng-model="wooid" ng-change="loadcomands()" id="" class="form-control">
+                            <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.name }}</option>
+                        </select>
                     </div>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"><i
+                            class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"
+                        ng-click="update()" ng-show="!!wooid"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="delete()" ng-show="!!wooid"><i
+                            class="fa fa-trash"></i></button>
+                    <button type="button" class="btn btn-default" ng-show="!!wooid" ng-click="updatesend(false)"><i
+                            class="fa fa-cloud-upload">&nbsp;{{'COMMON.SAVE' | translate}}</i></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddcs"
+                        ng-show="!!wooid"><i class="fa fa-plus">&nbsp;{{'WOO.COMMAND' | translate}}</i></button>
+                </div>
+                <div class="form-group" ng-show="!!wooid">
+                    <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
+                    <div class="col-sm-10">
+                        <button type="button" class="btn btn-default" ng-repeat="item in tempwoo.order track by $index"
+                            disabled><i class="fa fa-action">{{
+                                item }}</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-header bgm-bluegray">
+                <h2 ng-show="!!script"> {{'WOO.SCRIPT_DATA' | translate}}<small>
+                        <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
+                            data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
+                    </small>
+                </h2>
+            </div>
+            <div>
+                <div id="example_wrapper" class="dataTables_wrapper">
+                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr role="row">
+                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 25px;">
+                                    {{'WOO.TYPE' | translate}}</th>
+                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 875px;">
+                                    {{'WOO.DESCRIPTION' | translate}}</th>
+                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="3" style="width: 100px;">
+                                    {{'COMMON.OPTIONS' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="l in commands" role="row" class="{{ $even ? 'even' : 'odd'}}">
+                                <td id="{{ l.order }}" style="text-align: center;"><span style="color: black;"
+                                        class="fa fa-2x {{ fa_icon(l.type) }}"></span></td>
+                                <td>{{ l.desc }}</td>
+                                <td><span class="btn btn-default" ng-click="ucommand($index)"><i
+                                            class="fa fa-edit fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="cdelete($index)"><i
+                                            class="fa fa-trash fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="execute(l)"><i
+                                            class="fa fa-play fa-sm"></i></span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">{{'WOO.TYPE' | translate}}</th>
+                                <th rowspan="1" colspan="1">{{'WOO.DESCRIPTION' | translate}}</th>
+                                <th rowspan="1" colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
@@ -254,8 +248,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' |
+                        translate}}</button>
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
+                        translate}}</button>
                     <button type="button" ng-show="!icon" ng-click="updatesend(true)"
                         class="btn btn-primary">{{'COMMON.UPDATE' | translate}}</button>
                 </div>
@@ -318,8 +314,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' |
+                        translate}}</button>
+                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">{{'COMMON.SAVE' |
+                        translate}}</button>
                 </div>
             </div>
         </div>

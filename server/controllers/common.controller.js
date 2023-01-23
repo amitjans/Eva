@@ -18,6 +18,12 @@ commoncontroller.create = async (req, res) => {
     res.status(200).json({ status: 'Ok' , obj: obj});
 }
 
+commoncontroller.createLocal = async (db, item) => {
+    let obj = { ...item, _id: v4() };
+    await getConnection().get(db).push(obj).write();
+    return obj;
+}
+
 commoncontroller.edit = async (req, res) => {
     const result = await getConnection().get(req.query.db).find({ _id: req.params.id }).assign(req.body).write();
     res.status(200).json({ status: 'Ok' });

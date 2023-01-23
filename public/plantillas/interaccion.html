@@ -1,190 +1,188 @@
 <div class="container" ng-controller="interaccion">
   <div class="row">
     <div class="col-md-4">
-      <div class="card z-depth-1">
-        <div class="form-horizontal" role="form">
-          <div class="card-header bgm-bluegray">
-            <h2>{{'INTERACTION.TITLE' | translate}}<small></small></h2>
-          </div>
-          <div class="card-body table-responsive" style="height: 575px">
-            <table class="table" id="data-table-basic">
-              <thead>
-                <tr>
-                  <th>{{'COMMON.NAME' | translate}}</th>
-                  <th>{{'COMMON.OPTIONS' | translate}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="l in listado">
-                  <td>{{ l.nombre }}</td>
-                  <td><span class="btn btn-default" ng-click="unified(l._id)"><i class="fa fa-expand fa-sm"></i></span>
-                    <span class="btn btn-default" ng-click="iniciarInteracciong(l._id)"><i
-                        class="fa fa-play fa-sm"></i></span>
-                    <span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span>
-                    <span class="btn btn-default" ng-click="download(l._id)"><i class="fa fa-archive fa-sm"></i></span>
-                    <span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
-                    <span class="btn btn-default" ng-click="uninstall(l._id)"><i class="fa fa-trash fa-sm"></i></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <br />
-          <div class="form-group">
-            <button type="button" class="btn btn-primary" ng-click="add()"><span
-                class="fa fa-plus-circle"></span>&nbsp;&nbsp;{{'INTERACTION.ADD_INT' | translate}}</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimport"><span
-                class="fa fa-upload"></span>&nbsp;&nbsp;{{'INTERACTION.IMPORT_INT' | translate}}</button>
-          </div>
+      <div class="form-horizontal" role="form">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">{{'INTERACTION.TITLE' | translate}}</h1>
+        </div>
+        <div class="card-body table-responsive" style="height: 575px">
+          <table class="table" id="data-table-basic">
+            <thead>
+              <tr>
+                <th>{{'COMMON.NAME' | translate}}</th>
+                <th>{{'COMMON.OPTIONS' | translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="l in listado">
+                <td>{{ l.nombre }}</td>
+                <td>
+                  <!-- <span class="btn btn-default" ng-click="unified(l._id)"><i class="fa fa-expand fa-sm"></i></span> -->
+                  <span class="btn btn-default" ng-click="iniciarInteracciong(l._id)"><i
+                      class="fa fa-play fa-sm"></i></span>
+                  <span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span>
+                  <span class="btn btn-default" ng-click="download(l._id)"><i class="fa fa-archive fa-sm"></i></span>
+                  <span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
+                  <span class="btn btn-default" ng-click="uninstall(l._id)"><i class="fa fa-broom fa-sm"></i></span>
+                  <!-- <span class="btn btn-default" ng-click="install(l.nombre"><i class="fa fa-plus fa-sm"></i></span> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br />
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" ng-click="add()"><span
+              class="fa fa-plus-circle"></span>&nbsp;&nbsp;{{'INTERACTION.ADD_INT' | translate}}</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimport"><span
+              class="fa fa-upload"></span>&nbsp;&nbsp;{{'INTERACTION.IMPORT_INT' | translate}}</button>
         </div>
       </div>
     </div>
     <div class="col-md-8">
-      <div class="card z-depth-1">
-        <div class="form-horizontal" role="form">
-          <div class="card-header bgm-bluegray">
-            <h2>{{ accion }} Interacci&oacute;n <small></small></h2>
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>{{ accion }} Interacci&oacute;n <small></small></h2>
+      </div>
+      <div class="form-horizontal" role="form">
+        <div class="form-group row">
+          <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
           </div>
-          <div class="card-body card-padding">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
-              </div>
-            </div>
-            <div>
-              <div id="myDiagramDiv" style="border: solid 1px gray; border-radius: 1%; width:750px; height:525px">
-                <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
-                <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-                  <category name="Math" colour="#5b67a5">
-                    <block type="math_number">
-                      <field name="NUM"></field>
-                    </block>
-                    <block type="math_arithmetic">
-                      <field name="OP">ADD</field>
-                      <value name="A">
+          <div>
+            <div id="myDiagramDiv" style="border: solid 1px gray; border-radius: 1%; width:750px; height:525px">
+              <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
+              <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+                <category name="Math" colour="#5b67a5">
+                  <block type="math_number">
+                    <field name="NUM"></field>
+                  </block>
+                  <block type="math_arithmetic">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <shadow type="math_number">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <block type="math_random_int">
+                      <value name="FROM">
                         <shadow type="math_number">
                           <field name="NUM">1</field>
                         </shadow>
                       </value>
-                      <value name="B">
+                      <value name="TO">
                         <shadow type="math_number">
-                          <field name="NUM">1</field>
-                        </shadow>
-                      </value>
-                      <block type="math_random_int">
-                        <value name="FROM">
-                          <shadow type="math_number">
-                            <field name="NUM">1</field>
-                          </shadow>
-                        </value>
-                        <value name="TO">
-                          <shadow type="math_number">
-                            <field name="NUM">100</field>
-                          </shadow>
-                        </value>
-                      </block>
-                    </block>
-                  </category>
-                  <category name="Text" colour="#5ba58c">
-                    <block type="text">
-                      <field name="TEXT"></field>
-                    </block>
-                  </category>
-                  <category name="Logic" colour="#5b80a5">
-                    <block type="controls_if"></block>
-                    <block type="logic_compare">
-                      <field name="OP">EQ</field>
-                    </block>
-                  </category>
-                  <category name="Loops" colour="#5ba55b">
-                    <block type="controls_repeat_ext">
-                      <value name="TIMES">
-                        <shadow type="math_number">
-                          <field name="NUM">0</field>
+                          <field name="NUM">100</field>
                         </shadow>
                       </value>
                     </block>
-                  </category>
-                  <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
-                  <category name="Eva" colour="#5b67a5">
-                    <block type="emotion">
-                      <field name="emotion">ini</field>
-                      <field name="level">0</field>
-                    </block>
-                    <block type="dialogflow">
-                      <field name="proyect"></field>
-                      <field name="dialogparam"></field>
-                    </block>
-                    <block type="int">
-                      <field name="int">OPTIONNAME</field>
-                    </block>
-                    <block type="led">
-                      <field name="leds">OPTIONNAME</field>
-                    </block>
-                    <block type="mov">
-                      <field name="movement">OPTIONNAME</field>
-                    </block>
-                    <block type="record">
-                      <field name="time">0</field>
-                    </block>
-                    <block type="script">
-                      <field name="script">OPTIONNAME</field>
-                      <field name="random">FALSE</field>
-                      <field name="read">TRUE</field>
-                      <field name="order">none</field>
-                      <field name="unique">none</field>
-                      <field name="remove">TRUE</field>
-                    </block>
-                    <block type="dsci"></block>
-                    <block type="sound">
-                      <field name="sound">OPTIONNAME</field>
-                    </block>
-                    <block type="image">
-                      <field name="image">OPTIONNAME</field>
-                    </block>
-                    <block type="reset"></block>
-                    <block type="voice">
-                      <field name="voice">OPTIONNAME</field>
-                      <field name="translate">FALSE</field>
-                      <field name="source">OPTIONNAME</field>
-                    </block>
-                    <block type="listen">
-                      <field name="language"></field>
-                      <field name="listenopt"></field>
-                    </block>
-                    <block type="wait">
-                      <field name="time">0</field>
-                    </block>
-                  </category>
-                  <category name="Eva: Speak" colour="#5b67a5">
-                    <block type="speak">
-                      <field name="text"></field>
-                    </block>
-                    <block type="speak_combine"></block>
-                    <block type="speak_text">
-                      <field name="NAME"></field>
-                    </block>
-                    <block type="speak_var">
-                      <field name="NAME"></field>
-                    </block>
-                    <block type="speak_script">
-                      <field name="NAME"></field>
-                    </block>
-                  </category>
-                </xml>
-              </div>
+                  </block>
+                </category>
+                <category name="Text" colour="#5ba58c">
+                  <block type="text">
+                    <field name="TEXT"></field>
+                  </block>
+                </category>
+                <category name="Logic" colour="#5b80a5">
+                  <block type="controls_if"></block>
+                  <block type="logic_compare">
+                    <field name="OP">EQ</field>
+                  </block>
+                </category>
+                <category name="Loops" colour="#5ba55b">
+                  <block type="controls_repeat_ext">
+                    <value name="TIMES">
+                      <shadow type="math_number">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </category>
+                <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+                <category name="Eva" colour="#5b67a5">
+                  <block type="emotion">
+                    <field name="emotion">ini</field>
+                    <field name="level">0</field>
+                  </block>
+                  <block type="dialogflow">
+                    <field name="proyect"></field>
+                    <field name="dialogparam"></field>
+                  </block>
+                  <block type="int">
+                    <field name="int">OPTIONNAME</field>
+                  </block>
+                  <block type="led">
+                    <field name="leds">OPTIONNAME</field>
+                  </block>
+                  <block type="mov">
+                    <field name="movement">OPTIONNAME</field>
+                  </block>
+                  <block type="record">
+                    <field name="time">0</field>
+                  </block>
+                  <block type="script">
+                    <field name="script">OPTIONNAME</field>
+                    <field name="random">FALSE</field>
+                    <field name="read">TRUE</field>
+                    <field name="order">none</field>
+                    <field name="unique">none</field>
+                    <field name="remove">TRUE</field>
+                  </block>
+                  <block type="dsci"></block>
+                  <block type="sound">
+                    <field name="sound">OPTIONNAME</field>
+                  </block>
+                  <block type="image">
+                    <field name="image">OPTIONNAME</field>
+                  </block>
+                  <block type="reset"></block>
+                  <block type="voice">
+                    <field name="voice">OPTIONNAME</field>
+                    <field name="translate">FALSE</field>
+                    <field name="source">OPTIONNAME</field>
+                  </block>
+                  <block type="listen">
+                    <field name="language"></field>
+                    <field name="listenopt"></field>
+                  </block>
+                  <block type="wait">
+                    <field name="time">0</field>
+                  </block>
+                </category>
+                <category name="Eva: Speak" colour="#5b67a5">
+                  <block type="speak">
+                    <field name="text"></field>
+                  </block>
+                  <block type="speak_combine"></block>
+                  <block type="speak_text">
+                    <field name="NAME"></field>
+                  </block>
+                  <block type="speak_var">
+                    <field name="NAME"></field>
+                  </block>
+                  <block type="speak_script">
+                    <field name="NAME"></field>
+                  </block>
+                </category>
+              </xml>
             </div>
-            <br />
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" ng-show="!updateid" class="btn btn-primary btn-sm"
-                  ng-click="create()">{{'INTERACTION.SAVE' | translate}}</button>
-                <button type="button" ng-show="!!updateid" class="btn btn-primary btn-sm"
-                  ng-click="updatesend()">{{'INTERACTION.UPDATE' | translate}}</button>
-                <button type="button" ng-show="!!updateid" class="btn btn-primary btn-sm"
-                  ng-click="updatesend(true)">{{'INTERACTION.UPDATE_FINISH' | translate}}</button>
-              </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" ng-show="!updateid" class="btn btn-primary btn-sm"
+                ng-click="create()">{{'INTERACTION.SAVE' | translate}}</button>
+              <button type="button" ng-show="!!updateid" class="btn btn-primary btn-sm"
+                ng-click="updatesend()">{{'INTERACTION.UPDATE' | translate}}</button>
+              <button type="button" ng-show="!!updateid" class="btn btn-primary btn-sm"
+                ng-click="updatesend(true)">{{'INTERACTION.UPDATE_FINISH' | translate}}</button>
             </div>
           </div>
         </div>

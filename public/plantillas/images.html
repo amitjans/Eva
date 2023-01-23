@@ -1,30 +1,35 @@
 <div class="container" ng-controller="images">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bgm-bluegray">
-                    <h2> {{'IMG.TITLE' | translate}}<small>
-                            <div style="float: right; font-size: 2em; color: black; margin-left: 2px;"
-                                    onmouseover="this.style.cursor='pointer';" ng-click="details('stop')">
-                                    <span class="fa fa-stop-circle-o"></span></div>
-                            <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
-                                data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
-                        </small></h2>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">{{'IMG.TITLE' | translate}}</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                    data-target="#myModal"><span class="fa fa-plus"></span></button>
                 </div>
+            </div>
                 <div>
                     <div id="example_wrapper" class="dataTables_wrapper">
-                        <div class="dataTables_length" id="example_length">
-                            <label>{{'DATATABLE.SHOW' | translate}}
-                                <select name="example_length" aria-controls="example" class="" ng-model="limit"
-                                    ng-change="dataTable()">
+                        <div class="form-inline">
+                            <div class="input-group mb-3 col-md-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text" style="background-color: white !important; border: 0px !important;">{{'DATATABLE.SHOW' | translate}}</label>
+                                </div>
+                                <select class="form-control form-control-sm" ng-model="limit" ng-change="dataTable()">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
-                                </select> {{'DATATABLE.ENTRIES' | translate}}</label></div>
-                        <div id="example_filter" class="dataTables_filter">
-                            <label>{{'DATATABLE.SEARCH' | translate}}:<input type="search" class="" placeholder="" aria-controls="example"
-                                    ng-model="q" ng-change="dataTable()"></label>
+                                </select>
+                                <div class="input-group-append">
+                                    <label class="input-group-text" style="background-color: white !important; border: 0px !important;">{{'DATATABLE.ENTRIES' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                            <div class="input-group mb-3 col-md-3">
+                                <label>{{'DATATABLE.SEARCH' | translate}}: </label>
+                                <input type="search" class="form-control form-control-sm" placeholder="" ng-model="q" ng-change="dataTable()">
+                            </div>
                         </div>
                         <table id="example" class="display dataTable" style="width: 100%;" role="grid"
                             aria-describedby="example_info">

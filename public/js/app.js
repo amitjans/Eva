@@ -19,11 +19,28 @@ eva.config(function ($translateProvider) {
   $translateProvider.preferredLanguage(localStorage.getItem("lang") || "es");
 });
 
-eva.controller("lang", function ($scope, $translate) {
+eva.controller("menu", function ($scope, $rootScope, $translate, $http, $location) {
+
+  $rootScope.loggedIn = false;
+
   $scope.changeLanguage = function (key) {
     localStorage.setItem("lang", key);
     $translate.use(key);
   };
+
+  $scope.login = function () {
+    window.location.href = "https://eva-social-robot.github.io/app.html#!/login?redirect=" + window.location
+  };
+
+  $scope.init = function () {
+    if (!!localStorage.getItem("currentUser")) {
+      let token = JSON.parse(localStorage.getItem("currentUser")).token;
+      $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+      $rootScope.loggedIn = true;
+      $rootScope.user = JSON.parse(atob(token.split('.')[1])).name || JSON.parse(atob(token.split('.')[1])).sub;
+    }
+  }
+  $scope.init();
 });
 
 eva
