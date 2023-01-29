@@ -11,25 +11,28 @@ const { list } = require('serialport');
 
 module.exports = async function (req, res) {
 
-	let dir = `./public/app/${req.params.id}`;
+	let buff = Buffer.from(req.body.data, 'base64');
+	let dir = `./public/app/${req.body.name}`;
+	fs.writeFileSync(dir, buff);
+
 	var zip = new AdmZip(`${dir}.zip`);
 	let interacciones = [];
 
 	zip.extractAllTo(dir, true);
 
-	if(fs.existsSync(`${dir}/sonidos`)) {
+	if (fs.existsSync(`${dir}/sonidos`)) {
 		fs.readdirSync(`${dir}/sonidos/`).forEach(function (file) {
 			fs.copyFileSync(`${dir}/sonidos/${file}`, `./sonidos/${file}`);
 		})
 	}
 
-	if(fs.existsSync(`.${dir}/images`)) {
+	if (fs.existsSync(`.${dir}/images`)) {
 		fs.readdirSync(`${dir}/images/`).forEach(function (file) {
 			fs.copyFileSync(`${dir}/images/${file}`, `./public/images/${file}`);
 		})
 	}
 
-	if(fs.existsSync(`${dir}/leds`)) {
+	if (fs.existsSync(`${dir}/leds`)) {
 		fs.readdirSync(`${dir}/leds/`).forEach(function (file) {
 			if (!!file.match(/\.js$/)) {
 				fs.copyFileSync(`${dir}/leds/${file}`, `./leds/${file}`);
@@ -37,7 +40,7 @@ module.exports = async function (req, res) {
 		})
 	}
 
-	if(fs.existsSync(`${dir}/mov`)) {
+	if (fs.existsSync(`${dir}/mov`)) {
 		fs.readdirSync(`${dir}/mov/`).forEach(function (file) {
 			if (!!file.match(/\.json$/)) {
 				createLocal("mov", JSON.parse(fs.readFileSync(`./${dir}/mov/${file}`, 'utf-8')));
@@ -52,7 +55,7 @@ module.exports = async function (req, res) {
 	});
 	interacciones.sort(ordenar);
 
-	if(fs.existsSync(`${dir}/anims`)) {
+	if (fs.existsSync(`${dir}/anims`)) {
 		let files = fs.readdirSync(`${dir}/script/`);
 		for (const file of files) {
 			let temp = JSON.parse(fs.readFileSync(`./${dir}/anims/${file}`, 'utf-8'));
@@ -62,7 +65,7 @@ module.exports = async function (req, res) {
 		}
 	}
 
-	if(fs.existsSync(`${dir}/script`)) {
+	if (fs.existsSync(`${dir}/script`)) {
 		let files = fs.readdirSync(`${dir}/script/`);
 		for (const file of files) {
 			let temp = JSON.parse(fs.readFileSync(`./${dir}/script/${file}`, 'utf-8'));
@@ -81,7 +84,7 @@ module.exports = async function (req, res) {
 		if (!!interacciones[i]._id) {
 			let temp = createLocal("interaccion", interacciones[i])
 			sobreescribir(interacciones, interacciones[i]._id, temp._id);
-		}		
+		}
 	}
 	res.status(200).jsonp();
 };
@@ -105,7 +108,7 @@ function ordenar(a, b) {
 function sobreescribir(lista, viejo, nuevo) {
 
 	for (let i = 0; i < lista.length; i++) {
-		lista[i].xml = lista[i].xml.replaceAll(viejo, nuevo);		
+		lista[i].xml = lista[i].xml.replaceAll(viejo, nuevo);
 	}
 	return lista;
 }

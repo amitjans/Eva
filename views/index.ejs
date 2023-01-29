@@ -101,10 +101,12 @@
                     </ul>
                 </li>
             </ul>
-            <div ng-if="loggedIn" class="navbar-collapse collapse w-50 order-0 dual-collapse2">
-                {{'TOOLBAR.WELCOME' | translate}}: &nbsp;{{ user }}
+            <div ng-if="loggedIn" class="navbar-collapse collapse w-25 order-0 dual-collapse2">
+                <div class="navbar-nav ml-auto" style="color: rgba(255,255,255,.5);">
+                    {{'TOOLBAR.WELCOME' | translate}}: &nbsp;{{ user }}&nbsp;
+                </div>
             </div>
-            <a class="btn btn-outline-success my-2 my-sm-0" ng-click="login()">
+            <a class=" btn btn-outline-success my-2 my-sm-0" ng-click="login()">
                 <span class="fa fa-sign-in"></span>
                 <span ng-show="!loggedIn"> {{'TOOLBAR.LOGIN' | translate}}</span>
                 <span ng-show="loggedIn"> {{'TOOLBAR.LOGOUT' | translate}}</span>
@@ -118,7 +120,7 @@
 
     <div class="container">
         <footer>
-            <p>&copy; 2021 CICESE</p>
+            <p>&copy; 2023 CICESE</p>
         </footer>
     </div>
     <script src="/js/jquery-3.5.1.min.js"></script>
@@ -130,7 +132,6 @@
     <script src="/js/angular/angular-translate.min.js"></script>
     <script src="/js/angular/angular-translate-loader-static-files.min.js"></script>
 
-    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-notify.min.js"></script>
     <script src="/js/notify.min.js"></script>
     <script src="/js/datatable.min.js"></script>

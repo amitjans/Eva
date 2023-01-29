@@ -13,9 +13,11 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     Promise.all([led, sound, mov, voice, listen, image]).then(values => {
       var toolbox = document.getElementById("toolbox");
 
-      var options = { toolbox: toolbox, collapse: false, comments: false, disable: false, maxBlocks: 0, trashcan: true, horizontalLayout: false, toolboxPosition: 'start', 
-      css: true, media: 'https://blockly-demo.appspot.com/static/media/', rtl: false, scrollbars: true, sounds: true, oneBasedIndex: true, 
-      zoom : { controls : true, wheel : true, startScale : 1, maxScale : 3, minScale : 0.5, scaleSpeed : 1.01 } };
+      var options = {
+        toolbox: toolbox, collapse: false, comments: false, disable: false, maxBlocks: 0, trashcan: true, horizontalLayout: false, toolboxPosition: 'start',
+        css: true, media: 'https://blockly-demo.appspot.com/static/media/', rtl: false, scrollbars: true, sounds: true, oneBasedIndex: true,
+        zoom: { controls: true, wheel: true, startScale: 1, maxScale: 3, minScale: 0.5, scaleSpeed: 1.01 }
+      };
 
       workspace = Blockly.inject("myDiagramDiv", options);
       var workspaceBlocks = document.getElementById("workspaceBlocks");
@@ -42,7 +44,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     var xml_text = Blockly.Xml.domToText(xml);
     console.log(JSON.stringify(xmlToJson(xml)));
 
-    var json = { nombre: $scope.nombre, xml: xml_text };
+    var json = { nombre: $scope.nombre, xml: xml_text, descripcion: $('#desc').val() ?? "" };
     $http.post('/api/common?db=interaccion', json).then(function successCallback(response) {
       $scope.reset();
       $scope.list();
@@ -55,6 +57,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     $scope.reset();
     $scope.updateid = l._id;
     $scope.nombre = l.nombre;
+    $('#desc').val(l.descripcion);
     var xml = Blockly.Xml.textToDom(l.xml);
     Blockly.Xml.domToWorkspace(xml, workspace);
   }
@@ -63,8 +66,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     var xml = Blockly.Xml.workspaceToDom(workspace);
     var xml_text = Blockly.Xml.domToText(xml);
     console.log(JSON.stringify(xmlToJson(xml)));
-    
-    var json = { nombre: $scope.nombre, xml: xml_text };
+
+    var json = { nombre: $scope.nombre, xml: xml_text, descripcion: $('#desc').val() ?? "" };
     $http.put('/api/common/' + $scope.updateid + '?db=interaccion', json).then(function successCallback(response) {
       if (end) {
         $scope.reset();
@@ -117,8 +120,8 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
         $scope.slist();
       }, function (error) {
         console.log(error);
-      });  
-    }    
+      });
+    }
   }
 
   $scope.import = function () {

@@ -1,78 +1,85 @@
 <div class="container" ng-controller="led">
     <div class="row">
         <div class="col-md-12">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">{{'LED.TITLE' | translate}}</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                    data-target="#myModal"><span class="fa fa-plus"></span></button>
+                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal"><span
+                            class="fa fa-plus"></span></button>
                 </div>
             </div>
-                <div>
-                    <div id="example_wrapper" class="dataTables_wrapper">
-                        <div class="form-inline">
-                            <div class="input-group mb-3 col-md-3">
-                                <div class="input-group-prepend">
-                                  <label class="input-group-text" style="background-color: white !important; border: 0px !important;">{{'DATATABLE.SHOW' | translate}}</label>
-                                </div>
-                                <select class="form-control form-control-sm" ng-model="limit" ng-change="dataTable()">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <label class="input-group-text" style="background-color: white !important; border: 0px !important;">{{'DATATABLE.ENTRIES' | translate}}</label>
-                                </div>
+            <div>
+                <div id="example_wrapper" class="dataTables_wrapper">
+                    <div class="form-inline">
+                        <div class="input-group mb-3 col-md-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text"
+                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.SHOW'
+                                    | translate}}</label>
                             </div>
-                            <div class="col-md-6"></div>
-                            <div class="input-group mb-3 col-md-3">
-                                <label>{{'DATATABLE.SEARCH' | translate}}: </label>
-                                <input type="search" class="form-control form-control-sm" placeholder="" ng-model="q" ng-change="dataTable()">
+                            <select class="form-control form-control-sm" ng-model="limit" ng-change="dataTable()">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <div class="input-group-append">
+                                <label class="input-group-text"
+                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.ENTRIES'
+                                    | translate}}</label>
                             </div>
                         </div>
-                        <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                            aria-describedby="example_info">
-                            <thead>
-                                <tr role="row">
-                                    <th style="width: 334px;"> {{'COMMON.NAME' | translate}}</th>
-                                    <th style="width: 333px;"> {{'LED.BASE' | translate}}</th>
-                                    <th colspan="4" style="width: 333px;"> {{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                    <td>{{ l.nombre }}</td>
-                                    <td>{{ l.base }}</td>
-                                    <td><span class="btn btn-default" ng-click="execute(l)"><i
-                                                class="fa fa-play fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="clone(l)"><i
-                                                class="fa fa-clone fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="update(l)"><i
-                                                class="fa fa-edit fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="delete(l._id)"><i
-                                                class="fa fa-trash fa-sm"></i></span></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1"> {{'COMMON.NAME' | translate}}</th>
-                                    <th rowspan="1" colspan="1"> {{'LED.BASE' | translate}}</th>
-                                    <th rowspan="1" colspan="4"> {{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">{{'DATATABLE.SHOWING' | translate}}
-                            {{ from }} {{'DATATABLE.TO' | translate}}
-                            {{ to > temp.length ? temp.length : to }} {{'DATATABLE.OF' | translate}}
-                            {{ temp.length }} {{'DATATABLE.ENTRIES' | translate}}</div>
-                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                            <a class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}"
-                                aria-controls="example" data-dt-idx="0" tabindex="-1" id="example_previous"
-                                ng-click="dataTable(-1)">{{'DATATABLE.PREVIOUS' | translate}}</a>
-                            <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}" aria-controls="example" data-dt-idx="7" tabindex="0"
-                                id="example_next" ng-click="dataTable(1)">{{'DATATABLE.NEXT' | translate}}</a>
+                        <div class="col-md-6"></div>
+                        <div class="input-group mb-3 col-md-3">
+                            <label>{{'DATATABLE.SEARCH' | translate}}: </label>
+                            <input type="search" class="form-control form-control-sm" placeholder="" ng-model="q"
+                                ng-change="dataTable()" />
                         </div>
+                    </div>
+                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr role="row">
+                                <th style="width: 334px;"> {{'COMMON.NAME' | translate}}</th>
+                                <th style="width: 333px;"> {{'LED.BASE' | translate}}</th>
+                                <th colspan="4" style="width: 333px;"> {{'COMMON.OPTIONS' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
+                                <td>{{ l.nombre }}</td>
+                                <td>{{ l.base }}</td>
+                                <td><span class="btn btn-default" ng-click="execute(l)"><i
+                                            class="fa fa-play fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="clone(l)"><i
+                                            class="fa fa-clone fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="update(l)"><i
+                                            class="fa fa-edit fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i
+                                            class="fa fa-trash fa-sm"></i></span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1"> {{'COMMON.NAME' | translate}}</th>
+                                <th rowspan="1" colspan="1"> {{'LED.BASE' | translate}}</th>
+                                <th rowspan="1" colspan="4"> {{'COMMON.OPTIONS' | translate}}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
+                        {{'DATATABLE.SHOWING' | translate}}
+                        {{ from }} {{'DATATABLE.TO' | translate}}
+                        {{ to > temp.length ? temp.length : to }} {{'DATATABLE.OF' | translate}}
+                        {{ temp.length }} {{'DATATABLE.ENTRIES' | translate}}</div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <a class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}" aria-controls="example"
+                            data-dt-idx="0" tabindex="-1" id="example_previous"
+                            ng-click="dataTable(-1)">{{'DATATABLE.PREVIOUS' | translate}}</a>
+                        <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}"
+                            aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next"
+                            ng-click="dataTable(1)">{{'DATATABLE.NEXT' | translate}}</a>
                     </div>
                 </div>
             </div>
@@ -81,12 +88,12 @@
 
     <!-- Modal Led -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">{{ accion }} {{'LED.MODAL' | translate}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ accion }} {{'LED.MODAL' | translate}}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal" role="form">
@@ -125,22 +132,27 @@
                         <div class="form-group" ng-repeat="item in params.num">
                             <label class="col-sm-2 control-label">{{'LED.NUM' | translate}} {{ item.id }}</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control input-sm" ng-model="item.model" placeholder="0">
+                                <input type="number" class="form-control input-sm" ng-model="item.model"
+                                    placeholder="0">
                             </div>
                         </div>
                         <div class="form-group" ng-show="params.time">
                             <label class="col-sm-2 control-label">{{'LED.TIME' | translate}}</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control input-sm" ng-model="time" placeholder="{{'LED.MS' | translate}}">
+                                <input type="number" class="form-control input-sm" ng-model="time"
+                                    placeholder="{{'LED.MS' | translate}}">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="clear()">{{'COMMON.CLOSE' | translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
+                    <button type="button" class="btn btn-default" ng-click="clear()">{{'COMMON.CLOSE' |
+                        translate}}</button>
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
+                        translate}}</button>
                     <button type="button" ng-show="!icon" ng-click="updatesend()"
-                        class="btn btn-primary">{{'COMMON.UPDATE' | translate}}</button>
+                        class="btn btn-primary">{{'COMMON.UPDATE'
+                        | translate}}</button>
                 </div>
             </div>
         </div>

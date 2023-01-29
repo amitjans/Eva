@@ -16,7 +16,12 @@ const es = {
         CONFIG: "Configuraciones",
         SOCIAL_ROBOT: "Robot Social",
         SERVICES: "Servicios",
-        IMGS: "Imagenes"
+        IMGS: "Imagenes",
+        PROFILE: "Perfil",
+        ROBOT: "Robots",
+        LOGIN: "Acceso",
+        LOGOUT: "Cerrar sesión",
+        WELCOME: "Bienvenido"
     },
     LANG: {
         MENU: "Idioma",

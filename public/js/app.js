@@ -33,8 +33,18 @@ eva.controller("menu", function ($scope, $rootScope, $translate, $http, $locatio
   };
 
   $scope.init = function () {
-    if (!!localStorage.getItem("currentUser")) {
-      let token = JSON.parse(localStorage.getItem("currentUser")).token;
+    if (window.location.href.includes('?')) {
+      let values = window.location.href
+        .split('?')[1]
+        .split('&')
+        .map(i => {
+          let temp = i.split('=');
+          return { key: temp[0], value: temp[1] }
+        });
+      sessionStorage.setItem('currentUser', JSON.stringify({ token: values[0].value }));
+    }
+    if (!!sessionStorage.getItem("currentUser")) {
+      let token = JSON.parse(sessionStorage.getItem("currentUser")).token;
       $http.defaults.headers.common.Authorization = 'Bearer ' + token;
       $rootScope.loggedIn = true;
       $rootScope.user = JSON.parse(atob(token.split('.')[1])).name || JSON.parse(atob(token.split('.')[1])).sub;

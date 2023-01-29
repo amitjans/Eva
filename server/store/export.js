@@ -19,8 +19,8 @@ module.exports = async function (req, res) {
 
 	let interacciones = /<field name=\"int\">[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}<\/field>/;
 	let sub = interacciones.exec(obj.xml);
-	for(let i of (sub ?? [])) {
-		let j = clone(await find(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.exec(i)[0]));		
+	for (let i of (sub ?? [])) {
+		let j = clone(await find(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.exec(i)[0]));
 
 		fs.mkdirSync(`${dir}/`, { recursive: true });
 		fs.writeFileSync(`${dir}/${j.nombre}.json`, JSON.stringify(j));
@@ -97,7 +97,7 @@ module.exports = async function (req, res) {
 		fs.rmSync(dir, { recursive: true, force: true });
 	});
 
-	res.status(200).jsonp();
+	res.status(200).jsonp({ name: `${obj.nombre}.zip`, data: fs.readFileSync(`${dir}.zip`).toString('base64') });
 };
 
 function fileSha256(dir) {

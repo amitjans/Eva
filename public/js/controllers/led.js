@@ -31,7 +31,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
             $scope.clear();
             notify(locale().LED.NOTIFY.POST.SUCCESS);
         }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
+            notify(locale().LED.NOTIFY.ERROR, 'danger');
         });
     }
 
@@ -42,7 +42,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
             $scope.list();
             notify(locale().LED.NOTIFY.CLONE.SUCCESS);
         }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
+            notify(locale().LED.NOTIFY.ERROR, 'danger');
         });
     }
 
@@ -61,7 +61,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
             $scope.clear();
             notify(locale().LED.NOTIFY.UPDATE.SUCCESS);
         }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
+            notify(locale().LED.NOTIFY.ERROR, 'danger');
         });
     }
 
@@ -79,7 +79,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     $scope.execute = function (l) {
         $http.post('/nodes', { type: 'led', anim: l._id, base: l.base }).then(function successCallback(response) {
         }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
+            notify(locale().LED.NOTIFY.ERROR, 'danger');
         });;
     }
 
