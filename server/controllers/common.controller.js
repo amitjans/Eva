@@ -15,7 +15,7 @@ commoncontroller.getThis = async (value, db) => getConnection().get(db).find({ _
 commoncontroller.create = async (req, res) => {
     let obj = { ...req.body, _id: v4() };
     getConnection().get(req.query.db).push(obj).write();
-    res.status(200).json({ status: 'Ok' , obj: obj});
+    res.status(200).json({ status: 'Ok', obj: obj });
 }
 
 commoncontroller.createLocal = async (db, item) => {
@@ -26,6 +26,11 @@ commoncontroller.createLocal = async (db, item) => {
 
 commoncontroller.edit = async (req, res) => {
     const result = await getConnection().get(req.query.db).find({ _id: req.params.id }).assign(req.body).write();
+    res.status(200).json({ status: 'Ok' });
+}
+
+commoncontroller.updateLocal = async (db, item) => {
+    const result = await getConnection().get(db).find({ _id: item._id }).assign(item).write();
     res.status(200).json({ status: 'Ok' });
 }
 

@@ -7,9 +7,9 @@ const cookieParser = require('cookie-parser');
 const mqtt = require('mqtt');
 const { write } = require('./server/controllers/cloud.controller.js');
 const dotenv = require('dotenv').config();
-const client  = mqtt.connect('mqtt://' + (process.env.MQTT_SERVER || 'broker.hivemq.com'));
+const client = mqtt.connect('mqtt://' + (process.env.MQTT_SERVER || 'broker.hivemq.com'));
 const { v4 } = require('uuid');
-const id  = process.env.MQTT_ID || v4();
+const id = process.env.MQTT_ID || v4();
 
 var app = express();
 
@@ -18,7 +18,9 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -88,7 +90,7 @@ module.exports.enviarMensaje = enviarMensaje;
 module.exports.socketio = socketio;
 
 var enviarError = function (error, query) {
-	var data = {error: error, query: query};
+	var data = { error: error, query: query };
 	console.log(data);
 	io.sockets.emit('messages', data);
 }
@@ -104,15 +106,15 @@ console.log('Identificador utilizado: ' + id);
 
 client.on('connect', function () {
 	client.subscribe(`eva/${id}`, function (err) {
-	  if (!err) {
-		client.publish('eva/server', JSON.stringify({ status: "Up", id: id }));
-		console.log('Mensaje publicado');
-	  } else {
-		console.log(err);
-	  }
+		if (!err) {
+			client.publish('eva/server', JSON.stringify({ status: "Up", id: id }));
+			console.log('Mensaje publicado');
+		} else {
+			console.log(err);
+		}
 	})
 })
-  
+
 client.on('message', function (topic, message) {
 	// message is Buffer
 	let json = JSON.parse(message.toString());

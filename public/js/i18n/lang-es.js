@@ -108,7 +108,8 @@ const es = {
         INTERACTIONS: "Interacciones",
         EXPORT: "Exportar",
         CONTROL_SCRIPT: "Control Script",
-        SCRIPTS: "Scripts"
+        SCRIPTS: "Scripts",
+        STORE: "Tienda"
     },
     INTERACTION: {
         TITLE: "Listado de Interacciones",

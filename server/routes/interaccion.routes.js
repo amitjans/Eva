@@ -28,7 +28,7 @@ router.get('/export/:id', pack);
 
 router.get('/uninstall/:id', uninstall);
 
-router.get('/install/:id', install);
+router.post('/install', install);
 
 router.get('/:id', async function (req, res) {
 	res.status(200).jsonp();
