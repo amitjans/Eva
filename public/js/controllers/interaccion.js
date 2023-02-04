@@ -106,10 +106,31 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.download = function (id) {
-    $http.get('api/interaccion/export/' + id).then(function (res) {
+    if (!sessionStorage.getItem('currentUser')) {
+      //notify(locale().LED.NOTIFY.ERROR, 'danger');
+      notify("Necesitas estar autenticado.", 'danger');
+      return;
+    }
 
+    $http.get('api/interaccion/export/' + id).then(function (res) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://eva-repository.onrender.com/api/apps',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem('currentUser')).token
+        },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+          name: res.data.name,
+          description: res.data.descripcion,
+          data: res.data.data
+        }),
+        success: function (data) {
+        },
+        error: function () { }
+      });
     }, function (error) {
-      console.log(error);
     });
   }
 

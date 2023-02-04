@@ -29,7 +29,12 @@ eva.controller("menu", function ($scope, $rootScope, $translate, $http, $locatio
   };
 
   $scope.login = function () {
-    window.location.href = "https://eva-social-robot.github.io/app.html#!/login?redirect=" + window.location
+    if ($rootScope.loggedIn) {
+      $rootScope.loggedIn = false;
+      sessionStorage.removeItem('currentUser');
+    } else {
+      window.location.href = "https://eva-social-robot.github.io/app.html#!/login?redirect=" + window.location;
+    }
   };
 
   $scope.init = function () {
@@ -45,7 +50,7 @@ eva.controller("menu", function ($scope, $rootScope, $translate, $http, $locatio
     }
     if (!!sessionStorage.getItem("currentUser")) {
       let token = JSON.parse(sessionStorage.getItem("currentUser")).token;
-      $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+      //$http.defaults.headers.common.Authorization = 'Bearer ' + token;
       $rootScope.loggedIn = true;
       $rootScope.user = JSON.parse(atob(token.split('.')[1])).name || JSON.parse(atob(token.split('.')[1])).sub;
     }
