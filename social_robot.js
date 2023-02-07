@@ -41,7 +41,6 @@ var logs = require('./log');
 var time = 0;
 var emotional = true;
 
-
 class SocialRobot {
   constructor() {
     // { attentionWord: 'Eva', name: 'Eva', voice: 'es-LA_SofiaV3Voice', ttsReconnect: true };
@@ -152,7 +151,7 @@ class SocialRobot {
       return;
     }
     if (type == 'h') {
-      let parser =  port.pipe(new Readline());
+      let parser = port.pipe(new Readline());
       let temp = '';
       parser.on('data', x => temp = x);
       port.write(type);
@@ -167,13 +166,13 @@ class SocialRobot {
       return temp;
     } else {
       var opt = { u: 't', d: 'g', l: 'f', r: 'h' };
-      port.write(onestep ? opt[type] : type);      
+      port.write(onestep ? opt[type] : type);
     }
   }
 
-  async ledsanim({ base, opts }) {
+  async ledsanim(obj) {
     if (!!this.leds) this.ledsanimstop();
-    this.leds = ledsanimation[base](opts);
+    this.leds = ledsanimation.runAnim(obj);
   }
 
   async ledsanimstop() {
@@ -258,7 +257,7 @@ class SocialRobot {
   //     });
   // }
 
-  async recordSound(time, dir = './test.wav'){
+  async recordSound(time, dir = './test.wav') {
     let localeanim = false;
     if (!this.leds) {
       this.ledsanim(this.configuration.listenled);

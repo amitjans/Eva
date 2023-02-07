@@ -1,8 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const { get } = require('../controllers/script.controller');
-const leds = require('../controllers/leds.controller');
-const mov = require('../controllers/mov.controller');
+const common = require('../controllers/common.controller');
 const { find, unifyById } = require('../../vpl/Unify_Node');
 const AdmZip = require("adm-zip");
 const clone = require('../../utils/clone');
@@ -52,20 +51,11 @@ module.exports = async function (req, res) {
 	let ledNode = int.filter(i => i.type === 'led');
 	if (ledNode.length > 0) {
 		fs.mkdirSync(`${dir}/anims/`, { recursive: true });
-		fs.mkdirSync(`${dir}/leds/`, { recursive: true });
 	}
 	for (const item of ledNode) {
-		let s = clone(await leds.getData(item.anim));
+		let s = clone(await common.query('led', { _id: element._id }));
 		fs.writeFileSync(`${dir}/anims/${s.nombre}.json`, JSON.stringify(s));
 		fs.writeFileSync(`${dir}/anims/${s.nombre}.json.sha256`, fileSha256(`${dir}/anims/${s.nombre}.json`));
-
-		fs.readdirSync('./leds').forEach(file => {
-			let allFileContents = fs.readFileSync(`./leds/${file}`, 'utf-8');
-			if (allFileContents.includes(s.base)) {
-				fs.copyFileSync(`./leds/${file}`, `${dir}/leds/${file}`);
-				fs.writeFileSync(`${dir}/leds/${file}.sha256`, fileSha256(`${dir}/leds/${file}`));
-			}
-		});
 	}
 
 	let movNode = int.filter(i => i.type === 'mov');
@@ -73,7 +63,7 @@ module.exports = async function (req, res) {
 		fs.mkdirSync(`${dir}/mov/`, { recursive: true });
 	}
 	for (const item of movNode) {
-		let s = clone(await mov.getByCode(item.mov));
+		let s = clone(await common.query('mov', { codigo: item.mov }));
 		delete s._id;
 		fs.writeFileSync(`${dir}/mov/${s.nombre}.json`, JSON.stringify(s));
 		fs.writeFileSync(`${dir}/mov/${s.nombre}.json.sha256`, fileSha256(`${dir}/mov/${s.nombre}.json`));

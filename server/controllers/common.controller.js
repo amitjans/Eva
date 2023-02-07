@@ -10,10 +10,12 @@ commoncontroller.details = (req, res) => {
     res.status(200).json(getConnection().get(req.query.db).find({ _id: req.params.id }).value());
 }
 
+commoncontroller.query = async (db, filter) => getConnection().get(db).find(filter).value();
+
 commoncontroller.getThis = async (value, db) => getConnection().get(db).find({ _id: value }).value();
 
 commoncontroller.create = async (req, res) => {
-    let obj = { ...req.body, _id: v4() };
+    let obj = req.body._id ? req.body : { ...req.body, _id: v4() };
     getConnection().get(req.query.db).push(obj).write();
     res.status(200).json({ status: 'Ok', obj: obj });
 }

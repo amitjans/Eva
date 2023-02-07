@@ -227,6 +227,16 @@ const es = {
             ERROR: "A ocurrido un error al procesar su solicitud."
         }
     },
+    LEDEDITOR: {
+        TITLE: "Editor de Animaciones led",
+        MODAL: "Cuadro",
+        GRADIENT_INIT: "Gradiente desde",
+        GRADIENT_UNTIL: "hasta",
+        MOV_LEDS: "Desplazar leds",
+        CLONE_LEDS: "Clonar Leds",
+        DELETE_FRAMES: "Eliminar cuadro",
+        DELETE_NEXT: "y los siguientes"
+    },
     LISTEN: {
         TITLE: "Listado de modelos de voz",
         MODAL: "Modelo de voz",

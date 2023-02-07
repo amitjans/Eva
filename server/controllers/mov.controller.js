@@ -6,6 +6,4 @@ movcontroller.getCodes = async (req, res) => {
     res.status(200).json(JSON.parse(temp));
 }
 
-movcontroller.getByCode = async (value) => await getConnection().get('mov').find({ codigo: value }).value();
-
 module.exports = movcontroller;

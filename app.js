@@ -32,7 +32,6 @@ app.use('/api/script', require('./server/routes/script.routes.js'));
 app.use('/api/audio', require('./server/routes/audio.routes.js'));
 app.use('/api/mov', require('./server/routes/mov.routes.js'));
 app.use('/api/filters', require('./server/routes/listeningfilters.routes.js'));
-app.use('/api/leds', require('./server/routes/leds.routes.js'));
 app.use('/api/interaccion', require('./server/routes/interaccion.routes.js'));
 app.use('/api/cloud', require('./server/routes/cloud.routes.js'));
 app.use('/api/config', require('./server/routes/config.routes.js'));

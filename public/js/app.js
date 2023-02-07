@@ -101,6 +101,14 @@ eva
           templateUrl: "/plantillas/led.html",
           activetab: "led"
         })
+        .when("/lededitor", {
+          templateUrl: "/plantillas/lededitor.html",
+          activetab: "led"
+        })
+        .when("/lededitor/:id", {
+          templateUrl: "/plantillas/lededitor.html",
+          activetab: "led"
+        })
         .when("/mov", {
           templateUrl: "/plantillas/mov.html",
           activetab: "mov"

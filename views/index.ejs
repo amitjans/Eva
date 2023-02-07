@@ -53,9 +53,18 @@
 
                     </ul>
                 </li>
-                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'led'}">
-                    <a class="nav-link" href="/#!/led">{{'TOOLBAR.LED' | translate}}</a>
+                <li class="nav-item dropdown" ng-class="{'active': $route.current.activetab == 'led'}">
+                    <a id="drop2" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false" target="_blank">
+                        {{'TOOLBAR.LED' | translate}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="drop2">
+                        <li><a class="dropdown-item" href="/#!/led">{{'TOOLBAR.LED' | translate}}</a></li>
+                        <li><a class="dropdown-item" href="/#!/lededitor">Editor</a></li>
+                    </ul>
                 </li>
+
                 <li class="nav-item" ng-class="{'active': $route.current.activetab == 'mov'}">
                     <a class="nav-link" href="/#!/mov">{{'TOOLBAR.MOVEMENT' | translate}}</a>
                 </li>
@@ -107,9 +116,8 @@
                 </div>
             </div>
             <a class=" btn btn-outline-success my-2 my-sm-0" ng-click="login()">
-                <span class="fa fa-sign-in"></span>
-                <span ng-show="!loggedIn"> {{'TOOLBAR.LOGIN' | translate}}</span>
-                <span ng-show="loggedIn"> {{'TOOLBAR.LOGOUT' | translate}}</span>
+                <span ng-show="!loggedIn"><i class="fa-solid fa-door-open"></i></span>
+                <span ng-show="loggedIn"><i class="fa-solid fa-door-closed"></i></span>
             </a>
         </div>
     </nav>
@@ -157,6 +165,7 @@
     <script type="text/javascript" src="/js/controllers/images.js"></script>
     <script type="text/javascript" src="/js/controllers/interaccion.js"></script>
     <script type="text/javascript" src="/js/controllers/led.js"></script>
+    <script type="text/javascript" src="/js/controllers/lededitor.js"></script>
     <script type="text/javascript" src="/js/controllers/listen.js"></script>
     <script type="text/javascript" src="/js/controllers/mov.js"></script>
     <script type="text/javascript" src="/js/controllers/script.js"></script>

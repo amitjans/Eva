@@ -1,0 +1,237 @@
+<div ng-controller="lededitor">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom sticky-top"
+                style="top: 50px !important; background-color: white;">
+                <h1 class="h2">{{'LEDEDITOR.TITLE' | translate}}</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="save()"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-outline-secondary" onclick="saveForceNew()"><i
+                            class="fa-solid fa-file-circle-plus"></i></button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-outline-secondary" onclick="execute()"><i
+                            class="fa-solid fa-play"></i></button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-outline-secondary" onclick="executeDebug()"><i
+                            class="fa-solid fa-bug"></i></button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-outline-secondary" onclick="executeStop()"><i
+                            class="fa-solid fa-stop"></i></button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#importAnim"><i
+                            class="fa-solid fa-file-import"></i></button>
+                </div>
+            </div>
+            <from class="form-inline">
+                <label class="my-1 mr-2" for="inlineName">{{'COMMON.NAME' | translate}}</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineName" placeholder="Name">
+
+                <label class="my-1 mr-2" for="inlineTime">{{'LED.TIME' | translate}}</label>
+                <input type="number" class="form-control mb-2 mr-sm-2" id="inlineTime" value="100">
+
+                <div class="form-check mb-2 mr-sm-2">
+                    <input class="form-check-input" type="checkbox" id="inlineBucle">
+                    <label class="form-check-label" for="inlineFormCheck">
+                        Bucle
+                    </label>
+                </div>
+            </from>
+
+            <div class="row">
+                <div class="bd-callout bd-callout-info col-md-6" id="generalOptions">
+                    <button type="button" class="btn btn-primary" onclick="newFrame()"><i
+                            class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="moveAllLeds(false)"><i
+                            class="fa-solid fa-arrow-left"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="moveAllLeds(true)"><i
+                            class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="bd-callout bd-callout-info col-md-6" id="palette" style="display: none;"></div>
+            </div>
+
+            <div>
+                <div id="example_wrapper" class="dataTables_wrapper">
+                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
+                                <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
+                                <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
+                            </tr>
+                            <tr>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                                <th>13</th>
+                                <th>14</th>
+                                <th>15</th>
+                                <th>16</th>
+                                <th>17</th>
+                            </tr>
+                        </thead>
+                        <tbody id="frames">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                                <th>13</th>
+                                <th>14</th>
+                                <th>15</th>
+                                <th>16</th>
+                                <th>17</th>
+                                <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
+                            </tr>
+                            <tr>
+                                <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Importar Animacion -->
+    <div class="modal fade right" id="importAnim" tabindex="-1" role="dialog" aria-labelledby="importAnim">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Importar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea name="import" id="import" cols="70" rows="10" class="form-control"
+                                    style="resize: vertical;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="importAnim()"><i
+                            class="fa-solid fa-file-import"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Importar Animacion -->
+
+    <!-- Conf Frame -->
+    <div class="modal fade right" id="options" tabindex="-1" role="dialog" aria-labelledby="options">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="optionsTitle"> {{'LEDEDITOR.MODAL' | translate}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Gradiente -->
+                    <from class="form-inline">
+                        <label class="col-md-4 col-form-label" style="justify-content: left !important;"
+                            for="colorInit">{{'LEDEDITOR.GRADIENT_INIT' | translate}} </label>
+                        <input type="number" class="form-control mb-1 mr-sm-1" id="colorInit" min="0" max="17"
+                            value="0">
+                        <label class="">{{'LEDEDITOR.GRADIENT_UNTIL' | translate}} </label>
+                        <input type="number" class="form-control mb-1 mr-sm-1" id="colorEnd" min="0" max="17" value="0">
+                        <button type="button" class="btn btn-primary" onclick="gradient()"><i
+                                class="fa-solid fa-check-double"></i>
+                            Apply</button>
+
+                    </from>
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Desplazar Leds -->
+                    <from class="form-inline">
+                        <label class="col-md-4 col-form-label"
+                            style="justify-content: left !important;">{{'LEDEDITOR.MOV_LEDS' | translate}}</label>
+                        <button type="button" class="btn btn-primary" onclick="moveLeds(false)"><i
+                                class="fa-solid fa-arrow-left"></i></button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" onclick="moveLeds(true)"><i
+                                class="fa-solid fa-arrow-right"></i></button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" onclick="moveLedsUp()"><i
+                                class="fa-solid fa-arrow-up"></i></button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" onclick="moveLedsDown()"><i
+                                class="fa-solid fa-arrow-down"></i></button>
+                    </from>
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Clonar Leds -->
+                    <from class="form-inline">
+                        <label class="col-md-4 col-form-label"
+                            style="justify-content: left !important;">{{'LEDEDITOR.CLONE_LEDS' | translate}}</label>
+                        <button type="button" class="btn btn-primary" onclick="cloneFrame()"><i
+                                class="fa-solid fa-clone"></i></button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" onclick="cloneFrameUp()"><i
+                                class="fa-solid fa-clone"></i>&nbsp;<i
+                                class="fa-solid fa-arrows-up-to-line"></i></button>
+                        &nbsp;
+                        <button type="button" class="btn btn-primary" onclick="cloneFrameDown()"><i
+                                class="fa-solid fa-clone"></i>&nbsp;<i
+                                class="fa-solid fa-arrows-down-to-line"></i></button>
+                    </from>
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Eliminar frames -->
+                    <from class="form-inline">
+                        <label class="col-md-4 col-form-label"
+                            style="justify-content: left !important;">{{'LEDEDITOR.DELETE_FRAMES' |
+                            translate}}</label>
+                        <input type="number" class="form-control mb-1 mr-sm-1" id="currentFrame" disabled="disabled"
+                            min="1" value="0">
+
+                        <label class="" for="inlineTime">&nbsp;{{'LEDEDITOR.DELETE_NEXT' | translate}}&nbsp;</label>
+                        <input type="number" class="form-control mb-1 mr-sm-1" id="untilFrame" min="1" value="1">
+
+                        <button type="button" class="btn btn-primary" onclick="eliminarFrames()"><i
+                                class="fa-solid fa-check-double"></i>
+                            Apply</button>
+                    </from>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                            class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Conf Frame -->
+
+</div>

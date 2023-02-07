@@ -43,3 +43,17 @@ ul[dnd-list] li.selected {
 .rotate-45-left { display: inline-block; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
 .rotate-45-right { display: inline-block; -webkit-transform: rotate(45deg); transform: rotate(45deg); }
 .emojin { font-size: 30px; cursor: pointer; }
+.hand { cursor: pointer; }
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+}
+
+.bd-callout-info {
+    border-left-color: #5bc0de;
+}
