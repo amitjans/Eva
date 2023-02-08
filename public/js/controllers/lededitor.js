@@ -2,6 +2,7 @@ var anim = { name: "", time: 0, frames: [] };
 var colors = new Set();
 var cframe = -1;
 var debugFrame = 0;
+var animEmulation;
 
 eva.controller('lededitor', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
 
@@ -245,6 +246,38 @@ function executeDebug() {
 function executeStop() {
     postData('/nodes', { type: 'led' });
     debugFrame = 0;
+}
+
+function executeEmulator() {
+    $('#emulator').modal('show');
+    anim.time = parseInt(document.getElementById("inlineTime").value);
+    anim.bucle = document.getElementById("inlineBucle").checked;
+    animEmulation = runAnim();
+}
+
+function stopEmulator() {
+    clearInterval(animEmulation);
+    for (let j = 0; j < 17; j++) {
+        document.getElementById(`l${j}`).style.backgroundColor = `#000000`;
+    }
+    $('#emulator').modal('hide');
+}
+
+const runAnim = () => {
+    let i = 0;
+    let loop = setInterval(() => {
+        for (let j = 0; j < anim.frames[i].length; j++) {
+            document.getElementById(`l${j}`).style.backgroundColor = anim.frames[i][j];
+        }
+        i++;
+        if (!anim.bucle && i >= anim.frames.length) {
+            clearInterval(loop);
+        }
+        if (anim.frames.length <= i) {
+            i = 0;
+        }
+    }, anim.time);
+    return loop;
 }
 
 // --- Gradient ---

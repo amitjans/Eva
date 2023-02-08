@@ -57,3 +57,163 @@ ul[dnd-list] li.selected {
 .bd-callout-info {
     border-left-color: #5bc0de;
 }
+
+/* ------------------------------------------------------------------ */
+/* -------------------Simulador de Matrix Voice---------------------- */
+/* ------------------------------------------------------------------ */
+
+.circle-container {
+    position: relative;
+    width: 24em;
+    height: 24em;
+    padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
+    /* border: dashed 1px; */
+    border-radius: 50%;
+    margin: 1.75em auto 1.75em;
+}
+.circle-container a {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4em;
+    height: 4em;
+    margin: -2em; /* 2em = 4em/2 */ /* half the width */
+}
+.circle-container span {
+  display: block;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.deg0 {
+    -webkit-transform: translate(12em);
+    -moz-transform: translate(12em);
+    -ms-transform: translate(12em);
+    -o-transform: translate(12em);
+    transform: translate(12em);
+} /* 12em = half the width of the wrapper */
+.deg20 {
+    -webkit-transform: rotate(20deg) translate(12em) rotate(-20deg);
+    -moz-transform: rotate(20deg) translate(12em) rotate(-20deg);
+    -ms-transform: rotate(20deg) translate(12em) rotate(-20deg);
+    -o-transform: rotate(20deg) translate(12em) rotate(-20deg);
+    transform: rotate(20deg) translate(12em) rotate(-20deg);
+}
+.deg40 {
+    -webkit-transform: rotate(40deg) translate(12em) rotate(-40deg);
+    -moz-transform: rotate(40deg) translate(12em) rotate(-40deg);
+    -ms-transform: rotate(40deg) translate(12em) rotate(-40deg);
+    -o-transform: rotate(40deg) translate(12em) rotate(-40deg);
+    transform: rotate(40deg) translate(12em) rotate(-40deg);
+}
+.deg60 {
+    -webkit-transform: rotate(60deg) translate(12em) rotate(-60deg);
+    -moz-transform: rotate(60deg) translate(12em) rotate(-60deg);
+    -ms-transform: rotate(60deg) translate(12em) rotate(-60deg);
+    -o-transform: rotate(60deg) translate(12em) rotate(-60deg);
+    transform: rotate(60deg) translate(12em) rotate(-60deg);
+}
+.deg80 {
+    -webkit-transform: rotate(80deg) translate(12em) rotate(-80deg);
+    -moz-transform: rotate(80deg) translate(12em) rotate(-80deg);
+    -ms-transform: rotate(80deg) translate(12em) rotate(-80deg);
+    -o-transform: rotate(80deg) translate(12em) rotate(-80deg);
+    transform: rotate(80deg) translate(12em) rotate(-80deg);
+}
+.deg100 {
+    -webkit-transform: rotate(100deg) translate(12em) rotate(-100deg);
+    -moz-transform: rotate(100deg) translate(12em) rotate(-100deg);
+    -ms-transform: rotate(100deg) translate(12em) rotate(-100deg);
+    -o-transform: rotate(100deg) translate(12em) rotate(-100deg);
+    transform: rotate(100deg) translate(12em) rotate(-100deg);
+}
+.deg120 {
+    -webkit-transform: rotate(120deg) translate(12em) rotate(-120deg);
+    -moz-transform: rotate(120deg) translate(12em) rotate(-120deg);
+    -ms-transform: rotate(120deg) translate(12em) rotate(-120deg);
+    -o-transform: rotate(120deg) translate(12em) rotate(-120deg);
+    transform: rotate(120deg) translate(12em) rotate(-120deg);
+}
+.deg140 {
+    -webkit-transform: rotate(140deg) translate(12em) rotate(-140deg);
+    -moz-transform: rotate(140deg) translate(12em) rotate(-140deg);
+    -ms-transform: rotate(140deg) translate(12em) rotate(-140deg);
+    -o-transform: rotate(140deg) translate(12em) rotate(-140deg);
+    transform: rotate(140deg) translate(12em) rotate(-140deg);
+}
+.deg160 {
+    -webkit-transform: rotate(160deg) translate(12em) rotate(-160deg);
+    -moz-transform: rotate(160deg) translate(12em) rotate(-160deg);
+    -ms-transform: rotate(160deg) translate(12em) rotate(-160deg);
+    -o-transform: rotate(160deg) translate(12em) rotate(-160deg);
+    transform: rotate(160deg) translate(12em) rotate(-160deg);
+}
+.deg180 {
+    -webkit-transform: rotate(180deg) translate(12em) rotate(-180deg);
+    -moz-transform: rotate(180deg) translate(12em) rotate(-180deg);
+    -ms-transform: rotate(180deg) translate(12em) rotate(-180deg);
+    -o-transform: rotate(180deg) translate(12em) rotate(-180deg);
+    transform: rotate(180deg) translate(12em) rotate(-180deg);
+}
+.deg200 {
+    -webkit-transform: rotate(200deg) translate(12em) rotate(-200deg);
+    -moz-transform: rotate(200deg) translate(12em) rotate(-200deg);
+    -ms-transform: rotate(200deg) translate(12em) rotate(-200deg);
+    -o-transform: rotate(200deg) translate(12em) rotate(-200deg);
+    transform: rotate(200deg) translate(12em) rotate(-200deg);
+}
+.deg220 {
+    -webkit-transform: rotate(220deg) translate(12em) rotate(-220deg);
+    -moz-transform: rotate(220deg) translate(12em) rotate(-220deg);
+    -ms-transform: rotate(220deg) translate(12em) rotate(-220deg);
+    -o-transform: rotate(220deg) translate(12em) rotate(-220deg);
+    transform: rotate(220deg) translate(12em) rotate(-220deg);
+}
+.deg240 {
+    -webkit-transform: rotate(240deg) translate(12em) rotate(-240deg);
+    -moz-transform: rotate(240deg) translate(12em) rotate(-240deg);
+    -ms-transform: rotate(240deg) translate(12em) rotate(-240deg);
+    -o-transform: rotate(240deg) translate(12em) rotate(-240deg);
+    transform: rotate(240deg) translate(12em) rotate(-240deg);
+}
+.deg260 {
+    -webkit-transform: rotate(260deg) translate(12em) rotate(-260deg);
+    -moz-transform: rotate(260deg) translate(12em) rotate(-260deg);
+    -ms-transform: rotate(260deg) translate(12em) rotate(-260deg);
+    -o-transform: rotate(260deg) translate(12em) rotate(-260deg);
+    transform: rotate(260deg) translate(12em) rotate(-260deg);
+}
+.deg280 {
+    -webkit-transform: rotate(280deg) translate(12em) rotate(-280deg);
+    -moz-transform: rotate(280deg) translate(12em) rotate(-280deg);
+    -ms-transform: rotate(280deg) translate(12em) rotate(-280deg);
+    -o-transform: rotate(280deg) translate(12em) rotate(-280deg);
+    transform: rotate(280deg) translate(12em) rotate(-280deg);
+}
+.deg300 {
+    -webkit-transform: rotate(300deg) translate(12em) rotate(-300deg);
+    -moz-transform: rotate(300deg) translate(12em) rotate(-300deg);
+    -ms-transform: rotate(300deg) translate(12em) rotate(-300deg);
+    -o-transform: rotate(300deg) translate(12em) rotate(-300deg);
+    transform: rotate(300deg) translate(12em) rotate(-300deg);
+}
+.deg320 {
+    -webkit-transform: rotate(320deg) translate(12em) rotate(-320deg);
+    -moz-transform: rotate(320deg) translate(12em) rotate(-320deg);
+    -ms-transform: rotate(320deg) translate(12em) rotate(-320deg);
+    -o-transform: rotate(320deg) translate(12em) rotate(-320deg);
+    transform: rotate(320deg) translate(12em) rotate(-320deg);
+}
+.deg340 {
+    -webkit-transform: rotate(340deg) translate(12em) rotate(-340deg);
+    -moz-transform: rotate(340deg) translate(12em) rotate(-340deg);
+    -ms-transform: rotate(340deg) translate(12em) rotate(-340deg);
+    -o-transform: rotate(340deg) translate(12em) rotate(-340deg);
+    transform: rotate(340deg) translate(12em) rotate(-340deg);
+}

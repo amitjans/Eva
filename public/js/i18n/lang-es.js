@@ -235,7 +235,8 @@ const es = {
         MOV_LEDS: "Desplazar leds",
         CLONE_LEDS: "Clonar Leds",
         DELETE_FRAMES: "Eliminar cuadro",
-        DELETE_NEXT: "y los siguientes"
+        DELETE_NEXT: "y los siguientes",
+        LED_EMULATOR: "Emulador"
     },
     LISTEN: {
         TITLE: "Listado de modelos de voz",
