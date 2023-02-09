@@ -258,7 +258,7 @@ function executeEmulator() {
 function stopEmulator() {
     clearInterval(animEmulation);
     for (let j = 0; j < 17; j++) {
-        document.getElementById(`l${j}`).style.backgroundColor = `#000000`;
+        document.getElementById(`l${j}`).style.backgroundColor = `rgba(0, 0, 0, 0.0)`;
     }
     $('#emulator').modal('hide');
 }
@@ -267,7 +267,7 @@ const runAnim = () => {
     let i = 0;
     let loop = setInterval(() => {
         for (let j = 0; j < anim.frames[i].length; j++) {
-            document.getElementById(`l${j}`).style.backgroundColor = anim.frames[i][j];
+            document.getElementById(`l${j}`).style.backgroundColor = anim.frames[i][j] == "#000000" ? `rgba(0, 0, 0, 0.0)` : anim.frames[i][j];
         }
         i++;
         if (!anim.bucle && i >= anim.frames.length) {
