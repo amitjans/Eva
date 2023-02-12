@@ -23,22 +23,28 @@
                     <button class="btn btn-sm btn-outline-secondary" onclick="executeEmulator()"><i
                             class="fa-solid fa-eye"></i></button>
                     &nbsp;
-                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#importAnim"><i
-                            class="fa-solid fa-file-import"></i></button>
+                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#importAnim"><i class="fa-solid fa-file-import"></i></button>
                 </div>
             </div>
-            <from class="form-inline">
-                <label class="my-1 mr-2" for="inlineName">{{'COMMON.NAME' | translate}}</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineName" placeholder="Name">
+            <from class="row row-cols-lg-auto g-3 align-items-center">
 
-                <label class="my-1 mr-2" for="inlineTime">{{'LED.TIME' | translate}}</label>
-                <input type="number" class="form-control mb-2 mr-sm-2" id="inlineTime" value="100">
+                <div class="mb-3 row">
+                    <label for="inlineName" class="col-sm-2 col-form-label">{{'COMMON.NAME' | translate}}</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inlineName">
+                    </div>
+                </div>
 
-                <div class="form-check mb-2 mr-sm-2">
-                    <input class="form-check-input" type="checkbox" id="inlineBucle">
-                    <label class="form-check-label" for="inlineFormCheck">
-                        Bucle
-                    </label>
+                <div class="col-12">
+                    <label class="col-form-label col-sm-2" for="inlineTime">{{'LED.TIME' | translate}}</label>
+                    <input type="number" class="form-control" id="inlineTime" value="100">
+                </div>
+                <div class="col-12">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="inlineBucle" checked>
+                        <label class="form-check-label" for="inlineBucle">Bucle</label>
+                    </div>
                 </div>
             </from>
 
@@ -126,7 +132,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title"> {{'INTERACTION.IMPORT' |
                         translate}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -141,7 +147,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
                             class="fa-solid fa-xmark"></i></button>
                     <button type="button" class="btn btn-primary" onclick="importAnim()"><i
                             class="fa-solid fa-file-import"></i></button>
@@ -157,7 +163,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="optionsTitle"> {{'LEDEDITOR.MODAL' | translate}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -230,7 +236,7 @@
                     </from>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
                             class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
@@ -245,7 +251,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title"> {{'LEDEDITOR.LED_EMULATOR' |
                         translate}}</h5>
-                    <button type="button" class="close" onclick="stopEmulator()" aria-label="Close">
+                    <button type="button" class="btn-close" onclick="stopEmulator()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

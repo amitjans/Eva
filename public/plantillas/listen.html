@@ -5,131 +5,50 @@
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">{{'LISTEN.TITLE' | translate}}</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal"><span
+                    <button class="btn btn-sm btn-outline-secondary" onclick="openListenModalAdd()"><span
                             class="fa fa-plus"></span></button>
                 </div>
             </div>
             <div>
-                <div id="example_wrapper" class="dataTables_wrapper">
-                    <div class="form-inline">
-                        <div class="input-group mb-3 col-md-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text"
-                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.SHOW'
-                                    | translate}}</label>
-                            </div>
-                            <select class="form-control form-control-sm" ng-model="limit" ng-change="dataTable()">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <div class="input-group-append">
-                                <label class="input-group-text"
-                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.ENTRIES'
-                                    | translate}}</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6"></div>
-                        <div class="input-group mb-3 col-md-3">
-                            <label>{{'DATATABLE.SEARCH' | translate}}: </label>
-                            <input type="search" class="form-control form-control-sm" placeholder="" ng-model="q"
-                                ng-change="dataTable()">
-                        </div>
-                    </div>
-                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                        aria-describedby="example_info">
-                        <thead>
-                            <tr role="row">
-                                <th style="width: 350px;"> {{'LISTEN.LANGUAGE' | translate}}</th>
-                                <th style="width: 175px;"> {{'LISTEN.CODE' | translate}} (Google)</th>
-                                <th style="width: 175px;"> {{'LISTEN.CODE' | translate}} (Watson)</th>
-                                <th colspan="3" style="width: 50px;"> {{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                <td>{{ l.idioma }}</td>
-                                <td>{{ l.codigo }}</td>
-                                <td>{{ l.watson }}</td>
-                                <td>
-                                    <span class="btn btn-default" ng-click="enable(l)" ng-show="!!l.enabled"><i
-                                            class="fa fa-eye fa-sm"></i></span>
-                                    <span class="btn btn-default" ng-click="enable(l)" ng-show="!l.enabled"><i
-                                            class="fa fa-eye-slash fa-sm"></i></span>
-                                </td>
-                                <td><span class="btn btn-default" ng-click="update(l)"><i
-                                            class="fa fa-edit fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i
-                                            class="fa fa-trash fa-sm"></i></span></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>{{'LISTEN.LANGUAGE' | translate}}</th>
-                                <th>{{'LISTEN.CODE' | translate}} (Google)</th>
-                                <th>{{'LISTEN.CODE' | translate}} (Watson)</th>
-                                <th colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
-                        {{'DATATABLE.SHOWING' | translate}}
-                        {{ from }} {{'DATATABLE.TO' | translate}}
-                        {{ to > temp.length ? temp.length : to }} {{'DATATABLE.OF' | translate}}
-                        {{ temp.length }} {{'DATATABLE.ENTRIES' | translate}}</div>
-                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                        <a class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}" aria-controls="example"
-                            data-dt-idx="0" tabindex="-1" id="example_previous"
-                            ng-click="dataTable(-1)">{{'DATATABLE.PREVIOUS' | translate}}</a>
-                        <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}"
-                            aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next"
-                            ng-click="dataTable(1)">{{'DATATABLE.NEXT' | translate}}</a>
-                    </div>
-                </div>
+                <table id="listadoListen" class="table"></table>
             </div>
         </div>
     </div>
 
     <!-- Modal Listen -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modalListen" tabindex="-1" role="dialog" aria-labelledby="modalListenLabel">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">{{ accion }} {{'LISTEN.MODAL' | translate}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <h5 class="modal-title" id="modalListenLabel"></h5>
+                    <button type="button" class="btn-close" onclick="cleanListenModal()" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'LISTEN.LANGUAGE' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="idioma" placeholder="Nombre">
-                            </div>
+                    <form>
+                        <input type="hidden" id="listenId">
+                        <div class="mb-3">
+                            <label for="listenIdioma" class="col-form-label">{{'LISTEN.LANGUAGE' | translate}}:</label>
+                            <input type="text" class="form-control" id="listenIdioma">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'LISTEN.CODE' | translate}}(Google)</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="codigo"
-                                    placeholder="{{'LISTEN.CODE' | translate}}">
-                            </div>
+                        <div class="mb-3">
+                            <label for="listenCodigo" class="col-form-label">{{'LISTEN.CODE' |
+                                translate}}(Google):</label>
+                            <input type="text" class="form-control" id="listenCodigo">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'LISTEN.CODE' | translate}} (Watson)</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="watson"
-                                    placeholder="{{'LISTEN.CODE' | translate}}">
-                            </div>
+                        <div class="mb-3">
+                            <label for="listenWatson" class="col-form-label">{{'LISTEN.CODE' | translate}}
+                                (Watson):</label>
+                            <input type="text" class="form-control" id="listenWatson">
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="clear()">{{'COMMON.CLOSE' |
+                    <button type="button" class="btn btn-default" onclick="cleanListenModal()">{{'COMMON.CLOSE' |
                         translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
+                    <button type="button" id="bSave" onclick="newListen()" class="btn btn-primary">{{'COMMON.SAVE' |
                         translate}}</button>
-                    <button type="button" ng-show="!icon" ng-click="updatesend()"
+                    <button type="button" id="bUpdate" onclick="updateListen()"
                         class="btn btn-primary">{{'COMMON.UPDATE'
                         | translate}}</button>
                 </div>

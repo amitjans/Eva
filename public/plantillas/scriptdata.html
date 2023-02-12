@@ -10,8 +10,8 @@
                     <option ng-repeat="item in slistado" value="{{ item._id }}">{{ item.nombre }}</option>
                 </select>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal"><span
-                            class="fa fa-plus"></span></button>
+                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#myModal"><span class="fa fa-plus"></span></button>
                 </div>
             </div>
             <div>
@@ -104,7 +104,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">{{ accion }} {{'SCRIPT_DATA.SCRIPT' | translate}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">

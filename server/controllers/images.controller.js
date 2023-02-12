@@ -3,7 +3,11 @@ const imgcontroller = {};
 
 imgcontroller.getList = async (req, res) => {
     let files = await fs.promises.readdir('./public/images/');
-    res.status(200).json(files.map(item => { return { nombre: item, ext: item.split('.')[1].toUpperCase() }} ));
+    res.status(200).json(files
+        .filter(f => f.split('.').length > 1)
+        .map(item => {
+            return { nombre: item, ext: item.split('.')[1].toUpperCase() }
+        }));
 }
 
 imgcontroller.delete = async (req, res) => {

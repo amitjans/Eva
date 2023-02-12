@@ -16,6 +16,29 @@ async function postData(url = '', data = {}) {
     return response.json(); // parses JSON response into native JavaScript objects
 }
 
+async function putData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    return response.json();
+}
+
+async function deleteData(url = '') {
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    return response.json();
+}
+
 async function getData(url = '') {
     const response = await fetch(url, {
         cache: 'no-cache'

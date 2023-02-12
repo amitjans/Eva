@@ -148,15 +148,15 @@
                             <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.name }}</option>
                         </select>
                     </div>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"><i
+                    <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddid"><i
                             class="fa fa-plus"></i></button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddid"
+                    <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddid"
                         ng-click="update()" ng-show="!!wooid"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-default" ng-click="delete()" ng-show="!!wooid"><i
                             class="fa fa-trash"></i></button>
                     <button type="button" class="btn btn-default" ng-show="!!wooid" ng-click="updatesend(false)"><i
                             class="fa fa-cloud-upload">&nbsp;{{'COMMON.SAVE' | translate}}</i></button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#wooaddcs"
+                    <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddcs"
                         ng-show="!!wooid"><i class="fa fa-plus">&nbsp;{{'WOO.COMMAND' | translate}}</i></button>
                 </div>
                 <div class="form-group" ng-show="!!wooid">
@@ -175,8 +175,8 @@
         <div class="col-md-12">
             <div class="card-header bgm-bluegray">
                 <h2 ng-show="!!script"> {{'WOO.SCRIPT_DATA' | translate}}<small>
-                        <a href="#" style="float: right; font-size: 2em; color: black;" data-toggle="modal"
-                            data-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
+                        <a href="#" style="float: right; font-size: 2em; color: black;" data-bs-toggle="modal"
+                            data-bs-target="#myModal" target="_blank"><span class="fa fa-plus-circle"></span></a>
                     </small>
                 </h2>
             </div>
@@ -226,7 +226,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="wooadd">{{ accion }}</h4>
                 </div>
@@ -248,7 +248,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' |
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{'COMMON.CLOSE' |
                         translate}}</button>
                     <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
                         translate}}</button>
@@ -265,7 +265,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="wooadd">{{ accion }}</h4>
                 </div>
@@ -314,7 +314,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' |
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{'COMMON.CLOSE' |
                         translate}}</button>
                     <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">{{'COMMON.SAVE' |
                         translate}}</button>

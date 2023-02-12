@@ -1,4 +1,5 @@
 const pt = {
+	CODE: 'pt-BR',
 	TOOLBAR: {
 		NAME: "Controle Eva",
 		INI: "Iniciar",
@@ -26,16 +27,6 @@ const pt = {
 		FR: "Francês",
 		IT: "Italiano",
 		JA: "Japonês"
-	},
-	DATATABLE: {
-		SHOW: "Mostar",
-		SEARCH: "Pesquisar",
-		SHOWING: "Mostrando",
-		TO: "a",
-		OF: "de",
-		ENTRIES: "registros",
-		PREVIOUS: "Anterior",
-		NEXT: "Próximo"
 	},
 	AUDIO: {
 		TITLE: "Lista de Áudios",
