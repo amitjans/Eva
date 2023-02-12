@@ -46,14 +46,12 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
                 }
             }]
         })
-
     }
     $scope.list();
 }]);
 
 function newListen() {
     postData(`/api/common?db=googlestt`, {
-        _id: document.getElementById('listenId').value,
         idioma: document.getElementById('listenIdioma').value,
         codigo: document.getElementById('listenCodigo').value,
         watson: document.getElementById('listenWatson').value,
@@ -87,7 +85,6 @@ function enableListen(id) {
                 $('#listadoListen').bootstrapTable('refresh');
             });
     });
-
 }
 
 function updateListen() {
