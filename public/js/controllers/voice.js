@@ -1,82 +1,159 @@
 eva.controller('voice', ['$scope', '$http', function ($scope, $http) {
-    $scope.listado = [];
-    $scope.sublist = [];
-    $scope.temp = [];
-    $scope.icon = true;
-    $scope.updateid;
-    $scope.accion = locale().COMMON.ADD;
-    Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
-        $http.get('/api/common?db=voice').then(function successCallback(response) {
-            $scope.listado = response.data;
-            $scope.dataTable();
-        }, function errorCallback(response) {
-        });
+        $('#listadoVoice').bootstrapTable({
+            url: '/api/common?db=voice',
+            pagination: true,
+            search: true,
+            searchTimeOut: 1000,
+            locale: locale().CODE,
+            columns: [{
+                field: 'idioma',
+                title: locale().VOICE.LANGUAGE,
+                sortable: true,
+                searchable: true,
+                align: 'left',
+                width: 350,
+                widthUnit: 'px',
+            }, {
+                field: 'servicio',
+                title: locale().VOICE.SERVICE,
+                sortable: true,
+                searchable: true,
+                width: 175,
+                widthUnit: 'px',
+            }, {
+                field: 'codigo',
+                title: locale().VOICE.CODE,
+                sortable: true,
+                searchable: true,
+                width: 175,
+                widthUnit: 'px',
+            }, {
+                field: 'nombre',
+                title: locale().COMMON.OPTIONS,
+                sortable: true,
+                searchable: true,
+                width: 175,
+                widthUnit: 'px',
+            }, {
+                title: locale().COMMON.OPTIONS,
+                align: 'center',
+                width: 200,
+                widthUnit: 'px',
+                formatter: function (value, row, index) {
+                    return [`<span class="btn btn-default" onclick="enableVoice('${row._id}')">
+                    <i class="fa fa-eye${(!!row.enable ? '' : '-slash')} fa-sm"></i>
+                    </span>
+                    <span class="btn btn-default" onclick="setForUpdateVoice('${row._id}')">
+                    <i class="fa fa-edit fa-sm"></i>
+                    </span>
+                    <span class="btn btn-default" onclick="deleteVoice('${row._id}')">
+                    <i class="fa fa-trash fa-sm"></i>
+                    </span>`];
+                }
+            }]
+        })
     }
-
-    $scope.create = function () {
-        var json = { idioma: $scope.idioma, servicio: $scope.servicio, codigo: $scope.codigo, nombre: $scope.nombre };
-        $http.post('/api/common?db=voice', json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().VOICE.NOTIFY.POST.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().VOICE.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.update = function (l) {
-        $scope.updateid = l._id;
-        $scope.idioma = l.idioma;
-        $scope.servicio = l.servicio;
-        $scope.codigo = l.codigo;
-        $scope.nombre = l.nombre;
-        $scope.icon = false;
-        $scope.accion = locale().COMMON.EDIT;
-        $('#myModal').modal('show');
-    }
-
-    $scope.updatesend = function () {
-        var json = { idioma: $scope.idioma, servicio: $scope.servicio, codigo: $scope.codigo, nombre: $scope.nombre };
-        $http.put('/api/common/' + $scope.updateid + '?db=voice', json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().VOICE.NOTIFY.UPDATE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().VOICE.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.enable = function (obj) {
-        obj.enabled = !(!!obj.enabled);
-        $http.put('/api/common/' + obj._id + '?db=voice', obj).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().LISTEN.NOTIFY.UPDATE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().LISTEN.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.delete = function (id) {
-        if (confirm(locale().COMMON.DELETE)) {
-            $http.delete('/api/common/' + id + '?db=voice').then(function successCallback(response) {
-                $scope.list();
-                notify(locale().VOICE.NOTIFY.DELETE.SUCCESS);
-            }, function errorCallback(response) {
-                notify(locale().VOICE.NOTIFY.ERROR, 'danger');
-            });
-        }
-    }
-
-    $scope.dataTable = function (way = 0) {
-        let obj = dataTable($scope.listado, $scope, way, 'nombre', 'codigo', 'idioma', 'servicio');
-        Object.assign($scope, obj);
-    }
-
-    $scope.clear = function () {
-        Object.assign($scope, { idioma: '', servicio: '', codigo: '', nombre: '', icon: true, accion: locale().COMMON.ADD });
-        $('#myModal').modal('hide');
-        $scope.list();
-    }
-
     $scope.list();
 }]);
+
+function newVoice() {
+    postData(`/api/common?db=voice`, {
+        idioma: document.getElementById('voiceIdioma').value,
+        servicio: document.getElementById('voiceServicio').value,
+        codigo: document.getElementById('voiceCodigo').value,
+        nombre: document.getElementById('voiceNombre').value,
+    }).then((data) => {
+        notify(locale().VOICE.NOTIFY.POST.SUCCESS);
+        cleanVoiceModal();
+    })
+        .catch((error) => {
+            notify(locale().VOICE.NOTIFY.ERROR, 'danger');
+        });
+}
+
+function setForUpdateVoice(id) {
+    getData(`/api/common/${id}?db=voice`).then(edit => {
+        document.getElementById('voiceId').value = id;
+        document.getElementById('voiceIdioma').value = edit.idioma;
+        document.getElementById('voiceServicio').value = edit.servicio;
+        document.getElementById('voiceCodigo').value = edit.codigo;
+        document.getElementById('voiceNombre').value = edit.nombre;
+        openVoiceModalEdit();
+    });
+}
+
+function enableVoice(id) {
+    getData(`/api/common/${id}?db=voice`).then(edit => {
+        edit.enable = !edit.enable;
+        putData(`/api/common/${id}?db=voice`, edit)
+            .then((data) => {
+                $('#listadoVoice').bootstrapTable('refresh');
+            })
+            .catch((error) => {
+                $('#listadoVoice').bootstrapTable('refresh');
+            });
+    });
+}
+
+function updateVoice() {
+    let id = document.getElementById('voiceId').value;
+    putData(`/api/common/${id}?db=voice`, {
+        idioma: document.getElementById('voiceIdioma').value,
+        servicio: document.getElementById('voiceServicio').value,
+        codigo: document.getElementById('voiceCodigo').value,
+        nombre: document.getElementById('voiceNombre').value,
+    }).then((data) => {
+        notify(locale().VOICE.NOTIFY.UPDATE.SUCCESS);
+        cleanVoiceModal();
+    })
+        .catch((error) => {
+            notify(locale().VOICE.NOTIFY.ERROR, 'danger');
+        });
+}
+
+function deleteVoice(id) {
+    deleteData(`/api/common/${id}?db=voice`)
+        .then((data) => {
+            notify(locale().VOICE.NOTIFY.DELETE.SUCCESS);
+        })
+        .catch((error) => {
+            notify(locale().VOICE.NOTIFY.ERROR, 'danger');
+        });
+    $('#listadoVoice').bootstrapTable('refresh');
+}
+
+function modalTitle(id, title) {
+    document.getElementById(id).innerText = title;
+}
+
+function cleanVoiceModal() {
+    document.getElementById('voiceId').value = "";
+    document.getElementById('voiceIdioma').value = "";
+    document.getElementById('voiceServicio').value = "";
+    document.getElementById('voiceCodigo').value = "";
+    document.getElementById('voiceNombre').value = "";
+    modal.hide();
+    $('#listadoVoice').bootstrapTable('refresh');
+}
+
+function openVoiceModalAdd() {
+    document.getElementById('bUpdate').style.display = 'none';
+    document.getElementById('bSave').style.display = 'block';
+    modalTitle('modalVoiceLabel', `${locale().COMMON.ADD} ${locale().VOICE.MODAL}`);
+    modal = new bootstrap.Modal('#modalVoice', {
+        keyboard: false
+    })
+    modal.show();
+}
+
+function openVoiceModalEdit() {
+    document.getElementById('bSave').style.display = 'none';
+    document.getElementById('bUpdate').style.display = 'block';
+    modalTitle('modalVoiceLabel', `${locale().COMMON.EDIT} ${locale().VOICE.MODAL}`);
+    modal = new bootstrap.Modal('#modalVoice', {
+        keyboard: false
+    })
+    modal.show();
+}
