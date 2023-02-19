@@ -13,14 +13,16 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
+                                        <input type="text" class="form-control input-sm" ng-model="nombre"
+                                            placeholder="Nombre">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'CONFIG.VOICE' | translate}}</label>
                                     <div class="col-sm-10">
                                         <select name="voice" id="" ng-model="voice" class="form-control">
-                                            <option ng-repeat="item in listado" value="{{item.codigo}}" ng-if="!!item.enabled">
+                                            <option ng-repeat="item in listado" value="{{item.codigo}}"
+                                                ng-if="!!item.enabled">
                                                 {{ item.nombre + ' (' + item.idioma + ' - ' + item.servicio + ')' }}
                                             </option>
                                         </select>
@@ -38,7 +40,8 @@
                                     <label class="col-sm-2 control-label">{{'CONFIG.LISTEN' | translate}}</label>
                                     <div class="col-sm-10">
                                         <select name="leds" id="" ng-model="listen" class="form-control">
-                                            <option ng-repeat="m in sttlist" ng-if="!!m.codigo && !!m.watson && !!m.enabled" value="{{ m._id }}">
+                                            <option ng-repeat="m in sttlist"
+                                                ng-if="!!m.codigo && !!m.watson && !!m.enabled" value="{{ m._id }}">
                                                 {{ m.idioma }}
                                             </option>
                                         </select>
@@ -53,10 +56,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
 
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.JOY' | translate}}</div>
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.JOY' |
+                                translate}}</div>
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
@@ -78,7 +82,8 @@
                         </div>
 
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.SAD' | translate}}</div>
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.SAD' |
+                                translate}}</div>
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
@@ -100,7 +105,8 @@
                         </div>
 
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.ANGER' | translate}}</div>
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.ANGER' |
+                                translate}}</div>
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
@@ -122,7 +128,8 @@
                         </div>
 
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.SURPRISE' | translate}}</div>
+                            <div class="panel-heading">{{'INTERACTION.EMOTION' | translate}}: {{'EMOTION_TYPE.SURPRISE'
+                                | translate}}</div>
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">{{'CONFIG.MOV' | translate}}</label>
@@ -144,7 +151,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="button" ng-click="update()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
+                            <button type="button" ng-click="update()" class="btn btn-primary"><i
+                                    class="fa-solid fa-floppy-disk"></i></button>
                         </div>
                     </div>
                 </div>
