@@ -1,100 +1,160 @@
+var scriptDataId = "";
 eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    $scope.listado = [];
-    $scope.sublist = [];
-    $scope.temp = [];
-    $scope.accion = locale().COMMON.ADD;
-    $scope.icon = true;
-    $scope.updateid;
-    Object.assign($scope, dataTableValues());
-
-    $scope.list = function () {
-        $http.get('/api/script/data/' + $scope.script).then(function successCallback(response) {
-            $scope.listado = response.data;
-            $scope.dataTable();
-        }, function errorCallback(response) {
-        });
-    }
-
     $scope.slist = function () {
         $http.get('/api/common?db=script').then(function successCallback(response) {
             $scope.slistado = response.data;
             if (!!$routeParams.id) {
-                $scope.script = $routeParams.id;
-                $scope.list();
+                scriptDataId = $routeParams.id;
+                document.getElementById("inlineFormCustomSelect").value = scriptDataId;
+                table({ value: scriptDataId });
             }
         }, function errorCallback(response) {
         });
     }
-
-    $scope.create = function () {
-        var json = { campo1: $scope.c1.trim(), campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4, script: $scope.script };
-        $http.post('/api/common?db=scriptdata', json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.uploadcloud = function () {
-        var json = { name: $scope.slistado.filter(i => i._id == $scope.script)[0].nombre, scriptData: $scope.listado };
-        $http.post('https://eva-repository.herokuapp.com/script', json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.update = function (l) {
-        $scope.updateid = l._id;
-        $scope.c1 = l.campo1;
-        $scope.c2 = l.campo2;
-        $scope.c3 = l.campo3;
-        $scope.c4 = l.campo4;
-        $scope.icon = false;
-        $scope.accion = locale().COMMON.EDIT;
-        $('#myModal').modal('show');
-    }
-
-    $scope.updatesend = function () {
-        var json = { campo1: $scope.c1.trim(), campo2: $scope.c2, campo3: $scope.c3, campo4: $scope.c4 };
-        $http.put('/api/common/' + $scope.updateid + '?db=scriptdata', json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().SCRIPT_DATA.NOTIFY.UPDATE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.delete = function (id) {
-        if (confirm(locale().COMMON.DELETE)) {
-            $http.delete('/api/common/' + id + '?db=scriptdata').then(function successCallback(response) {
-                $scope.list();
-                notify(locale().SCRIPT_DATA.NOTIFY.DELETE.SUCCESS);
-            }, function errorCallback(response) {
-                notify(locale().SCRIPT_DATA.NOTIFY.ERROR, 'danger');
-            });
-        }
-    }
-
-    $scope.speak = function (value) {
-        $http.get('/speak?speak=' + value).then(function successCallback(response) {
-        }, function errorCallback(response) {
-            notify(locale().SCRIPT_DATA.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.dataTable = function (way = 0) {
-        let obj = dataTable($scope.listado, $scope, way, 'campo1', 'campo2');
-        Object.assign($scope, obj);
-    }
-
-    $scope.clear = function () {
-        Object.assign($scope, { c1: '', c2: '', c3: '', c4: '', icon: true, accion: locale().COMMON.ADD });
-        $('#myModal').modal('hide');
-        $scope.list();
-    }
-
     $scope.slist();
 }]);
+
+function table(obj) {
+    $('#listadoScriptdata').bootstrapTable('destroy');
+    $('#listadoScriptdata').bootstrapTable({
+        url: `/api/script/data/${obj.value}`,
+        pagination: true,
+        search: true,
+        searchTimeOut: 1000,
+        locale: locale().CODE,
+        columns: [{
+            field: 'campo1',
+            title: locale().SCRIPT_DATA.FIELD + '1',
+            sortable: true,
+            searchable: true,
+            align: 'left',
+            width: 300,
+            widthUnit: 'px',
+        }, {
+            field: 'campo2',
+            title: locale().SCRIPT_DATA.FIELD + '2',
+            sortable: true,
+            searchable: true,
+            align: 'left',
+            width: 300,
+            widthUnit: 'px',
+        }, {
+            field: 'campo3',
+            title: locale().SCRIPT_DATA.FIELD + '3',
+            sortable: true,
+            searchable: true,
+            align: 'left',
+            width: 300,
+            widthUnit: 'px',
+        }, {
+            field: 'campo4',
+            title: locale().SCRIPT_DATA.FIELD + '4',
+            sortable: true,
+            searchable: true,
+            align: 'left',
+            width: 300,
+            widthUnit: 'px',
+        }, {
+            title: locale().COMMON.OPTIONS,
+            align: 'center',
+            width: 200,
+            widthUnit: 'px',
+            formatter: function (value, row, index) {
+                return [`<span class="btn btn-default" onclick="setForUpdateScriptdata('${row._id}')">
+                    <i class="fa fa-edit fa-sm"></i>
+                    </span>
+                    <span class="btn btn-default" onclick="deleteScriptdata('${row._id}')">
+                    <i class="fa fa-trash fa-sm"></i>
+                    </span>`];
+            }
+        }]
+    });
+}
+
+function newScriptdata() {
+    postData(`/api/common?db=scriptdata`, {
+        script: document.getElementById("inlineFormCustomSelect").value,
+        campo1: document.getElementById('scriptdataCampo1').value,
+        campo2: document.getElementById('scriptdataCampo2').value,
+        campo3: document.getElementById('scriptdataCampo3').value,
+        campo4: document.getElementById('scriptdataCampo4').value
+    }).then((data) => {
+        notify(locale().SCRIPT_DATA.NOTIFY.POST.SUCCESS);
+        cleanScriptdataModal();
+    }).catch((error) => {
+        notify(locale().SCRIPT_DATA.NOTIFY.ERROR, 'danger');
+    });
+}
+
+function setForUpdateScriptdata(id) {
+    getData(`/api/common/${id}?db=scriptdata`).then(edit => {
+        document.getElementById('scriptdataId').value = id;
+        document.getElementById('scriptdataCampo1').value = edit.campo1;
+        document.getElementById('scriptdataCampo2').value = edit.campo2;
+        document.getElementById('scriptdataCampo3').value = edit.campo3;
+        document.getElementById('scriptdataCampo4').value = edit.campo4;
+        openScriptdataModalEdit();
+    });
+}
+
+function updateScriptdata() {
+    let id = document.getElementById('scriptdataId').value;
+    putData(`/api/common/${id}?db=scriptdata`, {
+        script: document.getElementById("inlineFormCustomSelect").value,
+        campo1: document.getElementById('scriptdataCampo1').value,
+        campo2: document.getElementById('scriptdataCampo2').value,
+        campo3: document.getElementById('scriptdataCampo3').value,
+        campo4: document.getElementById('scriptdataCampo4').value
+    }).then((data) => {
+        notify(locale().SCRIPT_DATA.NOTIFY.UPDATE.SUCCESS);
+        cleanScriptdataModal();
+    })
+        .catch((error) => {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR, 'danger');
+        });
+}
+
+function deleteScriptdata(id) {
+    deleteData(`/api/common/${id}?db=scriptdata`)
+        .then((data) => {
+            notify(locale().SCRIPT_DATA.NOTIFY.DELETE.SUCCESS);
+        })
+        .catch((error) => {
+            notify(locale().SCRIPT_DATA.NOTIFY.ERROR, 'danger');
+        });
+    $('#listadoScriptdata').bootstrapTable('refresh');
+}
+
+function modalTitle(id, title) {
+    document.getElementById(id).innerText = title;
+}
+
+function cleanScriptdataModal() {
+    document.getElementById('scriptdataId').value = "";
+    document.getElementById('scriptdataCampo1').value = "";
+    document.getElementById('scriptdataCampo2').value = "";
+    document.getElementById('scriptdataCampo3').value = "";
+    document.getElementById('scriptdataCampo4').value = "";
+    modal.hide();
+    $('#listadoScriptdata').bootstrapTable('refresh');
+}
+
+function openScriptdataModalAdd() {
+    document.getElementById('bUpdate').style.display = 'none';
+    document.getElementById('bSave').style.display = 'block';
+    modalTitle('modalScriptdataLabel', `${locale().COMMON.ADD} ${locale().LISTEN.MODAL}`);
+    modal = new bootstrap.Modal('#modalScriptdata', {
+        keyboard: false
+    })
+    modal.show();
+}
+
+function openScriptdataModalEdit() {
+    document.getElementById('bSave').style.display = 'none';
+    document.getElementById('bUpdate').style.display = 'block';
+    modalTitle('modalScriptdataLabel', `${locale().COMMON.EDIT} ${locale().LISTEN.MODAL}`);
+    modal = new bootstrap.Modal('#modalScriptdata', {
+        keyboard: false
+    })
+    modal.show();
+}
