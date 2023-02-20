@@ -1,49 +1,46 @@
 <div class="container" ng-controller="cloud">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bgm-bluegray">
-                    <h2> {{'CLOUD.TITLE' | translate}}<small></small></h2>
-                </div>
-                <div>
-                    <div id="example_wrapper" class="dataTables_wrapper">
-                        <table id="example" class="display dataTable" role="grid" aria-describedby="example_info">
-                            <thead>
-                                <tr role="row">
-                                    <th> {{'CLOUD.SERVICE' | translate}}</th>
-                                    <th> {{'CLOUD.VAR' | translate}}</th>
-                                    <th> {{'CLOUD.VALUE' | translate}}</th>
-                                    <th> {{'CLOUD.STATUS' | translate}}</th>
-                                    <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="l in listado">
-                                    <td ng-if="!l.before" rowspan="{{ l.rowspan }}">{{ l.service }}</td>
-                                    <td>{{ l.key }}</td>
-                                    <td style="word-break: break-all;">{{ l.value }}</td>
-                                    <td ng-if="!l.before" rowspan="{{ l.rowspan }}"
-                                        style="text-align: center; vertical-align: middle; color: {{ l.color }} ">
-                                        <span class="fa fa-{{ l.icon }}-circle fa-2x"></span>
-                                    </td>
-                                    <td><span class="btn btn-default" ng-click="modal(l.key, l.value)"><i
-                                                class="fa fa-edit fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="delete(l.key)"><i
-                                                class="fa fa-trash fa-sm"></i></span></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th> {{'CLOUD.SERVICE' | translate}}</th>
-                                    <th> {{'CLOUD.VAR' | translate}}</th>
-                                    <th> {{'CLOUD.VALUE' | translate}}</th>
-                                    <th> {{'CLOUD.STATUS' | translate}}</th>
-                                    <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">{{'CLOUD.TITLE' | translate}}</h1>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr role="row">
+                            <th> {{'CLOUD.SERVICE' | translate}}</th>
+                            <th> {{'CLOUD.VAR' | translate}}</th>
+                            <th> {{'CLOUD.VALUE' | translate}}</th>
+                            <th> {{'CLOUD.STATUS' | translate}}</th>
+                            <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="l in listado">
+                            <td ng-if="!l.before" rowspan="{{ l.rowspan }}">{{ l.service }}</td>
+                            <td>{{ l.key }}</td>
+                            <td style="word-break: break-all;">{{ l.value }}</td>
+                            <td ng-if="!l.before" rowspan="{{ l.rowspan }}"
+                                style="text-align: center; vertical-align: middle; color: {{ l.color }} ">
+                                <span class="fa fa-{{ l.icon }}-circle fa-2x"></span>
+                            </td>
+                            <td><span class="btn btn-default" ng-click="modal(l.key, l.value)"><i
+                                        class="fa fa-edit fa-sm"></i></span></td>
+                            <td><span class="btn btn-default" ng-click="delete(l.key)"><i
+                                        class="fa fa-trash fa-sm"></i></span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th> {{'CLOUD.SERVICE' | translate}}</th>
+                            <th> {{'CLOUD.VAR' | translate}}</th>
+                            <th> {{'CLOUD.VALUE' | translate}}</th>
+                            <th> {{'CLOUD.STATUS' | translate}}</th>
+                            <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
