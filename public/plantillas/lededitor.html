@@ -27,26 +27,25 @@
                         data-bs-target="#importAnim"><i class="fa-solid fa-file-import"></i></button>
                 </div>
             </div>
-            <from class="row row-cols-lg-auto g-3 align-items-center">
 
-                <div class="mb-3 row">
-                    <label for="inlineName" class="col-sm-2 col-form-label">{{'COMMON.NAME' | translate}}</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inlineName">
-                    </div>
+            <form class="row g-3">
+                <div class="col-sm-2 my-1">
+                    <label class="form-label" for="inlineName">{{'COMMON.NAME' | translate}}</label>
+                    <input type="text" class="form-control" id="inlineName" placeholder="Jane Doe">
                 </div>
-
-                <div class="col-12">
-                    <label class="col-form-label col-sm-2" for="inlineTime">{{'LED.TIME' | translate}}</label>
+                <div class="col-sm-2 my-1">
+                    <label class="form-label" for="inlineTime">{{'LED.TIME' | translate}}</label>
                     <input type="number" class="form-control" id="inlineTime" value="100">
                 </div>
-                <div class="col-12">
+                <div class="col-sm-1 my-1">
+                    <label class="form-check-label" for="inlineBucle">Bucle</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="inlineBucle" checked>
-                        <label class="form-check-label" for="inlineBucle">Bucle</label>
+                        <input class="form-check-input"
+                            style="height: 2em !important; width: 4em !important; margin-top: 0.8em;" type="checkbox"
+                            role="switch" id="inlineBucle" checked>
                     </div>
                 </div>
-            </from>
+            </form>
 
             <div class="row">
                 <div class="bd-callout bd-callout-info col-md-6" id="generalOptions">
@@ -61,67 +60,64 @@
             </div>
 
             <div>
-                <div id="example_wrapper" class="dataTables_wrapper">
-                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                        aria-describedby="example_info">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
-                                <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
-                                <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                            <tr>
-                                <th>0</th>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                                <th>5</th>
-                                <th>6</th>
-                                <th>7</th>
-                                <th>8</th>
-                                <th>9</th>
-                                <th>10</th>
-                                <th>11</th>
-                                <th>12</th>
-                                <th>13</th>
-                                <th>14</th>
-                                <th>15</th>
-                                <th>16</th>
-                                <th>17</th>
-                            </tr>
-                        </thead>
-                        <tbody id="frames">
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
-                                <th>0</th>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                                <th>5</th>
-                                <th>6</th>
-                                <th>7</th>
-                                <th>8</th>
-                                <th>9</th>
-                                <th>10</th>
-                                <th>11</th>
-                                <th>12</th>
-                                <th>13</th>
-                                <th>14</th>
-                                <th>15</th>
-                                <th>16</th>
-                                <th>17</th>
-                                <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                            <tr>
-                                <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                <table class="table" style="width: 100%;" role="grid">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
+                            <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
+                            <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                        <tr>
+                            <th>0</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                        </tr>
+                    </thead>
+                    <tbody id="frames">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
+                            <th>0</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                            <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>

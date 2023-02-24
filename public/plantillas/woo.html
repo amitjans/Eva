@@ -85,9 +85,12 @@
                     <div class="card">
                         <div class="card-header">{{'EMOTION_TYPE.NEUTRAL' | translate}}</div>
                         <div class="card-body">
-                            <span class="emojin" ng-click="emotion('ini', 0)">&#128528;</span>
-                            <span class="emojin" ng-click="emotion('blink', 0)">&#128528;</span>
-                            <span class="emojin" ng-click="emotion('wink', 0)">&#128521;</span>
+                            <span class="emojin" ng-click="emotion('ini', 0)"><i
+                                    class="fa-solid fa-face-meh"></i></span>
+                            <span class="emojin" ng-click="emotion('blink', 0)"><i
+                                    class="fa-solid fa-face-meh"></i></span>
+                            <span class="emojin" ng-click="emotion('wink', 0)"><i
+                                    class="fa-solid fa-face-smile-wink"></i></span>
                         </div>
                     </div>
                 </div>
@@ -95,9 +98,12 @@
                     <div class="card">
                         <div class="card-header">{{'EMOTION_TYPE.JOY' | translate}}</div>
                         <div class="card-body">
-                            <span class="emojin" ng-click="emotion('joy', 0)">&#128578;</span>
-                            <span class="emojin" ng-click="emotion('joy', 1)">&#128512;</span>
-                            <span class="emojin" ng-click="emotion('joy', 2)">&#128514;</span>
+                            <span class="emojin" ng-click="emotion('joy', 0)"><i
+                                    class="fa-solid fa-face-smile"></i></span>
+                            <span class="emojin" ng-click="emotion('joy', 1)"><i
+                                    class="fa-solid fa-face-laugh-squint"></i></span>
+                            <span class="emojin" ng-click="emotion('joy', 2)"><i
+                                    class="fa-solid fa-face-grin-squint-tears"></i></span>
                         </div>
                     </div>
                 </div>
@@ -105,9 +111,12 @@
                     <div class="card">
                         <div class="card-header">{{'EMOTION_TYPE.SAD' | translate}}</div>
                         <div class="card-body">
-                            <span class="emojin" ng-click="emotion('sad', 0)">&#128551;</span>
-                            <span class="emojin" ng-click="emotion('sad', 1)">&#128546;</span>
-                            <span class="emojin" ng-click="emotion('sad', 2)">&#128557;</span>
+                            <span class="emojin" ng-click="emotion('sad', 0)"><i
+                                    class="fa-solid fa-face-frown"></i></span>
+                            <span class="emojin" ng-click="emotion('sad', 1)"><i
+                                    class="fa-solid fa-face-sad-tear"></i></span>
+                            <span class="emojin" ng-click="emotion('sad', 2)"><i
+                                    class="fa-solid fa-face-sad-cry"></i></span>
                         </div>
                     </div>
                 </div>
@@ -118,9 +127,12 @@
                     <div class="card">
                         <div class="card-header">{{'EMOTION_TYPE.ANGER' | translate}}</div>
                         <div class="card-body">
-                            <span class="emojin" ng-click="emotion('anger', 0)">&#128544;</span>
-                            <span class="emojin" ng-click="emotion('anger', 1)">&#128545;</span>
-                            <span class="emojin" ng-click="emotion('anger', 2)">&#129324;</span>
+                            <span class="emojin" ng-click="emotion('anger', 0)"><i
+                                    class="fa-solid fa-face-angry"></i></span>
+                            <span class="emojin" ng-click="emotion('anger', 1)"><i
+                                    class="fa-solid fa-face-angry"></i></span>
+                            <span class="emojin" ng-click="emotion('anger', 2)"><i
+                                    class="fa-solid fa-face-angry"></i></span>
                         </div>
                     </div>
                 </div>
@@ -128,9 +140,12 @@
                     <div class="card">
                         <div class="card-header">{{'EMOTION_TYPE.SURPRISE' | translate}}</div>
                         <div class="card-body">
-                            <span class="emojin" ng-click="emotion('surprise', 0)">&#128558;</span>
-                            <span class="emojin" ng-click="emotion('surprise', 1)">&#128559;</span>
-                            <span class="emojin" ng-click="emotion('surprise', 2)">&#128562;</span>
+                            <span class="emojin" ng-click="emotion('surprise', 0)"><i
+                                    class="fa-solid fa-face-surprise"></i></span>
+                            <span class="emojin" ng-click="emotion('surprise', 1)"><i
+                                    class="fa-solid fa-face-surprise"></i></span>
+                            <span class="emojin" ng-click="emotion('surprise', 2)"><i
+                                    class="fa-solid fa-face-flushed"></i></span>
                         </div>
                     </div>
                 </div>
@@ -181,41 +196,38 @@
                 </h2>
             </div>
             <div>
-                <div id="example_wrapper" class="dataTables_wrapper">
-                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                        aria-describedby="example_info">
-                        <thead>
-                            <tr role="row">
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 25px;">
-                                    {{'WOO.TYPE' | translate}}</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 875px;">
-                                    {{'WOO.DESCRIPTION' | translate}}</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="3" style="width: 100px;">
-                                    {{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="l in commands" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                <td id="{{ l.order }}" style="text-align: center;"><span style="color: black;"
-                                        class="fa fa-2x {{ fa_icon(l.type) }}"></span></td>
-                                <td>{{ l.desc }}</td>
-                                <td><span class="btn btn-default" ng-click="ucommand($index)"><i
-                                            class="fa fa-edit fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="cdelete($index)"><i
-                                            class="fa fa-trash fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="execute(l)"><i
-                                            class="fa fa-play fa-sm"></i></span></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">{{'WOO.TYPE' | translate}}</th>
-                                <th rowspan="1" colspan="1">{{'WOO.DESCRIPTION' | translate}}</th>
-                                <th rowspan="1" colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                <table id="example" class="table">
+                    <thead>
+                        <tr role="row">
+                            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 25px;">
+                                {{'WOO.TYPE' | translate}}</th>
+                            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 875px;">
+                                {{'WOO.DESCRIPTION' | translate}}</th>
+                            <th tabindex="0" aria-controls="example" rowspan="1" colspan="3" style="width: 100px;">
+                                {{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="l in commands" role="row" class="{{ $even ? 'even' : 'odd'}}">
+                            <td id="{{ l.order }}" style="text-align: center;"><span style="color: black;"
+                                    class="fa {{ fa_icon(l.type) }}"></span></td>
+                            <td>{{ l.desc }}</td>
+                            <td><span class="btn btn-default" ng-click="ucommand($index)"><i
+                                        class="fa fa-edit fa-sm"></i></span></td>
+                            <td><span class="btn btn-default" ng-click="cdelete($index)"><i
+                                        class="fa fa-trash fa-sm"></i></span></td>
+                            <td><span class="btn btn-default" ng-click="execute(l)"><i
+                                        class="fa fa-play fa-sm"></i></span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th rowspan="1" colspan="1">{{'WOO.TYPE' | translate}}</th>
+                            <th rowspan="1" colspan="1">{{'WOO.DESCRIPTION' | translate}}</th>
+                            <th rowspan="1" colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
@@ -226,34 +238,29 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="wooadd">{{ accion }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="wooadd">{{ accion }}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="name">
-                            </div>
+                    <form>
+                        <div class="mb-3">
+                            <label class="col-form-label">{{'COMMON.NAME' | translate}}:</label>
+                            <input type="text" class="form-control" ng-model="name">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'WOO.ORDER' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="order"
-                                    placeholder="Separados por coma">
-                            </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">{{'WOO.ORDER' | translate}}:</label>
+                            <input type="text" class="form-control" ng-model="order" placeholder="Separados por coma">
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{'COMMON.CLOSE' |
-                        translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
-                        translate}}</button>
-                    <button type="button" ng-show="!icon" ng-click="updatesend(true)"
-                        class="btn btn-primary">{{'COMMON.UPDATE' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
+                    <button type="button" ng-show="!icon" ng-click="updatesend(true)" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
                 </div>
             </div>
         </div>
@@ -265,59 +272,49 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="wooadd">{{ accion }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="wooadd">{{ accion }}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'WOO.TYPE' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="" ng-model="tipo" id="" class="form-control">
-                                    <option value="speak" selected>{{'WOO.SPEAK' | translate}}</option>
-                                    <option value="sound">{{'WOO.SOUND' | translate}}</option>
-                                    <option value="led">{{'WOO.LED' | translate}}</option>
-                                </select>
-                            </div>
+                    <form>
+                        <div class="mb-3">
+                            <label class="col-form-label">{{'WOO.TYPE' | translate}}:</label>
+                            <select name="" ng-model="tipo" id="" class="form-select">
+                                <option value="speak" selected>{{'WOO.SPEAK' | translate}}</option>
+                                <option value="sound">{{'WOO.SOUND' | translate}}</option>
+                                <option value="led">{{'WOO.LED' | translate}}</option>
+                            </select>
                         </div>
-                        <div class="form-group" ng-show="tipo == 'speak'">
-                            <label class="col-sm-2 control-label">{{'WOO.TEXT' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="text">
-                            </div>
+                        <div class="mb-3" ng-show="tipo == 'speak'">
+                            <label class="col-form-label">{{'WOO.TEXT' | translate}}:</label>
+                            <input type="text" class="form-control" ng-model="text">
                         </div>
-                        <div class="form-group" ng-show="tipo == 'sound'">
-                            <label class="col-sm-2 control-label">{{'WOO.AUDIO' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="" id="" ng-model="thesound" class="form-control">
-                                    <option value="" selected>{{'WOO.NONE' | translate}}</option>
-                                    <option ng-repeat="item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}
-                                    </option>
-                                </select>
-                            </div>
+                        <div class="mb-3" ng-show="tipo == 'sound'">
+                            <label class="col-form-label">{{'WOO.AUDIO' | translate}}</label>
+                            <select name="" id="" ng-model="thesound" class="form-select">
+                                <option value="" selected>{{'WOO.NONE' | translate}}</option>
+                                <option ng-repeat=" item in soundlistado" value="{{item.nombre}}">{{ item.nombre }}
+                                </option>
+                            </select>
                         </div>
-                        <div class="form-group" ng-show="tipo == 'led'">
-                            <label class="col-sm-2 control-label">{{'WOO.LED' | translate}}</label>
-                            <div class="col-sm-10">
-                                <select name="leds" id="" ng-model="leds" class="form-control">
-                                    <option ng-repeat="m in led" value="{{ m._id }}">{{ m.nombre }}</option>
-                                </select>
-                            </div>
+                        <div class="mb-3" ng-show="tipo == 'led'">
+                            <label class="col-form-label">{{'WOO.LED' | translate}}</label>
+                            <select name="leds" id="" ng-model="leds" class="form-select">
+                                <option ng-repeat="m in led" value="{{ m._id }}">{{ m.name }}</option>
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'WOO.ORDER' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" ng-model="corder">
-                            </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">{{'WOO.ORDER' | translate}}</label>
+                            <input type="number" class="form-control" ng-model="corder">
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{'COMMON.CLOSE' |
-                        translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary">{{'COMMON.SAVE' |
-                        translate}}</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" ng-show="icon" ng-click="ccommand()" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
                 </div>
             </div>
         </div>
