@@ -11,6 +11,9 @@ module.exports = async function (req, res) {
 	let dir = `./public/app/${obj.nombre}`;
 	delete obj._id;
 
+	let int = await unifyById(req.params.id);
+	obj['exec'] = int;
+
 	fs.mkdirSync(`${dir}/`, { recursive: true });
 	fs.writeFileSync(`${dir}/${obj.nombre}.json`, JSON.stringify(obj));
 	fs.writeFileSync(`${dir}/${obj.nombre}.json.sha256`, fileSha256(`${dir}/${obj.nombre}.json`));
@@ -20,12 +23,10 @@ module.exports = async function (req, res) {
 	for (let i of (sub ?? [])) {
 		let j = clone(await find(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.exec(i)[0]));
 
-		fs.mkdirSync(`${dir}/`, { recursive: true });
-		fs.writeFileSync(`${dir}/${j.nombre}.json`, JSON.stringify(j));
-		fs.writeFileSync(`${dir}/${j.nombre}.json.sha256`, fileSha256(`${dir}/${j.nombre}.json`));
+		fs.mkdirSync(`${dir}/sub/`, { recursive: true });
+		fs.writeFileSync(`${dir}/sub/${j.nombre}.json`, JSON.stringify(j));
+		fs.writeFileSync(`${dir}/sub/${j.nombre}.json.sha256`, fileSha256(`${dir}/sub/${j.nombre}.json`));
 	}
-
-	let int = await unifyById(req.params.id);
 
 	let soundsNode = int.filter(i => i.type === 'sound');
 	if (soundsNode.length > 0)

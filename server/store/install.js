@@ -46,7 +46,11 @@ module.exports = async function (req, res) {
 			})
 	}
 
-	let iFiles = fs.readdirSync(`${dir}/`).filter(file => !!file.match(/\.json$/))
+	let iFiles = fs.readdirSync(`${dir}/`).filter(file => !!file.match(/\.json$/));
+	if (fs.existsSync(`${dir}/sub`)) {
+		iFiles.push(fs.readdirSync(`${dir}/sub/`).filter(file => !!file.match(/\.json$/)));
+	}
+
 	for (const file of iFiles) {
 		interacciones.push(JSON.parse(fs.readFileSync(`./${dir}/${file}`, 'utf-8')));
 	}
