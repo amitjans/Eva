@@ -1,4 +1,5 @@
 const it = {
+	CODE: 'it-IT',
 	TOOLBAR: {
 		NAME: "Controllo di Eva",
 		INI: "Inizio",
@@ -26,16 +27,6 @@ const it = {
 		FR: "Francese",
 		IT: "Italiano",
 		JA: "Giapponese"
-	},
-	DATATABLE: {
-		SHOW: "Mostra",
-		SEARCH: "Ricerca",
-		SHOWING: "Visualizzazione",
-		TO: "a",
-		OF: "di",
-		ENTRIES: "record",
-		PREVIOUS: "Precedente",
-		NEXT: "Successivo"
 	},
 	AUDIO: {
 		TITLE: "Elenco degli Audisti",

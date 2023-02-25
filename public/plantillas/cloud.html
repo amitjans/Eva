@@ -1,46 +1,46 @@
 <div class="container" ng-controller="cloud">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bgm-bluegray">
-                    <h2> {{'CLOUD.TITLE' | translate}}<small></small></h2>
-                </div>
-                <div>
-                    <div id="example_wrapper" class="dataTables_wrapper">
-                        <table id="example" class="display dataTable" role="grid" aria-describedby="example_info">
-                            <thead>
-                                <tr role="row">
-                                    <th> {{'CLOUD.SERVICE' | translate}}</th>
-                                    <th> {{'CLOUD.VAR' | translate}}</th>
-                                    <th> {{'CLOUD.VALUE' | translate}}</th>
-                                    <th> {{'CLOUD.STATUS' | translate}}</th>
-                                    <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="l in listado">
-                                    <td ng-if="!l.before" rowspan="{{ l.rowspan }}">{{ l.service }}</td>
-                                    <td>{{ l.key }}</td>
-                                    <td style="word-break: break-all;">{{ l.value }}</td>
-                                    <td ng-if="!l.before" rowspan="{{ l.rowspan }}"
-                                    style="text-align: center; vertical-align: middle; color: {{ l.color }} ">
-                                    <span class="fa fa-{{ l.icon }}-circle fa-2x"></span></td>
-                                    <td><span class="btn btn-default" ng-click="modal(l.key, l.value)"><i class="fa fa-edit fa-sm"></i></span></td>
-                                    <td><span class="btn btn-default" ng-click="delete(l.key)"><i class="fa fa-trash fa-sm"></i></span></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th> {{'CLOUD.SERVICE' | translate}}</th>
-                                    <th> {{'CLOUD.VAR' | translate}}</th>
-                                    <th> {{'CLOUD.VALUE' | translate}}</th>
-                                    <th> {{'CLOUD.STATUS' | translate}}</th>
-                                    <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">{{'CLOUD.TITLE' | translate}}</h1>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr role="row">
+                            <th> {{'CLOUD.SERVICE' | translate}}</th>
+                            <th> {{'CLOUD.VAR' | translate}}</th>
+                            <th> {{'CLOUD.VALUE' | translate}}</th>
+                            <th> {{'CLOUD.STATUS' | translate}}</th>
+                            <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="l in listado">
+                            <td ng-if="!l.before" rowspan="{{ l.rowspan }}">{{ l.service }}</td>
+                            <td>{{ l.key }}</td>
+                            <td style="word-break: break-all;">{{ l.value }}</td>
+                            <td ng-if="!l.before" rowspan="{{ l.rowspan }}"
+                                style="text-align: center; vertical-align: middle; color: {{ l.color }} ">
+                                <span class="fa fa-{{ l.icon }}-circle fa-2x"></span>
+                            </td>
+                            <td><span class="btn btn-default" ng-click="modal(l.key, l.value)"><i
+                                        class="fa fa-edit fa-sm"></i></span></td>
+                            <td><span class="btn btn-default" ng-click="delete(l.key)"><i
+                                        class="fa fa-trash fa-sm"></i></span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th> {{'CLOUD.SERVICE' | translate}}</th>
+                            <th> {{'CLOUD.VAR' | translate}}</th>
+                            <th> {{'CLOUD.VALUE' | translate}}</th>
+                            <th> {{'CLOUD.STATUS' | translate}}</th>
+                            <th colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">{{'CLOUD.EDIT' | translate}}</h4>
                 </div>
@@ -59,20 +59,23 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">{{'CLOUD.VAR' | translate}}</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="key" disabled >
+                                <input type="text" class="form-control input-sm" ng-model="key" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">{{'CLOUD.VALUE' | translate}}</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="value" placeholder="{{'CLOUD.VALUE' | translate}}">
+                                <input type="text" class="form-control input-sm" ng-model="value"
+                                    placeholder="{{'CLOUD.VALUE' | translate}}">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
-                    <button type="button" ng-click="update()" class="btn btn-primary">{{'COMMON.SAVE' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{'COMMON.CLOSE' |
+                        translate}}</button>
+                    <button type="button" ng-click="update()" class="btn btn-primary">{{'COMMON.SAVE' |
+                        translate}}</button>
                 </div>
             </div>
         </div>
@@ -84,7 +87,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Telegram</h4>
                 </div>
@@ -93,21 +96,24 @@
                         <div class="form-group" ng-show="!tel">
                             <label class="col-sm-2 control-label">{{'CLOUD.TELEPHONE' | translate}}</label>
                             <div class="col-sm-10">
-                                <input type="tel" class="form-control input-sm" ng-model="telephone" >
+                                <input type="tel" class="form-control input-sm" ng-model="telephone">
                             </div>
                         </div>
                         <div class="form-group" ng-show="!!tel">
                             <label class="col-sm-2 control-label">{{'CLOUD.CODE' | translate}}</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="code" >
+                                <input type="text" class="form-control input-sm" ng-model="code">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'COMMON.CLOSE' | translate}}</button>
-                    <button type="button" ng-show="!tel" ng-click="sendNumber(telephone)" class="btn btn-primary">{{'CLOUD.NEXT' | translate}}</button>
-                    <button type="button" ng-show="!!tel" ng-click="sendCode(code)" class="btn btn-primary">{{'CLOUD.SEND' | translate}}</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{'COMMON.CLOSE' |
+                        translate}}</button>
+                    <button type="button" ng-show="!tel" ng-click="sendNumber(telephone)"
+                        class="btn btn-primary">{{'CLOUD.NEXT' | translate}}</button>
+                    <button type="button" ng-show="!!tel" ng-click="sendCode(code)"
+                        class="btn btn-primary">{{'CLOUD.SEND' | translate}}</button>
                 </div>
             </div>
         </div>

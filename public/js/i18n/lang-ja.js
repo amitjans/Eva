@@ -1,4 +1,5 @@
 const ja = {
+	CODE: 'ja-JP',
 	TOOLBAR: {
 		NAME: "エヴァコントロール",
 		INI: "スタート",
@@ -26,16 +27,6 @@ const ja = {
 		FR: "フランス語",
 		IT: "イタリア語",
 		JA: "日本語"
-	},
-	DATATABLE: {
-		SHOW: "ショー",
-		SEARCH: "サーチ",
-		SHOWING: "表示",
-		TO: "a",
-		OF: "( 1 )",
-		ENTRIES: "レコード",
-		PREVIOUS: "前へ",
-		NEXT: "次"
 	},
 	AUDIO: {
 		TITLE: "Audiums の一覧",

@@ -1,4 +1,5 @@
 const es = {
+    CODE: 'es-MX',
     TOOLBAR: {
         NAME: "Control Eva",
         INI: "Inicio",
@@ -11,6 +12,7 @@ const es = {
         VOICE: "Voz",
         LISTEN: "Escuchar",
         LED: "Led",
+        EDITOR: "Editor",
         MOVEMENT: "Movimiento",
         WOO: "Mago de Oz",
         CONFIG: "Configuraciones",
@@ -31,16 +33,6 @@ const es = {
         FR: "Francés",
         IT: "Italiano",
         JA: "Japonés"
-    },
-    DATATABLE: {
-        SHOW: "Mostra",
-        SEARCH: "Buscar",
-        SHOWING: "Mostrando",
-        TO: "a",
-        OF: "de",
-        ENTRIES: "registros",
-        PREVIOUS: "Anterior",
-        NEXT: "Siguiente",
     },
     AUDIO: {
         TITLE: "Listado de Audios",
@@ -211,6 +203,7 @@ const es = {
         NUM: "Num",
         TIME: "Tiempo",
         MS: "Milisegundos",
+        LOOP: 'Bucle',
         NOTIFY: {
             POST: {
                 SUCCESS: "Animación led creada correctamente."

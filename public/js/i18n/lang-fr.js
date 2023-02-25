@@ -1,4 +1,5 @@
 const fr = {
+	CODE: 'fr-FR',
 	TOOLBAR: {
 		NAME: "Contrôle Eva",
 		INI: "Démarrer",
@@ -26,16 +27,6 @@ const fr = {
 		FR: "Français",
 		IT: "Italien",
 		JA: "Japonais"
-	},
-	DATATABLE: {
-		SHOW: "Affiche",
-		SEARCH: "Rechercher",
-		SHOWING: "Affichage",
-		TO: "a",
-		OF: "de",
-		ENTRIES: "enregistrements",
-		PREVIOUS: "Précédent",
-		NEXT: "Suivant"
 	},
 	AUDIO: {
 		TITLE: "liste des auditions",

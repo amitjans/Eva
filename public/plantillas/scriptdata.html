@@ -6,155 +6,63 @@
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">{{'SCRIPT_DATA.TITLE' | translate}}</h1>
-                <select class="custom-select col-md-2" id="inlineFormCustomSelect" ng-model="script" ng-change="list()">
-                    <option ng-repeat="item in slistado" value="{{ item._id }}">{{ item.nombre }}</option>
-                </select>
+                <form>
+                    <select class="form-control col-md-2" id="inlineFormCustomSelect" onchange="table(this)">
+                        <option ng-repeat="item in slistado" value="{{ item._id }}">{{ item.nombre }}</option>
+                    </select>
+                </form>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal"><span
+                    <button class="btn btn-sm btn-outline-secondary" onclick="openScriptdataModalAdd()"><span
                             class="fa fa-plus"></span></button>
                 </div>
             </div>
             <div>
-                <div id="example_wrapper" class="dataTables_wrapper">
-                    <div class="form-inline">
-                        <div class="input-group mb-3 col-md-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text"
-                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.SHOW'
-                                    | translate}}</label>
-                            </div>
-                            <select class="form-control form-control-sm" ng-model="limit" ng-change="dataTable()">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <div class="input-group-append">
-                                <label class="input-group-text"
-                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.ENTRIES'
-                                    | translate}}</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6"></div>
-                        <div class="input-group mb-3 col-md-3">
-                            <label>{{'DATATABLE.SEARCH' | translate}}: </label>
-                            <input type="search" class="form-control form-control-sm" placeholder="" ng-model="q"
-                                ng-change="dataTable()">
-                        </div>
-                    </div>
-                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                        aria-describedby="example_info">
-                        <thead>
-                            <tr role="row">
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 225px;">
-                                    {{'SCRIPT_DATA.FIELD' | translate}} 1</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 225px;">
-                                    {{'SCRIPT_DATA.FIELD' | translate}} 2</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 225px;">
-                                    {{'SCRIPT_DATA.FIELD' | translate}} 3</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 225px;">
-                                    {{'SCRIPT_DATA.FIELD' | translate}} 4</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="2" style="width: 100px;">
-                                    {{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                <td>{{ l.campo1 }}</td>
-                                <td>{{ l.campo2 }}</td>
-                                <td>{{ l.campo3 }}</td>
-                                <td>{{ l.campo4 }}</td>
-                                <td><span class="btn btn-default" ng-click="update(l)"><i
-                                            class="fa fa-edit fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i
-                                            class="fa fa-trash fa-sm"></i></span></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">{{'SCRIPT_DATA.FIELD' | translate}} 1</th>
-                                <th rowspan="1" colspan="1">{{'SCRIPT_DATA.FIELD' | translate}} 2</th>
-                                <th rowspan="1" colspan="1">{{'SCRIPT_DATA.FIELD' | translate}} 3</th>
-                                <th rowspan="1" colspan="1">{{'SCRIPT_DATA.FIELD' | translate}} 4</th>
-                                <th rowspan="1" colspan="2">{{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
-                        {{'DATATABLE.SHOWING' | translate}}
-                        {{ from }} {{'DATATABLE.TO' | translate}}
-                        {{ to > temp.length ? temp.length : to }} {{'DATATABLE.OF' | translate}}
-                        {{ temp.length }} {{'DATATABLE.ENTRIES' | translate}}</div>
-                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                        <a class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}" aria-controls="example"
-                            data-dt-idx="0" tabindex="-1" id="example_previous"
-                            ng-click="dataTable(-1)">{{'DATATABLE.PREVIOUS' | translate}}</a>
-                        <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}"
-                            aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next"
-                            ng-click="dataTable(1)">{{'DATATABLE.NEXT' | translate}}</a>
-                    </div>
-                </div>
+                <table id="listadoScriptdata" class="table"></table>
             </div>
         </div>
     </div>
 
     <!-- Modal Script -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modalScriptdata" tabindex="-1" role="dialog" aria-labelledby="modalScriptdataLabel">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">{{ accion }} {{'SCRIPT_DATA.SCRIPT' | translate}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <h5 class="modal-title" id="modalScriptdataLabel"></h5>
+                    <button type="button" class="btn-close" onclick="cleanScriptdataModal()" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'SCRIPT_DATA.FIELD' | translate}} 1</label>
-                            <div class="input-group col-sm-9">
-                                <input type="text" class="form-control" ng-model="c1">
-                                <div class="input-group-addon" ng-click="speak(c1)"><i
-                                        class="fa fa-volume-up fa-sm"></i>
-                                </div>
-                            </div>
+                    <form>
+                        <input type="hidden" id="scriptdataId">
+                        <div class="mb-3">
+                            <label for="scriptdataCampo1" class="col-form-label">{{'SCRIPT_DATA.FIELD' | translate}}
+                                1:</label>
+                            <input type="text" class="form-control" id="scriptdataCampo1">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'SCRIPT_DATA.FIELD' | translate}} 2</label>
-                            <div class="input-group col-sm-9">
-                                <input type="text" class="form-control" ng-model="c2">
-                                <div class="input-group-addon" ng-click="speak(c2)"><i
-                                        class="fa fa-volume-up fa-sm"></i>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="scriptdataCampo2" class="col-form-label">{{'SCRIPT_DATA.FIELD' | translate}}
+                                2:</label>
+                            <input type="text" class="form-control" id="scriptdataCampo2">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'SCRIPT_DATA.FIELD' | translate}} 3</label>
-                            <div class="input-group col-sm-9">
-                                <input type="text" class="form-control" ng-model="c3">
-                                <div class="input-group-addon" ng-click="speak(c3)"><i
-                                        class="fa fa-volume-up fa-sm"></i>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="scriptdataCampo3" class="col-form-label">{{'SCRIPT_DATA.FIELD' | translate}}
+                                3:</label>
+                            <input type="text" class="form-control" id="scriptdataCampo3">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'SCRIPT_DATA.FIELD' | translate}} 4</label>
-                            <div class="input-group col-sm-9">
-                                <input type="text" class="form-control" ng-model="c4">
-                                <div class="input-group-addon" ng-click="speak(c4)"><i
-                                        class="fa fa-volume-up fa-sm"></i>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="scriptdataCampo4" class="col-form-label">{{'SCRIPT_DATA.FIELD' | translate}}
+                                4:</label>
+                            <input type="text" class="form-control" id="scriptdataCampo4">
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="clear()">{{'COMMON.CLOSE' |
-                        translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
-                        translate}}</button>
-                    <button type="button" ng-show="!icon" ng-click="updatesend()"
-                        class="btn btn-primary">{{'COMMON.UPDATE'
-                        | translate}}</button>
+                    <button type="button" class="btn btn-default" onclick="cleanScriptdataModal()"><i
+                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" id="bSave" onclick="newScriptdata()" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
+                    <button type="button" id="bUpdate" onclick="updateScriptdata()" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
                 </div>
             </div>
         </div>

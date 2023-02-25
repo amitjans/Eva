@@ -5,128 +5,71 @@
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">{{'MOVEMENT.TITLE' | translate}}</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal"><span
+                    <button class="btn btn-sm btn-outline-secondary" onclick="openMovModalAdd()"><span
                             class="fa fa-plus"></span></button>
                 </div>
             </div>
             <div>
-                <div id="example_wrapper" class="dataTables_wrapper">
-                    <div class="form-inline">
-                        <div class="input-group mb-3 col-md-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text"
-                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.SHOW'
-                                    | translate}}</label>
-                            </div>
-                            <select class="form-control form-control-sm" ng-model="limit" ng-change="dataTable()">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <div class="input-group-append">
-                                <label class="input-group-text"
-                                    style="background-color: white !important; border: 0px !important;">{{'DATATABLE.ENTRIES'
-                                    | translate}}</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6"></div>
-                        <div class="input-group mb-3 col-md-3">
-                            <label>{{'DATATABLE.SEARCH' | translate}}: </label>
-                            <input type="search" class="form-control form-control-sm" placeholder="" ng-model="q"
-                                ng-change="dataTable()">
-                        </div>
-                    </div>
-                    <table id="example" class="display dataTable" style="width: 100%;" role="grid"
-                        aria-describedby="example_info">
-                        <thead>
-                            <tr role="row">
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 334px;">
-                                    {{'COMMON.NAME' | translate}}</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 333px;">
-                                    {{'MOVEMENT.CODE' | translate}}</th>
-                                <th tabindex="0" aria-controls="example" rowspan="1" colspan="3" style="width: 333px;">
-                                    {{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="l in sublist" role="row" class="{{ $even ? 'even' : 'odd'}}">
-                                <td>{{ l.nombre }}</td>
-                                <td>{{ l.codigo }}</td>
-                                <td><span class="btn btn-default" ng-click="execute(l)"><i
-                                            class="fa fa-play fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="update(l)"><i
-                                            class="fa fa-edit fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i
-                                            class="fa fa-trash fa-sm"></i></span></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">{{'COMMON.NAME' | translate}}</th>
-                                <th rowspan="1" colspan="1">{{'MOVEMENT.CODE' | translate}}</th>
-                                <th rowspan="1" colspan="3">{{'COMMON.OPTIONS' | translate}}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
-                        {{'DATATABLE.SHOWING' | translate}}
-                        {{ from }} {{'DATATABLE.TO' | translate}}
-                        {{ to > temp.length ? temp.length : to }} {{'DATATABLE.OF' | translate}}
-                        {{ temp.length }} {{'DATATABLE.ENTRIES' | translate}}</div>
-                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                        <a class="paginate_button previous {{ (page == 0) ? 'disabled' : '' }}" aria-controls="example"
-                            data-dt-idx="0" tabindex="-1" id="example_previous"
-                            ng-click="dataTable(-1)">{{'DATATABLE.PREVIOUS' | translate}}</a>
-                        <a class="paginate_button next {{ (to >= temp.length) ? 'disabled' : '' }}"
-                            aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next"
-                            ng-click="dataTable(1)">{{'DATATABLE.NEXT' | translate}}</a>
-                    </div>
-                </div>
+                <table id="listadoMov" class="table"></table>
             </div>
         </div>
     </div>
 
     <!-- Modal Voice -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modalMov" tabindex="-1" role="dialog" aria-labelledby="modalMovLabel">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">{{ accion }} {{'MOVEMENT.MODAL' | translate}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <h5 class="modal-title" id="modalMovLabel">{{ accion }} {{'MOVEMENT.MODAL' | translate}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
-                            </div>
+                    <form>
+                        <input type="hidden" id="movId">
+                        <div class="mb-3">
+                            <label for="listenIdioma" class="col-form-label">{{'COMMON.NAME' | translate}}:</label>
+                            <input type="text" class="form-control" id="movNombre">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{'MOVEMENT.CODE' | translate}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control input-sm" ng-model="codigo" placeholder="Código">
-                            </div>
+                        <div class="mb-3">
+                            <label for="listenCodigo" class="col-form-label">{{'MOVEMENT.CODE' | translate}}:</label>
+                            <input type="text" class="form-control" id="movCodigo">
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">{{'MOVEMENT.ACTIONS' | translate}}</label>
                             <div class="col-sm-10">
-                                <span class="btn" ng-repeat="i in codes" ng-click="addCode(i.code)"
-                                    ng-bind-html=" i.symbol | trusted"></span>
+                                <span class="btn" onclick="addCode('c')">&olarr;</span>
+                                <span class="btn" onclick="addCode('r')">&rarr;</span>
+                                <span class="btn" onclick="addCode('l')">&larr;</span>
+                                <span class="btn" onclick="addCode('u')">&uarr;</span>
+                                <span class="btn" onclick="addCode('d')">&darr;</span>
+                                <span class="btn" onclick="addCode('R')">&rrarr;</span>
+                                <span class="btn" onclick="addCode('L')">&llarr;</span>
+                                <span class="btn" onclick="addCode('U')">&uuarr;</span>
+                                <span class="btn" onclick="addCode('D')">&ddarr;</span>
+                                <span class="btn" onclick="addCode('n')">&varr;</span>
+                                <span class="btn" onclick="addCode('N')">&udarr;</span>
+                                <span class="btn" onclick="addCode('s')">&harr;</span>
+                                <span class="btn" onclick="addCode('S')">&lrarr;</span>
+                                <span class="btn" onclick="addCode('e')">&nearr;</span>
+                                <span class="btn" onclick="addCode('E')">&neArr;</span>
+                                <span class="btn" onclick="addCode('q')">&nwarr;</span>
+                                <span class="btn" onclick="addCode('Q')">&nwArr;</span>
+                                <span class="btn" onclick="addCode('x')">&searr;</span>
+                                <span class="btn" onclick="addCode('X')">&seArr;</span>
+                                <span class="btn" onclick="addCode('z')">&swarr;</span>
+                                <span class="btn" onclick="addCode('Z')">&swArr;</span>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click=clear()>{{'COMMON.CLOSE' |
-                        translate}}</button>
-                    <button type="button" ng-show="icon" ng-click="create()" class="btn btn-primary">{{'COMMON.SAVE' |
-                        translate}}</button>
-                    <button type="button" ng-show="!icon" ng-click="updatesend()"
-                        class="btn btn-primary">{{'COMMON.UPDATE'
-                        | translate}}</button>
+                    <button type="button" class="btn btn-default" onclick="cleanMovModal()"><i
+                            class="fa-solid fa-xmark"></i></button>
+                    <button type="button" id="bSave" onclick="newMov()" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
+                    <button type="button" id="bUpdate" onclick="updateMov()" class="btn btn-primary"><i
+                            class="fa-solid fa-floppy-disk"></i></button>
                 </div>
             </div>
         </div>
