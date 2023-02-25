@@ -2,167 +2,138 @@
     <br><br>
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{'WOO.PHRASE' | translate}}</h3>
-                </div>
-                <div class="panel-body">
+            <div class="card">
+                <div class="card-header">{{'WOO.PHRASE' | translate}}</div>
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">{{'WOO.VOICE' | translate}}</label>
-                                    <div class="col-sm-10">
-                                        <select name="voice" id="" ng-model="voice" ng-change="setvoice(voice)"
-                                            class="form-control">
-                                            <option ng-repeat="item in vlistado" value="{{item.codigo}}">
-                                                {{ item.nombre + '(' + item.idioma + ')' }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control"
-                                                placeholder="{{'WOO.CUSTOM_PHRASE' | translate}}!" ng-model="mensaje"
-                                                ng-keydown="enviarMensaje2($event)">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button"
-                                                    ng-click="node({ type: 'speak', text: mensaje })">{{'WOO.SEND' |
-                                                    translate}}&nbsp;<i class="fa fa-volume-up fa-lg"
-                                                        aria-hidden="true"></i></button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <!-- <label class="col-form-label">{{'WOO.VOICE' | translate}}:</label> -->
+                                <select name="voice" id="" ng-model="voice" ng-change="setvoice(voice)"
+                                    class="form-select">
+                                    <option ng-repeat="item in vlistado" value="{{item.codigo}}">
+                                        {{ item.nombre + ' (' + item.idioma + ')' }}
+                                    </option>
+                                </select>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{'WOO.MOVEMENT' | translate}}</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <table style="margin-left: auto; margin-right: auto;">
-                            <tr>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('q')"><i
-                                            class="fa fa-arrow-up fa-2x rotate-45-left"></i></button></td>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('u')"><i
-                                            class="fa fa-arrow-up fa-2x"></i></button></td>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('e')"><i
-                                            class="fa fa-arrow-up fa-2x rotate-45-right"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('l')"><i
-                                            class="fa fa-arrow-left fa-2x"></i></button></td>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('c')"><i
-                                            class="fa fa-circle fa-2x"></i></button></td>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('r')"><i
-                                            class="fa fa-arrow-right fa-2x"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('z')"><i
-                                            class="fa fa-arrow-down fa-2x rotate-45-right"></button></td>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('d')"><i
-                                            class="fa fa-arrow-down fa-2x"></i></button></td>
-                                <td><button type="button" class="btn btn-default" ng-click="mov('x')"><i
-                                            class="fa fa-arrow-down fa-2x rotate-45-left"></button></td>
-                            </tr>
-                        </table>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"
+                                    placeholder="{{'WOO.CUSTOM_PHRASE' | translate}}!" ng-model="mensaje"
+                                    ng-keydown="enviarMensaje2($event)">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    ng-click="node({ type: 'speak', text: mensaje })" id="button-addon2"><i
+                                        class="fa fa-volume-up fa-lg" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">{{'EMOTION_TYPE.NEUTRAL' | translate}}</div>
-                        <div class="card-body">
-                            <span class="emojin" ng-click="emotion('ini', 0)"><i
-                                    class="fa-solid fa-face-meh"></i></span>
-                            <span class="emojin" ng-click="emotion('blink', 0)"><i
-                                    class="fa-solid fa-face-meh"></i></span>
-                            <span class="emojin" ng-click="emotion('wink', 0)"><i
-                                    class="fa-solid fa-face-smile-wink"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">{{'EMOTION_TYPE.JOY' | translate}}</div>
-                        <div class="card-body">
-                            <span class="emojin" ng-click="emotion('joy', 0)"><i
-                                    class="fa-solid fa-face-smile"></i></span>
-                            <span class="emojin" ng-click="emotion('joy', 1)"><i
-                                    class="fa-solid fa-face-laugh-squint"></i></span>
-                            <span class="emojin" ng-click="emotion('joy', 2)"><i
-                                    class="fa-solid fa-face-grin-squint-tears"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">{{'EMOTION_TYPE.SAD' | translate}}</div>
-                        <div class="card-body">
-                            <span class="emojin" ng-click="emotion('sad', 0)"><i
-                                    class="fa-solid fa-face-frown"></i></span>
-                            <span class="emojin" ng-click="emotion('sad', 1)"><i
-                                    class="fa-solid fa-face-sad-tear"></i></span>
-                            <span class="emojin" ng-click="emotion('sad', 2)"><i
-                                    class="fa-solid fa-face-sad-cry"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">{{'EMOTION_TYPE.ANGER' | translate}}</div>
-                        <div class="card-body">
-                            <span class="emojin" ng-click="emotion('anger', 0)"><i
-                                    class="fa-solid fa-face-angry"></i></span>
-                            <span class="emojin" ng-click="emotion('anger', 1)"><i
-                                    class="fa-solid fa-face-angry"></i></span>
-                            <span class="emojin" ng-click="emotion('anger', 2)"><i
-                                    class="fa-solid fa-face-angry"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">{{'EMOTION_TYPE.SURPRISE' | translate}}</div>
-                        <div class="card-body">
-                            <span class="emojin" ng-click="emotion('surprise', 0)"><i
-                                    class="fa-solid fa-face-surprise"></i></span>
-                            <span class="emojin" ng-click="emotion('surprise', 1)"><i
-                                    class="fa-solid fa-face-surprise"></i></span>
-                            <span class="emojin" ng-click="emotion('surprise', 2)"><i
-                                    class="fa-solid fa-face-flushed"></i></span>
-                        </div>
-                    </div>
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header">{{'WOO.MOVEMENT' | translate}}</div>
+                <div class="card-body position-relative" style="height: 120px; margin: 10px;">
+                    <button type="button" class="btn btn-outline-dark position-absolute top-0 start-0"
+                        ng-click="mov('q')"><i class="fa fa-arrow-up rotate-45-left"></i></button>
+                    <button type="button"
+                        class="btn btn-outline-dark position-absolute top-0 start-50 translate-middle-x"
+                        ng-click="mov('u')"><i class="fa fa-arrow-up"></i></button>
+                    <button type="button" class="btn btn-outline-dark position-absolute top-0 end-0"
+                        ng-click="mov('e')"><i class="fa fa-arrow-up rotate-45-right"></i></button>
+
+                    <button type="button"
+                        class="btn btn-outline-dark position-absolute top-50 start-0 translate-middle-y"
+                        ng-click="mov('l')"><i class="fa fa-arrow-left"></i></button>
+                    <button type="button"
+                        class="btn btn-outline-dark position-absolute top-50 start-50 translate-middle"
+                        ng-click="mov('c')"><i class="fa-solid fa-arrows-to-dot"></i></button>
+                    <button type="button" class="btn btn-outline-dark position-absolute top-50 end-0 translate-middle-y"
+                        ng-click="mov('r')"><i class="fa fa-arrow-right"></i></button>
+
+                    <button type="button" class="btn btn-outline-dark position-absolute bottom-0 start-0"
+                        ng-click="mov('z')"><i class="fa fa-arrow-down rotate-45-right"></i></button>
+                    <button type="button"
+                        class="btn btn-outline-dark position-absolute bottom-0 start-50 translate-middle-x"
+                        ng-click="mov('d')"><i class="fa-solid fa-arrow-down"></i></button>
+                    <button type="button" class="btn btn-outline-dark position-absolute bottom-0 end-0"
+                        ng-click="mov('x')"><i class="fa fa-arrow-down rotate-45-left"></i></button>
                 </div>
             </div>
         </div>
     </div>
-
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header">{{'EMOTION_TYPE.NEUTRAL' | translate}}</div>
+                <div class="card-body">
+                    <span class="emojin" ng-click="emotion('ini', 0)"><i class="fa-solid fa-face-meh"></i></span>
+                    <span class="emojin" ng-click="emotion('blink', 0)"><i class="fa-solid fa-face-meh"></i></span>
+                    <span class="emojin" ng-click="emotion('wink', 0)"><i
+                            class="fa-solid fa-face-smile-wink"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header">{{'EMOTION_TYPE.JOY' | translate}}</div>
+                <div class="card-body">
+                    <span class="emojin" ng-click="emotion('joy', 0)"><i class="fa-solid fa-face-smile"></i></span>
+                    <span class="emojin" ng-click="emotion('joy', 1)"><i
+                            class="fa-solid fa-face-laugh-squint"></i></span>
+                    <span class="emojin" ng-click="emotion('joy', 2)"><i
+                            class="fa-solid fa-face-grin-squint-tears"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header">{{'EMOTION_TYPE.SAD' | translate}}</div>
+                <div class="card-body">
+                    <span class="emojin" ng-click="emotion('sad', 0)"><i class="fa-solid fa-face-frown"></i></span>
+                    <span class="emojin" ng-click="emotion('sad', 1)"><i class="fa-solid fa-face-sad-tear"></i></span>
+                    <span class="emojin" ng-click="emotion('sad', 2)"><i class="fa-solid fa-face-sad-cry"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header">{{'EMOTION_TYPE.ANGER' | translate}}</div>
+                <div class="card-body">
+                    <span class="emojin" ng-click="emotion('anger', 0)"><i class="fa-solid fa-face-angry"></i></span>
+                    <span class="emojin" ng-click="emotion('anger', 1)"><i class="fa-solid fa-face-angry"></i></span>
+                    <span class="emojin" ng-click="emotion('anger', 2)"><i class="fa-solid fa-face-angry"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-header">{{'EMOTION_TYPE.SURPRISE' | translate}}</div>
+                <div class="card-body">
+                    <span class="emojin" ng-click="emotion('surprise', 0)"><i
+                            class="fa-solid fa-face-surprise"></i></span>
+                    <span class="emojin" ng-click="emotion('surprise', 1)"><i
+                            class="fa-solid fa-face-surprise"></i></span>
+                    <span class="emojin" ng-click="emotion('surprise', 2)"><i
+                            class="fa-solid fa-face-flushed"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
     <div class="row">
         <div class="col-md-12">
-            <div class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">{{'WOO.WOO' | translate}}</label>
-                    <div class="col-sm-6">
-                        <select name="" ng-model="wooid" ng-change="loadcomands()" id="" class="form-control">
+            <form class="row gy-1 gx-2 align-items-center">
+                <div class="row col-auto">
+                    <label class="col-form-label col-auto">{{'WOO.WOO' | translate}}</label>
+                    <div class="col-auto">
+                        <select name="" ng-model="wooid" ng-change="loadcomands()" id="" class="form-select">
                             <option ng-repeat="item in listado" value="{{ item._id }}">{{ item.name }}</option>
                         </select>
                     </div>
+                </div>
+                <div class="col-auto">
                     <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddid"><i
                             class="fa fa-plus"></i></button>
                     <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddid"
@@ -174,15 +145,15 @@
                     <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddcs"
                         ng-show="!!wooid"><i class="fa fa-plus">&nbsp;{{'WOO.COMMAND' | translate}}</i></button>
                 </div>
-                <div class="form-group" ng-show="!!wooid">
-                    <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
-                    <div class="col-sm-10">
-                        <button type="button" class="btn btn-default" ng-repeat="item in tempwoo.order track by $index"
-                            disabled><i class="fa fa-action">{{
-                                item }}</i></button>
-                    </div>
-                </div>
+        </div>
+        <div class="form-group" ng-show="!!wooid">
+            <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
+            <div class="col-sm-10">
+                <button type="button" class="btn btn-default" ng-repeat="item in tempwoo.order track by $index"
+                    disabled><i class="fa fa-action">{{
+                        item }}</i></button>
             </div>
+            </form>
         </div>
     </div>
 
@@ -195,7 +166,7 @@
                     </small>
                 </h2>
             </div>
-            <div>
+            <div class="card-body">
                 <table id="example" class="table">
                     <thead>
                         <tr role="row">
@@ -217,7 +188,8 @@
                             <td><span class="btn btn-default" ng-click="cdelete($index)"><i
                                         class="fa fa-trash fa-sm"></i></span></td>
                             <td><span class="btn btn-default" ng-click="execute(l)"><i
-                                        class="fa fa-play fa-sm"></i></span></td>
+                                        class="fa fa-play fa-sm"></i></span>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -231,7 +203,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Modal Script -->
     <div class="modal fade" id="wooaddid" tabindex="-1" role="dialog" aria-labelledby="wooadd">
