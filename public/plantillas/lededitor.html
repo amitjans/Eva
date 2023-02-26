@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <form class="row g-3">
+            <form class="row g-6">
                 <div class="col-sm-2 my-1">
                     <label class="form-label" for="inlineName">{{'COMMON.NAME' | translate}}</label>
                     <input type="text" class="form-control" id="inlineName" placeholder="Jane Doe">
@@ -42,8 +42,16 @@
                     <div class="form-check form-switch">
                         <input class="form-check-input"
                             style="height: 2em !important; width: 4em !important; margin-top: 0.8em;" type="checkbox"
-                            role="switch" id="inlineBucle" checked>
+                            role="switch" id="inlineBucle" checked onclick="bucleChange()">
                     </div>
+                </div>
+                <div class="col-sm-2 my-1">
+                    <label class="form-label" for="inlineLoops">{{'LEDEDITOR.LOOPS' | translate}}</label>
+                    <input type="number" class="form-control" id="inlineLoops" min="0" value="0">
+                </div>
+                <div class="col-sm-2 my-1">
+                    <label class="form-label" for="inlineFrameSkipLoops">{{'LEDEDITOR.FRAME_SKIP' | translate}}</label>
+                    <input type="number" class="form-control" id="inlineFrameSkipLoops" min="0" value="0">
                 </div>
             </form>
 
@@ -166,69 +174,100 @@
                 <div class="modal-body">
 
                     <!-- Gradiente -->
-                    <from class="form-inline">
-                        <label class="col-md-4 col-form-label" style="justify-content: left !important;"
-                            for="colorInit">{{'LEDEDITOR.GRADIENT_INIT' | translate}} </label>
-                        <input type="number" class="form-control mb-1 mr-sm-1" id="colorInit" min="0" max="17"
-                            value="0">
-                        <label class="">{{'LEDEDITOR.GRADIENT_UNTIL' | translate}} </label>
-                        <input type="number" class="form-control mb-1 mr-sm-1" id="colorEnd" min="0" max="17" value="0">
-                        <button type="button" class="btn btn-primary" onclick="gradient()"><i
-                                class="fa-solid fa-check-double"></i>
-                            Apply</button>
-
+                    <from class="row gy-1 gx-3 align-items-center">
+                        <div class="row col-auto">
+                            <label class="col-auto col-form-label" for="colorInit">{{'LEDEDITOR.GRADIENT_INIT' |
+                                translate}} </label>
+                            <div class="col-auto">
+                                <input type="number" class="form-control" id="colorInit" min="0" max="17" value="0">
+                            </div>
+                        </div>
+                        <div class="row col-auto">
+                            <label class="col-auto col-form-label">{{'LEDEDITOR.GRADIENT_UNTIL' | translate}}</label>
+                            <div class="col-auto">
+                                <input type="number" class="form-control" id="colorEnd" min="0" max="17" value="0">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="gradient()"><i
+                                    class="fa-solid fa-check-double"></i></button>
+                        </div>
                     </from>
-                    <div class="dropdown-divider"></div>
+
+                    <br />
 
                     <!-- Desplazar Leds -->
-                    <from class="form-inline">
-                        <label class="col-md-4 col-form-label"
-                            style="justify-content: left !important;">{{'LEDEDITOR.MOV_LEDS' | translate}}</label>
-                        <button type="button" class="btn btn-primary" onclick="moveLeds(false)"><i
-                                class="fa-solid fa-arrow-left"></i></button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" onclick="moveLeds(true)"><i
-                                class="fa-solid fa-arrow-right"></i></button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" onclick="moveLedsUp()"><i
-                                class="fa-solid fa-arrow-up"></i></button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" onclick="moveLedsDown()"><i
-                                class="fa-solid fa-arrow-down"></i></button>
+                    <from class="row gy-1 gx-5 align-items-center">
+                        <div class="col-auto">
+                            <label class="col-form-label">{{'LEDEDITOR.MOV_LEDS' | translate}}</label>
+                        </div>
+
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="moveLeds(false)"><i
+                                    class="fa-solid fa-arrow-left"></i></button>
+                        </div>
+
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="moveLeds(true)"><i
+                                    class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="moveLedsUp()"><i
+                                    class="fa-solid fa-arrow-up"></i></button>
+                        </div>
+
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="moveLedsDown()"><i
+                                    class="fa-solid fa-arrow-down"></i></button>
+                        </div>
                     </from>
-                    <div class="dropdown-divider"></div>
+
+                    <br />
 
                     <!-- Clonar Leds -->
-                    <from class="form-inline">
-                        <label class="col-md-4 col-form-label"
-                            style="justify-content: left !important;">{{'LEDEDITOR.CLONE_LEDS' | translate}}</label>
-                        <button type="button" class="btn btn-primary" onclick="cloneFrame()"><i
-                                class="fa-solid fa-clone"></i></button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" onclick="cloneFrameUp()"><i
-                                class="fa-solid fa-clone"></i>&nbsp;<i
-                                class="fa-solid fa-arrows-up-to-line"></i></button>
-                        &nbsp;
-                        <button type="button" class="btn btn-primary" onclick="cloneFrameDown()"><i
-                                class="fa-solid fa-clone"></i>&nbsp;<i
-                                class="fa-solid fa-arrows-down-to-line"></i></button>
+                    <from class="row gy-1 gx-4 align-items-center">
+                        <div class="col-auto">
+                            <label class="col-form-label">{{'LEDEDITOR.CLONE_LEDS' | translate}}</label>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="cloneFrame()"><i
+                                    class="fa-solid fa-clone"></i></button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="cloneFrameUp()"><i
+                                    class="fa-solid fa-clone"></i>&nbsp;<i
+                                    class="fa-solid fa-arrows-up-to-line"></i></button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="cloneFrameDown()"><i
+                                    class="fa-solid fa-clone"></i>&nbsp;<i
+                                    class="fa-solid fa-arrows-down-to-line"></i></button>
+                        </div>
                     </from>
-                    <div class="dropdown-divider"></div>
+
+                    <br />
 
                     <!-- Eliminar frames -->
-                    <from class="form-inline">
-                        <label class="col-md-4 col-form-label"
-                            style="justify-content: left !important;">{{'LEDEDITOR.DELETE_FRAMES' |
-                            translate}}</label>
-                        <input type="number" class="form-control mb-1 mr-sm-1" id="currentFrame" disabled="disabled"
-                            min="1" value="0">
-
-                        <label class="" for="inlineTime">&nbsp;{{'LEDEDITOR.DELETE_NEXT' | translate}}&nbsp;</label>
-                        <input type="number" class="form-control mb-1 mr-sm-1" id="untilFrame" min="1" value="1">
-
-                        <button type="button" class="btn btn-primary" onclick="eliminarFrames()"><i
-                                class="fa-solid fa-check-double"></i>
-                            Apply</button>
+                    <from class="row gy-1 gx-3 align-items-center">
+                        <div class="row col-auto">
+                            <label class="col-auto col-form-label">{{'LEDEDITOR.DELETE_FRAMES' | translate}}</label>
+                            <div class="col-auto">
+                                <input type="number" class="form-control" id="currentFrame" disabled="disabled" min="1"
+                                    value="0">
+                            </div>
+                        </div>
+                        <div class="row col-auto">
+                            <label class="col-auto col-form-label" for="inlineTime">{{'LEDEDITOR.DELETE_NEXT' |
+                                translate}}</label>
+                            <div class="col-auto">
+                                <input type="number" class="form-control" id="untilFrame" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="eliminarFrames()"><i
+                                    class="fa-solid fa-check-double"></i></button>
+                        </div>
                     </from>
                 </div>
                 <div class="modal-footer">

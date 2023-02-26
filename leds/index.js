@@ -5,11 +5,11 @@ const runAnim = (obj) => {
     let loop = setInterval(() => {
         matrix.led.set(obj.frames[i] ?? new Array(matrix.led.length).fill("#000000"));
         i++;
-        if (!obj.bucle && i >= obj.frames.length) {
+        if ((!obj.bucle || (obj.bucle && obj.loops == 1)) && i >= obj.frames.length) {
             clearInterval(loop);
         }
         if (obj.frames.length <= i) {
-            i = 0;
+            i = obj.skip;
         }
     }, obj.time);
     return loop;

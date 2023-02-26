@@ -229,7 +229,9 @@ const es = {
         CLONE_LEDS: "Clonar Leds",
         DELETE_FRAMES: "Eliminar cuadro",
         DELETE_NEXT: "y los siguientes",
-        LED_EMULATOR: "Emulador"
+        LED_EMULATOR: "Emulador",
+        LOOPS: "Iteraciones",
+        FRAME_SKIP: "Saltar"
     },
     LISTEN: {
         TITLE: "Listado de modelos de voz",

@@ -21,7 +21,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
                 width: 100,
                 widthUnit: 'px',
                 formatter: function (value, row, index) {
-                    return [`${row.bucle ? '<i class="fa-solid fa-repeat"></i>' : '<i class="fa-solid fa-1"></i>'}`];
+                    return [`${row.bucle ? '<i class="fa-solid fa-repeat"></i>' : (row.loops || 1)}`];
                 }
             }, {
                 title: locale().COMMON.OPTIONS,

@@ -66,6 +66,7 @@ function importAnim() {
     document.getElementById("inlineName").value = anim.name;
     document.getElementById("inlineTime").value = anim.time;
     document.getElementById("inlineBucle").checked = !!anim.bucle;
+    bucleChange();
     writeTable();
     $('#importAnim').modal('hide');
 }
@@ -191,6 +192,8 @@ function save() {
     anim.name = document.getElementById("inlineName").value;
     anim.time = parseInt(document.getElementById("inlineTime").value);
     anim.bucle = document.getElementById("inlineBucle").checked;
+    anim.loops = parseInt(document.getElementById("inlineLoops").value);
+    anim.skip = parseInt(document.getElementById("inlineFrameSkipLoops").value);
     postData('/api/common?db=led', anim)
         .then((data) => {
             anim._id = data.obj._id;
@@ -213,6 +216,9 @@ function getAnim(id) {
             document.getElementById("inlineName").value = anim.name;
             document.getElementById("inlineTime").value = anim.time;
             document.getElementById("inlineBucle").checked = !!anim.bucle;
+            document.getElementById("inlineLoops").value = anim.loops || 0;
+            document.getElementById("inlineFrameSkipLoops").value = anim.skip || 0;
+            bucleChange();
             cframe = 1;
             debugFrame = 0;
             writeTable();
@@ -225,6 +231,8 @@ function getAnim(id) {
 function execute() {
     anim.time = parseInt(document.getElementById("inlineTime").value);
     anim.bucle = document.getElementById("inlineBucle").checked;
+    anim.loops = parseInt(document.getElementById("inlineLoops").value);
+    anim.skip = parseInt(document.getElementById("inlineFrameSkipLoops").value);
     postData('/nodes', { type: 'led', ...anim });
 }
 
@@ -252,6 +260,8 @@ function executeEmulator() {
     $('#emulator').modal('show');
     anim.time = parseInt(document.getElementById("inlineTime").value);
     anim.bucle = document.getElementById("inlineBucle").checked;
+    anim.loops = parseInt(document.getElementById("inlineLoops").value);
+    anim.skip = parseInt(document.getElementById("inlineFrameSkipLoops").value);
     animEmulation = runAnim();
 }
 
@@ -270,14 +280,25 @@ const runAnim = () => {
             document.getElementById(`l${j}`).style.backgroundColor = anim.frames[i][j] == "#000000" ? `rgba(0, 0, 0, 0.0)` : anim.frames[i][j];
         }
         i++;
-        if (!anim.bucle && i >= anim.frames.length) {
+        if ((!anim.bucle || (anim.bucle && anim.loops == 1)) && i >= anim.frames.length) {
             clearInterval(loop);
         }
         if (anim.frames.length <= i) {
-            i = 0;
+            anim.loops--;
+            i = anim.skip;
         }
     }, anim.time);
     return loop;
+}
+
+function bucleChange() {
+    if (document.getElementById("inlineBucle").checked) {
+        document.getElementById("inlineLoops").removeAttribute('disabled');
+        document.getElementById("inlineFrameSkipLoops").removeAttribute('disabled');
+    } else {
+        document.getElementById("inlineLoops").setAttribute('disabled', 'disabled');
+        document.getElementById("inlineFrameSkipLoops").setAttribute('disabled', 'disabled');
+    }
 }
 
 // --- Gradient ---

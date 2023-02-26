@@ -145,14 +145,13 @@
                     <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#wooaddcs"
                         ng-show="!!wooid"><i class="fa fa-plus">&nbsp;{{'WOO.COMMAND' | translate}}</i></button>
                 </div>
-        </div>
-        <div class="form-group" ng-show="!!wooid">
-            <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
-            <div class="col-sm-10">
-                <button type="button" class="btn btn-default" ng-repeat="item in tempwoo.order track by $index"
-                    disabled><i class="fa fa-action">{{
-                        item }}</i></button>
-            </div>
+                <div class="form-group" ng-show="!!wooid">
+                    <label class="col-sm-2 control-label">{{'WOO.SEQUENCE' | translate}}</label>
+                    <div class="col-sm-10">
+                        <button type="button" class="btn btn-default" ng-repeat="item in tempwoo.order track by $index"
+                            disabled><i class="fa fa-action">{{
+                                item }}</i></button>
+                    </div>
             </form>
         </div>
     </div>
