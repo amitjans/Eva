@@ -63,6 +63,12 @@
                             class="fa-solid fa-arrow-left"></i></button>
                     <button type="button" class="btn btn-primary" onclick="moveAllLeds(true)"><i
                             class="fa-solid fa-arrow-right"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="moveAllLedsUp()"><i
+                            class="fa-solid fa-arrow-up"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="moveAllLedsDown()"><i
+                            class="fa-solid fa-arrow-down"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="deleteAllLeds()"><i
+                            class="fa-solid fa-trash"></i></button>
                 </div>
                 <div class="bd-callout bd-callout-info col-md-6" id="palette" style="display: none;"></div>
             </div>
@@ -71,7 +77,15 @@
                 <table class="table" style="width: 100%;" role="grid">
                     <thead>
                         <tr>
-                            <th rowspan="2">{{'LEDEDITOR.MODAL' | translate}}</th>
+                            <th rowspan="2">
+                                <div class="form-check">
+                                    <input class="form-check-input frameCheckbox" type="checkbox" id="allFrames"
+                                        onclick="checkAllFrames(this)">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        {{'LEDEDITOR.MODAL' | translate}}
+                                    </label>
+                                </div>
+                            </th>
                             <th colspan="18" class="text-center">{{'LED.LED' | translate}}</th>
                             <th rowspan="2" colspan="2"> {{'COMMON.OPTIONS' | translate}}</th>
                         </tr>
@@ -191,35 +205,6 @@
                         <div class="col-auto">
                             <button type="button" class="btn btn-primary" onclick="gradient()"><i
                                     class="fa-solid fa-check-double"></i></button>
-                        </div>
-                    </from>
-
-                    <br />
-
-                    <!-- Desplazar Leds -->
-                    <from class="row gy-1 gx-5 align-items-center">
-                        <div class="col-auto">
-                            <label class="col-form-label">{{'LEDEDITOR.MOV_LEDS' | translate}}</label>
-                        </div>
-
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-primary" onclick="moveLeds(false)"><i
-                                    class="fa-solid fa-arrow-left"></i></button>
-                        </div>
-
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-primary" onclick="moveLeds(true)"><i
-                                    class="fa-solid fa-arrow-right"></i></button>
-                        </div>
-
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-primary" onclick="moveLedsUp()"><i
-                                    class="fa-solid fa-arrow-up"></i></button>
-                        </div>
-
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-primary" onclick="moveLedsDown()"><i
-                                    class="fa-solid fa-arrow-down"></i></button>
                         </div>
                     </from>
 

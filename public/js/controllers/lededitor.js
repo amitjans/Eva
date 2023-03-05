@@ -1,6 +1,7 @@
 var anim = { name: "", time: 0, frames: [] };
 var colors = new Set();
 var cframe = -1;
+var checkedFrames = [];
 var debugFrame = 0;
 var animEmulation;
 
@@ -23,7 +24,7 @@ function writeTable() {
     let body = "";
     colors = new Set();
     for (let i = 0; i < anim.frames.length; i++) {
-        body += writeTr(i, anim.frames[i]);
+        body += writeTr(i, anim.frames[i], anim.checked);
     }
     document.getElementById("frames").innerHTML = body;
 
@@ -38,8 +39,15 @@ function writeTable() {
     debugFrame = 0;
 }
 
-function writeTr(frame, color = []) {
-    let row = `<tr id="${frame}"><td>${frame}</td>`;
+function writeTr(frame, color = [], checked = false) {
+    let row = `<tr id="${frame}"><td>
+    <div class="form-check">
+        <input class="form-check-input frameCheckbox" type="checkbox" value="${frame}" 
+            ${(checkedFrames[frame] ? 'checked' : '')} onclick="checkFrame(this)">
+        <label class="form-check-label" for="flexCheckChecked">
+            ${frame}
+        </label>
+    </div></td>`;
     for (let i = 0; i < 18; i++) {
         row += writeTd(frame, i, color[i] ?? "#000000");
     }
@@ -92,43 +100,77 @@ function eliminarUnFrame(value) {
     writeTable();
 }
 
-function moveLeds(dir) {
-    anim.frames[cframe] = arrayRotate(anim.frames[cframe], dir);
+function deleteAllLeds() {
+    for (let i = checkedFrames.length - 1; i >= 0; i--) {
+        if (checkedFrames[i]) {
+            anim.frames.splice(parseInt(i), 1);
+        }
+    }
+    checkedFrames.fill(false);
+    document.getElementById("allFrames").checked = false;
     writeTable();
 }
 
 function moveAllLeds(dir) {
-    for (let i = 0; i < anim.frames.length; i++) {
-        anim.frames[i] = arrayRotate(anim.frames[i], dir);
+    if (checkedFrames.some(f => f)) {
+        for (let i = 0; i < checkedFrames.length; i++) {
+            if (checkedFrames[i]) {
+                anim.frames[i] = arrayRotate(anim.frames[i], dir);
+            }
+        }
+    } else {
+        for (let i = 0; i < anim.frames.length; i++) {
+            anim.frames[i] = arrayRotate(anim.frames[i], dir);
+        }
     }
     writeTable();
 }
 
-function moveLedsUp() {
-    if (cframe != 0) {
-        let temp = anim.frames[cframe];
-        anim.frames[cframe] = anim.frames[cframe - 1];
-        anim.frames[cframe - 1] = temp;
-        cframe--;
+function moveAllLedsUp() {
+    if (checkedFrames.indexOf(!checkedFrames[0]) == -1) {
+        anim.frames = arrayRotate(anim.frames, false);
     } else {
-        anim.frames.push(anim.frames.shift())
-        cframe = anim.frames.length - 1;
+        for (let i = 0; i < checkedFrames.length; i++) {
+            if (checkedFrames[i]) {
+                if (i != 0) {
+                    let temp = anim.frames[i];
+                    anim.frames[i] = anim.frames[i - 1];
+                    anim.frames[i - 1] = temp;
+                    let aux = checkedFrames[i];
+                    checkedFrames[i] = checkedFrames[i - 1];
+                    checkedFrames[i - 1] = aux;
+                } else {
+                    anim.frames.push(anim.frames.shift());
+                    checkedFrames.push(checkedFrames.shift());
+                    break;
+                }
+            }
+        }
     }
-    options(cframe);
     writeTable();
 }
 
-function moveLedsDown() {
-    if (cframe < anim.frames.length - 1) {
-        let temp = anim.frames[cframe];
-        anim.frames[cframe] = anim.frames[cframe + 1];
-        anim.frames[cframe + 1] = temp;
-        cframe++;
+function moveAllLedsDown() {
+    if (checkedFrames.indexOf(!checkedFrames[0]) == -1) {
+        anim.frames = arrayRotate(anim.frames, true);
     } else {
-        anim.frames.unshift(anim.frames.pop());
-        cframe = 0;
+        for (let i = checkedFrames.length - 1; i >= 0; i--) {
+            if (checkedFrames[i]) {
+                if (i < anim.frames.length - 1) {
+                    let temp = anim.frames[i];
+                    anim.frames[i] = anim.frames[i + 1];
+                    anim.frames[i + 1] = temp;
+                    let aux = checkedFrames[i];
+                    checkedFrames[i] = checkedFrames[i + 1];
+                    checkedFrames[i + 1] = aux;
+                } else {
+                    anim.frames.unshift(anim.frames.pop());
+                    checkedFrames.unshift(checkedFrames.pop());
+                    break
+                }
+            }
+        }
     }
-    options(cframe);
     writeTable();
 }
 
@@ -153,6 +195,7 @@ function cloneFrameDown() {
 
 function newFrame() {
     anim.frames.push(new Array(18).fill("#000000"));
+    checkedFrames.push(false);
     writeTable();
 }
 
@@ -220,6 +263,7 @@ function getAnim(id) {
             document.getElementById("inlineFrameSkipLoops").value = anim.skip || 0;
             bucleChange();
             cframe = 1;
+            checkedFrames = new Array(anim.frames.length).fill(false);
             debugFrame = 0;
             writeTable();
         })
@@ -299,6 +343,24 @@ function bucleChange() {
         document.getElementById("inlineLoops").setAttribute('disabled', 'disabled');
         document.getElementById("inlineFrameSkipLoops").setAttribute('disabled', 'disabled');
     }
+}
+
+// --- Checkbox Frames ---
+
+function checkAllFrames(e) {
+    checkedFrames.fill(e.checked);
+    writeTable();
+}
+
+function checkFrame(e) {
+    checkedFrames[parseInt(e.value)] = !checkedFrames[parseInt(e.value)];
+    if (checkedFrames.indexOf(!checkedFrames[0]) == -1) {
+        document.getElementById("allFrames").checked = checkedFrames[0];
+        document.getElementById("allFrames").indeterminate = false;
+    } else {
+        document.getElementById("allFrames").indeterminate = true;
+    }
+    writeTable();
 }
 
 // --- Gradient ---
