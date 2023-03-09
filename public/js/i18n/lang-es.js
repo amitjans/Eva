@@ -231,7 +231,9 @@ const es = {
         DELETE_NEXT: "y los siguientes",
         LED_EMULATOR: "Emulador",
         LOOPS: "Iteraciones",
-        FRAME_SKIP: "Saltar"
+        FRAME_SKIP: "Saltar",
+        SET_DEFAULT_COLOR: "Color establecido por defecto: ",
+        UNSET_DEFAULT_COLOR: "Sin color por defecto."
     },
     LISTEN: {
         TITLE: "Listado de modelos de voz",

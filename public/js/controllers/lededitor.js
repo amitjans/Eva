@@ -4,6 +4,7 @@ var cframe = -1;
 var checkedFrames = [];
 var debugFrame = 0;
 var animEmulation;
+var currentColor = "";
 
 eva.controller('lededitor', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
 
@@ -31,7 +32,7 @@ function writeTable() {
     document.getElementById("palette").style.display = 'block';
     let colorPalette = '<p>Paleta de colores:&nbsp;</p>';
     for (const item of colors) {
-        colorPalette += `<input type="color" color-old="${item}" value="${item}" onchange="updateColor(this)"></input>&nbsp;`;
+        colorPalette += `<input type="color" color-old="${item}" value="${item}" onchange="updateColor(this)" oncontextmenu="setAsDefault(event, this)"></input>&nbsp;`;
     }
     document.getElementById("palette").style.display = 'block';
     document.getElementById("palette").innerHTML = colorPalette;
@@ -59,7 +60,7 @@ function writeTr(frame, color = [], checked = false) {
 
 function writeTd(frame, led, color = "#000000") {
     colors.add(color);
-    return `<td><input type="color" id="f${frame}l${led}" name="f${frame}l${led}" value="${color}" onchange="updateSingleColor(this)"></td>`;
+    return `<td><input type="color" id="f${frame}l${led}" name="f${frame}l${led}" value="${color}" onchange="updateSingleColor(this)" onclick="handleColorChange(event, this)"></td>`;
 }
 
 function arrayRotate(arr, reverse) {
@@ -409,4 +410,24 @@ function generateColor(colorStart, colorEnd, colorCount) {
 function clone(params) {
     return JSON.parse(JSON.stringify(params));
 }
+
+// --- Color Picker ---
+function setAsDefault(e, obj) {
+    e.preventDefault();
+    if (currentColor == obj.value) {
+        currentColor = "";
+        notify(`${locale().LEDEDITOR.UNSET_DEFAULT_COLOR}`);
+    } else {
+        currentColor = obj.value;
+        notify(`${locale().LEDEDITOR.SET_DEFAULT_COLOR} ${obj.value}`);
+    }
+}
+
+function handleColorChange(e, obj) {
+    if (currentColor != "") {
+        e.preventDefault();
+        obj.value = currentColor;
+        updateSingleColor(obj);
+    }
+};
 
