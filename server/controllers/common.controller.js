@@ -15,8 +15,12 @@ commoncontroller.query = async (db, filter) => getConnection().get(db).find(filt
 commoncontroller.getThis = async (value, db) => getConnection().get(db).find({ _id: value }).value();
 
 commoncontroller.create = async (req, res) => {
-    let obj = req.body._id ? req.body : { ...req.body, _id: v4() };
-    getConnection().get(req.query.db).push(obj).write();
+    let obj;
+    if (req.body._id) {
+        obj = await getConnection().get(req.query.db).find({ _id: req.body._id }).assign(req.body).write();
+    } else {
+        obj = await getConnection().get(req.query.db).push({ ...req.body, _id: v4() }).write();
+    }
     res.status(200).json({ status: 'Ok', obj: obj });
 }
 

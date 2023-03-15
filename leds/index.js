@@ -9,7 +9,7 @@ const runAnim = (obj) => {
             clearInterval(loop);
         }
         if (obj.frames.length <= i) {
-            i = obj.skip;
+            i = obj.skip || 0;
         }
     }, obj.time);
     return loop;
