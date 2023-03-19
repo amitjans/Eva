@@ -18,6 +18,6 @@ credencial.json
 git.sh
 temp/*
 public/app/**
-test.wav
+audio.wav
 sonidos
 db.json

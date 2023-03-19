@@ -75,6 +75,7 @@ function importAnim() {
     document.getElementById("inlineName").value = anim.name;
     document.getElementById("inlineTime").value = anim.time;
     document.getElementById("inlineBucle").checked = !!anim.bucle;
+    document.getElementById("inlineRotate").checked = !!anim.rotate;
     bucleChange();
     writeTable();
     $('#importAnim').modal('hide');
@@ -113,18 +114,22 @@ function deleteAllLeds() {
 }
 
 function moveAllLeds(dir) {
+    moveAllLedsOfAnim(anim, dir);
+    writeTable();
+}
+
+function moveAllLedsOfAnim(arr, dir) {
     if (checkedFrames.some(f => f)) {
         for (let i = 0; i < checkedFrames.length; i++) {
             if (checkedFrames[i]) {
-                anim.frames[i] = arrayRotate(anim.frames[i], dir);
+                arr.frames[i] = arrayRotate(arr.frames[i], dir);
             }
         }
     } else {
-        for (let i = 0; i < anim.frames.length; i++) {
-            anim.frames[i] = arrayRotate(anim.frames[i], dir);
+        for (let i = 0; i < arr.frames.length; i++) {
+            arr.frames[i] = arrayRotate(arr.frames[i], dir);
         }
     }
-    writeTable();
 }
 
 function moveAllLedsUp() {
@@ -236,6 +241,7 @@ function save() {
     anim.name = document.getElementById("inlineName").value;
     anim.time = parseInt(document.getElementById("inlineTime").value);
     anim.bucle = document.getElementById("inlineBucle").checked;
+    anim.rotate = document.getElementById("inlineRotate").checked;
     anim.loops = parseInt(document.getElementById("inlineLoops").value);
     anim.skip = parseInt(document.getElementById("inlineFrameSkipLoops").value);
     postData('/api/common?db=led', anim)
@@ -260,6 +266,7 @@ function getAnim(id) {
             document.getElementById("inlineName").value = anim.name;
             document.getElementById("inlineTime").value = anim.time;
             document.getElementById("inlineBucle").checked = !!anim.bucle;
+            document.getElementById("inlineRotate").checked = !!anim.rotate;
             document.getElementById("inlineLoops").value = anim.loops || 0;
             document.getElementById("inlineFrameSkipLoops").value = anim.skip || 0;
             bucleChange();
@@ -276,6 +283,7 @@ function getAnim(id) {
 function execute() {
     anim.time = parseInt(document.getElementById("inlineTime").value);
     anim.bucle = document.getElementById("inlineBucle").checked;
+    anim.rotate = document.getElementById("inlineRotate").checked;
     anim.loops = parseInt(document.getElementById("inlineLoops").value);
     anim.skip = parseInt(document.getElementById("inlineFrameSkipLoops").value);
     postData('/nodes', { type: 'led', ...anim });
@@ -305,6 +313,7 @@ function executeEmulator() {
     $('#emulator').modal('show');
     anim.time = parseInt(document.getElementById("inlineTime").value);
     anim.bucle = document.getElementById("inlineBucle").checked;
+    anim.rotate = document.getElementById("inlineRotate").checked;
     anim.loops = parseInt(document.getElementById("inlineLoops").value);
     anim.skip = parseInt(document.getElementById("inlineFrameSkipLoops").value);
     animEmulation = runAnim();
@@ -320,19 +329,23 @@ function stopEmulator() {
 
 const runAnim = () => {
     let i = 0;
+    let anim2 = clone(anim);
     let loop = setInterval(() => {
-        for (let j = 0; j < anim.frames[i].length; j++) {
-            document.getElementById(`l${j}`).style.backgroundColor = anim.frames[i][j] == "#000000" ? `rgba(0, 0, 0, 0.0)` : anim.frames[i][j];
+        for (let j = 0; j < anim2.frames[i].length; j++) {
+            document.getElementById(`l${j}`).style.backgroundColor = anim2.frames[i][j] == "#000000" ? `rgba(0, 0, 0, 0.0)` : anim2.frames[i][j];
         }
         i++;
-        if ((!anim.bucle || (anim.bucle && anim.loops == 1)) && i >= anim.frames.length) {
+        if ((!anim2.bucle || (anim2.bucle && anim2.loops == 1)) && i >= anim2.frames.length) {
             clearInterval(loop);
         }
-        if (anim.frames.length <= i) {
-            anim.loops--;
-            i = anim.skip;
+        if (anim2.frames.length <= i) {
+            anim2.loops--;
+            i = anim2.skip;
+            if (!!anim2.rotate) {
+                moveAllLedsOfAnim(anim2, true);
+            }
         }
-    }, anim.time);
+    }, anim2.time);
     return loop;
 }
 

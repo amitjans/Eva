@@ -233,7 +233,9 @@ const es = {
         LOOPS: "Iteraciones",
         FRAME_SKIP: "Saltar",
         SET_DEFAULT_COLOR: "Color establecido por defecto: ",
-        UNSET_DEFAULT_COLOR: "Sin color por defecto."
+        UNSET_DEFAULT_COLOR: "Sin color por defecto.",
+        BUCLE: "Bucle",
+        ROTATE: "Rotar"
     },
     LISTEN: {
         TITLE: "Listado de modelos de voz",
