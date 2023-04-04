@@ -12,7 +12,7 @@ Eva social robot main app.
 ## Installation
 ### New way
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 ### Old way
