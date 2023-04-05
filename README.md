@@ -8,6 +8,14 @@ Eva social robot main app.
 
 ## Requirements
 - NodeJs 14.16.0
+
+## Installation
+### New way
+```bash
+docker compose up
+```
+
+### Old way
 ```bash
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 ```
